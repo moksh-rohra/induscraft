@@ -92,10 +92,29 @@
   <div>
     <p>Handcrafted just for you! Did you know you can make custom requests for our furniture? <a href="/pages/custom-furniture">Learn more</a></p>
   </div>
-  <button class="custom-furniture-toast-close" aria-label="Close" onclick="document.getElementById('customFurnitureToast').classList.add('is-hidden')">
+  <button class="custom-furniture-toast-close" aria-label="Close" onclick="closeCustomFurnitureToast()">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
   </button>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (sessionStorage.getItem('customFurnitureClosed')) {
+      var toast = document.getElementById('customFurnitureToast');
+      if (toast) {
+        toast.classList.add('is-hidden');
+      }
+    }
+  });
+
+  function closeCustomFurnitureToast() {
+    var toast = document.getElementById('customFurnitureToast');
+    if (toast) {
+      toast.classList.add('is-hidden');
+    }
+    sessionStorage.setItem('customFurnitureClosed', 'true');
+  }
+</script>
 
 <!-- Circular WhatsApp button -->
 <a href="https://api.whatsapp.com/send?phone=917821013706&text=Hello%2C%20I%20was%20just%20checking%20Buy%2520Furniture%2520Online%2520in%2520India%2520%40upto%252040%25%2520Off%2520-%2520Induscraft.%20Can%20you%20help%20me%20with%20something%3F" class="whatsapp-circular-btn" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
