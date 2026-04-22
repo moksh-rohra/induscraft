@@ -92,20 +92,18 @@
   <div>
     <p>Handcrafted just for you! Did you know you can make custom requests for our furniture? <a href="/pages/custom-furniture">Learn more</a></p>
   </div>
-  <button class="custom-furniture-toast-close" aria-label="Close" onclick="closeCustomFurnitureToast()">
+  <button type="button" class="custom-furniture-toast-close" aria-label="Close" onclick="closeCustomFurnitureToast()">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
   </button>
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    if (sessionStorage.getItem('customFurnitureClosed')) {
-      var toast = document.getElementById('customFurnitureToast');
-      if (toast) {
-        toast.classList.add('is-hidden');
-      }
+  if (sessionStorage.getItem('customFurnitureClosed')) {
+    var toast = document.getElementById('customFurnitureToast');
+    if (toast) {
+      toast.classList.add('is-hidden');
     }
-  });
+  }
 
   function closeCustomFurnitureToast() {
     var toast = document.getElementById('customFurnitureToast');
