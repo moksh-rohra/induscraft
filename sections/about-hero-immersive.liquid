@@ -1,0 +1,382 @@
+{%- comment -%}
+  About Hero Immersive Section
+  ============================
+  A scroll-linked hero section featuring:
+  - Pinned two-column layout
+  - Image reveal animation on scroll
+  - Text exit animation
+  - Full-screen image expansion
+  
+  Requires: GSAP + ScrollTrigger (loaded conditionally)
+{%- endcomment -%}
+
+{{ 'about-hero-immersive.css' | asset_url | stylesheet_tag }}
+
+<section 
+  id="about-hero-{{ section.id }}"
+  class="about-hero"
+  data-section-id="{{ section.id }}"
+  data-section-type="about-hero-immersive"
+  style="
+    --heading-size-desktop: {{ section.settings.heading_font_size }}px;
+    --heading-size-mobile: {{ section.settings.heading_font_size_mobile }}px;
+    --tagline-size-desktop: {{ section.settings.tagline_font_size }}px;
+    --tagline-size-mobile: {{ section.settings.tagline_font_size_mobile }}px;
+    --brand-text-size-desktop: {{ section.settings.brand_text_font_size }}px;
+    --brand-text-size-mobile: {{ section.settings.brand_text_font_size_mobile }}px;
+    --brand-text-font: {% if section.settings.use_bristone_brand_text %}'Bristone', {% endif %}var(--heading-font-family);
+    --heading-font: var(--base-font-family);
+  "
+>
+  <div class="about-hero__wrapper">
+    {%- comment -%} Left Column: Text Content {%- endcomment -%}
+    <div class="about-hero__content">
+      <div class="about-hero__content-inner">
+        {%- if section.settings.tagline != blank -%}
+          <span class="about-hero__tagline">{{ section.settings.tagline }}</span>
+        {%- endif -%}
+        
+        {%- if section.settings.heading != blank -%}
+          <h1 class="about-hero__heading">{{ section.settings.heading }}</h1>
+        {%- endif -%}
+        
+        {%- if section.settings.button_label != blank and section.settings.button_url != blank -%}
+          <a 
+            href="{{ section.settings.button_url }}" 
+            class="about-hero__cta btn btn--primary"
+            aria-label="{{ section.settings.button_aria_label | default: section.settings.button_label }}"
+          >
+            {{ section.settings.button_label }}
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+    
+    {%- comment -%} Right Column: Image Container {%- endcomment -%}
+    <div class="about-hero__image-container">
+      <div class="about-hero__image-wrapper">
+        {%- if section.settings.video != blank -%}
+          {{ section.settings.video | video_tag:
+            image_size: '2000x',
+            autoplay: true,
+            loop: true,
+            muted: true,
+            controls: false,
+            playsinline: true,
+            class: 'about-hero__image'
+          }}
+        {%- elsif section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 2000 | image_tag:
+            class: 'about-hero__image',
+            loading: 'eager',
+            fetchpriority: 'high',
+            sizes: '(min-width: 1200px) 50vw, 100vw',
+            widths: '600, 800, 1000, 1200, 1600, 2000'
+          }}
+        {%- else -%}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'about-hero__image about-hero__image--placeholder' }}
+        {%- endif -%}
+      </div>
+    </div>
+    
+    {%- comment -%} Large Brand Text - Spans Full Width {%- endcomment -%}
+    {%- if section.settings.brand_text != blank -%}
+      <div class="about-hero__brand-text">
+        <span>{{ section.settings.brand_text }}</span>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{%- comment -%} GSAP Scripts - Loaded only on this section {%- endcomment -%}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+<script>
+  (function() {
+    const sectionId = '{{ section.id }}';
+    
+    function initAboutHeroAnimation() {
+      // Wait for GSAP to load
+      if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+        setTimeout(initAboutHeroAnimation, 100);
+        return;
+      }
+      
+      gsap.registerPlugin(ScrollTrigger);
+      
+      const section = document.querySelector(`#about-hero-${sectionId}`);
+      if (!section) return;
+      
+      const wrapper = section.querySelector('.about-hero__wrapper');
+      const contentColumn = section.querySelector('.about-hero__content');
+      const contentInner = section.querySelector('.about-hero__content-inner');
+      const brandText = section.querySelector('.about-hero__brand-text');
+      const imageContainer = section.querySelector('.about-hero__image-container');
+      const image = section.querySelector('.about-hero__image');
+      
+      // Mobile check - disable complex animations on mobile
+      const mm = gsap.matchMedia();
+      
+      mm.add("(min-width: 768px)", () => {
+        // Desktop Animation Timeline
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            end: "+=150%",
+            pin: true,
+            scrub: 1,
+            anticipatePin: 1
+          }
+        });
+        
+        // Animation: White content slides left, image expands from left
+        tl.to(contentColumn, {
+          xPercent: -120,
+          opacity: 0,
+          duration: 1,
+          ease: "power2.inOut"
+        }, 0);
+
+        if (brandText) {
+          tl.to(brandText, {
+            xPercent: -100,
+            duration: 1,
+            ease: "power2.inOut"
+          }, 0);
+        }
+        
+        // Image container expands horizontally from the left
+        tl.to(imageContainer, {
+          left: 0,
+          width: "100vw",
+          duration: 1,
+          ease: "power2.inOut"
+        }, 0);
+        
+        // Cleanup on destroy
+        return () => {
+          ScrollTrigger.getAll().forEach(st => st.kill());
+        };
+      });
+      
+      mm.add("(max-width: 767px)", () => {
+        // Mobile: Simple fade-in animations only
+        // Disable pinning and complex animations on mobile
+        gsap.from(contentInner, {
+          y: 30,
+          opacity: 0,
+          duration: 0.8,
+          ease: "power2.out"
+        });
+        
+        gsap.from(imageContainer, {
+          y: 30,
+          opacity: 0,
+          duration: 0.8,
+          delay: 0.2,
+          ease: "power2.out"
+        });
+        
+        // Return function to cleanup mobile animations
+        return () => {
+          // Clean up any animations
+          gsap.set([contentInner, imageContainer], { clearProps: "all" });
+        };
+      });
+    }
+    
+    // Initialize on DOM ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initAboutHeroAnimation);
+    } else {
+      initAboutHeroAnimation();
+    }
+    
+    // Shopify Theme Editor support
+    document.addEventListener('shopify:section:load', function(e) {
+      if (e.detail.sectionId === sectionId) {
+        initAboutHeroAnimation();
+      }
+    });
+    
+    // Cleanup when leaving the section
+    document.addEventListener('shopify:section:unload', function(e) {
+      if (e.detail.sectionId === sectionId) {
+        // Kill all scroll triggers to prevent conflicts
+        if (typeof ScrollTrigger !== 'undefined') {
+          ScrollTrigger.getAll().forEach(st => st.kill());
+        }
+        // Reset body styles to ensure proper scroll restoration
+        if (document.body.style.overflow === 'hidden') {
+          document.body.style.overflow = '';
+        }
+      }
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "About Hero Immersive",
+  "tag": "section",
+  "class": "about-hero-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Our Story"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "We craft timeless pieces that capture tradition with elegance and purpose."
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size",
+      "label": "Heading Font Size",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "default": 48,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size_mobile",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Font Size (Mobile)",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "tagline_font_size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Tagline Font Size (Desktop)",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "tagline_font_size_mobile",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Tagline Font Size (Mobile)",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "brand_text_font_size",
+      "min": 80,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "label": "Brand Text Font Size (Desktop)",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "brand_text_font_size_mobile",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Brand Text Font Size (Mobile)",
+      "default": 55
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Explore Our Journey"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button URL"
+    },
+    {
+      "type": "text",
+      "id": "button_aria_label",
+      "label": "Button Accessibility Label",
+      "info": "Describes the button for screen readers"
+    },
+    {
+      "type": "text",
+      "id": "brand_text",
+      "label": "Large Brand Text",
+      "default": "Induscraft",
+      "info": "Large decorative text displayed at the bottom left"
+    },
+    {
+      "type": "checkbox",
+      "id": "use_bristone_brand_text",
+      "label": "Use Bristone Font for Brand Text",
+      "default": true,
+      "info": "Toggle to use the decorative Bristone font for the large brand text"
+    },
+    {
+      "type": "header",
+      "content": "Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Hero Image",
+      "info": "Recommended: Landscape image (minimum 1920x1080px) for best effect"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Hero Video",
+      "info": "Overrides the image if selected. Hosted by Shopify."
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#FAFAFA"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#1A1A1A"
+    },
+    {
+      "type": "color",
+      "id": "tagline_color",
+      "label": "Tagline Color",
+      "default": "#666666"
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Hero Immersive"
+    }
+  ]
+}
+{% endschema %}

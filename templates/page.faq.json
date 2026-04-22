@@ -1,0 +1,236 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "page_heading_V6yL7n": {
+      "type": "page-heading",
+      "name": "Page Heading",
+      "settings": {
+        "custom_heading": "",
+        "heading_size": 72,
+        "heading_size_mobile": 48,
+        "use_bristone_font": true,
+        "text_align": "center",
+        "show_divider": true,
+        "divider_color": "#2C2A28",
+        "heading_color": "#181210",
+        "bg_color": "rgba(0,0,0,0)",
+        "padding_top": 60,
+        "padding_bottom": 40,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 24
+      }
+    },
+    "page_content_9Q4kF7": {
+      "type": "page-content",
+      "name": "Page Content",
+      "settings": {
+        "font_size": 16,
+        "font_size_mobile": 14,
+        "line_height": 1.7,
+        "text_align": "left",
+        "max_width": "1000",
+        "text_color": "#555555",
+        "heading_color": "#181210",
+        "link_color": "#ec4855",
+        "bg_color": "rgba(0,0,0,0)",
+        "padding_top": 40,
+        "padding_bottom": 60,
+        "padding_top_mobile": 24,
+        "padding_bottom_mobile": 40
+      }
+    },
+    "faq-page-template": {
+      "type": "faq-page-template",
+      "blocks": {
+        "category-0": {
+          "type": "category",
+          "settings": {
+            "heading": "General Questions"
+          }
+        },
+        "faq-0": {
+          "type": "faq_item",
+          "settings": {
+            "heading": "Does Induscraft provide a Catalog?",
+            "text": "<p>We do not provide a special catalog. You can see all our entire product range across furniture and decor on our online platform.</p>"
+          }
+        },
+        "faq-1": {
+          "type": "faq_item",
+          "settings": {
+            "heading": "Does Induscraft have any Retail Outlet?",
+            "text": "<p>Yes, we have 4 retail outlets, and you can find them at these addresses:<br/><br/>Jodhpur - B-176 PAL SHILP GRAM Highway, # 112, Jodhpur - Barmer Road, Jodhpur, Rajasthan 342008<br/><br/>Pune - 18 Latitude, Kate Wasti, Punawale, Pune, Pimpri-Chinchwad, Maharashtra 411033<br/><br/>Bangalore - 1287,25th C Cross Rd, 27th Main Rd, HSR Layout, Bengaluru, Karnataka 560102<br/><br/>Surat - 1st Floor, Sy N50 to 52,TP no.6, FP no.109, Somnath Society, UM Road, near Shanidev Mandir, Ambanagar, Surat, Gujarat 395002</p>"
+          }
+        },
+        "faq_item_E3zGyE": {
+          "type": "faq_item",
+          "settings": {
+            "heading": "I saw a piece of furniture on Google that I liked, how can I find more information on it?",
+            "text": "<p>Please email the item code, name or link of item which you like at sales@induscraft.com. We would be happy to reply to your request. Or you can just chat with us on the website!</p>"
+          }
+        },
+        "faq_item_BYxmWa": {
+          "type": "faq_item",
+          "settings": {
+            "heading": "Where can I post my comment or review of a product?",
+            "text": "<p>You can post your comment or review of a product on the product listing page of every product listed on our website.</p>"
+          }
+        },
+        "category-1": {
+          "type": "category",
+          "settings": {
+            "heading": "Furniture Related Questions"
+          }
+        },
+        "faq-2": {
+          "type": "faq_item",
+          "settings": {
+            "heading": "What do we need to do to take care of our furniture?",
+            "text": "<p>Do not wipe furniture with a wet cloth and do not keep very hot items on it. Always wipe furniture with a dry cloth. If the wood is scratched, gently rub it down with extra fine wire wool in the direction of the grain, and restore the finish using beeswax or lacquer.</p>"
+          }
+        },
+        "faq-3": {
+          "type": "faq_item",
+          "settings": {
+            "heading": "What is difference between king size bed and queen size bed?",
+            "text": "<p>Queen Size bed has a 5 ft x 6.5 ft Mattress size, whereas a King Size bed has a size of 6 ft x 6.5 ft. The bigger the size, the higher the cost.</p>"
+          }
+        },
+        "faq_item_bF98Lx": {
+          "type": "faq_item",
+          "settings": {
+            "heading": "Does Induscraft offer a re-upholstery service, or can you refer me to a reputable re-upholstery company?\"",
+            "text": "<p>Yes, we can provide re-upholstery service with additional charges</p>"
+          }
+        },
+        "faq_item_m3aLiK": {
+          "type": "faq_item",
+          "settings": {
+            "heading": "Will the colour of the product match the image exactly?",
+            "text": "<p>We have made every effort to display products as accurately as possible. However, your screen on which you are viewing the product can process images differently. This is why we cannot guarantee that the colour on your screen will accurately reflect the colour of the product on delivery.</p>"
+          }
+        },
+        "faq_item_qLaGDF": {
+          "type": "faq_item",
+          "settings": {
+            "heading": "Is the dimension of products exactly the same as mentioned in the product listing?",
+            "text": "<p>Dimensions / specifications / sizes mentioned of items displayed online on our website are approximately similar to the actual item.</p>"
+          }
+        },
+        "faq_item_UUgkqf": {
+          "type": "faq_item",
+          "settings": {
+            "heading": "Where do you source your products from?",
+            "text": "<p>Our products originate from Jodhpur, Rajasthan, which is world famous place for its craftsmanship.</p>"
+          }
+        },
+        "faq_item_3THq7j": {
+          "type": "faq_item",
+          "settings": {
+            "heading": "What wood do you use?",
+            "text": "<p>We use different kinds of hardwood, depending on the item being manufactured. Sheesham (Dalbergia latifolia) is the wood of choice for the majority of our production. It is a rosewood indigenous to India. It is hard, durable, has a densely packed grain structure, with warm rich tones. Other woods used are, Mango Wood, Acacia Wood & Teak Wood.</p>"
+          }
+        },
+        "faq_item_AzqMzj": {
+          "type": "faq_item",
+          "settings": {
+            "heading": "Is your wood seasoned?",
+            "text": "<p>All our wood is pressure treated to remove infestation. Subsequently, to prevent warping, it is seasoned, using the kiln dry process to lower the moisture content to 7-8%.</p>"
+          }
+        },
+        "faq_item_dAApDg": {
+          "type": "faq_item",
+          "settings": {
+            "heading": "What can you tell us about the construction and finish of the product?",
+            "text": "<p>We realize quality of construction and craftsmanship defines the appeal of piece of furniture. The wood and finishing techniques used, reveal the long lasting durability of our furniture. Tongue and groove, and mortise and tenon joints are used extensively. Wood is then stained, sealed and coated with a protection coat. No item is passed until it goes through a detailed inspection and quality check.</p>"
+          }
+        },
+        "category_cAFzii": {
+          "type": "category",
+          "settings": {
+            "heading": "Delivery and Installation"
+          }
+        },
+        "faq_item_irnTwh": {
+          "type": "faq_item",
+          "settings": {
+            "heading": "What if I don’t get an item on time?",
+            "text": "<p>Our priority is always to ensure that an order should reach the destination on time. But sometime delays due to unexpected weather or transport issues are sometimes out of our control, which at times do lead to delays. But we will do our best to keep you informed for such unexpected/unforeseen delays.</p>"
+          }
+        },
+        "faq_item_pxUAB4": {
+          "type": "faq_item",
+          "settings": {
+            "heading": "Which courier company does Induscraft use for shipping order?",
+            "text": "<p>We have several logistics partners depending on the product or item. Our logistic partner include GATI, Airstate, FEDEX and Overnite . We also use local transporters for delivery of items in bulk.</p>"
+          }
+        },
+        "faq_item_Ta9keN": {
+          "type": "faq_item",
+          "settings": {
+            "heading": "How can I get instructions to assemble my furniture?",
+            "text": "<p>You can assemble your furniture easily with help of any of your nearby local carpenter or call us for support. We also provide free installation in few cities for every product sold by us.</p>"
+          }
+        },
+        "faq_item_6qdYNC": {
+          "type": "faq_item",
+          "settings": {
+            "heading": "What happens if I am out and not at home when you deliver?",
+            "text": "<p>All deliveries need to be signed for; we will be unable to leave your furniture outside your home. However, we will keep you informed about the delivery to ensure you are aware of when it is reaching your home.</p>"
+          }
+        },
+        "faq_item_Dmimdj": {
+          "type": "faq_item",
+          "settings": {
+            "heading": "Does Induscraft deliver overseas?",
+            "text": "<p>Yes we deliver to markets outside India but it depends on your ordered item’s size, quantity and order amount.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "category-0",
+        "faq-0",
+        "faq-1",
+        "faq_item_E3zGyE",
+        "faq_item_BYxmWa",
+        "category-1",
+        "faq-2",
+        "faq-3",
+        "faq_item_bF98Lx",
+        "faq_item_m3aLiK",
+        "faq_item_qLaGDF",
+        "faq_item_UUgkqf",
+        "faq_item_3THq7j",
+        "faq_item_AzqMzj",
+        "faq_item_dAApDg",
+        "category_cAFzii",
+        "faq_item_irnTwh",
+        "faq_item_pxUAB4",
+        "faq_item_Ta9keN",
+        "faq_item_6qdYNC",
+        "faq_item_Dmimdj"
+      ],
+      "settings": {
+        "label": "",
+        "heading": "FAQ",
+        "offset_top_desktop": 60,
+        "offset_bottom_desktop": 60,
+        "offset_top_mobile": 30,
+        "offset_bottom_mobile": 30
+      }
+    }
+  },
+  "order": [
+    "page_heading_V6yL7n",
+    "page_content_9Q4kF7",
+    "faq-page-template"
+  ]
+}

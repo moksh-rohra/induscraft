@@ -1,0 +1,278 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "about-hero": {
+      "type": "about-hero-immersive",
+      "settings": {
+        "tagline": "Our Story",
+        "heading": "We craft timeless pieces that capture tradition with elegance and purpose.",
+        "heading_font_size": 38,
+        "heading_font_size_mobile": 28,
+        "tagline_font_size": 14,
+        "tagline_font_size_mobile": 12,
+        "brand_text_font_size": 180,
+        "brand_text_font_size_mobile": 40,
+        "button_label": "Explore Our Journey",
+        "button_url": "",
+        "button_aria_label": "",
+        "brand_text": "Induscraft",
+        "use_bristone_brand_text": true,
+        "image": "shopify://shop_images/hemant.jpg",
+        "video": "shopify://files/videos/induscraft-about.mp4",
+        "background_color": "#fafafa",
+        "text_color": "#1a1a1a",
+        "tagline_color": "#000000"
+      }
+    },
+    "about_text_CQLbUM": {
+      "type": "about-text",
+      "name": "About Text",
+      "settings": {
+        "full_width": false,
+        "content_max_width": 800,
+        "label_size_mobile": 13,
+        "label_size_desktop": 13,
+        "heading_size_mobile": 20,
+        "heading_size_desktop": 28,
+        "small_heading": "ABOUT INDUSCRAFT",
+        "main_heading": "At Induscraft, we craft timeless furniture rooted in tradition and designed for modern living. Every piece reflects thoughtful design, skilled craftsmanship, and a deep respect for natural materials.",
+        "button_label": "Check Our Collection",
+        "button_link": "shopify://collections",
+        "button_style": "secondary",
+        "text_color": "#000000",
+        "background_color": "rgba(0,0,0,0)",
+        "padding_top_desktop": 100,
+        "padding_bottom_desktop": 100,
+        "show_top_border": true,
+        "border_color": "#c9c9c9",
+        "border_width": 1,
+        "border_spacing": 20,
+        "padding_top_mobile": 60,
+        "padding_bottom_mobile": 60,
+        "padding_horizontal_desktop": 60,
+        "padding_horizontal_mobile": 20
+      }
+    },
+    "about_collage_stats_9Ji6Hy": {
+      "type": "about-collage-stats",
+      "blocks": {
+        "stat_GVJJXY": {
+          "type": "stat",
+          "settings": {
+            "number": "25+",
+            "label": "Years of Craft & Furniture Expertise"
+          }
+        },
+        "stat_9UYKcA": {
+          "type": "stat",
+          "settings": {
+            "number": "10K+",
+            "label": "Homes Furnished"
+          }
+        },
+        "stat_rCpzwq": {
+          "type": "stat",
+          "settings": {
+            "number": "4.8 ★",
+            "label": "Rated Across Google & Store Reviews"
+          }
+        }
+      },
+      "block_order": [
+        "stat_GVJJXY",
+        "stat_9UYKcA",
+        "stat_rCpzwq"
+      ],
+      "name": "About Collage Stats",
+      "settings": {
+        "main_image": "shopify://shop_images/kalkan.jpg",
+        "secondary_image_1": "shopify://shop_images/ivett.jpg",
+        "secondary_image_2": "shopify://shop_images/claire.jpg",
+        "description": "Discover thoughtfully handcrafted furniture made from solid wood, designed to bring warmth, character, and longevity to your living spaces.",
+        "background_color": "rgba(0,0,0,0)",
+        "text_color": "#000000",
+        "padding_top_desktop": 52,
+        "padding_bottom_desktop": 100,
+        "padding_top_mobile": 60,
+        "padding_bottom_mobile": 60
+      }
+    },
+    "gallery-card": {
+      "type": "animated-gallery-card",
+      "settings": {
+        "image_1": "shopify://shop_images/ivett.jpg",
+        "image_2": "shopify://shop_images/claire.jpg",
+        "image_3": "shopify://shop_images/fsdsiyo.jpg",
+        "heading": "Crafted for Everyday Living",
+        "text": "Explore how our furniture comes to life in real homes. Each piece is thoughtfully designed and handcrafted to bring warmth, character, and timeless appeal to everyday spaces.",
+        "button_label": "Explore Products",
+        "button_url": "shopify://collections/all",
+        "button_style": "secondary",
+        "bg_color": "#111111",
+        "scrolled_bg_color": "rgba(0,0,0,0)",
+        "text_color": "#ffffff"
+      }
+    },
+    "parallax-section": {
+      "type": "parallax-video",
+      "settings": {
+        "content_position_vertical": "flex-end",
+        "content_position_horizontal": "flex-start",
+        "text_alignment": "left",
+        "icon_color_filter": "none",
+        "icon_size_desktop": 40,
+        "icon_size_mobile": 32,
+        "tagline": "Experience The Art",
+        "heading": "Experience The Art Of Sustainable Furniture.",
+        "description": "Crafted with care, designed for life.",
+        "content_bg_color": "rgba(0,0,0,0)",
+        "content_bg_opacity": 0,
+        "enable_glass_effect": false,
+        "glass_blur": 12,
+        "glass_border_opacity": 20,
+        "glass_shadow_opacity": 15,
+        "content_border_radius": 0,
+        "content_padding": 0,
+        "content_padding_mobile": 0,
+        "content_max_width": 800,
+        "heading_size": 42,
+        "heading_size_mobile": 26,
+        "tagline_size": 14,
+        "tagline_size_mobile": 12,
+        "description_size": 16,
+        "description_size_mobile": 13,
+        "secondary_text": "",
+        "secondary_link_text": "Let's Chat",
+        "secondary_link": "",
+        "button_label": "Contact Us",
+        "button_link": "shopify://pages/contact",
+        "button_style": "secondary",
+        "btn_bg_color": "#181210",
+        "btn_bg_color_hover": "#fdf0d5",
+        "btn_text_color": "#fdf0d5",
+        "btn_text_color_hover": "#181210",
+        "btn_border_color": "#181210",
+        "btn_border_color_hover": "rgba(0,0,0,0)",
+        "video": "shopify://files/videos/induscraft-about.mp4",
+        "parallax_style": "fixed",
+        "height_desktop": 650,
+        "height_mobile": 350,
+        "overlay_color": "#000000",
+        "overlay_opacity": 30,
+        "margin_top": 100,
+        "margin_bottom": 100,
+        "margin_top_mobile": 0,
+        "margin_bottom_mobile": 0
+      }
+    },
+    "curved-text-section": {
+      "type": "text-image-curved",
+      "settings": {
+        "image_position": "right",
+        "content_width": 65,
+        "vertical_alignment": "flex-start",
+        "text_alignment": "left",
+        "heading": "<p>Celebrating 25 Years of Thoughtful Craftsmanship.</p>",
+        "text": "",
+        "button_label": "",
+        "button_link": "",
+        "button_style": "primary",
+        "image": "shopify://shop_images/carpenter.jpg",
+        "curve_style": "bottom-left",
+        "curve_radius": 500,
+        "image_width": 60,
+        "heading_size": 44,
+        "heading_size_mobile": 20,
+        "text_size": 16,
+        "text_size_mobile": 14,
+        "background_color": "rgba(0,0,0,0)",
+        "text_color": "#1a1a1a",
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_top_mobile": 0,
+        "margin_bottom_mobile": 0,
+        "padding_top": 0,
+        "mobile_padding_top": 40,
+        "text_padding": 100,
+        "text_padding_mobile": 20
+      }
+    },
+    "text_image_curved_kKBpce": {
+      "type": "text-image-curved",
+      "name": "Curved Text Image",
+      "settings": {
+        "image_position": "left",
+        "content_width": 45,
+        "vertical_alignment": "center",
+        "text_alignment": "left",
+        "heading": "<p>Shaping the Future of Handcrafted Furniture</p>",
+        "text": "<p>Rooted in Rajasthan’s rich craft tradition, Induscraft creates thoughtfully designed furniture that blends skilled craftsmanship with modern living. </p><p>Every piece is made with quality materials and care, ensuring durability, character, and timeless appeal.</p>",
+        "button_label": "Read Our Story",
+        "button_link": "shopify://blogs/news",
+        "button_style": "secondary",
+        "image": "shopify://shop_images/carpenter2.jpg",
+        "curve_style": "top-right",
+        "curve_radius": 500,
+        "image_width": 80,
+        "heading_size": 32,
+        "heading_size_mobile": 20,
+        "text_size": 16,
+        "text_size_mobile": 14,
+        "background_color": "rgba(0,0,0,0)",
+        "text_color": "#1a1a1a",
+        "margin_top": 0,
+        "margin_bottom": 100,
+        "margin_top_mobile": 0,
+        "margin_bottom_mobile": 100,
+        "padding_top": 0,
+        "mobile_padding_top": 0,
+        "text_padding": 100,
+        "text_padding_mobile": 20
+      }
+    },
+    "newsletter_section_erjczQ": {
+      "type": "newsletter-section",
+      "name": "Newsletter Section",
+      "settings": {
+        "badge": "Stay in the loop",
+        "heading": "Get exclusive offers & updates",
+        "subtext": "Subscribe to our newsletter and be the first to know about new arrivals and promotions.",
+        "placeholder": "Enter your email",
+        "btn_label": "Subscribe",
+        "success_message": "Thanks for subscribing!",
+        "privacy_note": "No spam, unsubscribe anytime.",
+        "bg_color": "#1a1a1a",
+        "accent_color": "#ec4855",
+        "heading_color": "#ffffff",
+        "subtext_color": "#aaaaaa",
+        "input_bg": "#2a2a2a",
+        "input_border": "#3a3a3a",
+        "input_text": "#ffffff",
+        "btn_bg": "#c8a97e",
+        "btn_text": "#fdf0d5",
+        "padding_top_desktop": 18,
+        "padding_bottom_desktop": 80,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48
+      }
+    }
+  },
+  "order": [
+    "about-hero",
+    "about_text_CQLbUM",
+    "about_collage_stats_9Ji6Hy",
+    "gallery-card",
+    "parallax-section",
+    "curved-text-section",
+    "text_image_curved_kKBpce",
+    "newsletter_section_erjczQ"
+  ]
+}

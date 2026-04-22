@@ -1,0 +1,765 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "content-image": {
+      "type": "content-image",
+      "blocks": {
+        "text-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Most bedroom furniture compromises on something—either you get real solid wood with no storage, or you get storage beds made from particle board with wood-look veneers. Finding both in one piece is harder than it should be.</p>"
+          }
+        },
+        "text-2": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Our collection of solid sheesham wood king-size beds with storage solves this. These are furniture-grade hardwood beds with practical underbed storage built into the construction, not tacked on as an afterthought. You'll find three distinct storage mechanisms, multiple design styles, and four finish options—all using the same solid sheesham wood construction.</p>"
+          }
+        },
+        "text-3": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Whether you need deep seasonal storage, daily-access drawers, or simple underbed space, there's a design in this collection built for how you actually live.</p>"
+          }
+        },
+        "button-1": {
+          "type": "button",
+          "settings": {
+            "button_label": "Browse Full Collection",
+            "button_link": "shopify://collections/beds",
+            "button_style": "outline"
+          }
+        }
+      },
+      "block_order": [
+        "text-1",
+        "text-2",
+        "text-3",
+        "button-1"
+      ],
+      "settings": {
+        "heading": "Buy Sheesham Wood King-Size Beds with Storage",
+        "image": "shopify://shop_images/WC83Mid-CenturyModernSheeshamWoodBedwithArchedCaneHeadboard_1_e2c6cf6d-60b8-400e-94d0-068443254178.webp",
+        "image_alt": "",
+        "image_position": "right",
+        "background_color": "#f0ebe5",
+        "text_color": "#333333",
+        "heading_color": "#1a1a1a",
+        "button_color": "#c8651b",
+        "button_text_color": "#ffffff"
+      }
+    },
+    "category-cards": {
+      "type": "category-cards",
+      "blocks": {
+        "card-1": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/sheesham-wood-king-size-bed-with-hydraulic-storage.png",
+            "label": "Hydraulic Lift Storage Bed",
+            "link": ""
+          }
+        },
+        "card-2": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Drawer_Storage_Bed.jpg",
+            "label": "Drawer Storage Bed",
+            "link": ""
+          }
+        },
+        "card-3": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Box_Storage_Bed.jpg",
+            "label": "Box Storage Bed",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "card-1",
+        "card-2",
+        "card-3"
+      ],
+      "settings": {
+        "heading": "SHeesham Wood King Size Storage Bed Available in-",
+        "background_color": "#e8eaf0",
+        "heading_color": "#1a1a1a",
+        "label_color": "#1a1a1a"
+      }
+    },
+    "text_section_xYCr9b": {
+      "type": "text-section",
+      "name": "Rich text",
+      "settings": {
+        "heading": "The collection includes-",
+        "subheading": "",
+        "text_content": "",
+        "text_alignment": "center",
+        "section_alignment": "center",
+        "enable_read_more": false,
+        "read_more_text": "Read more",
+        "show_less_text": "Show less",
+        "full_width": false,
+        "offset_top_desktop": 40,
+        "offset_bottom_desktop": 0,
+        "offset_top_mobile": 60,
+        "offset_bottom_mobile": 60
+      }
+    },
+    "feature-collage": {
+      "type": "feature-collage",
+      "settings": {
+        "heading": "Three storage mechanisms",
+        "text": "<p>Hydraulic lift beds (maximum storage capacity), drawer storage beds (organized compartments), and box storage beds (open access, budget-friendly).</p>",
+        "image": "shopify://shop_images/Three_storage_mechanisms.png",
+        "image_alt": "Sheesham Wood King Size Bed with Storage - Three Mechanishm Options",
+        "button_label": "",
+        "button_link": "",
+        "image_position": "left",
+        "background_color": "#ffffff",
+        "text_color": "#333333",
+        "heading_color": "#1a1a1a"
+      }
+    },
+    "feature_collage_wjCwyz": {
+      "type": "feature-collage",
+      "settings": {
+        "heading": "Multiple design styles",
+        "text": "<p>Modern platform beds with clean lines, traditional carved headboards, minimalist Scandinavian-inspired frames, and mid-century tapered leg designs.</p>",
+        "image": "shopify://shop_images/Multiple_design_styles.png",
+        "image_alt": "sheesham-wood-king-size-storage-bed-multiple-styles",
+        "button_label": "",
+        "button_link": "",
+        "image_position": "right",
+        "background_color": "#ffffff",
+        "text_color": "#333333",
+        "heading_color": "#1a1a1a"
+      }
+    },
+    "feature_collage_mNNEFQ": {
+      "type": "feature-collage",
+      "settings": {
+        "heading": "Four finish options",
+        "text": "<p>Every storage type is available in natural, honey-teak, rosewood, and dark-teak finishes—choose based on your existing bedroom furniture.</p>",
+        "image": "shopify://shop_images/Four_finish_options_-_Sheesham_King-Size_Bed_with_Hydraulic_Storage.png",
+        "image_alt": "Sheesham Wood King Size Storage Bed Finish Options",
+        "button_label": "",
+        "button_link": "",
+        "image_position": "left",
+        "background_color": "#ffffff",
+        "text_color": "#333333",
+        "heading_color": "#1a1a1a"
+      }
+    },
+    "feature_collage_gaBPzG": {
+      "type": "feature-collage",
+      "settings": {
+        "heading": "Consistent construction",
+        "text": "<p>All beds use solid sheesham wood frames, traditional joinery reinforced with modern hardware, and quality storage mechanisms rated for years of daily use.</p>",
+        "image": "shopify://shop_images/Consistent_construction.png",
+        "image_alt": "Consistent Consutruction in Induscraft's Solid Sheesham Wood King Bed with Storage",
+        "button_label": "",
+        "button_link": "",
+        "image_position": "right",
+        "background_color": "#ffffff",
+        "text_color": "#333333",
+        "heading_color": "#1a1a1a"
+      }
+    },
+    "default-page": {
+      "type": "default-page-template",
+      "disabled": true,
+      "settings": {
+        "offset_top_desktop": 60,
+        "offset_bottom_desktop": 60,
+        "offset_top_mobile": 30,
+        "offset_bottom_mobile": 30
+      }
+    },
+    "text_section_fYNqBL": {
+      "type": "text-section",
+      "name": "Rich text",
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "text_content": "<p><br/>The variety exists to match different bedroom sizes, storage needs, and aesthetic preferences. A couple in a 14×14 bedroom with minimal closet space needs something different than someone in a 10×12 room with adequate wardrobe storage. Whether you're searching for a practical yet stylish sheesham wood king-size bed with storage or a compact solution for tighter spaces, both will find what they need here.</p>",
+        "text_alignment": "center",
+        "section_alignment": "center",
+        "enable_read_more": false,
+        "read_more_text": "Read more",
+        "show_less_text": "Show less",
+        "full_width": false,
+        "offset_top_desktop": 0,
+        "offset_bottom_desktop": 80,
+        "offset_top_mobile": 60,
+        "offset_bottom_mobile": 60
+      }
+    },
+    "parallax_video_tiLnKP": {
+      "type": "parallax-video",
+      "name": "Parallax Video Section",
+      "settings": {
+        "content_position_vertical": "center",
+        "content_position_horizontal": "center",
+        "text_alignment": "center",
+        "icon_color_filter": "none",
+        "icon_size_desktop": 40,
+        "icon_size_mobile": 32,
+        "tagline": "",
+        "heading": "",
+        "description": "",
+        "content_bg_color": "rgba(0,0,0,0)",
+        "content_bg_opacity": 100,
+        "enable_glass_effect": false,
+        "glass_blur": 12,
+        "glass_border_opacity": 20,
+        "glass_shadow_opacity": 15,
+        "content_border_radius": 0,
+        "content_padding": 0,
+        "content_padding_mobile": 0,
+        "content_max_width": 800,
+        "heading_size": 64,
+        "heading_size_mobile": 32,
+        "tagline_size": 14,
+        "tagline_size_mobile": 12,
+        "description_size": 18,
+        "description_size_mobile": 16,
+        "secondary_text": "",
+        "secondary_link_text": "",
+        "secondary_link": "",
+        "button_label": "",
+        "button_link": "",
+        "button_style": "primary",
+        "btn_bg_color": "#000000",
+        "btn_bg_color_hover": "#333333",
+        "btn_text_color": "#ffffff",
+        "btn_text_color_hover": "#ffffff",
+        "btn_border_color": "#000000",
+        "btn_border_color_hover": "#333333",
+        "video": "shopify://files/videos/Diamond bed.mp4",
+        "image": "shopify://shop_images/stage1x1.jpg",
+        "parallax_style": "none",
+        "height_desktop": 700,
+        "height_mobile": 500,
+        "overlay_color": "#000000",
+        "overlay_opacity": 0,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_top_mobile": 0,
+        "margin_bottom_mobile": 0
+      }
+    },
+    "text_section_zEjLwN": {
+      "type": "text-section",
+      "name": "Rich text",
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "text_content": "<p>Before browsing specific beds, understanding the three storage mechanisms helps you filter down to what actually works for your space and needs.</p>",
+        "text_alignment": "left",
+        "section_alignment": "flex-start",
+        "enable_read_more": false,
+        "read_more_text": "Read more",
+        "show_less_text": "Show less",
+        "full_width": false,
+        "offset_top_desktop": 100,
+        "offset_bottom_desktop": 0,
+        "offset_top_mobile": 60,
+        "offset_bottom_mobile": 0
+      }
+    },
+    "faq_simple_V4YYEi": {
+      "type": "faq-simple",
+      "blocks": {
+        "faq_item_LHwEjL": {
+          "type": "faq_item",
+          "settings": {
+            "heading": "Hydraulic Lift Storage Beds",
+            "text": "<p>The entire mattress platform lifts up on gas pistons, revealing a deep storage cavity underneath. You lift from the front, the mechanism holds it open, and you access the full underbed space at once.</p><p><strong>Best for:</strong> Seasonal items you access monthly or less—extra bedding, winter blankets, luggage, out-of-season clothes. Things that don't need daily access but you want stored out of sight.</p><p><strong>Storage capacity:</strong> 18-25 cubic feet depending on bed design—the highest capacity option in the collection.</p><p><strong>Space requirements:</strong> You need 18-24 inches of clearance behind the bed for the mattress to tilt back fully. Won't work if your bed must sit flush against a wall.</p><p><strong>Mechanism lifespan:</strong> Quality hydraulic pistons are rated for 3000-5000 lift cycles, translating to 8-13 years of daily use (most people use them less frequently and get 15+ years).</p><p><strong>View Hydraulic Storage Beds</strong></p>"
+          }
+        },
+        "faq_item_DVYwT8": {
+          "type": "faq_item",
+          "settings": {
+            "heading": "Drawer Storage Beds",
+            "text": "<p>Built-in drawers accessible from the sides or foot of the bed. Designs in this category range from two large drawers to six smaller compartments, all sliding on metal ball-bearing runners.</p><p><strong>Best for:</strong> Frequently accessed items—extra linens you rotate weekly, clothes, books, kids' toys. Anything you grab regularly and want organized into separate compartments.</p><p><strong>Storage capacity:</strong> 12-18 cubic feet total across all drawers (varies by number and depth of drawers).</p><p><strong>Space requirements:</strong> You need 24-30 inches of clearance on whichever side has drawers so they can extend fully. Consider your bedroom layout carefully—if both bedside tables sit tight against the bed, drawers won't work on those sides.</p><p><strong>Drawer quality:</strong> Our collection uses full-extension ball-bearing slides, not cheaper roller runners. You can access items at the very back of each drawer without fighting the mechanism.</p><p><strong>View Drawer Storage Beds</strong></p>"
+          }
+        },
+        "faq_item_e9aUV9": {
+          "type": "faq_item",
+          "settings": {
+            "heading": "Box Storage Beds",
+            "text": "<p>The space under the bed is enclosed with solid panels but remains open from the front or end for easy access. You slide storage containers in and out or reach in directly.</p><p><strong>Best for:</strong> Bulky irregular items (luggage, sports equipment, storage bins you already own), or if you're working with a tighter budget. Also ideal if you like the flexibility to use your own organizing system.</p><p><strong>Storage capacity:</strong> 15-20 cubic feet—middle ground between hydraulic and drawer options.</p><p><strong>Space requirements:</strong> Just 12-18 inches clearance on the access side, making these the most space-efficient option for smaller bedrooms.</p><p><strong>Why choose this:</strong> It's 15-20% less expensive than hydraulic or drawer versions since there's no complex hardware to install. You get solid wood construction and storage space, just without the premium mechanisms.</p><p><strong>View Box Storage Beds</strong></p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_LHwEjL",
+        "faq_item_DVYwT8",
+        "faq_item_e9aUV9"
+      ],
+      "custom_css": [
+        "{background-color: #fff;}"
+      ],
+      "name": "FAQ",
+      "settings": {
+        "label": "",
+        "heading": "Understanding Your Storage Options",
+        "button_label": "",
+        "button_link": "",
+        "button_style": "primary",
+        "offset_top_desktop": 20,
+        "offset_bottom_desktop": 60,
+        "offset_top_mobile": 20,
+        "offset_bottom_mobile": 30
+      }
+    },
+    "product-slider": {
+      "type": "product-slider",
+      "blocks": {
+        "slide-1": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/sheesham_wood_king_size_bed_with_hydraulic_storage.png",
+            "heading": "Sheesham Hydraulic Storage Beds",
+            "text": "<p>These designs prioritize storage volume over everything else. When you lift the mattress platform, you get access to nearly the entire footprint of the bed—nothing else in the collection offers this much dedicated storage space. This makes a sheesham wood king size bed with storage, especially in a hydraulic configuration, one of the most space-efficient choices for modern homes. The hydraulic mechanism does add weight (these beds run 200–220 lbs) and requires clearance behind the bed, but for people with limited closet space or who need to store luggage, off-season clothes, or extra bedding, the tradeoff makes sense.</p>",
+            "button_label": "Shop Now",
+            "button_link": "shopify://collections/beds"
+          }
+        },
+        "slide-2": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/sheesham_wood_king_size_bed_with_storage_drawers.png",
+            "heading": "Drawer Storage Beds",
+            "text": "<p>If you've ever wished your bed could function like a dresser, these designs deliver that. Separate drawers mean you can dedicate one to bedding, another to off-season clothes, another to items you want hidden but accessible.The drawer configurations vary—some designs feature two deep drawers on one side, others distribute four to six smaller drawers around the base. Choose based on what you're storing and which side of your bed has clearance space.</p>",
+            "button_label": "Shop Now",
+            "button_link": "shopify://collections/beds"
+          }
+        },
+        "slide-3": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/sheesham_wood_king_size_bed_with_box_storage.png",
+            "heading": "Box Storage Beds",
+            "text": "<p>These beds give you enclosed underbed storage without complex mechanisms. The space underneath is paneled on three sides with open access from the front or end—you decide how to organize it with your own bins, baskets, or storage solutions.This design works especially well if you already have a storage system you like, if you're storing irregular items that don't fit in drawers, or if you want solid wood bed construction without the premium hardware costs.</p>",
+            "button_label": "Shop Now",
+            "button_link": "shopify://collections/beds"
+          }
+        }
+      },
+      "block_order": [
+        "slide-1",
+        "slide-2",
+        "slide-3"
+      ],
+      "settings": {
+        "background_color": "#ffffff"
+      }
+    },
+    "info-columns": {
+      "type": "info-columns",
+      "blocks": {
+        "column_YhFaU6": {
+          "type": "column",
+          "settings": {
+            "icon_size": 40,
+            "icon_gap": 14,
+            "heading": "Density and weight capacity",
+            "text": "<p>Sheesham's density (around 770 kg/m³) sits between oak and walnut. This means side rails, headboards, and slat systems resist denting and support weight without sagging over time. Storage beds need to handle more stress than standard beds since they're heavier and users frequently access storage mechanisms. Sheesham handles this reliably.</p>",
+            "card_background": "#f7f7f7"
+          }
+        },
+        "column_hKBqGb": {
+          "type": "column",
+          "settings": {
+            "icon_size": 40,
+            "icon_gap": 14,
+            "heading": "Humidity resistance",
+            "text": "<p>The wood contains natural oils that help it withstand moisture exposure better than lighter woods like mango or rubber wood. This matters because storage beds create enclosed spaces underneath where air circulation is limited. In humid climates, woods without natural moisture resistance can warp or attract insects. Sheesham's oil content provides built-in protection.</p>",
+            "card_background": "#f7f7f7"
+          }
+        },
+        "column_xmirW4": {
+          "type": "column",
+          "settings": {
+            "icon_size": 40,
+            "icon_gap": 14,
+            "heading": "Movement stability",
+            "text": "<p>Wood expands and contracts with seasonal humidity changes. Sheesham's interlocked grain structure limits this movement to about 3-5% seasonally, compared to 7-12% for many other furniture woods. In practical terms, your drawer runners won't suddenly stick during monsoon season and loosen in winter. The tolerances stay consistent year-round.</p>",
+            "card_background": "#f7f7f7"
+          }
+        },
+        "col-1": {
+          "type": "column",
+          "settings": {
+            "icon_size": 100,
+            "icon_gap": 14,
+            "heading": "Longevity",
+            "text": "<p>The solid sheesham wood beds typically last 15-20 years with normal use before you see any structural issues. The wood itself can go 50+ years—the limiting factors are usually hardware wear (hydraulic pistons, drawer slides) rather than wood failure. If you're buying quality construction with proper joinery, this bed outlasts most other bedroom furniture investments.</p>",
+            "card_background": "#f7f7f7"
+          }
+        },
+        "col-2": {
+          "type": "column",
+          "settings": {
+            "icon_size": 40,
+            "icon_gap": 14,
+            "heading": "Visual character",
+            "text": "<p>Sheesham has a distinctive wavy, interlocked grain pattern with natural color variation from golden browns to deep chocolate tones. This means no two beds look identical—even beds from the same design will have unique grain patterns. This variability is an authenticity marker, not a quality concern.</p>",
+            "card_background": "#f7f7f7"
+          }
+        },
+        "col-3": {
+          "type": "column",
+          "settings": {
+            "icon_size": 40,
+            "icon_gap": 14,
+            "heading": "The tradeoff",
+            "text": "<p>Sheesham beds are heavy. A king-size storage bed typically weighs 180-220 lbs, making assembly a two-person job and delivery logistics more complex. But this weight directly correlates with the structural integrity and lifespan you're getting.</p>",
+            "card_background": "#f7f7f7"
+          }
+        }
+      },
+      "block_order": [
+        "column_YhFaU6",
+        "column_hKBqGb",
+        "column_xmirW4",
+        "col-1",
+        "col-2",
+        "col-3"
+      ],
+      "settings": {
+        "section_heading": "Why Sheesham Wood Across Our Collection?",
+        "columns_per_row": 3,
+        "background_color": "#ffffff",
+        "heading_color": "#1a1a1a",
+        "text_color": "#555555",
+        "show_button": true,
+        "button_label": "Shop Solid Sheesham Wood Beds",
+        "button_link": "shopify://collections/beds"
+      }
+    },
+    "info_columns_J4Lbtk": {
+      "type": "info-columns",
+      "blocks": {
+        "column_RUfGqg": {
+          "type": "column",
+          "settings": {
+            "icon": "shopify://shop_images/Rosewood_Finish_5f9f2696-cd42-43b1-825a-fd9eb9d15a30.png",
+            "icon_size": 100,
+            "icon_gap": 40,
+            "heading": "Rosewood Finish",
+            "text": "<p>Deep chocolate-brown tones that appear almost black in low light, with the wood grain subtly visible beneath the finish. The darkest option available, creating maximum drama and formality. Particularly striking in modern and minimalist spaces where the dark wood provides bold contrast. Hides minor wear and scratches better than lighter finishes while maintaining the authentic solid wood appearance.</p>",
+            "card_background": "#f7f7f7"
+          }
+        },
+        "column_axLCHk": {
+          "type": "column",
+          "settings": {
+            "icon": "shopify://shop_images/Espresso_Brown_Finish_71f83e82-9edc-4fca-a1ce-86d6cc6b1393.png",
+            "icon_size": 100,
+            "icon_gap": 40,
+            "heading": "Espresso Brown Finish",
+            "text": "<p>The richest, most intense finish in the collection—deep espresso-to-black tones that create a dramatic, high-contrast look. The wood grain is still discernible but takes a secondary role to the bold color statement. Best suited for contemporary and modern bedrooms, especially those with lighter floors or walls where you want the bed to anchor the space visually. This finish makes the bed a focal point rather than blending with other furniture.</p>",
+            "card_background": "#f7f7f7"
+          }
+        },
+        "column_VLPwzq": {
+          "type": "column",
+          "settings": {
+            "icon": "shopify://shop_images/Honey-Teak_Finish.png",
+            "icon_size": 100,
+            "icon_gap": 40,
+            "heading": "Honey-Teak Finish (Sheesham Wood)",
+            "text": "<p>Warm golden amber tones with pronounced grain patterns and natural color variation from light honey to deeper teak browns. The most versatile choice—works equally well with traditional carved designs and modern platform styles. Shows the authentic character of sheesham wood with visible knots and grain striping. Low-maintenance polyurethane coating that highlights the wood's natural beauty.</p>",
+            "card_background": "#f7f7f7"
+          }
+        },
+        "column_UKCgcF": {
+          "type": "column",
+          "settings": {
+            "icon": "shopify://shop_images/Dark-Teak_Finish.png",
+            "icon_size": 100,
+            "icon_gap": 40,
+            "heading": "Dark-Teak Finish (Sheesham Wood)",
+            "text": "<p>Rich medium-to-dark brown tones with subtle color gradation across the wood planks. Creates a sophisticated, grounded aesthetic without going fully dark. The natural grain remains visible, providing warmth and texture while offering a more refined appearance than lighter finishes. Excellent for contemporary bedrooms and pairs well with both neutral and bold wall colors.</p>",
+            "card_background": "#f7f7f7"
+          }
+        }
+      },
+      "block_order": [
+        "column_RUfGqg",
+        "column_axLCHk",
+        "column_VLPwzq",
+        "column_UKCgcF"
+      ],
+      "settings": {
+        "section_heading": "Sheesham Bed Finish Options at Induscraft",
+        "columns_per_row": 2,
+        "background_color": "#ffffff",
+        "heading_color": "#1a1a1a",
+        "text_color": "#555555",
+        "show_button": true,
+        "button_label": "Shop Now",
+        "button_link": "shopify://collections/beds"
+      }
+    },
+    "image_info_cards_XHqcqk": {
+      "type": "image-info-cards",
+      "blocks": {
+        "card_RCwxAE": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Box_Storage_Bed_Configuration_1.png",
+            "heading": "For box storage beds",
+            "text": "<p>12' × 12' minimum (144 sq ft) You need walking space on three sides plus clearance for storage access. In a 12×12 room, you'll have 24-30\" on most sides—adequate for making the bed and moving around comfortably.</p>",
+            "card_background": "#ffffff"
+          }
+        },
+        "card_ezLGnM": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Drawer_Storage_Bed_Configuration_1.png",
+            "heading": "For drawer storage beds",
+            "text": "<p>12' × 13' minimum (156 sq ft) Drawer sides need 24-30\" of clearance to fully extend, which eats into your movement space. The extra foot of room length prevents the bedroom from feeling cramped.</p>",
+            "card_background": "#ffffff"
+          }
+        },
+        "card_HtHBEp": {
+          "type": "card",
+          "settings": {
+            "image": "shopify://shop_images/Hydraulic_Storage_Bed_Configuration_1.png",
+            "heading": "For hydraulic storage beds",
+            "text": "<p>13' × 12' minimum (156 sq ft) You need 18-24\" clearance behind the bed for the mattress to tilt back when accessing storage. This typically means pulling the bed away from the wall or dedicating wall space to storage access rather than decorative furniture.</p>",
+            "card_background": "#ffffff"
+          }
+        }
+      },
+      "block_order": [
+        "card_RCwxAE",
+        "card_ezLGnM",
+        "card_HtHBEp"
+      ],
+      "name": "Image Info Cards",
+      "settings": {
+        "section_heading": "Size & Space Planning for King-Size Beds",
+        "section_description": "<p>Before selecting a storage bed design, confirm that king size actually works for your bedroom. The bed itself measures 78\" × 72\" (6.5' × 6'), but that's not the full space footprint once you account for movement and storage access. Recommended minimum room sizes:</p>",
+        "columns_per_row": 3,
+        "background_color": "#f0f4f8",
+        "heading_color": "#1a1a1a",
+        "text_color": "#555555"
+      }
+    },
+    "faq_simple_Jdc4f3": {
+      "type": "faq-simple",
+      "blocks": {
+        "faq_item_Yj879c": {
+          "type": "faq_item",
+          "settings": {
+            "heading": "What are the main differences between the storage bed types in your collection?",
+            "text": "<p>The core difference is the storage mechanism and how you access stored items. Hydraulic beds give you one large cavity accessed by lifting the mattress—best for bulky seasonal storage with maximum capacity (18-25 cubic feet). Drawer beds provide organized compartments you access from the side or foot without disturbing the mattress—ideal for frequently accessed items with 12-18 cubic feet across multiple drawers. Box storage beds have open-access underbed space with no mechanism—flexible and most affordable with 15-20 cubic feet. All three types use the same solid sheesham wood construction; the difference is purely functional design based on what you're storing and how often you need it.</p>"
+          }
+        },
+        "faq_item_CcaLzA": {
+          "type": "faq_item",
+          "settings": {
+            "heading": "Can I get any design in any finish, or are finishes limited to certain styles?",
+            "text": "<p>Nearly every bed in our collection is available in all four finishes: Honey-Teak, Dark-Teak, Rosewood, and Espresso Brown. The wood is the same; only the finishing treatment changes. Some heavily carved traditional designs look best in Honey-Teak because this finish highlights the carving detail and natural grain variation, while modern platform beds often look sharper in Rosewood or Espresso Brown for higher contrast and contemporary drama. But these are aesthetic recommendations, not restrictions—you can order any combination that matches your bedroom's existing furniture and personal preference.</p>"
+          }
+        },
+        "faq_item_3dJ6pY": {
+          "type": "faq_item",
+          "settings": {
+            "heading": "How do I know which storage configuration will fit my bedroom?",
+            "text": "<p>Measure your bedroom and identify how much clearance you have on each side of where the bed will sit. Box storage needs the least clearance (12-18\" on the access side). Drawer storage needs 24-30\" on whichever side has drawers. Hydraulic storage needs 18-24\" behind the bed so the mattress can tilt back. If you're working with tight clearances (under 20\" on most sides), box storage with front access is your most viable option. Our size planning guide provides specific room dimension recommendations for each storage type, but the quick rule is: 12'×12' bedroom works for most configurations, smaller bedrooms should stick to box storage.</p>"
+          }
+        },
+        "faq_item_HKiT6M": {
+          "type": "faq_item",
+          "settings": {
+            "heading": "Is sheesham wood genuinely better than other woods, or is this just marketing?",
+            "text": "<p>Sheesham has specific properties that make it particularly suitable for storage beds—this isn't marketing preference. Its density (770 kg/m³) means it supports weight without sagging, which matters when you're building heavier beds with storage mechanisms underneath. The wood's natural oils provide termite and moisture resistance, relevant when you're creating enclosed storage spaces with limited air circulation in humid climates. The interlocked grain structure limits seasonal movement to 3-5% compared to 7-12% for many other furniture woods, so drawer runners don't stick during monsoon and loosen in winter. These are measurable properties, not subjective claims. The tradeoff is weight—sheesham beds are heavy (180-220 lbs), making delivery and assembly more challenging. But this weight correlates directly with the structural integrity you're getting.</p>"
+          }
+        },
+        "faq_item_FcP6NW": {
+          "type": "faq_item",
+          "settings": {
+            "heading": "Do all the beds in this collection come with the same warranty?",
+            "text": "<p>Warranty coverage is consistent across the collection: 3 years comprehensive warranty covering manufacturing defects including cracked wood, faulty joinery, and hardware failures. The warranty typically doesn't cover finish wear, scratches, or damage from misuse. Hardware components like hydraulic pistons and drawer runners are included in the 3-year coverage, though normal wear and tear from daily use falls outside warranty scope. What matters more than warranty length is our commitment to actually honoring warranties and providing support. We have an established service network, so if something fails legitimately within the warranty period, you get resolution rather than runarounds.</p>"
+          }
+        },
+        "faq_item_nM4Qyi": {
+          "type": "faq_item",
+          "settings": {
+            "heading": "Can I customize a bed design to match specific requirements?",
+            "text": "<p>Customization options are available to match your specific requirements. You can select your preferred wood type, choose from our four standard finish options (Honey-Teak, Dark-Teak, Rosewood, Espresso Brown), or request custom finishes if you have something specific in mind. You can also request design modifications, adjust dimensions to fit your space, and specify other configuration details based on your needs. Our design team will work with you to ensure the bed matches your vision while maintaining structural integrity and quality standards. Connect with our team to discuss your customization requirements—we'll guide you through what's possible and provide recommendations based on your bedroom layout and aesthetic preferences.</p>"
+          }
+        },
+        "faq_item_Cbw4aR": {
+          "type": "faq_item",
+          "settings": {
+            "heading": "What mattress should I use with these beds, and does thickness matter?",
+            "text": "<p>Any standard king-size mattress (78\" × 72\") works—memory foam, latex, innerspring, hybrid, whatever you prefer. The slatted base provides adequate airflow for foam mattresses, so you don't need a box spring. One consideration: storage beds sit higher than standard beds (sleeping surface at 26-30\" versus 22-24\" for platform beds), so thicker mattresses (12\"+) might put you uncomfortably high for easy bed entry/exit and can make the bed dominate the room visually. Many buyers prefer 6-8\" mattresses on storage beds for better proportion. Just confirm the mattress dimensions match Indian king size (78\"×72\"), not US/UK king (76\"×80\")—imported mattresses may not fit properly.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_Yj879c",
+        "faq_item_CcaLzA",
+        "faq_item_3dJ6pY",
+        "faq_item_HKiT6M",
+        "faq_item_FcP6NW",
+        "faq_item_nM4Qyi",
+        "faq_item_Cbw4aR"
+      ],
+      "custom_css": [
+        "{background-color: #f0f4f8;}"
+      ],
+      "name": "FAQ",
+      "settings": {
+        "label": "",
+        "heading": "Frequently Asked Questions",
+        "button_label": "",
+        "button_link": "",
+        "button_style": "primary",
+        "offset_top_desktop": 60,
+        "offset_bottom_desktop": 60,
+        "offset_top_mobile": 30,
+        "offset_bottom_mobile": 30
+      }
+    },
+    "info_columns_hDw9WJ": {
+      "type": "info-columns",
+      "blocks": {
+        "column_NVYF6h": {
+          "type": "column",
+          "settings": {
+            "icon_size": 40,
+            "icon_gap": 14,
+            "heading": "Consistent material standards",
+            "text": "<p>Every bed uses solid sheesham wood—no veneers, no engineered wood cores, no misleading \"sheesham finish\" phrasing. The construction method is transparent, and you're getting the same wood quality regardless of which design or storage type you choose.</p>",
+            "card_background": "#f7f7f7"
+          }
+        },
+        "column_LQNQcc": {
+          "type": "column",
+          "settings": {
+            "icon_size": 40,
+            "icon_gap": 14,
+            "heading": "Hardware quality",
+            "text": "<p>We don't compromise on mechanisms. Hydraulic beds use European-manufactured gas pistons rated for thousands of cycles. Drawer beds have full-extension ball-bearing runners, not cheaper roller systems. This matters three years from now when marketplace beds start squeaking and sticking while yours still operate smoothly.</p>",
+            "card_background": "#f7f7f7"
+          }
+        },
+        "column_jDwcrX": {
+          "type": "column",
+          "settings": {
+            "icon_size": 40,
+            "icon_gap": 14,
+            "heading": "Variety within specialization",
+            "text": "<p>You're not choosing between one hydraulic model, one drawer model, and one box model. The collection offers multiple design aesthetics, finish options, and configurations within each storage category—enough variety to match different bedroom styles without overwhelming generic marketplace browsing.</p>",
+            "card_background": "#f7f7f7"
+          }
+        },
+        "column_7VCTjL": {
+          "type": "column",
+          "settings": {
+            "icon_size": 40,
+            "icon_gap": 14,
+            "heading": "Realistic expectations",
+            "text": "<p>We're transparent about assembly requirements, clearance needs, weight considerations, and maintenance realities. You won't discover after delivery that your hydraulic bed needs 24\" clearance behind it or that your drawer bed won't work with your bedroom layout. The information is upfront because dealing with returns on 200-lb furniture benefits nobody.</p>",
+            "card_background": "#f7f7f7"
+          }
+        },
+        "column_HFGU6m": {
+          "type": "column",
+          "settings": {
+            "icon_size": 40,
+            "icon_gap": 14,
+            "heading": "Longevity-focused construction",
+            "text": "<p>These beds are designed for 15-20 year lifespans, not 3-5 years until replacement. The joinery methods, wood thickness, and hardware quality reflect this timeline. You're paying more upfront but dividing that cost across many more years of use.</p>",
+            "card_background": "#f7f7f7"
+          }
+        },
+        "column_bpFybb": {
+          "type": "column",
+          "settings": {
+            "icon_size": 40,
+            "icon_gap": 14,
+            "heading": "Support after purchase",
+            "text": "<p>You have access to assembly support, care guidance, and genuine warranty service. If a hydraulic piston fails prematurely or a drawer runner breaks under normal use, there's an established process for resolution. This isn't a marketplace where vendors disappear after the sale.</p>",
+            "card_background": "#f7f7f7"
+          }
+        }
+      },
+      "block_order": [
+        "column_NVYF6h",
+        "column_LQNQcc",
+        "column_jDwcrX",
+        "column_7VCTjL",
+        "column_HFGU6m",
+        "column_bpFybb"
+      ],
+      "name": "Info Columns",
+      "settings": {
+        "section_heading": "Why Choose the Sheesham Wood King-Size Bed at Induscraft?",
+        "columns_per_row": 3,
+        "background_color": "#ffffff",
+        "heading_color": "#1a1a1a",
+        "text_color": "#555555",
+        "show_button": true,
+        "button_label": "Browse Full Collection by Storage Type",
+        "button_link": "shopify://collections/beds"
+      }
+    },
+    "featured_blog_46aDWp": {
+      "type": "featured-blog",
+      "name": "Blog posts",
+      "settings": {
+        "blog": "news",
+        "label": "",
+        "heading": "Furniture Buying Guides & Inspiration",
+        "link_text": "View All",
+        "link_aria_label_text": "Link to blog",
+        "button_style": "primary",
+        "full_width": true,
+        "offset_top_desktop": 60,
+        "offset_bottom_desktop": 60,
+        "offset_top_mobile": 30,
+        "offset_bottom_mobile": 30
+      }
+    }
+  },
+  "order": [
+    "content-image",
+    "category-cards",
+    "text_section_xYCr9b",
+    "feature-collage",
+    "feature_collage_wjCwyz",
+    "feature_collage_mNNEFQ",
+    "feature_collage_gaBPzG",
+    "default-page",
+    "text_section_fYNqBL",
+    "parallax_video_tiLnKP",
+    "text_section_zEjLwN",
+    "faq_simple_V4YYEi",
+    "product-slider",
+    "info-columns",
+    "info_columns_J4Lbtk",
+    "image_info_cards_XHqcqk",
+    "faq_simple_Jdc4f3",
+    "info_columns_hDw9WJ",
+    "featured_blog_46aDWp"
+  ]
+}

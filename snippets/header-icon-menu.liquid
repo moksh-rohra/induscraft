@@ -1,0 +1,96 @@
+{%- comment -%}
+	------------------------------------------------------------------------------
+	Snippet: Header Icon Menu
+	Render header icon menu with 7 slots
+	------------------------------------------------------------------------------
+{%- endcomment -%}
+
+{%- assign design = settings.design -%}
+
+{%- capture classes -%}
+	{%- if design == 'alternate' -%}
+		header-mega-menu-new header-mega-menu-new--icon-menu
+	{%- else -%}
+		header-mega-menu header-mega-menu--icon-menu
+	{%- endif -%}
+{%- endcapture -%}
+
+<div
+	id="headerMegaMenu:{{- menu.title | handleize -}}"
+	class="{{ classes }} is-hidden js-header-mega-menu"
+>
+	<div class="header-mega-menu__container mega-menu-icon-row js-header-mega-menu-content">
+		{%- for i in (1..7) -%}
+			{%- capture image_key -%}image_{{ i }}{%- endcapture -%}
+			{%- capture heading_key -%}heading_{{ i }}{%- endcapture -%}
+			{%- capture label_key -%}label_{{ i }}{%- endcapture -%}
+			{%- capture link_key -%}link_{{ i }}{%- endcapture -%}
+			{%- capture icon_size_key -%}icon_size_{{ i }}{%- endcapture -%}
+			{%- capture icon_padding_key -%}icon_padding_{{ i }}{%- endcapture -%}
+			{%- capture icon_bg_key -%}icon_bg_{{ i }}{%- endcapture -%}
+
+			{%- assign image = megamenu_object.settings[image_key] -%}
+			{%- assign heading = megamenu_object.settings[heading_key] -%}
+			{%- assign label = megamenu_object.settings[label_key] -%}
+			{%- assign link = megamenu_object.settings[link_key] -%}
+			{%- assign icon_size = megamenu_object.settings[icon_size_key] | default: 80 -%}
+			{%- assign icon_padding = megamenu_object.settings[icon_padding_key] | default: 20 -%}
+			{%- assign icon_bg = megamenu_object.settings[icon_bg_key] | default: '#f0f0f0' -%}
+
+			{%- assign wrapper_size = icon_size | plus: icon_padding | plus: icon_padding -%}
+
+			{%- if image != blank or heading != blank -%}
+				{%- comment -%} Look up submenu links by matching heading handle against parent menu's children {%- endcomment -%}
+				{%- assign heading_handle = heading | handleize -%}
+				{%- assign submenu_links = null -%}
+				{%- for child_link in menu.links -%}
+					{%- assign child_title_handle = child_link.title | handleize -%}
+					{%- if child_link.handle == heading_handle or child_title_handle == heading_handle -%}
+						{%- if child_link.links.size > 0 -%}
+							{%- assign submenu_links = child_link.links -%}
+						{%- endif -%}
+						{%- break -%}
+					{%- endif -%}
+				{%- endfor -%}
+
+				<div class="icon-menu-item-wrapper{% if submenu_links %} has-submenu{% endif %}">
+					<a href="{{ link | default: '#' }}" class="icon-menu-item">
+						<div class="icon-wrapper" style="width: {{ wrapper_size }}px; height: {{ wrapper_size }}px; padding: {{ icon_padding }}px; background-color: {{ icon_bg }};">
+							{%- if image != blank -%}
+								<img
+									src="{{ image | image_url: width: 160 }}"
+									alt="{{ heading | escape }}"
+									loading="lazy"
+									width="{{ icon_size }}"
+									height="{{ icon_size }}"
+									style="width: {{ icon_size }}px; height: {{ icon_size }}px;"
+								>
+							{%- endif -%}
+						</div>
+						<div class="content-wrapper">
+							{%- if heading != blank -%}
+								<span class="heading">{{ heading }}</span>
+							{%- endif -%}
+							{%- if label != blank -%}
+								<span class="label">{{ label }}</span>
+							{%- endif -%}
+						</div>
+					</a>
+
+					{%- if submenu_links -%}
+						<ul class="icon-submenu">
+							{%- for sub_link in submenu_links -%}
+								<li class="icon-submenu__item">
+									<a href="{{ sub_link.url }}" class="icon-submenu__link">
+										{{ sub_link.title }}
+									</a>
+								</li>
+							{%- endfor -%}
+						</ul>
+					{%- endif -%}
+				</div>
+			{%- endif -%}
+		{%- endfor -%}
+	</div>
+    <div class="header-mega-menu__overlay js-mega-menu-overlay"></div>
+</div>

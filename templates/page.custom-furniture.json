@@ -1,0 +1,82 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "default-page": {
+      "type": "default-page-template",
+      "disabled": true,
+      "settings": {
+        "offset_top_desktop": 60,
+        "offset_bottom_desktop": 60,
+        "offset_top_mobile": 30,
+        "offset_bottom_mobile": 30
+      }
+    },
+    "spaces_cta_84fggV": {
+      "type": "spaces-cta",
+      "name": "Custom Hero",
+      "settings": {
+        "image": "shopify://shop_images/shelby_sofa_af9a31da-74ff-4caa-803c-7d8608b3e73a.png",
+        "overlay_opacity": 40,
+        "content_max_width": 1200,
+        "heading": "Want to get your Custom Furniture Designed?",
+        "heading_size_desktop": 64,
+        "heading_size_mobile": 24,
+        "use_bristone_font": true,
+        "btn_label": "Upload Your Design",
+        "btn_link": "#shopify-section-template--20693035647161__custom_furniture_contact_eeN3gy",
+        "button_type": "secondary",
+        "desktop_height": 600,
+        "section_max_width": 100,
+        "border_radius": 0,
+        "mobile_height": 400,
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
+        "text_color": "#fdf0d5"
+      }
+    },
+    "custom_furniture_contact_eeN3gy": {
+      "type": "custom-furniture-contact",
+      "name": "Custom Furniture Form",
+      "settings": {
+        "basin_endpoint": "https://usebasin.com/f/030370afc821",
+        "heading": "Custom Furniture Inquiry",
+        "heading_size_desktop": 40,
+        "heading_size_mobile": 28,
+        "description": "Have a custom furniture design in mind? Share your vision with us and we'll bring it to life.",
+        "first_name_label": "First Name",
+        "last_name_label": "Last Name",
+        "email_label": "Email",
+        "phone_label": "Phone Number",
+        "message_label": "Describe Your Custom Furniture",
+        "image_label": "Upload Reference Image",
+        "submit_label": "Submit Inquiry",
+        "button_style": "secondary",
+        "success_message": "Thank you for your inquiry! We'll review your request and get back to you soon.",
+        "bg_color": "#ffffff",
+        "heading_color": "#2c2a28",
+        "description_color": "#666666",
+        "label_color": "#333333",
+        "input_border_color": "#dddddd",
+        "padding_top_desktop": 60,
+        "padding_bottom_desktop": 100,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 60
+      }
+    }
+  },
+  "order": [
+    "default-page",
+    "spaces_cta_84fggV",
+    "custom_furniture_contact_eeN3gy"
+  ]
+}

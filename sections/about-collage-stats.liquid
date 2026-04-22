@@ -1,0 +1,387 @@
+{%- comment -%}
+------------------------------------------------------------------------------
+  Section: About Collage Stats
+  - A responsive collage section with a main image, statistics blocks, text content, 
+    and two secondary images.
+  - Matches the design provided: Desktop split layout, Mobile stacked layout.
+------------------------------------------------------------------------------
+{%- endcomment -%}
+
+{%- assign main_image = section.settings.main_image -%}
+{%- assign secondary_image_1 = section.settings.secondary_image_1 -%}
+{%- assign secondary_image_2 = section.settings.secondary_image_2 -%}
+{%- assign text_content = section.settings.description -%}
+{%- assign bg_color = section.settings.background_color -%}
+{%- assign text_color = section.settings.text_color -%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    background-color: {{ bg_color }};
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    overflow: hidden;
+  }
+
+  @media screen and (min-width: 768px) {
+    #shopify-section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top_desktop }}px;
+      padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+    }
+  }
+
+  .collage-stats__container {
+    max-width: var(--global-container-width, 1440px);
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  /* Desktop Layout */
+  @media screen and (min-width: 1024px) {
+    .collage-stats__container {
+      flex-direction: row;
+      align-items: stretch;
+      gap: 60px;
+      padding: 0 60px;
+    }
+
+    .collage-stats__left,
+    .collage-stats__right {
+      flex: 1;
+      width: 50%;
+    }
+    
+    .collage-stats__right {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  }
+
+  /* Main Image */
+  .collage-stats__image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 75%; /* 4:3 Aspect Ratio default */
+    overflow: hidden;
+    border-radius: 20px;
+    background-color: #f0f0f0;
+  }
+  
+  @media screen and (min-width: 1024px) {
+     .collage-stats__image-wrapper--main {
+         height: 100%;
+         padding-bottom: 0;
+         min-height: 600px;
+     }
+  }
+
+  .collage-stats__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Stats Row */
+  .collage-stats__stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px 20px;
+    margin-bottom: 40px;
+    color: {{ text_color }};
+  }
+
+  @media screen and (min-width: 768px) {
+    .collage-stats__stats-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+  }
+  
+  .collage-stats__stat-item {
+      display: flex;
+      flex-direction: column;
+  }
+
+  .collage-stats__stat-number {
+    font-family: var(--heading-font-family);
+    font-size: 36px;
+    font-weight: 500;
+    line-height: 1.1;
+    margin-bottom: 8px;
+    display: block;
+  }
+  
+  .collage-stats__stat-label {
+    font-size: 14px;
+    line-height: 1.4;
+    opacity: 0.9;
+  }
+  
+  @media screen and (min-width: 1024px) {
+      .collage-stats__stat-number {
+          font-size: 56px;
+      }
+      .collage-stats__stat-label {
+          font-size: 15px;
+      }
+  }
+
+  /* Description Text */
+  .collage-stats__description {
+    font-family: var(--heading-font-family);
+    font-size: 20px;
+    line-height: 1.4;
+    color: {{ text_color }};
+    margin: 40px 0 20px 0;
+    max-width: 480px;
+    margin-left: auto;
+    text-align: right;
+  }
+  
+  /* Mobile stack alignment */
+  @media screen and (max-width: 1023px) {
+      .collage-stats__description {
+          text-align: left;
+          margin-left: 0;
+          font-size: 18px;
+      }
+  }
+
+  /* Secondary Images Grid */
+  .collage-stats__secondary-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .collage-stats__image-wrapper--secondary {
+    padding-bottom: 80%; /* Slightly taller than square */
+  }
+</style>
+
+<div class="collage-stats__container">
+  <!-- Left Column: Main Image -->
+  <div class="collage-stats__left left-animate">
+    <div class="collage-stats__image-wrapper collage-stats__image-wrapper--main">
+      {%- if main_image != blank -%}
+        <img
+          srcset="{{ main_image | image_url: width: 800 }} 800w, {{ main_image | image_url: width: 1200 }} 1200w"
+          src="{{ main_image | image_url: width: 1200 }}"
+          alt="{{ main_image.alt | escape }}"
+          loading="lazy"
+          class="collage-stats__image"
+          width="{{ main_image.width }}"
+          height="{{ main_image.height }}"
+        >
+      {%- else -%}
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'collage-stats__image' }}
+      {%- endif -%}
+    </div>
+  </div>
+
+  <!-- Right Column: Stats, content, secondary images -->
+  <div class="collage-stats__right right-animate">
+    <!-- Top: Stats -->
+    <div class="collage-stats__stats-grid">
+      {%- for block in section.blocks -%}
+        <div class="collage-stats__stat-item">
+          <span class="collage-stats__stat-number">{{ block.settings.number }}</span>
+          <span class="collage-stats__stat-label">{{ block.settings.label }}</span>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <!-- Middle: Description -->
+    {%- if text_content != blank -%}
+      <div class="collage-stats__description">
+        {{ text_content | newline_to_br }}
+      </div>
+    {%- endif -%}
+
+    <!-- Bottom: Two Images -->
+    <div class="collage-stats__secondary-images">
+      <div class="collage-stats__image-wrapper collage-stats__image-wrapper--secondary">
+        {%- if secondary_image_1 != blank -%}
+          <img
+            src="{{ secondary_image_1 | image_url: width: 600 }}"
+            alt="{{ secondary_image_1.alt | escape }}"
+            loading="lazy"
+            class="collage-stats__image"
+            width="{{ secondary_image_1.width }}"
+            height="{{ secondary_image_1.height }}"
+          >
+        {%- else -%}
+          {{ 'product-1' | placeholder_svg_tag: 'collage-stats__image' }}
+        {%- endif -%}
+      </div>
+      
+      <div class="collage-stats__image-wrapper collage-stats__image-wrapper--secondary">
+        {%- if secondary_image_2 != blank -%}
+          <img
+            src="{{ secondary_image_2 | image_url: width: 600 }}"
+            alt="{{ secondary_image_2.alt | escape }}"
+            loading="lazy"
+            class="collage-stats__image"
+            width="{{ secondary_image_2.width }}"
+            height="{{ secondary_image_2.height }}"
+          >
+        {%- else -%}
+          {{ 'product-2' | placeholder_svg_tag: 'collage-stats__image' }}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Collage Stats (New)",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "main_image",
+      "label": "Main Image (Left)"
+    },
+    {
+      "type": "image_picker",
+      "id": "secondary_image_1",
+      "label": "Secondary Image 1 (Bottom Left)"
+    },
+    {
+      "type": "image_picker",
+      "id": "secondary_image_2",
+      "label": "Secondary Image 2 (Bottom Right)"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description Text",
+      "default": "Discover our unique, sustainable, handcrafted reclaimed oak furniture"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop Top Padding",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop Bottom Padding",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Top Padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile Bottom Padding",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Statistic",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "80M+"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Savings on Sustainable Design"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Collage Stats",
+      "blocks": [
+        {
+          "type": "stat",
+          "settings": {
+              "number": "$80M+",
+              "label": "Savings on Sustainable Design"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+              "number": "20K+",
+              "label": "Global Clients"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+              "number": "98%",
+              "label": "Client Satisfaction"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

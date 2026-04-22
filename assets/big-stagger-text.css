@@ -1,0 +1,79 @@
+@font-face {
+    font-family: 'Bristone';
+    src: url('Bristone Reg.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+.big-stagger-text {
+    width: 100%;
+    background-color: var(--bg-color);
+    padding-top: var(--pt-d);
+    padding-bottom: var(--pb-d);
+    overflow: hidden;
+}
+
+.big-stagger-text__container {
+    max-width: 100%;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 60px;
+    display: flex;
+    flex-direction: column;
+}
+
+.big-stagger-text__item {
+    width: 100%;
+    text-align: var(--text-align);
+    overflow: hidden;
+    padding: 10px 0;
+}
+
+.big-stagger-text__heading {
+    margin: 0;
+    color: var(--text-color);
+    font-size: var(--font-size-d) !important;
+    line-height: 1;
+    text-transform: uppercase;
+    font-weight: var(--font-weight) !important;
+    display: inline-block;
+}
+
+/* Word wrappers - keep words together */
+.big-stagger-text__heading .word {
+    display: inline-block;
+    white-space: nowrap;
+    margin-right: 0.25em;
+}
+
+/* Font Families */
+.font-bristone {
+    font-family: 'Bristone', sans-serif;
+}
+
+.font-body {
+    font-family: var(--font-body-family);
+}
+
+/* GSAP SplitText Chars Class */
+.big-stagger-text__heading .char {
+    display: inline-block;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+
+    .big-stagger-text__container {
+        padding: 0 20px;
+    }
+
+    .big-stagger-text {
+        padding-top: var(--pt-m);
+        padding-bottom: var(--pb-m);
+    }
+
+    .big-stagger-text__heading {
+        font-size: var(--font-size-m) !important;
+    }
+}

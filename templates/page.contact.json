@@ -1,0 +1,181 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "contact_page_template_Ajiz34": {
+      "type": "contact-page-template",
+      "disabled": true,
+      "name": "Contact",
+      "settings": {
+        "label": "",
+        "info_heading": "",
+        "address_heading": "",
+        "address_text": "<p>Company: <br>Street. City, ZIP/Postal Country</p>",
+        "phone_heading": "",
+        "phone_text": "<p><a href=\"tel:Contact_number\" title=\"tel:Contact_number\">Contact number</a></p>",
+        "email_heading": "",
+        "email_text": "<p><a href=\"mailto:email@email.com\" title=\"mailto:email@email.com\">email@email.com</a></p>",
+        "social_heading": "",
+        "show_social": true,
+        "map_api_key": "",
+        "map_query": "Eiffel+Tower,Paris+France",
+        "map_url": "",
+        "form_heading": "Heading",
+        "name_placeholder": "Your name...",
+        "email_placeholder": "Your email...",
+        "phone_placeholder": "Enter your phone number",
+        "message_placeholder": "Your message...",
+        "submit_label": "Send",
+        "offset_top_desktop": 60,
+        "offset_bottom_desktop": 60,
+        "offset_top_mobile": 30,
+        "offset_bottom_mobile": 30
+      }
+    },
+    "big_stagger_text_xKi3ig": {
+      "type": "big-stagger-text",
+      "blocks": {
+        "text_block_EqneU6": {
+          "type": "text_block",
+          "settings": {
+            "text": "Contact US",
+            "text_color": "#3b3b3b",
+            "font_size_d": 150,
+            "font_size_m": 34,
+            "use_theme_font": false,
+            "text_align": "center",
+            "is_bold": true
+          }
+        }
+      },
+      "block_order": [
+        "text_block_EqneU6"
+      ],
+      "name": "Big Stagger Text",
+      "settings": {
+        "bg_color": "rgba(0,0,0,0)",
+        "padding_top_d": 50,
+        "padding_bottom_d": 0,
+        "padding_top_m": 40,
+        "padding_bottom_m": 0
+      }
+    },
+    "custom_contact_form_pWJhb6": {
+      "type": "custom-contact-form",
+      "blocks": {
+        "ccf_contact_info_yjNB6L": {
+          "type": "ccf_contact_info",
+          "settings": {
+            "title": "Email",
+            "text": "Contact us by email, and we will respond shortly.",
+            "highlight": "sales@induscraft.com",
+            "highlight_link": ""
+          }
+        },
+        "ccf_contact_info_qhpKzm": {
+          "type": "ccf_contact_info",
+          "settings": {
+            "title": "Phone",
+            "text": "Call us on weekdays from 9 AM to 5 PM.",
+            "highlight": "+917821013706",
+            "highlight_link": ""
+          }
+        },
+        "ccf_contact_info_xtd4Qg": {
+          "type": "ccf_contact_info",
+          "settings": {
+            "title": "Office",
+            "text": "Visit us at our headquarters.",
+            "highlight": "#112, Jodhpur - Barmer Rd, Jodhpur, Rajasthan 342014",
+            "highlight_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "ccf_contact_info_yjNB6L",
+        "ccf_contact_info_qhpKzm",
+        "ccf_contact_info_xtd4Qg"
+      ],
+      "name": "Contact Form",
+      "settings": {
+        "heading": "Reach Us",
+        "heading_size": 48,
+        "heading_size_mobile": 32,
+        "description": "We'd love to hear from you. Please feel free to reach out to us by below methods, and we'll reply soon.",
+        "form_heading": "Write us a message",
+        "first_name_label": "First name",
+        "first_name_placeholder": "Indus",
+        "last_name_label": "Last name",
+        "last_name_placeholder": "Craft",
+        "email_label": "Email",
+        "email_placeholder": "induscraft@gmail.com",
+        "message_label": "Message",
+        "message_placeholder": "How can we help you?",
+        "show_privacy_checkbox": true,
+        "privacy_text_before": "I agree the",
+        "privacy_link_text": "Privacy Policy",
+        "privacy_link": "",
+        "privacy_text": "I agree the Privacy Policy.",
+        "button_text": "Send",
+        "success_message": "Thank you for your message. We will get back to you shortly.",
+        "bg_color": "rgba(0,0,0,0)",
+        "heading_color": "#1a1a1a",
+        "text_color": "#555555",
+        "link_color": "#1a1a1a",
+        "form_bg_color": "#f5f2eb",
+        "form_border_radius": 20,
+        "form_heading_color": "#1a1a1a",
+        "form_label_color": "#333333",
+        "input_bg_color": "#ffffff",
+        "input_border_color": "#dddddd",
+        "input_text_color": "#333333",
+        "input_placeholder_color": "#999999",
+        "button_bg_color": "#1a1a1a",
+        "button_text_color": "#ffffff",
+        "button_hover_bg_color": "#333333",
+        "button_hover_text_color": "#ffffff",
+        "button_border_radius": 30,
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    },
+    "google_map_ndwRnc": {
+      "type": "google-map",
+      "name": "Google Map",
+      "settings": {
+        "map_embed_url": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3579.4844703477684!2d72.95119877521105!3d26.213443477070935!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39418b8a2ddfcfeb%3A0x4164c3c38a919013!2sInduscraft!5e0!3m2!1sen!2sin!4v1769669836735!5m2!1sen!2sin\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>",
+        "show_heading": false,
+        "heading": "Visit Our Store",
+        "heading_size": 36,
+        "heading_size_mobile": 28,
+        "subheading": "Find us at our showroom location",
+        "max_width": 1200,
+        "map_height": 460,
+        "map_height_mobile": 300,
+        "border_radius": 20,
+        "bg_color": "rgba(0,0,0,0)",
+        "heading_color": "#1a1a1a",
+        "subheading_color": "#666666",
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    }
+  },
+  "order": [
+    "contact_page_template_Ajiz34",
+    "big_stagger_text_xKi3ig",
+    "custom_contact_form_pWJhb6",
+    "google_map_ndwRnc"
+  ]
+}

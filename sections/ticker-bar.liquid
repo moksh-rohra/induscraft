@@ -1,0 +1,192 @@
+{%- comment -%}
+  Ticker Bar Section
+  ==================
+  Infinite scrolling marquee for announcements.
+  Uses CSS animation with duplicated content for seamless looping.
+{%- endcomment -%}
+
+{{ 'ticker-bar.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  #ticker-bar-{{ section.id }} {
+    --ticker-bg-color: {{ section.settings.background_color }};
+    --ticker-text-color: {{ section.settings.text_color }};
+    --ticker-padding-vertical: {{ section.settings.padding_vertical }}px;
+    --ticker-speed: {{ section.settings.speed }}s;
+    --ticker-gap: {{ section.settings.gap }}px;
+    --ticker-font-size: {{ section.settings.font_size }}px;
+    --ticker-font-weight: {{ section.settings.font_weight }};
+  }
+{%- endstyle -%}
+
+<section id="ticker-bar-{{ section.id }}" class="ticker-bar" data-section-id="{{ section.id }}">
+  <div class="ticker-bar__wrapper">
+    <!-- 
+      We repeat the blocks multiple times to ensure the track is long enough 
+      to cover the screen and scroll seamlessly.
+      10 repeats is usually sufficient for text.
+    -->
+    <div class="ticker-bar__track direction--{{ section.settings.direction }} pause--{{ section.settings.pause_on_hover }}">
+      {%- for i in (1..10) -%}
+        {%- for block in section.blocks -%}
+          <div class="ticker-bar__item" {{ block.shopify_attributes }}>
+            {%- if block.settings.link != blank -%}
+              <a href="{{ block.settings.link }}">
+            {%- endif -%}
+            
+            {%- if block.settings.icon != 'none' -%}
+                {% comment %} Simple dot separator or icon logic could go here {% endcomment %}
+                 {%- if block.settings.icon == 'dot' -%}
+                    <span class="ticker-bar__icon-separator"></span>
+                 {%- endif -%}
+            {%- endif -%}
+
+            {{ block.settings.text }}
+
+            {%- if block.settings.link != blank -%}
+              </a>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Ticker Bar",
+  "class": "section-ticker-bar",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 10,
+      "max": 140,
+      "step": 2,
+      "unit": "s",
+      "label": "Animation Speed",
+      "default": 20,
+      "info": "Time to complete one loop. Lower is faster."
+    },
+    {
+      "type": "select",
+      "id": "direction",
+      "label": "Direction",
+      "options": [
+        { "value": "left", "label": "Left to Right" },
+        { "value": "right", "label": "Right to Left" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "checkbox",
+      "id": "pause_on_hover",
+      "label": "Pause on hover",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Space between items",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_vertical",
+      "min": 5,
+      "max": 40,
+      "step": 1,
+      "unit": "px",
+      "label": "Vertical Padding",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Font Size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "font_weight",
+      "min": 300,
+      "max": 900,
+      "step": 100,
+      "label": "Font Weight",
+      "default": 500
+    }
+  ],
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "Announcement",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "Welcome to our store"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon/Separator",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "dot", "label": "Dot" }
+          ],
+          "default": "none"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ticker Bar",
+      "blocks": [
+        { "type": "announcement", "settings": { "text": "Free Shipping on Orders Over $100" } },
+        { "type": "announcement", "settings": { "text": "New Arrivals Just Dropped!", "icon": "dot" } },
+        { "type": "announcement", "settings": { "text": "Use code WELCOME10 for 10% off", "icon": "dot" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

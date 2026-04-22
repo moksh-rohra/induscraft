@@ -1,0 +1,456 @@
+{%- comment -%}
+------------------------------------------------------------------------------
+  Section: Sticky Button
+  A floating sticky CTA button fixed to the viewport edge.
+  Can link to any product, page, collection, or external URL.
+------------------------------------------------------------------------------
+{%- endcomment -%}
+
+{%- assign btn_text       = section.settings.button_text -%}
+{%- assign btn_link       = section.settings.button_link -%}
+{%- assign btn_style      = section.settings.button_style -%}
+{%- assign btn_position   = section.settings.position -%}
+{%- assign btn_icon        = section.settings.icon -%}
+{%- assign show_on_mobile  = section.settings.show_on_mobile -%}
+{%- assign show_on_desktop = section.settings.show_on_desktop -%}
+{%- assign open_new_tab    = section.settings.open_new_tab -%}
+{%- assign show_after_scroll = section.settings.show_after_scroll -%}
+{%- assign scroll_distance  = section.settings.scroll_distance -%}
+{%- assign hide_on_product  = section.settings.hide_on_product_page -%}
+
+{%- comment -%} Don't render if text or link missing {%- endcomment -%}
+{%- if btn_text == blank or btn_link == blank -%}
+  {%- if request.design_mode -%}
+    <div style="text-align:center;padding:20px;opacity:0.5;">
+      <p>Sticky Button: Please add button text and link in section settings.</p>
+    </div>
+  {%- endif -%}
+  {%- break -%}
+{%- endif -%}
+
+{%- comment -%} Hide on product page if setting enabled {%- endcomment -%}
+{%- if hide_on_product and template.name == 'product' -%}
+  {%- break -%}
+{%- endif -%}
+
+{%- style -%}
+  /* ---- Sticky Button Section ---- */
+  .sticky-btn-section-{{ section.id }} {
+    position: fixed;
+    z-index: 999;
+    transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease;
+  }
+
+  /* Visibility by device */
+  {% unless show_on_desktop %}
+    @media (min-width: 768px) {
+      .sticky-btn-section-{{ section.id }} {
+        display: none !important;
+      }
+    }
+  {% endunless %}
+
+  {% unless show_on_mobile %}
+    @media (max-width: 767.98px) {
+      .sticky-btn-section-{{ section.id }} {
+        display: none !important;
+      }
+    }
+  {% endunless %}
+
+  /* ---- Positioning ---- */
+  {% case btn_position %}
+    {% when 'bottom-right' %}
+      .sticky-btn-section-{{ section.id }} {
+        bottom: {{ section.settings.offset_bottom }}px;
+        right: {{ section.settings.offset_side }}px;
+      }
+      @media (max-width: 767.98px) {
+        .sticky-btn-section-{{ section.id }} {
+          bottom: {{ section.settings.offset_bottom_mobile }}px;
+          right: {{ section.settings.offset_side_mobile }}px;
+        }
+      }
+    {% when 'bottom-left' %}
+      .sticky-btn-section-{{ section.id }} {
+        bottom: {{ section.settings.offset_bottom }}px;
+        left: {{ section.settings.offset_side }}px;
+      }
+      @media (max-width: 767.98px) {
+        .sticky-btn-section-{{ section.id }} {
+          bottom: {{ section.settings.offset_bottom_mobile }}px;
+          left: {{ section.settings.offset_side_mobile }}px;
+        }
+      }
+    {% when 'top-right' %}
+      .sticky-btn-section-{{ section.id }} {
+        top: {{ section.settings.offset_bottom }}px;
+        right: {{ section.settings.offset_side }}px;
+      }
+      @media (max-width: 767.98px) {
+        .sticky-btn-section-{{ section.id }} {
+          top: {{ section.settings.offset_bottom_mobile }}px;
+          right: {{ section.settings.offset_side_mobile }}px;
+        }
+      }
+    {% when 'top-left' %}
+      .sticky-btn-section-{{ section.id }} {
+        top: {{ section.settings.offset_bottom }}px;
+        left: {{ section.settings.offset_side }}px;
+      }
+      @media (max-width: 767.98px) {
+        .sticky-btn-section-{{ section.id }} {
+          top: {{ section.settings.offset_bottom_mobile }}px;
+          left: {{ section.settings.offset_side_mobile }}px;
+        }
+      }
+    {% when 'bottom-center' %}
+      .sticky-btn-section-{{ section.id }} {
+        bottom: {{ section.settings.offset_bottom }}px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      @media (max-width: 767.98px) {
+        .sticky-btn-section-{{ section.id }} {
+          bottom: {{ section.settings.offset_bottom_mobile }}px;
+        }
+      }
+    {% when 'bottom-full-width' %}
+      .sticky-btn-section-{{ section.id }} {
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: {{ section.settings.offset_bottom }}px {{ section.settings.offset_side }}px;
+      }
+      .sticky-btn-section-{{ section.id }} .sticky-btn__link {
+        width: 100%;
+      }
+      @media (max-width: 767.98px) {
+        .sticky-btn-section-{{ section.id }} {
+          padding: {{ section.settings.offset_bottom_mobile }}px {{ section.settings.offset_side_mobile }}px;
+        }
+      }
+  {% endcase %}
+
+  /* ---- Show after scroll ---- */
+  {% if show_after_scroll %}
+    .sticky-btn-section-{{ section.id }}.is-hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      {% if btn_position == 'bottom-center' %}
+        transform: translateX(-50%) translateY(20px);
+      {% elsif btn_position == 'top-right' or btn_position == 'top-left' %}
+        transform: translateY(-20px);
+      {% else %}
+        transform: translateY(20px);
+      {% endif %}
+    }
+    .sticky-btn-section-{{ section.id }}.is-visible {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      {% if btn_position == 'bottom-center' %}
+        transform: translateX(-50%) translateY(0);
+      {% else %}
+        transform: translateY(0);
+      {% endif %}
+    }
+  {% endif %}
+
+  /* ---- Button inner layout ---- */
+  .sticky-btn-section-{{ section.id }} .sticky-btn__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    white-space: nowrap;
+    text-transform: uppercase;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    padding: 14px 36px;
+    font-size: calc(var(--body-font-size) * 0.8);
+  }
+
+  .sticky-btn-section-{{ section.id }} .sticky-btn__link::after {
+    width: calc(100% - 12px);
+    height: calc(100% - 12px);
+  }
+
+  .sticky-btn-section-{{ section.id }} .sticky-btn__icon {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .sticky-btn-section-{{ section.id }} .sticky-btn__icon img,
+  .sticky-btn-section-{{ section.id }} .sticky-btn__icon svg {
+    width: {{ section.settings.icon_size }}px;
+    height: {{ section.settings.icon_size }}px;
+    object-fit: contain;
+  }
+
+  /* ---- Pulse animation ---- */
+  {% if section.settings.enable_pulse %}
+    .sticky-btn-section-{{ section.id }} .sticky-btn__link {
+      animation: stickyBtnPulse-{{ section.id }} 2s ease-in-out infinite;
+    }
+    @keyframes stickyBtnPulse-{{ section.id }} {
+      0%, 100% { box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); }
+      50%      { box-shadow: 0 4px 30px rgba(0, 0, 0, 0.30); }
+    }
+  {% endif %}
+{%- endstyle -%}
+
+<div
+  class="sticky-btn-section-{{ section.id }} {% if show_after_scroll %}is-hidden{% endif %}"
+  data-sticky-btn-section
+  {% if show_after_scroll %}
+    data-scroll-show="true"
+    data-scroll-distance="{{ scroll_distance }}"
+  {% endif %}
+>
+  <a
+    href="{{ btn_link }}"
+    class="sticky-btn__link button-new button--{{ btn_style }}"
+    aria-label="{{ btn_text | escape }}"
+    {% if open_new_tab %}target="_blank" rel="noopener noreferrer"{% endif %}
+  >
+    {%- if btn_icon != blank -%}
+      <span class="sticky-btn__icon">
+        {{ btn_icon | image_url: width: 80 | image_tag: loading: 'lazy' }}
+      </span>
+    {%- endif -%}
+    <span class="sticky-btn__text">{{ btn_text }}</span>
+  </a>
+</div>
+
+{% if show_after_scroll %}
+<script>
+  (function() {
+    var section = document.querySelector('.sticky-btn-section-{{ section.id }}');
+    if (!section) return;
+    var distance = parseInt(section.getAttribute('data-scroll-distance'), 10) || 200;
+    function onScroll() {
+      if (window.scrollY >= distance) {
+        section.classList.remove('is-hidden');
+        section.classList.add('is-visible');
+      } else {
+        section.classList.add('is-hidden');
+        section.classList.remove('is-visible');
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+</script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Sticky Button",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link",
+      "info": "Link to any product, page, collection or external URL"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        {
+          "value": "primary",
+          "label": "Primary"
+        },
+        {
+          "value": "secondary",
+          "label": "Secondary"
+        }
+      ],
+      "default": "primary"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_new_tab",
+      "label": "Open link in new tab",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Icon"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon",
+      "label": "Button icon",
+      "info": "Optional. Displayed before button text. 40x40px recommended."
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "min": 12,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Icon size",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Position"
+    },
+    {
+      "type": "select",
+      "id": "position",
+      "label": "Button position",
+      "options": [
+        {
+          "value": "bottom-right",
+          "label": "Bottom Right"
+        },
+        {
+          "value": "bottom-left",
+          "label": "Bottom Left"
+        },
+        {
+          "value": "bottom-center",
+          "label": "Bottom Center"
+        },
+        {
+          "value": "bottom-full-width",
+          "label": "Bottom Full Width"
+        },
+        {
+          "value": "top-right",
+          "label": "Top Right"
+        },
+        {
+          "value": "top-left",
+          "label": "Top Left"
+        }
+      ],
+      "default": "bottom-right"
+    },
+    {
+      "type": "range",
+      "id": "offset_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom offset (Desktop)",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "offset_side",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Side offset (Desktop)",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "offset_bottom_mobile",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Bottom offset (Mobile)",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "offset_side_mobile",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Side offset (Mobile)",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Visibility"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_on_desktop",
+      "label": "Show on desktop",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_on_mobile",
+      "label": "Show on mobile",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_on_product_page",
+      "label": "Hide on product pages",
+      "default": false,
+      "info": "Useful to avoid conflict with sticky add-to-cart"
+    },
+    {
+      "type": "header",
+      "content": "Scroll Behavior"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_after_scroll",
+      "label": "Show only after scrolling",
+      "default": true,
+      "info": "Button appears after the user scrolls down"
+    },
+    {
+      "type": "range",
+      "id": "scroll_distance",
+      "min": 50,
+      "max": 1000,
+      "step": 50,
+      "unit": "px",
+      "label": "Scroll distance to show",
+      "default": 200,
+      "info": "How many pixels user must scroll before the button appears"
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_pulse",
+      "label": "Enable pulse glow animation",
+      "default": false,
+      "info": "Adds a subtle pulsating shadow to draw attention"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sticky Button",
+      "settings": {
+        "button_text": "Shop Now",
+        "button_style": "primary",
+        "position": "bottom-right",
+        "show_after_scroll": true,
+        "scroll_distance": 200
+      }
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,2112 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero_slideshow_E3EWAJ": {
+      "type": "hero-slideshow",
+      "blocks": {
+        "slide_azPzTK": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Hero_Banner_-_Brahmika.png",
+            "bg_color": "#f4f4f4",
+            "overlay_opacity": 35,
+            "content_alignment": "center",
+            "content_vertical_alignment": "center",
+            "text_alignment": "center",
+            "text_color": "#ffffff",
+            "subheading": "Exclusive Offer",
+            "heading": "FREE Centre Table",
+            "description": "<p>On the purchase of Brahmika Sofa Set </p>",
+            "heading_font_size": 38,
+            "heading_font_size_mobile": 32,
+            "subheading_font_size": 16,
+            "subheading_font_size_mobile": 14,
+            "description_font_size": 16,
+            "description_font_size_mobile": 14,
+            "subheading_icon_color": "#ec4855",
+            "btn_1_label": "Shop Now",
+            "btn_1_link": "shopify://products/brahmika-solid-wood-sofa-3-seater",
+            "btn_1_style": "primary",
+            "btn_1_bg_color": "#000000",
+            "btn_1_bg_color_hover": "#333333",
+            "btn_1_text_color": "#ffffff",
+            "btn_1_text_color_hover": "#ffffff",
+            "btn_1_border_color": "#000000",
+            "btn_1_border_color_hover": "#333333",
+            "btn_2_label": "",
+            "btn_2_link": "",
+            "btn_2_style": "secondary",
+            "btn_2_bg_color": "rgba(0,0,0,0)",
+            "btn_2_bg_color_hover": "#ffffff",
+            "btn_2_text_color": "#ffffff",
+            "btn_2_text_color_hover": "#000000",
+            "btn_2_border_color": "#ffffff",
+            "btn_2_border_color_hover": "#ffffff"
+          }
+        },
+        "slide_TWJd6p": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/Navratri-Sale-Furniture.jpg",
+            "bg_color": "#f4f4f4",
+            "overlay_opacity": 0,
+            "content_alignment": "center",
+            "content_vertical_alignment": "center",
+            "text_alignment": "center",
+            "text_color": "#ffffff",
+            "subheading": "",
+            "heading": "",
+            "description": "",
+            "heading_font_size": 48,
+            "heading_font_size_mobile": 32,
+            "subheading_font_size": 16,
+            "subheading_font_size_mobile": 14,
+            "description_font_size": 16,
+            "description_font_size_mobile": 14,
+            "subheading_icon_color": "#ffffff",
+            "btn_1_label": "",
+            "btn_1_link": "",
+            "btn_1_style": "primary",
+            "btn_1_bg_color": "#000000",
+            "btn_1_bg_color_hover": "#333333",
+            "btn_1_text_color": "#ffffff",
+            "btn_1_text_color_hover": "#ffffff",
+            "btn_1_border_color": "#000000",
+            "btn_1_border_color_hover": "#333333",
+            "btn_2_label": "",
+            "btn_2_link": "",
+            "btn_2_style": "secondary",
+            "btn_2_bg_color": "rgba(0,0,0,0)",
+            "btn_2_bg_color_hover": "#ffffff",
+            "btn_2_text_color": "#ffffff",
+            "btn_2_text_color_hover": "#000000",
+            "btn_2_border_color": "#ffffff",
+            "btn_2_border_color_hover": "#ffffff"
+          }
+        },
+        "slide_iUHeCy": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/shelby-sofa.webp",
+            "bg_color": "#f4f4f4",
+            "overlay_opacity": 20,
+            "content_alignment": "left",
+            "content_vertical_alignment": "center",
+            "text_alignment": "left",
+            "text_color": "#ffffff",
+            "subheading": "Fresh Arrivals Sale",
+            "heading": "5% Off + Free Shipping",
+            "description": "",
+            "heading_font_size": 38,
+            "heading_font_size_mobile": 22,
+            "subheading_font_size": 16,
+            "subheading_font_size_mobile": 12,
+            "description_font_size": 16,
+            "description_font_size_mobile": 14,
+            "subheading_icon_color": "#ec4855",
+            "btn_1_label": "Shop Now",
+            "btn_1_link": "https://induscraft.com/collections/beds",
+            "btn_1_style": "primary",
+            "btn_1_bg_color": "rgba(0,0,0,0)",
+            "btn_1_bg_color_hover": "#181210",
+            "btn_1_text_color": "#ffffff",
+            "btn_1_text_color_hover": "#fdf0d5",
+            "btn_1_border_color": "#ffffff",
+            "btn_1_border_color_hover": "#181210",
+            "btn_2_label": "",
+            "btn_2_link": "https://induscraft.com/collections/beds",
+            "btn_2_style": "link",
+            "btn_2_bg_color": "rgba(0,0,0,0)",
+            "btn_2_bg_color_hover": "rgba(0,0,0,0)",
+            "btn_2_text_color": "#ffffff",
+            "btn_2_text_color_hover": "#000000",
+            "btn_2_border_color": "#ffffff",
+            "btn_2_border_color_hover": "#ffffff"
+          }
+        },
+        "slide_N6693r": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/Tayasui_Bed.webp",
+            "bg_color": "#f4f4f4",
+            "overlay_opacity": 20,
+            "content_alignment": "left",
+            "content_vertical_alignment": "center",
+            "text_alignment": "left",
+            "text_color": "#ffffff",
+            "subheading": "KARUI — SIGNATURE SERIES",
+            "heading": "Designed for Quiet Luxury",
+            "description": "<p>Discover the Karui collection, sculpted from solid wood and inspired by serene, minimalist living. A statement of balance, precision, and understated luxury.</p>",
+            "heading_font_size": 38,
+            "heading_font_size_mobile": 22,
+            "subheading_font_size": 16,
+            "subheading_font_size_mobile": 12,
+            "description_font_size": 16,
+            "description_font_size_mobile": 14,
+            "subheading_icon_color": "#ec4855",
+            "btn_1_label": "Explore Karui",
+            "btn_1_link": "shopify://collections/karui-1",
+            "btn_1_style": "primary",
+            "btn_1_bg_color": "rgba(0,0,0,0)",
+            "btn_1_bg_color_hover": "#181210",
+            "btn_1_text_color": "#ffffff",
+            "btn_1_text_color_hover": "#fdf0d5",
+            "btn_1_border_color": "#ffffff",
+            "btn_1_border_color_hover": "#181210",
+            "btn_2_label": "Shop Beds",
+            "btn_2_link": "https://induscraft.com/collections/beds",
+            "btn_2_style": "link",
+            "btn_2_bg_color": "rgba(0,0,0,0)",
+            "btn_2_bg_color_hover": "rgba(0,0,0,0)",
+            "btn_2_text_color": "#ffffff",
+            "btn_2_text_color_hover": "#000000",
+            "btn_2_border_color": "#ffffff",
+            "btn_2_border_color_hover": "#ffffff"
+          }
+        },
+        "slide_DaEYty": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/Shelby_Sofa.webp",
+            "bg_color": "#f4f4f4",
+            "overlay_opacity": 20,
+            "content_alignment": "left",
+            "content_vertical_alignment": "center",
+            "text_alignment": "left",
+            "text_color": "#ffffff",
+            "subheading": "ICONIC COMFORT",
+            "heading": "Shelby. Designed to Stay",
+            "description": "<p>Refined proportions, plush comfort, and timeless form. Shelby is crafted to anchor modern living spaces with effortless sophistication.</p>",
+            "heading_font_size": 38,
+            "heading_font_size_mobile": 22,
+            "subheading_font_size": 16,
+            "subheading_font_size_mobile": 12,
+            "description_font_size": 16,
+            "description_font_size_mobile": 14,
+            "subheading_icon_color": "#ec4855",
+            "btn_1_label": "Shop Shelby",
+            "btn_1_link": "shopify://products/weasely-solid-wood-fabric-sofa-lounge-seating-with-deep-cushioned-comfort-by-induscraft-copy-1",
+            "btn_1_style": "primary",
+            "btn_1_bg_color": "rgba(0,0,0,0)",
+            "btn_1_bg_color_hover": "#181210",
+            "btn_1_text_color": "#ffffff",
+            "btn_1_text_color_hover": "#fdf0d5",
+            "btn_1_border_color": "#ffffff",
+            "btn_1_border_color_hover": "rgba(0,0,0,0)",
+            "btn_2_label": "Explore Sofas",
+            "btn_2_link": "https://induscraft.com/collections/sofas",
+            "btn_2_style": "link",
+            "btn_2_bg_color": "rgba(0,0,0,0)",
+            "btn_2_bg_color_hover": "rgba(0,0,0,0)",
+            "btn_2_text_color": "#ffffff",
+            "btn_2_text_color_hover": "#000000",
+            "btn_2_border_color": "#ffffff",
+            "btn_2_border_color_hover": "#ffffff"
+          }
+        },
+        "slide_DXKLXV": {
+          "type": "slide",
+          "disabled": true,
+          "settings": {
+            "video_hosted": "shopify://files/videos/brendon chair.mp4",
+            "bg_color": "#f4f4f4",
+            "overlay_opacity": 20,
+            "content_alignment": "left",
+            "content_vertical_alignment": "center",
+            "text_alignment": "left",
+            "text_color": "#ffffff",
+            "subheading": "ARTISAN CRAFT",
+            "heading": "The Brendon Chair",
+            "description": "<p>Tailored proportions, premium materials, and thoughtful detailing come together in the Brendon Chair, a timeless accent <br/>designed to elevate interiors.</p>",
+            "heading_font_size": 38,
+            "heading_font_size_mobile": 22,
+            "subheading_font_size": 16,
+            "subheading_font_size_mobile": 12,
+            "description_font_size": 16,
+            "description_font_size_mobile": 14,
+            "subheading_icon_color": "#ec4855",
+            "btn_1_label": "View the Chair",
+            "btn_1_link": "shopify://products/brendon-sheesham-chair-with-upholstered-fabric",
+            "btn_1_style": "primary",
+            "btn_1_bg_color": "#181210",
+            "btn_1_bg_color_hover": "#fdf0d5",
+            "btn_1_text_color": "#fdf0d5",
+            "btn_1_text_color_hover": "#181210",
+            "btn_1_border_color": "rgba(0,0,0,0)",
+            "btn_1_border_color_hover": "#fdf0d5",
+            "btn_2_label": "Speak to an Expert",
+            "btn_2_link": "shopify://pages/contact",
+            "btn_2_style": "secondary",
+            "btn_2_bg_color": "rgba(0,0,0,0)",
+            "btn_2_bg_color_hover": "#181210",
+            "btn_2_text_color": "#ffffff",
+            "btn_2_text_color_hover": "#fdf0d5",
+            "btn_2_border_color": "#ffffff",
+            "btn_2_border_color_hover": "#000000"
+          }
+        }
+      },
+      "block_order": [
+        "slide_azPzTK",
+        "slide_TWJd6p",
+        "slide_iUHeCy",
+        "slide_N6693r",
+        "slide_DaEYty",
+        "slide_DXKLXV"
+      ],
+      "name": "Hero Slideshow",
+      "settings": {
+        "full_screen": false,
+        "desktop_height": 80,
+        "mobile_height": 60,
+        "padding_horizontal": 60,
+        "padding_vertical": 60,
+        "mobile_padding_horizontal": 20,
+        "mobile_padding_vertical": 20,
+        "autoplay": true,
+        "autoplay_speed": 10,
+        "speed": 1,
+        "show_arrows": false,
+        "show_pagination": true
+      }
+    },
+    "promo_category_grid_6cFaxi": {
+      "type": "promo-category-grid",
+      "blocks": {
+        "promo_card_cgeHKa": {
+          "type": "promo_card",
+          "settings": {
+            "background_image": "shopify://shop_images/main_img.webp",
+            "overlay_opacity": 0.3,
+            "heading": "Transform your house",
+            "discount_text": "with",
+            "discount_number": "Induscraft",
+            "end_date_text": "",
+            "end_date_number": "",
+            "button_text": "Explore Our Catalogue",
+            "button_style": "secondary",
+            "button_link": "shopify://collections/seasonal-sale"
+          }
+        },
+        "category_card_e7hprc": {
+          "type": "category_card",
+          "settings": {
+            "heading": "Bed",
+            "price_text": "from ₹19,999",
+            "product_image": "shopify://shop_images/4_a646767c-9134-488e-a830-bca4545b44b3.webp",
+            "background_color": "#d33636",
+            "heading_font_size_desktop": 32,
+            "heading_font_size_mobile": 32,
+            "price_font_size_desktop": 20,
+            "price_font_size_mobile": 20,
+            "link": "https://induscraft.com/collections/beds"
+          }
+        },
+        "category_card_Cztkt9": {
+          "type": "category_card",
+          "settings": {
+            "heading": "Sofa",
+            "price_text": "from ₹17,999",
+            "product_image": "shopify://shop_images/2_bec4dc34-ba4a-4e1a-a3e0-49f3f1dd5ca6.webp",
+            "background_color": "#2d6a4f",
+            "heading_font_size_desktop": 32,
+            "heading_font_size_mobile": 32,
+            "price_font_size_desktop": 20,
+            "price_font_size_mobile": 20,
+            "link": "shopify://collections/sofas"
+          }
+        },
+        "category_card_WpdkUG": {
+          "type": "category_card",
+          "settings": {
+            "heading": "Dining Table",
+            "price_text": "from ₹12,999",
+            "product_image": "shopify://shop_images/3_84591373-fd35-4d97-8810-e57111539284.webp",
+            "background_color": "#2d6a4f",
+            "heading_font_size_desktop": 33,
+            "heading_font_size_mobile": 34,
+            "price_font_size_desktop": 20,
+            "price_font_size_mobile": 20,
+            "link": "shopify://collections/dining-tables"
+          }
+        },
+        "category_card_kHfNkA": {
+          "type": "category_card",
+          "settings": {
+            "heading": "Office Table",
+            "price_text": "from ₹2,999",
+            "product_image": "shopify://shop_images/1_110dfa3a-6fae-4464-9eb2-46db750ad913.webp",
+            "background_color": "#2d6a4f",
+            "heading_font_size_desktop": 32,
+            "heading_font_size_mobile": 32,
+            "price_font_size_desktop": 20,
+            "price_font_size_mobile": 20,
+            "link": "shopify://collections/office-furniture-1"
+          }
+        }
+      },
+      "block_order": [
+        "promo_card_cgeHKa",
+        "category_card_e7hprc",
+        "category_card_Cztkt9",
+        "category_card_WpdkUG",
+        "category_card_kHfNkA"
+      ],
+      "name": "Promo Category Grid",
+      "settings": {
+        "offset_top_desktop": 80,
+        "offset_bottom_desktop": 60,
+        "offset_top_mobile": 60,
+        "offset_bottom_mobile": 40
+      }
+    },
+    "video_reviews_TgzHtp": {
+      "type": "video-reviews",
+      "blocks": {
+        "vr_video_card_VQVknQ": {
+          "type": "vr_video_card",
+          "settings": {
+            "video": "shopify://files/videos/video-testimonial-12.mp4",
+            "video_url": "",
+            "reviewer_name": "Happy Customer"
+          }
+        },
+        "vr_video_card_3a8F8g": {
+          "type": "vr_video_card",
+          "settings": {
+            "video": "shopify://files/videos/20260114_205827.mp4",
+            "video_url": "",
+            "reviewer_name": "Happy Customer"
+          }
+        },
+        "vr_video_card_kbHQbJ": {
+          "type": "vr_video_card",
+          "settings": {
+            "video": "shopify://files/videos/Video testimonial 13.mp4",
+            "video_url": "",
+            "reviewer_name": "Arun Guchiya"
+          }
+        },
+        "vr_video_card_LxFRqC": {
+          "type": "vr_video_card",
+          "settings": {
+            "video": "shopify://files/videos/WhatsApp Video 2026-01-28 at 16.42.48.mp4",
+            "video_url": "",
+            "reviewer_name": "Shalini Parekh"
+          }
+        },
+        "vr_video_card_Nzwwya": {
+          "type": "vr_video_card",
+          "settings": {
+            "video": "shopify://files/videos/WhatsApp Video 2026-01-28 at 16.46.43 (1).mp4",
+            "video_url": "",
+            "reviewer_name": "Happy Customer"
+          }
+        },
+        "vr_video_card_fpzNVV": {
+          "type": "vr_video_card",
+          "settings": {
+            "video": "shopify://files/videos/WhatsApp Video 2026-01-28 at 16.46.42.mp4",
+            "video_url": "",
+            "reviewer_name": "Happy Customer"
+          }
+        },
+        "vr_video_card_JtgJAU": {
+          "type": "vr_video_card",
+          "settings": {
+            "video": "shopify://files/videos/WhatsApp Video 2026-01-28 at 16.44.13.mp4",
+            "video_url": "",
+            "reviewer_name": "Happy Customer"
+          }
+        },
+        "vr_video_card_qqPhdK": {
+          "type": "vr_video_card",
+          "settings": {
+            "video": "shopify://files/videos/WhatsApp Video 2026-01-28 at 16.46.44.mp4",
+            "video_url": "",
+            "reviewer_name": "Happy Customer"
+          }
+        },
+        "vr_video_card_ewYBJt": {
+          "type": "vr_video_card",
+          "settings": {
+            "video": "shopify://files/videos/WhatsApp Video 2026-01-28 at 16.42.48 (1).mp4",
+            "video_url": "",
+            "reviewer_name": "Happy Customer"
+          }
+        },
+        "vr_video_card_nrNmiG": {
+          "type": "vr_video_card",
+          "settings": {
+            "video": "shopify://files/videos/WhatsApp Video 2026-01-28 at 16.46.45.mp4",
+            "video_url": "",
+            "reviewer_name": "Happy Customer"
+          }
+        },
+        "vr_video_card_VjTnq8": {
+          "type": "vr_video_card",
+          "settings": {
+            "video": "shopify://files/videos/WhatsApp Video 2026-01-28 at 16.46.43.mp4",
+            "video_url": "",
+            "reviewer_name": "Happy Customer"
+          }
+        },
+        "vr_video_card_7x4wHE": {
+          "type": "vr_video_card",
+          "settings": {
+            "video": "shopify://files/videos/WhatsApp Video 2026-01-28 at 16.42.48 (2).mp4",
+            "video_url": "",
+            "reviewer_name": "Happy Customer"
+          }
+        },
+        "vr_video_card_B63pDH": {
+          "type": "vr_video_card",
+          "settings": {
+            "video": "shopify://files/videos/WhatsApp Video 2026-01-28 at 16.42.49.mp4",
+            "video_url": "",
+            "reviewer_name": ""
+          }
+        },
+        "vr_video_card_UQWBd4": {
+          "type": "vr_video_card",
+          "settings": {
+            "video": "shopify://files/videos/videoplayback_2.mp4",
+            "video_url": "",
+            "reviewer_name": ""
+          }
+        }
+      },
+      "block_order": [
+        "vr_video_card_VQVknQ",
+        "vr_video_card_3a8F8g",
+        "vr_video_card_kbHQbJ",
+        "vr_video_card_LxFRqC",
+        "vr_video_card_Nzwwya",
+        "vr_video_card_fpzNVV",
+        "vr_video_card_JtgJAU",
+        "vr_video_card_qqPhdK",
+        "vr_video_card_ewYBJt",
+        "vr_video_card_nrNmiG",
+        "vr_video_card_VjTnq8",
+        "vr_video_card_7x4wHE",
+        "vr_video_card_B63pDH",
+        "vr_video_card_UQWBd4"
+      ],
+      "name": "Video Reviews Marquee",
+      "settings": {
+        "heading": "Customer Video Reviews",
+        "heading_size": 38,
+        "heading_size_mobile": 22,
+        "heading_color": "#181210",
+        "heading_alignment": "center",
+        "card_width": 300,
+        "card_height": 450,
+        "card_width_mobile": 220,
+        "card_height_mobile": 350,
+        "scroll_speed": 120,
+        "pause_on_hover": false,
+        "bg_color": "rgba(0,0,0,0)",
+        "play_button_color": "#fdf0d5",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "product_tabs_q3UzD8": {
+      "type": "product-tabs",
+      "blocks": {
+        "tab_6gFHFE": {
+          "type": "tab",
+          "settings": {
+            "heading": "Sofas",
+            "product_list": [
+              "weasely-solid-wood-fabric-sofa-lounge-seating-with-deep-cushioned-comfort-by-induscraft-copy",
+              "shelby-solid-wood-upholstered-sofa-structured-calm-with-quiet-authority-by-induscraft-copy",
+              "sirea-solid-wood-upholstered-l-shape-sofa-by-induscraft",
+              "yuki-luxury-chaise-lounge-for-luxury-seating"
+            ]
+          }
+        },
+        "tab_3XkXy8": {
+          "type": "tab",
+          "settings": {
+            "heading": "Beds",
+            "product_list": [
+              "karui-luxury-upholstered-bed-with-stilted-headboard",
+              "helix-sheesham-bed-with-geometric-headboard",
+              "asteroid-sheesham-4-piece-bed-set",
+              "yuki-luxury-upholstered-bed-with-padded-headboard"
+            ]
+          }
+        }
+      },
+      "block_order": [
+        "tab_6gFHFE",
+        "tab_3XkXy8"
+      ],
+      "name": "Product tabs",
+      "settings": {
+        "label": "",
+        "heading": "Top Trending products",
+        "enable_cards_indent": false,
+        "full_width": true,
+        "offset_top_desktop": 30,
+        "offset_bottom_desktop": 35,
+        "offset_top_mobile": 30,
+        "offset_bottom_mobile": 30
+      }
+    },
+    "text_marquee_ddMCr4": {
+      "type": "text-marquee",
+      "blocks": {
+        "icon_item_XHUQEB": {
+          "type": "icon_item",
+          "settings": {
+            "icon_image": "shopify://shop_images/star.svg",
+            "icon_color": "#d33636",
+            "icon_size": 38,
+            "image_hue": 310
+          }
+        },
+        "text_item_fAczfn": {
+          "type": "text_item",
+          "settings": {
+            "text": "COMPLETE INTERIORS",
+            "link": "shopify://pages/b2b-experience",
+            "use_bristone_font": true
+          }
+        },
+        "icon_item_TWC9QK": {
+          "type": "icon_item",
+          "settings": {
+            "icon_image": "shopify://shop_images/star.svg",
+            "icon_color": "#c8ff00",
+            "icon_size": 38,
+            "image_hue": 310
+          }
+        },
+        "text_item_VW9yCU": {
+          "type": "text_item",
+          "settings": {
+            "text": "HOME RENOVATION",
+            "link": "shopify://pages/b2b-experience",
+            "use_bristone_font": true
+          }
+        },
+        "icon_item_L3jVBk": {
+          "type": "icon_item",
+          "settings": {
+            "icon_image": "shopify://shop_images/star.svg",
+            "icon_color": "#c8ff00",
+            "icon_size": 38,
+            "image_hue": 310
+          }
+        },
+        "text_item_KYqERw": {
+          "type": "text_item",
+          "settings": {
+            "text": "RETAIL FURNITURES",
+            "link": "shopify://collections/all",
+            "use_bristone_font": true
+          }
+        },
+        "icon_item_MqLp6n": {
+          "type": "icon_item",
+          "settings": {
+            "icon_image": "shopify://shop_images/star.svg",
+            "icon_color": "#c8ff00",
+            "icon_size": 38,
+            "image_hue": 310
+          }
+        },
+        "text_item_WUmLPT": {
+          "type": "text_item",
+          "settings": {
+            "text": "LUXURY",
+            "link": "shopify://pages/moakuzai",
+            "use_bristone_font": true
+          }
+        }
+      },
+      "block_order": [
+        "icon_item_XHUQEB",
+        "text_item_fAczfn",
+        "icon_item_TWC9QK",
+        "text_item_VW9yCU",
+        "icon_item_L3jVBk",
+        "text_item_KYqERw",
+        "icon_item_MqLp6n",
+        "text_item_WUmLPT"
+      ],
+      "custom_css": [
+        ".text-marquee-section {margin-top: 50px; margin-bottom: 50px;}"
+      ],
+      "name": "Text Marquee",
+      "settings": {
+        "background_color": "rgba(0,0,0,0)",
+        "text_color": "#3b3b3b",
+        "font_size": 48,
+        "font_size_mobile": 34,
+        "font_weight": "300",
+        "letter_spacing": 2,
+        "animation_speed": 35,
+        "direction": "left",
+        "pause_on_hover": false,
+        "enable_top_border": true,
+        "top_border_color": "#949494",
+        "top_border_thickness": 1,
+        "enable_bottom_border": true,
+        "bottom_border_color": "#949494",
+        "bottom_border_thickness": 1,
+        "item_gap": 60,
+        "padding_top": 44,
+        "padding_bottom": 44
+      }
+    },
+    "grid_images_3N84aw": {
+      "type": "grid-images",
+      "blocks": {
+        "grid_image_f7XrGA": {
+          "type": "grid_image",
+          "settings": {
+            "label": "Retro Furniture",
+            "heading": "Explore Our Retro World",
+            "image_desktop": "shopify://shop_images/retro_n1.webp",
+            "image_border_width": 1,
+            "image_border_indent": 10,
+            "url": "shopify://collections/retro",
+            "overlay_color": "#000000",
+            "text_color": "#ffffff",
+            "image_border_color": "#ffffff",
+            "overlay": 30
+          }
+        },
+        "grid_image_dqERP9": {
+          "type": "grid_image",
+          "settings": {
+            "label": "Modern Design",
+            "heading": "Two Worlds of Modern Homes",
+            "image_desktop": "shopify://shop_images/option_9.webp",
+            "image_border_width": 1,
+            "image_border_indent": 10,
+            "url": "shopify://collections/modern",
+            "overlay_color": "#000000",
+            "text_color": "#ffffff",
+            "image_border_color": "#ffffff",
+            "overlay": 30
+          }
+        }
+      },
+      "block_order": [
+        "grid_image_f7XrGA",
+        "grid_image_dqERP9"
+      ],
+      "disabled": true,
+      "settings": {
+        "big_image_position": "second",
+        "full_width": true,
+        "offset_top_desktop": 40,
+        "offset_bottom_desktop": 50,
+        "offset_top_mobile": 30,
+        "offset_bottom_mobile": 50
+      }
+    },
+    "stats_counter_CGAapm": {
+      "type": "stats-counter",
+      "blocks": {
+        "sc_stat_card_GRX3TF": {
+          "type": "sc_stat_card",
+          "settings": {
+            "label": "Years of Excellence",
+            "label_size": 14,
+            "number": 25,
+            "suffix": "+ Years",
+            "description": "Crafting excellence for generations",
+            "description_size": 14,
+            "description_color": "#181210"
+          }
+        },
+        "sc_stat_card_3VnUmU": {
+          "type": "sc_stat_card",
+          "settings": {
+            "label": "Projects Delivered",
+            "label_size": 14,
+            "number": 500,
+            "suffix": "+ Projects",
+            "description": "Delivered across Homes",
+            "description_size": 14,
+            "description_color": "#181210"
+          }
+        },
+        "sc_stat_card_VHQaNJ": {
+          "type": "sc_stat_card",
+          "settings": {
+            "label": "Cities Served",
+            "label_size": 14,
+            "number": 50,
+            "suffix": "+ Cities",
+            "description": "Trusted across India and beyond",
+            "description_size": 14,
+            "description_color": "#181210"
+          }
+        }
+      },
+      "block_order": [
+        "sc_stat_card_GRX3TF",
+        "sc_stat_card_3VnUmU",
+        "sc_stat_card_VHQaNJ"
+      ],
+      "name": "Stats Counter",
+      "settings": {
+        "label": "STANDARD OF LUXURY",
+        "label_size": 14,
+        "label_size_mobile": 11,
+        "heading": "Induscraft is more than craftsmanship it's an expression of elegance and exclusivity.",
+        "heading_size": 32,
+        "heading_size_mobile": 20,
+        "description": "With attention to every detail, our artisans create pieces that bring warmth to your spaces. Every curve, every texture has been thoughtfully designed to deliver a lifestyle of comfort, prestige, and sophistication.",
+        "animation_duration": 4,
+        "bg_color": "rgba(0,0,0,0)",
+        "label_color": "#666666",
+        "label_icon_color": "#ec4855",
+        "heading_color": "#181210",
+        "text_color": "#666666",
+        "card_bg_color": "#fdf0d5",
+        "card_border_radius": 20,
+        "card_dot_color": "#ec4855",
+        "card_label_color": "#666666",
+        "number_color": "#181210",
+        "number_size": 60,
+        "number_size_mobile": 40,
+        "suffix_color": "#ec4855",
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40
+      }
+    },
+    "tab_product_showcase_3de8RK": {
+      "type": "tab-product-showcase",
+      "blocks": {
+        "showcase_item_nYiUCE": {
+          "type": "showcase_item",
+          "settings": {
+            "tab_title": "Living Room Favorites",
+            "product": "yuki-contemporary-tv-cabinet-with-curved-edges",
+            "custom_image": "shopify://shop_images/How_to_Choose_the_Right_Furniture_for_Your_Home.png",
+            "custom_image_alt": "",
+            "custom_heading": "",
+            "description": "",
+            "atc_bg_color": "rgba(0,0,0,0)",
+            "atc_text_color": "#fdf0d5",
+            "atc_border_color": "#fdf0d5",
+            "atc_hover_bg_color": "#fdf0d5",
+            "atc_hover_text_color": "#181210",
+            "atc_hover_border_color": "#181210",
+            "bin_bg_color": "#fdf0d5",
+            "bin_text_color": "#181210",
+            "bin_border_color": "#181210",
+            "bin_hover_bg_color": "#181210",
+            "bin_hover_text_color": "#fdf0d5",
+            "bin_hover_border_color": "#fdf0d5",
+            "btn_border_radius": 30,
+            "btn_border_width": 1,
+            "btn_font_size": 14,
+            "btn_padding_y": 16,
+            "btn_padding_x": 20
+          }
+        },
+        "showcase_item_kq86zR": {
+          "type": "showcase_item",
+          "settings": {
+            "tab_title": "Bedroom Essentials",
+            "product": "meher-bed-in-old-mix-wood-by-induscraft",
+            "custom_image": "shopify://shop_images/How_to_Choose_the_Right_Furniture_for_Your_Home.png",
+            "custom_image_alt": "",
+            "custom_heading": "",
+            "description": "",
+            "atc_bg_color": "rgba(0,0,0,0)",
+            "atc_text_color": "#fdf0d5",
+            "atc_border_color": "#fdf0d5",
+            "atc_hover_bg_color": "#fdf0d5",
+            "atc_hover_text_color": "#181210",
+            "atc_hover_border_color": "#181210",
+            "bin_bg_color": "#fdf0d5",
+            "bin_text_color": "#181210",
+            "bin_border_color": "#181210",
+            "bin_hover_bg_color": "#181210",
+            "bin_hover_text_color": "#fdf0d5",
+            "bin_hover_border_color": "#fdf0d5",
+            "btn_border_radius": 30,
+            "btn_border_width": 1,
+            "btn_font_size": 14,
+            "btn_padding_y": 16,
+            "btn_padding_x": 20
+          }
+        },
+        "showcase_item_pQFnaA": {
+          "type": "showcase_item",
+          "settings": {
+            "tab_title": "Dining Best Sellers",
+            "product": "yeshua-sheesham-4-seater-round-dining-set",
+            "custom_image": "shopify://shop_images/How_to_Choose_the_Right_Furniture_for_Your_Home.png",
+            "custom_image_alt": "",
+            "custom_heading": "",
+            "description": "",
+            "atc_bg_color": "rgba(0,0,0,0)",
+            "atc_text_color": "#fdf0d5",
+            "atc_border_color": "#fdf0d5",
+            "atc_hover_bg_color": "#fdf0d5",
+            "atc_hover_text_color": "#181210",
+            "atc_hover_border_color": "#181210",
+            "bin_bg_color": "#fdf0d5",
+            "bin_text_color": "#181210",
+            "bin_border_color": "#181210",
+            "bin_hover_bg_color": "#181210",
+            "bin_hover_text_color": "#fdf0d5",
+            "bin_hover_border_color": "#fdf0d5",
+            "btn_border_radius": 30,
+            "btn_border_width": 1,
+            "btn_font_size": 14,
+            "btn_padding_y": 16,
+            "btn_padding_x": 20
+          }
+        },
+        "showcase_item_p74V46": {
+          "type": "showcase_item",
+          "settings": {
+            "tab_title": "Office Picks",
+            "product": "yuki-modern-solid-wood-office-desk-and-upholstered-chair",
+            "custom_image": "shopify://shop_images/How_to_Choose_the_Right_Furniture_for_Your_Home.png",
+            "custom_image_alt": "",
+            "custom_heading": "",
+            "description": "",
+            "atc_bg_color": "rgba(0,0,0,0)",
+            "atc_text_color": "#fdf0d5",
+            "atc_border_color": "#fdf0d5",
+            "atc_hover_bg_color": "#fdf0d5",
+            "atc_hover_text_color": "#181210",
+            "atc_hover_border_color": "#181210",
+            "bin_bg_color": "#fdf0d5",
+            "bin_text_color": "#181210",
+            "bin_border_color": "#181210",
+            "bin_hover_bg_color": "#181210",
+            "bin_hover_text_color": "#fdf0d5",
+            "bin_hover_border_color": "#fdf0d5",
+            "btn_border_radius": 30,
+            "btn_border_width": 1,
+            "btn_font_size": 14,
+            "btn_padding_y": 16,
+            "btn_padding_x": 20
+          }
+        },
+        "showcase_item_TjJXnd": {
+          "type": "showcase_item",
+          "settings": {
+            "tab_title": "Storage & Cabinets",
+            "product": "diamond-sheesham-bar-cabinet",
+            "custom_image": "shopify://shop_images/How_to_Choose_the_Right_Furniture_for_Your_Home.png",
+            "custom_image_alt": "",
+            "custom_heading": "",
+            "description": "",
+            "atc_bg_color": "rgba(0,0,0,0)",
+            "atc_text_color": "#fdf0d5",
+            "atc_border_color": "#fdf0d5",
+            "atc_hover_bg_color": "#fdf0d5",
+            "atc_hover_text_color": "#181210",
+            "atc_hover_border_color": "#181210",
+            "bin_bg_color": "#fdf0d5",
+            "bin_text_color": "#181210",
+            "bin_border_color": "#181210",
+            "bin_hover_bg_color": "#181210",
+            "bin_hover_text_color": "#fdf0d5",
+            "bin_hover_border_color": "#fdf0d5",
+            "btn_border_radius": 30,
+            "btn_border_width": 1,
+            "btn_font_size": 14,
+            "btn_padding_y": 16,
+            "btn_padding_x": 20
+          }
+        }
+      },
+      "block_order": [
+        "showcase_item_nYiUCE",
+        "showcase_item_kq86zR",
+        "showcase_item_pQFnaA",
+        "showcase_item_p74V46",
+        "showcase_item_TjJXnd"
+      ],
+      "name": "Tab Product Showcase",
+      "settings": {
+        "subheading": "BEST SELLERS",
+        "heading": "Our Most Loved Signature Pieces",
+        "section_description": "<p>Discover our top-selling handcrafted furniture — thoughtfully designed, beautifully finished, with signature Induscraft detailing, trusted by homes across the country.</p>",
+        "bg_color": "#181210",
+        "text_color": "#fdf0d5",
+        "accent_color": "#ec4855",
+        "tab_inactive_color": "#888888",
+        "card_bg_color": "#ffffff",
+        "subheading_font_size": 14,
+        "subheading_font_size_mobile": 12,
+        "heading_font_size": 38,
+        "heading_font_size_mobile": 22,
+        "description_font_size": 18,
+        "description_font_size_mobile": 14,
+        "tab_font_size": 32,
+        "tab_font_size_mobile": 18,
+        "card_border_radius": 20,
+        "card_max_width": 520,
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40,
+        "inner_padding_v_desktop": 60,
+        "inner_padding_h_desktop": 60,
+        "inner_padding_v_mobile": 40,
+        "inner_padding_h_mobile": 20,
+        "section_border_radius": 20
+      }
+    },
+    "product_list_xgmXz4": {
+      "type": "product-list",
+      "custom_css": [
+        ".product-card-new.js-product-card {background-color: #0000;}"
+      ],
+      "name": "Product List",
+      "settings": {
+        "heading": "Yuki by Moakuzai",
+        "heading_font_size_desktop": 38,
+        "heading_font_size_mobile": 22,
+        "heading_color": "#000000",
+        "button_text": "View All",
+        "button_link": "shopify://collections/yuki",
+        "button_aria_label": "View all products",
+        "button_style": "primary",
+        "product_list": [
+          "yuki-luxury-chaise-lounge-for-luxury-seating",
+          "yuki-luxury-upholstered-bed-with-padded-headboard",
+          "yuki-modern-full-length-wall-mirror-with-curved-frame",
+          "yuki-modern-solid-wood-office-desk-and-upholstered-chair",
+          "yuki-two-door-almirah-with-glass-panels-and-drawer-storage",
+          "yuki-contemporary-tv-cabinet-with-curved-edges"
+        ],
+        "card_design": "alternate",
+        "arrow_bg_color": "#ffffff",
+        "arrow_hover_bg_color": "#f0f0f0",
+        "arrow_color": "#000000",
+        "max_width": 1400,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 40,
+        "padding_top_mobile": 60,
+        "padding_bottom_mobile": 24
+      }
+    },
+    "room_layout_hotspot_C83QWC": {
+      "type": "room-layout-hotspot",
+      "blocks": {
+        "product_U3EF4M": {
+          "type": "product",
+          "settings": {
+            "image": "shopify://shop_images/6_c0f344b7-3c5c-4a2c-bddf-80610d0359b2.webp",
+            "product_1": "meher-bedside-table-in-old-mix-wood-by-induscraft",
+            "horizontal_position_1": 10,
+            "vertical_position_1": 70,
+            "horizontal_position_mobile_1": 20,
+            "vertical_position_mobile_1": 20,
+            "product_2": "meher-bed-in-old-mix-wood-by-induscraft",
+            "horizontal_position_2": 58,
+            "vertical_position_2": 80,
+            "horizontal_position_mobile_2": 50,
+            "vertical_position_mobile_2": 50,
+            "product_3": "meher-heritage-hand-carved-teak-wood-full-length-mirror",
+            "horizontal_position_3": 92,
+            "vertical_position_3": 45,
+            "horizontal_position_mobile_3": 80,
+            "vertical_position_mobile_3": 80,
+            "product_4": "",
+            "horizontal_position_4": 75,
+            "vertical_position_4": 52,
+            "horizontal_position_mobile_4": 30,
+            "vertical_position_mobile_4": 40,
+            "product_5": "",
+            "horizontal_position_5": 60,
+            "vertical_position_5": 60,
+            "horizontal_position_mobile_5": 60,
+            "vertical_position_mobile_5": 60,
+            "product_6": "",
+            "horizontal_position_6": 70,
+            "vertical_position_6": 30,
+            "horizontal_position_mobile_6": 70,
+            "vertical_position_mobile_6": 30,
+            "product_7": "",
+            "horizontal_position_7": 40,
+            "vertical_position_7": 70,
+            "horizontal_position_mobile_7": 40,
+            "vertical_position_mobile_7": 70,
+            "product_8": "",
+            "horizontal_position_8": 25,
+            "vertical_position_8": 55,
+            "horizontal_position_mobile_8": 25,
+            "vertical_position_mobile_8": 55,
+            "product_9": "",
+            "horizontal_position_9": 65,
+            "vertical_position_9": 45,
+            "horizontal_position_mobile_9": 65,
+            "vertical_position_mobile_9": 45,
+            "product_10": "",
+            "horizontal_position_10": 85,
+            "vertical_position_10": 65,
+            "horizontal_position_mobile_10": 85,
+            "vertical_position_mobile_10": 65
+          }
+        },
+        "product_4KQgcE": {
+          "type": "product",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/bedroom.webp",
+            "product_1": "karui-two-door-almirah-with-japanese-wall-art-panels-and-drawer-storage",
+            "horizontal_position_1": 20,
+            "vertical_position_1": 25,
+            "horizontal_position_mobile_1": 20,
+            "vertical_position_mobile_1": 20,
+            "product_2": "karui-modern-full-length-wall-mirror-with-wooden-frame",
+            "horizontal_position_2": 46,
+            "vertical_position_2": 62,
+            "horizontal_position_mobile_2": 50,
+            "vertical_position_mobile_2": 50,
+            "product_3": "karui-luxury-upholstered-bed-with-stilted-headboard",
+            "horizontal_position_3": 69,
+            "vertical_position_3": 75,
+            "horizontal_position_mobile_3": 80,
+            "vertical_position_mobile_3": 80,
+            "product_4": "",
+            "horizontal_position_4": 40,
+            "vertical_position_4": 50,
+            "horizontal_position_mobile_4": 30,
+            "vertical_position_mobile_4": 40,
+            "product_5": "",
+            "horizontal_position_5": 60,
+            "vertical_position_5": 60,
+            "horizontal_position_mobile_5": 60,
+            "vertical_position_mobile_5": 60,
+            "product_6": "",
+            "horizontal_position_6": 70,
+            "vertical_position_6": 30,
+            "horizontal_position_mobile_6": 70,
+            "vertical_position_mobile_6": 30,
+            "product_7": "",
+            "horizontal_position_7": 40,
+            "vertical_position_7": 70,
+            "horizontal_position_mobile_7": 40,
+            "vertical_position_mobile_7": 70,
+            "product_8": "",
+            "horizontal_position_8": 25,
+            "vertical_position_8": 55,
+            "horizontal_position_mobile_8": 25,
+            "vertical_position_mobile_8": 55,
+            "product_9": "",
+            "horizontal_position_9": 65,
+            "vertical_position_9": 45,
+            "horizontal_position_mobile_9": 65,
+            "vertical_position_mobile_9": 45,
+            "product_10": "",
+            "horizontal_position_10": 85,
+            "vertical_position_10": 65,
+            "horizontal_position_mobile_10": 85,
+            "vertical_position_mobile_10": 65
+          }
+        },
+        "product_CJ4QB9": {
+          "type": "product",
+          "settings": {
+            "image": "shopify://shop_images/bedroom2.webp",
+            "product_1": "yuki-modern-full-length-wall-mirror-with-curved-frame",
+            "horizontal_position_1": 25,
+            "vertical_position_1": 40,
+            "horizontal_position_mobile_1": 20,
+            "vertical_position_mobile_1": 20,
+            "product_2": "yuki-two-door-almirah-with-glass-panels-and-drawer-storage",
+            "horizontal_position_2": 55,
+            "vertical_position_2": 50,
+            "horizontal_position_mobile_2": 50,
+            "vertical_position_mobile_2": 50,
+            "product_3": "yuki-luxury-upholstered-bed-with-padded-headboard",
+            "horizontal_position_3": 75,
+            "vertical_position_3": 65,
+            "horizontal_position_mobile_3": 80,
+            "vertical_position_mobile_3": 80,
+            "product_4": "",
+            "horizontal_position_4": 30,
+            "vertical_position_4": 40,
+            "horizontal_position_mobile_4": 30,
+            "vertical_position_mobile_4": 40,
+            "product_5": "",
+            "horizontal_position_5": 60,
+            "vertical_position_5": 60,
+            "horizontal_position_mobile_5": 60,
+            "vertical_position_mobile_5": 60,
+            "product_6": "",
+            "horizontal_position_6": 70,
+            "vertical_position_6": 30,
+            "horizontal_position_mobile_6": 70,
+            "vertical_position_mobile_6": 30,
+            "product_7": "",
+            "horizontal_position_7": 40,
+            "vertical_position_7": 70,
+            "horizontal_position_mobile_7": 40,
+            "vertical_position_mobile_7": 70,
+            "product_8": "",
+            "horizontal_position_8": 25,
+            "vertical_position_8": 55,
+            "horizontal_position_mobile_8": 25,
+            "vertical_position_mobile_8": 55,
+            "product_9": "",
+            "horizontal_position_9": 65,
+            "vertical_position_9": 45,
+            "horizontal_position_mobile_9": 65,
+            "vertical_position_mobile_9": 45,
+            "product_10": "",
+            "horizontal_position_10": 85,
+            "vertical_position_10": 65,
+            "horizontal_position_mobile_10": 85,
+            "vertical_position_mobile_10": 65
+          }
+        },
+        "product_jk6XDE": {
+          "type": "product",
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/kovaleva.jpg",
+            "product_1": "aeron-sheesham-coffee-table-with-glass-top",
+            "product_image_1": "shopify://shop_images/caelideco.jpg",
+            "horizontal_position_1": 29,
+            "vertical_position_1": 67,
+            "horizontal_position_mobile_1": 20,
+            "vertical_position_mobile_1": 20,
+            "product_2": "antilia-sheesham-rectangular-dining-table",
+            "horizontal_position_2": 53,
+            "vertical_position_2": 76,
+            "horizontal_position_mobile_2": 50,
+            "vertical_position_mobile_2": 50,
+            "product_3": "",
+            "horizontal_position_3": 88,
+            "vertical_position_3": 71,
+            "horizontal_position_mobile_3": 80,
+            "vertical_position_mobile_3": 80,
+            "product_4": "",
+            "horizontal_position_4": 30,
+            "vertical_position_4": 40,
+            "horizontal_position_mobile_4": 30,
+            "vertical_position_mobile_4": 40,
+            "product_5": "",
+            "horizontal_position_5": 60,
+            "vertical_position_5": 60,
+            "horizontal_position_mobile_5": 60,
+            "vertical_position_mobile_5": 60,
+            "product_6": "",
+            "horizontal_position_6": 70,
+            "vertical_position_6": 30,
+            "horizontal_position_mobile_6": 70,
+            "vertical_position_mobile_6": 30,
+            "product_7": "",
+            "horizontal_position_7": 40,
+            "vertical_position_7": 70,
+            "horizontal_position_mobile_7": 40,
+            "vertical_position_mobile_7": 70,
+            "product_8": "",
+            "horizontal_position_8": 25,
+            "vertical_position_8": 55,
+            "horizontal_position_mobile_8": 25,
+            "vertical_position_mobile_8": 55,
+            "product_9": "",
+            "horizontal_position_9": 65,
+            "vertical_position_9": 45,
+            "horizontal_position_mobile_9": 65,
+            "vertical_position_mobile_9": 45,
+            "product_10": "",
+            "horizontal_position_10": 85,
+            "vertical_position_10": 65,
+            "horizontal_position_mobile_10": 85,
+            "vertical_position_mobile_10": 65
+          }
+        }
+      },
+      "block_order": [
+        "product_U3EF4M",
+        "product_4KQgcE",
+        "product_CJ4QB9",
+        "product_jk6XDE"
+      ],
+      "name": "Room Layout Hotspot",
+      "settings": {
+        "full_height": true,
+        "desktop_height": 70,
+        "mobile_height": 200,
+        "hotspot_background": "#f9f5f0",
+        "hotspot_color": "#2c2a28",
+        "hotspot_size_desktop": 32,
+        "hotspot_size_mobile": 24,
+        "offset_top_desktop": 50,
+        "offset_bottom_desktop": 50,
+        "offset_top_mobile": 25,
+        "offset_bottom_mobile": 25
+      }
+    },
+    "shop_by_room_gRwpCY": {
+      "type": "shop-by-room",
+      "blocks": {
+        "room_NBLcmq": {
+          "type": "room",
+          "settings": {
+            "image": "shopify://shop_images/18.webp",
+            "title": "STUDY",
+            "link": "shopify://collections/study-room"
+          }
+        },
+        "room_PwDyyV": {
+          "type": "room",
+          "settings": {
+            "image": "shopify://shop_images/7_e8e2aae1-2cba-4de4-8d51-16aabe04c40f.webp",
+            "title": "BEDROOM",
+            "link": "shopify://collections/bedroom-furniture"
+          }
+        },
+        "room_QHw8x7": {
+          "type": "room",
+          "settings": {
+            "image": "shopify://shop_images/almirah_n.webp",
+            "title": "STORAGE",
+            "link": "shopify://collections/storage-and-cabinets"
+          }
+        },
+        "room_KVkkCE": {
+          "type": "room",
+          "settings": {
+            "image": "shopify://shop_images/8_7dbcf6a0-753e-42e6-86d2-cc4b16dda100.png",
+            "title": "DINING",
+            "link": "shopify://collections/dining-room-furniture"
+          }
+        },
+        "room_ApP46L": {
+          "type": "room",
+          "settings": {
+            "image": "shopify://shop_images/19.webp",
+            "title": "LIVING",
+            "link": "shopify://collections/living-room"
+          }
+        },
+        "room_zXNMfc": {
+          "type": "room",
+          "settings": {
+            "image": "shopify://shop_images/18.webp",
+            "title": "OFFICE",
+            "link": "shopify://collections/office-furniture-1"
+          }
+        },
+        "room_J4CXRa": {
+          "type": "room",
+          "settings": {
+            "image": "shopify://shop_images/quirva.jpg",
+            "title": "ACCESSORIES",
+            "link": "shopify://collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "room_NBLcmq",
+        "room_PwDyyV",
+        "room_QHw8x7",
+        "room_KVkkCE",
+        "room_ApP46L",
+        "room_zXNMfc",
+        "room_J4CXRa"
+      ],
+      "name": "Shop By Room",
+      "settings": {
+        "heading": "SHOP BY ROOM",
+        "heading_size_desktop": 38,
+        "heading_size_mobile": 22,
+        "card_title_size_desktop": 40,
+        "card_title_size_mobile": 34,
+        "padding_top_desktop": 60,
+        "padding_bottom_desktop": 100,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 60
+      }
+    },
+    "parallax_video_maVmjE": {
+      "type": "parallax-video",
+      "name": "Parallax Video Section",
+      "settings": {
+        "content_position_vertical": "center",
+        "content_position_horizontal": "center",
+        "text_alignment": "center",
+        "icon": "shopify://shop_images/living-room.png",
+        "icon_color_filter": "white",
+        "icon_size_desktop": 56,
+        "icon_size_mobile": 32,
+        "tagline": "FULL-HOME INTERIOR & FURNISHING",
+        "heading": "We Design, Furnish & Complete Your Entire Home",
+        "description": "From space planning to bespoke furniture and final styling, our experts handle every detail. Together, we create beautifully functional homes — crafted to match your lifestyle and built to last.",
+        "content_bg_color": "#ffffff",
+        "content_bg_opacity": 0,
+        "enable_glass_effect": true,
+        "glass_blur": 6,
+        "glass_border_opacity": 20,
+        "glass_shadow_opacity": 15,
+        "content_border_radius": 20,
+        "content_padding": 40,
+        "content_padding_mobile": 20,
+        "content_max_width": 900,
+        "heading_size": 36,
+        "heading_size_mobile": 20,
+        "tagline_size": 12,
+        "tagline_size_mobile": 10,
+        "description_size": 15,
+        "description_size_mobile": 12,
+        "secondary_text": "Need help now?",
+        "secondary_link_text": "Let's Talk",
+        "secondary_link": "tel:+917820955777",
+        "button_label": "Plan My Home",
+        "button_link": "shopify://pages/contact",
+        "button_style": "primary",
+        "btn_bg_color": "rgba(0,0,0,0)",
+        "btn_bg_color_hover": "#181210",
+        "btn_text_color": "#ffffff",
+        "btn_text_color_hover": "#fdf0d5",
+        "btn_border_color": "#ffffff",
+        "btn_border_color_hover": "#181210",
+        "video": "shopify://files/videos/motion_n2.mp4",
+        "parallax_style": "fixed",
+        "height_desktop": 600,
+        "height_mobile": 550,
+        "overlay_color": "#181210",
+        "overlay_opacity": 40,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "margin_top_mobile": 0,
+        "margin_bottom_mobile": 0
+      }
+    },
+    "product_marquee_QLmNFi": {
+      "type": "product-marquee",
+      "blocks": {
+        "image_tNLYx6": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/spacee-b.jpg",
+            "image_height_desktop": 370,
+            "image_height_mobile": 250,
+            "width_mode": "custom",
+            "image_width_desktop": 250,
+            "image_width_mobile": 200,
+            "link": ""
+          }
+        },
+        "image_BPRBDP": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/sofa-beachc.png",
+            "image_height_desktop": 190,
+            "image_height_mobile": 120,
+            "width_mode": "custom",
+            "image_width_desktop": 280,
+            "image_width_mobile": 200,
+            "link": ""
+          }
+        },
+        "image_F8jt48": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/quirva.jpg",
+            "image_height_desktop": 310,
+            "image_height_mobile": 220,
+            "width_mode": "custom",
+            "image_width_desktop": 250,
+            "image_width_mobile": 200,
+            "link": ""
+          }
+        },
+        "image_pNjjF6": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/spacee.jpg",
+            "image_height_desktop": 280,
+            "image_height_mobile": 200,
+            "width_mode": "custom",
+            "image_width_desktop": 250,
+            "image_width_mobile": 200,
+            "link": ""
+          }
+        },
+        "image_8QeiUf": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/aira.jpg",
+            "image_height_desktop": 370,
+            "image_height_mobile": 250,
+            "width_mode": "custom",
+            "image_width_desktop": 250,
+            "image_width_mobile": 200,
+            "link": ""
+          }
+        },
+        "image_JDPEmW": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/fsdsiyo.jpg",
+            "image_height_desktop": 190,
+            "image_height_mobile": 120,
+            "width_mode": "custom",
+            "image_width_desktop": 280,
+            "image_width_mobile": 200,
+            "link": ""
+          }
+        },
+        "image_Bn4JGr": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/clay2.jpg",
+            "image_height_desktop": 310,
+            "image_height_mobile": 220,
+            "width_mode": "custom",
+            "image_width_desktop": 250,
+            "image_width_mobile": 200,
+            "link": ""
+          }
+        },
+        "image_agBF7q": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/bedroom2_eb1dfbcd-c11c-4793-836f-d501d2d2aabd.jpg",
+            "image_height_desktop": 280,
+            "image_height_mobile": 200,
+            "width_mode": "custom",
+            "image_width_desktop": 250,
+            "image_width_mobile": 200,
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_tNLYx6",
+        "image_BPRBDP",
+        "image_F8jt48",
+        "image_pNjjF6",
+        "image_8QeiUf",
+        "image_JDPEmW",
+        "image_Bn4JGr",
+        "image_agBF7q"
+      ],
+      "name": "Product Marquee",
+      "settings": {
+        "heading": "Designing Furniture for Homes, Hotels & Workspaces",
+        "heading_alignment": "center",
+        "heading_font_size_desktop": 38,
+        "heading_font_size_mobile": 22,
+        "heading_font_weight": "400",
+        "heading_letter_spacing": 0,
+        "heading_bottom_spacing": 24,
+        "description": "Looking for bulk orders or custom furniture solutions? <br>Our specialists help bring large-scale interior projects to life.",
+        "description_alignment": "center",
+        "description_bottom_spacing": 20,
+        "button_text": "Experience Our B2B",
+        "button_link": "shopify://pages/b2b-experience",
+        "button_style": "primary",
+        "animation_speed": 50,
+        "animation_direction": "right",
+        "pause_on_hover": true,
+        "max_image_width_desktop": 300,
+        "max_image_width_mobile": 200,
+        "image_gap_desktop": 20,
+        "image_gap_mobile": 12,
+        "image_border_radius": 20,
+        "enable_image_hover": false,
+        "background_color": "#ffffff",
+        "enable_transparent_bg": true,
+        "heading_color": "#181210",
+        "text_color": "#666666",
+        "content_spacing_desktop": 48,
+        "content_spacing_mobile": 32,
+        "content_padding_left_desktop": 40,
+        "content_padding_right_desktop": 40,
+        "content_padding_left_mobile": 20,
+        "content_padding_right_mobile": 20,
+        "marquee_padding_left_desktop": 40,
+        "marquee_padding_right_desktop": 40,
+        "marquee_padding_left_mobile": 16,
+        "marquee_padding_right_mobile": 16,
+        "padding_top_desktop": 80,
+        "padding_bottom_desktop": 60,
+        "padding_top_mobile": 52,
+        "padding_bottom_mobile": 40
+      }
+    },
+    "marquee_logos_eBfWNj": {
+      "type": "marquee-logos",
+      "blocks": {
+        "logo_MGnPRq": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/5_3a4fdc25-a046-4f12-bf32-7477f5010270.webp",
+            "link": ""
+          }
+        },
+        "logo_kPMGfi": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/4_8b74432e-5986-46c6-971e-7c4df20ba047.webp",
+            "link": ""
+          }
+        },
+        "logo_wexUCz": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/iskon.avif",
+            "link": ""
+          }
+        },
+        "logo_c6WBaB": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/1_2827229a-5c97-4edc-89cd-58ad42e2bba1.webp",
+            "link": ""
+          }
+        },
+        "logo_zDXWqf": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/2_f583cae9-9bcd-4ad9-ab60-c54481b0ccc6.webp",
+            "link": ""
+          }
+        },
+        "logo_xphxjR": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/9_300x_6e1bdd3d-9f22-41a9-9fe5-30d5b0bca89e.avif",
+            "link": ""
+          }
+        },
+        "logo_nYXNfJ": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/And_Many_More..._1.webp",
+            "link": ""
+          }
+        },
+        "logo_RwdT8F": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/6_950f1d84-7028-4383-9aa3-f044ea55a928.webp",
+            "link": ""
+          }
+        },
+        "logo_QUChJw": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/3_56c88387-685b-47fd-bbe4-5f680dfca688.webp",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "logo_MGnPRq",
+        "logo_kPMGfi",
+        "logo_wexUCz",
+        "logo_c6WBaB",
+        "logo_zDXWqf",
+        "logo_xphxjR",
+        "logo_nYXNfJ",
+        "logo_RwdT8F",
+        "logo_QUChJw"
+      ],
+      "name": "Marquee Logos",
+      "settings": {
+        "heading": "Brands we served in B2B",
+        "description": "",
+        "heading_color": "#2c2a28",
+        "heading_size_desktop": 32,
+        "heading_size_mobile": 24,
+        "description_color": "#666666",
+        "description_size_desktop": 16,
+        "description_size_mobile": 14,
+        "background_color": "#ffffff",
+        "enable_transparent_bg": true,
+        "speed": 40,
+        "pause_on_hover": true,
+        "logo_height_desktop": 100,
+        "logo_height_mobile": 72,
+        "logo_background": "rgba(0,0,0,0)",
+        "logo_radius": 0,
+        "gap_desktop": 105,
+        "gap_mobile": 40,
+        "padding_top_desktop": 52,
+        "padding_bottom_desktop": 40,
+        "padding_top_mobile": 20,
+        "padding_bottom_mobile": 20
+      }
+    },
+    "store_locations_mRgdca": {
+      "type": "store-locations",
+      "blocks": {
+        "location_9XhbHE": {
+          "type": "location",
+          "settings": {
+            "icon": "shopify://shop_images/monument_14150888.png",
+            "label": "Jodhpur",
+            "link": "shopify://pages/jodhpur"
+          }
+        },
+        "location_CnFYkA": {
+          "type": "location",
+          "settings": {
+            "icon": "shopify://shop_images/angkor-wat_2647109.png",
+            "label": "Bengaluru",
+            "link": "shopify://pages/bangalore"
+          }
+        },
+        "location_QRgxxn": {
+          "type": "location",
+          "settings": {
+            "icon": "shopify://shop_images/food_13608665.png",
+            "label": "Pune",
+            "link": "shopify://pages/pune"
+          }
+        },
+        "location_KtH9Ma": {
+          "type": "location",
+          "disabled": true,
+          "settings": {
+            "icon": "shopify://shop_images/skyline.png",
+            "label": "Vadodara",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "location_9XhbHE",
+        "location_CnFYkA",
+        "location_QRgxxn",
+        "location_KtH9Ma"
+      ],
+      "name": "Store Locations",
+      "settings": {
+        "heading": "Shop at Store",
+        "heading_font_size_desktop": 38,
+        "heading_font_size_mobile": 22,
+        "heading_alignment": "center",
+        "icon_size_desktop": 48,
+        "icon_size_mobile": 40,
+        "background_color": "rgba(0,0,0,0)",
+        "heading_color": "#181210",
+        "label_color": "#8a8a8a",
+        "border_color": "#e0e0e0",
+        "border_radius": 20,
+        "max_width": 1400,
+        "padding_top_desktop": 80,
+        "padding_bottom_desktop": 100,
+        "padding_top_mobile": 24,
+        "padding_bottom_mobile": 24
+      }
+    },
+    "google_reviews_mebiaR": {
+      "type": "google-reviews",
+      "blocks": {
+        "review_9bY7C6": {
+          "type": "review",
+          "settings": {
+            "row_position": "top",
+            "author_image": "shopify://shop_images/unnamed_1.png",
+            "author_name": "Gunjan Baid",
+            "time_text": "a month ago",
+            "rating": 5,
+            "text": "Thanku induscraft for bringing my imagination into reality .\nBeing a marwari it's mandatory to enjoy food   with family, sitting on the floor, having one big thaal with lots and lots of dishes . But as our elders are aging it's difficult to sit on the floor and this makes a Little difference in our joy.\nSo u make an incredible dining set and hold the family together.\nThanku induscraft",
+            "review_image": "shopify://shop_images/review3.png"
+          }
+        },
+        "review_aBMACL": {
+          "type": "review",
+          "settings": {
+            "row_position": "top",
+            "author_name": "Manish Kumar HPCL",
+            "time_text": "2 month ago",
+            "rating": 5,
+            "text": "The variety and quality of furniture here are absolutely superb! Every piece reflects excellent craftsmanship and attention to detail. Although the prices are slightly on the premium side, the overall experience justifies the investment. The service is prompt, and the shopping experience is smooth without any delays. If you're looking for quality furniture with a great selection, this is the place to go without hesitation!"
+          }
+        },
+        "review_fqM8Q4": {
+          "type": "review",
+          "settings": {
+            "row_position": "top",
+            "author_name": "Rajendra Khatri",
+            "time_text": "5 years ago",
+            "rating": 5,
+            "text": "I visited Induscraft to see a double bed. I purchased king-size double bed with storage. It was really a great purchase for me. Very decent look and very high quality finishing attracted me so much that I also brought one dining table with four chairs design. It was delivered on promised time. It was great experience visiting Induscraft. Quality and finishing of both product is excellent.  I also ordered a customized dressing  table, which is yet to be delivered. It is now one-stop shop for all of my furniture solutions in future.",
+            "review_image": "shopify://shop_images/review5_2_c72fd280-fb97-4b6e-9144-7cfa1d2e6036.png",
+            "review_image_2": "shopify://shop_images/review5_7ee03161-9e17-49e2-90a3-dc08ef4c278e.png",
+            "review_image_3": "shopify://shop_images/review4_1cdb6dc1-8240-4d1e-b9fb-50cf723f52ca.png"
+          }
+        },
+        "review_wEGJVk": {
+          "type": "review",
+          "settings": {
+            "row_position": "top",
+            "author_name": "Dhawal Solanki",
+            "time_text": "6 month ago",
+            "rating": 5,
+            "text": "\"Induscraft\"\nA brand where Furniture is not just the product but feeling. The class, the elegance of the Furniture is unmatched.",
+            "review_image": "shopify://shop_images/review6.png",
+            "review_image_2": "shopify://shop_images/review7.png"
+          }
+        },
+        "review_CDYrFa": {
+          "type": "review",
+          "settings": {
+            "row_position": "top",
+            "author_name": "Sandeep Singh Grover",
+            "time_text": "2 years ago",
+            "rating": 5,
+            "text": "Actually our association with Induscraft is almost for a decade when we visited their stall at a fair and were impressed with the SHESHAM product and then only decided to purchase sofa 3+1+1 with customised 3 seater satty (which is now part of cateloug of INDUSCRAFT) and still the same is pride of our living room.  Recently I ordered one king size double bed with mattress, alongwith two sofa chairs and a coffee table, as expected excellent quality and superb finish.  Feel proud to be associated with INDUSCRAFT.",
+            "review_image": "shopify://shop_images/review8.png"
+          }
+        },
+        "review_jDfUqn": {
+          "type": "review",
+          "settings": {
+            "row_position": "bottom",
+            "author_image": "shopify://shop_images/unnamed.png",
+            "author_name": "Nipun Kachhawaha",
+            "time_text": "2 month ago",
+            "rating": 5,
+            "text": "I recently got this bed and I am extremely happy with the quality and craftsmanship. The wood finish is premium, and the structure feels sturdy and durable. The headboard storage space is a very practical feature, allowing me to keep books, remotes, and other essentials neatly organized and within reach.\n\nThe mattress fits perfectly, and the bed looks elegant in the room, giving it a classy and modern feel. The drawers and side table add extra convenience for storing daily items. Overall, this bed is a perfect combination of style, comfort, and functionality. Highly recommended!",
+            "review_image": "shopify://shop_images/Screenshot_2026-01-20_103804.png",
+            "review_image_2": "shopify://shop_images/review2.png"
+          }
+        },
+        "review_CcbJN3": {
+          "type": "review",
+          "settings": {
+            "row_position": "bottom",
+            "author_image": "shopify://shop_images/unnamed_2.png",
+            "author_name": "Varun khatri",
+            "time_text": "5 months ago",
+            "rating": 5,
+            "text": "Superb furniture from indus craft",
+            "review_image": "shopify://shop_images/review9.png",
+            "review_image_2": "shopify://shop_images/review9_1.png"
+          }
+        },
+        "review_Ky3zPa": {
+          "type": "review",
+          "settings": {
+            "row_position": "bottom",
+            "author_name": "Neeraj Bohra",
+            "time_text": "a year ago",
+            "rating": 5,
+            "text": "Quality products,  Best services and pocket friendly prices.",
+            "review_image": "shopify://shop_images/review10.png",
+            "review_image_2": "shopify://shop_images/review11.png"
+          }
+        },
+        "review_8EByiU": {
+          "type": "review",
+          "settings": {
+            "row_position": "bottom",
+            "author_image": "shopify://shop_images/unnamed_3.png",
+            "author_name": "Harsh Jain",
+            "time_text": "a year ago",
+            "rating": 5,
+            "text": "Top class quality and top class perfection with the best wood and style just amazing loving it everyday more and more .",
+            "review_image": "shopify://shop_images/review_3.png",
+            "review_image_2": "shopify://shop_images/review.png",
+            "review_image_3": "shopify://shop_images/review_2.png"
+          }
+        },
+        "review_gWeEhw": {
+          "type": "review",
+          "settings": {
+            "row_position": "bottom",
+            "author_name": "Sumona Nath",
+            "time_text": "3 years ago",
+            "rating": 5,
+            "text": "Bought these beautiful Sofas recently. Very happy with the buy.",
+            "review_image": "shopify://shop_images/review_5.png"
+          }
+        }
+      },
+      "block_order": [
+        "review_9bY7C6",
+        "review_aBMACL",
+        "review_fqM8Q4",
+        "review_wEGJVk",
+        "review_CDYrFa",
+        "review_jDfUqn",
+        "review_CcbJN3",
+        "review_Ky3zPa",
+        "review_8EByiU",
+        "review_gWeEhw"
+      ],
+      "name": "Google Reviews Marquee",
+      "settings": {
+        "heading": "Homes Transformed. Stories Shared.",
+        "row_layout": "double",
+        "heading_size": 38,
+        "heading_size_mobile": 22,
+        "heading_color": "#181210",
+        "heading_alignment": "center",
+        "row1_direction": "ltr",
+        "row1_speed": 150,
+        "row2_direction": "ltr",
+        "row2_speed": 120,
+        "bg_color": "rgba(0,0,0,0)",
+        "btn_text": "Leave a Review",
+        "btn_link": "",
+        "verified_badge": "shopify://shop_images/verified.png",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "hero_background_slider_E8fnEU": {
+      "type": "hero-background-slider",
+      "name": "Hero Background Slider",
+      "settings": {
+        "heading": "Complete Bedroom Collection",
+        "heading_size": 38,
+        "subheading": "Everything you need to create a calm, comfortable space.",
+        "text_style": "body",
+        "heading_size_mobile": 22,
+        "subheading_size_mobile": 16,
+        "button_label": "View Collection",
+        "button_link": "shopify://collections/bedroom-furniture",
+        "button_style": "primary",
+        "image_1": "shopify://shop_images/7_1.webp",
+        "image_2": "shopify://shop_images/Untitled_design_95.webp",
+        "image_3": "shopify://shop_images/9_9e69aca1-e884-48ee-b0a8-182a74eb3b64.webp",
+        "slide_duration": 3,
+        "section_height": "medium",
+        "text_color": "#fdf0d5",
+        "overlay_color": "#181210",
+        "overlay_opacity": 30,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "collection_list_q8Hacy": {
+      "type": "collection-list",
+      "blocks": {
+        "collection_mRxQwN": {
+          "type": "collection",
+          "settings": {
+            "collection": "accent-chairs",
+            "image": "shopify://shop_images/7_2.png"
+          }
+        },
+        "collection_nzVXFC": {
+          "type": "collection",
+          "settings": {
+            "collection": "almirahs-and-wardrobes",
+            "image": "shopify://shop_images/8_1.png"
+          }
+        },
+        "collection_ATtgky": {
+          "type": "collection",
+          "settings": {
+            "collection": "bajots",
+            "image": "shopify://shop_images/5_1.png"
+          }
+        },
+        "collection_FEBRJh": {
+          "type": "collection",
+          "settings": {
+            "collection": "bar-cabinets",
+            "image": "shopify://shop_images/6_9caf0140-a238-4bb3-8db1-5cc287465c7c.png"
+          }
+        }
+      },
+      "block_order": [
+        "collection_mRxQwN",
+        "collection_nzVXFC",
+        "collection_ATtgky",
+        "collection_FEBRJh"
+      ],
+      "settings": {
+        "label": "",
+        "heading": "Check our Collection",
+        "link_url": "",
+        "link_text": "",
+        "link_aria_label_text": "",
+        "text_alignment": "left",
+        "button_style": "primary",
+        "aspect_ratio": "square",
+        "text_position": "under_the_image",
+        "image_crop": "bottom",
+        "show_products_count": false,
+        "color_overlay": "#181210",
+        "inside_the_image_text": "#f7f2ec",
+        "inside_the_image_text_hover": "#000000",
+        "full_width": true,
+        "offset_top_desktop": 50,
+        "offset_bottom_desktop": 50,
+        "offset_top_mobile": 20,
+        "offset_bottom_mobile": 30
+      }
+    },
+    "faq_section_7hemwP": {
+      "type": "faq-section",
+      "blocks": {
+        "faq_item_MTg3a8": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What materials do you use in your furniture?",
+            "answer": "We specialize in solid wood furniture using premium materials like Sheesham, Mango wood, and reclaimed teak. Each piece is carefully crafted to ensure durability and timeless beauty."
+          }
+        },
+        "faq_item_AeE3cR": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you offer custom furniture designs?",
+            "answer": "Yes! We love bringing unique visions to life. Our design team works closely with you to create custom pieces that perfectly fit your space and style preferences."
+          }
+        },
+        "faq_item_X9ejGc": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is the typical delivery timeline?",
+            "answer": "Standard items ship within 2-3 weeks. Custom orders typically take 4-6 weeks depending on complexity. We'll keep you updated throughout the entire process."
+          }
+        },
+        "faq_item_nj8wzb": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you provide interior design consultation?",
+            "answer": "Absolutely! Our experienced design consultants can help you plan your entire space, from furniture selection to layout optimization. Book a free consultation to get started."
+          }
+        },
+        "faq_item_Fmrmez": {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is your return and warranty policy?",
+            "answer": "We offer a 36-months of warranty on all our furniture for any manufacturing defect. We stand behind the quality of our craftsmanship."
+          }
+        },
+        "faq_item_jtBjWE": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you ship internationally?",
+            "answer": "Yes, we ship worldwide! Shipping costs and delivery times vary by location. Contact us for a custom quote for international orders."
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_MTg3a8",
+        "faq_item_AeE3cR",
+        "faq_item_X9ejGc",
+        "faq_item_nj8wzb",
+        "faq_item_Fmrmez",
+        "faq_item_jtBjWE"
+      ],
+      "name": "FAQ Section",
+      "settings": {
+        "label": "FAQ",
+        "heading": "Your Questions, Answered",
+        "description": "Find quick answers to the most common questions about our handcrafted furniture and design services.",
+        "bg_color": "rgba(0,0,0,0)",
+        "heading_color": "#181210",
+        "text_color": "#181210",
+        "accent_color": "#ec4855",
+        "heading_size": 38,
+        "heading_size_mobile": 22,
+        "padding_top_desktop": 80,
+        "padding_bottom_desktop": 80,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 60
+      }
+    },
+    "simple_description_yHBCU7": {
+      "type": "simple-description",
+      "disabled": true,
+      "name": "Simple description",
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "content": "",
+        "content_alignment": "left",
+        "block_alignment": "flex-start",
+        "offset_top_desktop": 100,
+        "offset_bottom_desktop": 100,
+        "offset_top_mobile": 50,
+        "offset_bottom_mobile": 50
+      }
+    },
+    "text_section_DNJwbe": {
+      "type": "text-section",
+      "name": "Rich text",
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "text_content": "<h2>Discover India's Finest Solid Wood Furniture Collection</h2><p>For over 25 years, Induscraft has been crafting furniture the way it was meant to be made—with real wood, real craftsmanship, and real care. As India's first online furniture store, we've helped hundreds of thousands of families transform their homes with furniture that doesn't just look beautiful—it lasts generations.</p><p>Whether you're searching for a solid wood bed that becomes a family heirloom, a 6 chair dining set that hosts countless memories, or a wooden coffee table that anchors your living room, you've come to the right place. Every piece we create is made from 100% solid wood—no veneers, no particle board, no compromises. Just honest, beautiful furniture built to stand the test of time.</p><p>When you shop with Induscraft, you're not just buying furniture online. You're investing in pieces handcrafted by artisans in Jodhpur, inspected for quality, and delivered with the kind of care that only comes from a brand that's been in the furniture industry since before online shopping even existed in India.</p><h2>Why Solid Wood Furniture Still Matters in 2026?</h2><p>Walk into most furniture stores today, and you'll find engineered wood everywhere—MDF wrapped in a thin veneer, chipboard hiding under laminate, materials that look good in photos but start sagging within months. There's a reason your grandparents' furniture is still standing while modern pieces barely make it past warranty.</p><p>Solid wood furniture isn't just a premium choice—it's the smart choice. Especially in India's climate, where humidity swings, monsoon moisture, and dry summers put furniture through extremes that engineered materials simply cannot handle. Sheesham wood (Indian Rosewood), Mango wood, and Teak have evolved over centuries to thrive in these conditions. They breathe, they adapt, they age gracefully.</p><p>When you choose a sheesham wood bed or a wooden dining table, you're choosing furniture that:</p><ul><li>Lasts 20+ years with minimal maintenance</li><li>Gains character as it ages, unlike plastic laminates that chip and fade</li><li>Supports Indian craftsmanship and traditional joinery techniques</li><li>Holds value and can even be refinished decades later</li><li>Withstands daily use from kids, pets, and real life without falling apart</li></ul><p>This is why Induscraft has never wavered from our commitment to solid wood. Not when cheaper materials became trendy. Not when other online furniture stores started cutting corners to compete on price. We believe your home deserves better, and we've spent a quarter-century proving that the best<strong> furniture store online</strong> doesn't mean sacrificing quality for convenience.</p><h2>Dining Room Furniture That Brings Everyone Together</h2><p>The dining table is where life happens. Morning chai. Homework spread across the surface. Festival feasts with extended family squeezed around every inch. Sunday brunches that stretch into the afternoon. Your dining furniture needs to be more than just functional—it needs to be the heart of your home.</p><h3>Finding the Perfect Solid Wood Dining Table Set for Your Space and Lifestyle</h3><p>Whether you're furnishing a compact 2BHK or a spacious independent house, we understand that dining sets for small space requirements look very different from large family dining needs. That's why our collection spans everything from an intimate dining set of 4 chairs perfect for young couples, to expansive 6 chair dining set configurations that comfortably seat the whole family.</p><p>Living in a metro apartment? Our dining set with bench options maximize seating without the visual bulk of six separate chairs—brilliant for spaces where every square foot counts. The bench tucks neatly under the table when not in use, and kids absolutely love the casual, flexible seating style.</p><p>What makes our solid wood dining set and chairs collections stand out isn't just the solid wood construction—it's the thoughtful design. We've spent years studying how Indian families actually use dining spaces. We know you need chairs that don't wobble when your teenager leans back. Tables with finishes that can handle hot serving dishes without leaving marks. Joinery strong enough to survive being dragged across floors during Diwali cleaning.</p><p><strong>Every wooden dining table in our collection features:</strong></p><ul><li>Mortise and tenon joinery (the traditional method that's held furniture together for centuries)</li><li>Hand-sanded finishes that feel as smooth as they look</li><li>Pre-treatment for humidity resistance specific to Indian climate zones</li><li>Customizable dimensions because we know standard sizes don't fit every home</li></ul><p>And because we manufacture everything ourselves in Jodhpur, we can offer customization without the luxury markup. Need your dining set 6 inches narrower to fit your dining alcove? Want a different wood tone to match your existing cabinets? Need storage drawers built into the bench? Just ask.</p><h2>Living Room Furniture That Reflects Your Style</h2><p>Your living room is your home's first impression and your family's daily gathering spot. It deserves furniture that's both stunning and supremely functional—pieces that make guests pause and admire, while handling everything from movie marathons to impromptu game nights.</p><h3>The Centerpiece: Finding Your Ideal Coffee Table</h3><p>A wooden coffee table is the unsung hero of living room design. It grounds the entire seating area, provides essential surface space, and—when chosen well—becomes a conversation piece in its own right.</p><p>Our wooden coffee table for living room collection ranges from minimalist Scandinavian-inspired designs to intricately carved traditional pieces that showcase Indian craftsmanship at its finest. Looking for something that combines old-world elegance with modern practicality? Our glass top wooden coffee table options feature solid wood bases with tempered glass surfaces—easy to clean, visually light, and perfect for contemporary homes.</p><p>The beauty of solid wood coffee tables lies in their versatility. A rectangular coffee table can anchor a formal living room or create structure in an open floor plan. Many of our designs include a coffee<strong> </strong>table with storag<strong>e</strong>—hidden drawers, lower shelves, or lift-top mechanisms that reveal storage compartments. Perfect for tucking away remote controls, magazines, board games, and all the little things that tend to clutter living spaces.</p><h3>Beyond the Coffee Table: Complete Living Room Solutions</h3><p>While the coffee table might be the centerpiece, we've designed our living room furniture collection to work as a cohesive whole. Pair your coffee table with our solid wood TV units that actually support the weight of modern televisions without bowing. Add a matching side table for extra surface space and visual balance. Complete the look with a wooden bookshelf that's built to hold actual books, not just decorative objects.</p><p>Every piece in our living room collection is designed with the same philosophy: beautiful enough to showcase, strong enough to use daily.</p><h2>Bedroom Furniture: Where Quality Matters Most</h2><p>You spend a third of your life in bed. Your bedroom furniture isn't just decor—it's an investment in rest, relaxation, and the daily rituals that bookend every day. This is where Induscraft's commitment to 100% solid wood furniture makes the biggest difference.</p><h3>Solid Wood Beds Built to Last Generations</h3><p>A solid wood bed isn't just furniture—it's the foundation of good sleep. Unlike metal frames that creak with every movement or engineered wood that sags under mattress weight, solid wood beds provide stable, silent support that actually improves over time as the wood settles and the joinery tightens.</p><p>Our solid wood king-size bed collection is designed for Indian master bedrooms, with dimensions and styles that accommodate everything from traditional thick mattresses to modern memory foam. Need storage? Our king-size bed with storage options feature spacious drawers on smooth-gliding runners—perfect for bedding, seasonal clothing, or anything you want tucked away but easily accessible.</p><p>For those working with tighter spaces, our queen-size bed designs offer the same quality construction in a footprint that leaves room for nightstands and movement. The queen-size bed with storage variants are particularly popular in urban apartments, where maximizing every inch of space isn't optional—it's essential.</p><h3>The Hydraulic Storage Revolution</h3><p>Space-saving innovation meets traditional craftsmanship in our hydraulic storage beds. The king-size bed hydraulic storage mechanism makes accessing under-bed storage effortless—no pulling heavy drawers, no getting on your hands and knees. Just lift the mattress platform (hydraulics do the heavy lifting), and you've got instant access to a storage cavity that can hold an entire season's worth of bedding, suitcases, or keepsakes.</p><p>The queen-size bed with hydraulic storage offers the same convenience in a smaller footprint, perfect for guest rooms or children's bedrooms where storage is crucial but floor space is limited.</p><h3>Why Sheesham Wood Beds Are a Smart Investment</h3><p>When we talk about sheesham wood bed options, we're talking about one of India's most prized furniture woods. Sheesham (Indian Rosewood) has been the wood of choice for premium furniture for centuries, and for good reason:</p><ul><li>Naturally termite-resistant without chemical treatments</li><li>Stunning grain patterns that make every bed unique</li><li>Exceptional durability that handles weight and daily use without complaint</li><li>Climate-appropriate hardness that doesn't crack in dry heat or swell in monsoons</li></ul><p>Our sheesham wood bed with storage combines this premium material with practical design, creating bedroom furniture that's as functional as it is beautiful. Every piece showcases the wood's natural beauty—we don't hide it under thick stains or opaque finishes. The grain tells the story of the tree, and we believe that's part of the furniture's character.</p><h2>Customization: Because Your Home Isn't One-Size-Fits-All</h2><p>Here's something most online furniture stores won't tell you: standard dimensions rarely work perfectly for real homes. That awkward space between your dining room columns? The bedroom wall that's 6 inches too narrow for a standard king bed? The living room that needs a coffee table just a bit longer to balance the sofa?</p><p>These aren't problems—they're opportunities for customization.</p><p>Because we control the entire manufacturing process at our Jodhpur factory, we can modify almost anything. Different wood finish? Done. Custom dimensions? Easy. Storage added where standard designs don't have it? Absolutely. Want your dining set with bench designed to fit perfectly under your unique table overhang? We can make that happen.</p><p>This factory-direct model means customization doesn't come with the premium price tag you'd pay at boutique furniture stores. We're not middlemen marking up custom orders—we're the makers. Your customization request goes straight from our design team to our craftsmen, with no layers of markup in between.</p><p>The result? Furniture that fits your space perfectly, matches your vision exactly, and costs less than you'd expect.</p><h2>Why Induscraft Offers the Best Furniture Store Online Experience</h2><p>Being <strong>India's first online furniture store</strong> gave us a head start, but staying the best requires constant innovation. While newer players have come and gone, we've refined every aspect of the online furniture buying experience:</p><h3>Transparent Pricing, Factory-Direct Savings</h3><p>When you buy from Induscraft, you're buying directly from the factory. No retail markup. No distributor fees. No layers of middlemen taking their cut. This is how we offer best pricing on solid wood furniture without compromising on quality—we simply eliminate the unnecessary costs that other furniture stores build into their prices.</p><p>A 6 chair dining set in solid sheesham that might cost between ₹60,000 to 90,000 at a showroom in South Delhi? We can offer the same quality for ₹30,000 to 50,000 because we're not paying for expensive retail real estate or multiple layers of distribution. The savings go directly to you.</p><h3>The Hybrid Advantage: Online Convenience + Offline Trust</h3><p>Unlike pure-play online furniture stores, we have <strong>physical stores in Jodhpur, Bangalore, Pune, and Vadodara</strong>. This isn't just about giving you places to see furniture in person (though that's valuable)—it's about demonstrating our commitment to being a real, established business that stands behind every piece we sell.</p><p>If you're in Bangalore and want to see the wood grain of a sheesham wood bed before ordering, visit our store. If you're designing a home in Pune and want to discuss custom modifications to a dining set for a small space, our team is there to help. Can't visit? No problem—our online consultation process includes video calls, detailed photos, and wood samples shipped to your home.</p><h3>Quality That Arrives Intact</h3><p>We've shipped furniture to every corner of India—from high-rise apartments in Mumbai to farmhouses in Punjab, from coastal homes in Kerala to mountain retreats in Himachal. We know that getting a king-size bed with storage to your fourth-floor walkup in perfect condition requires more than just bubble wrap and hope.</p><p>Every piece of wooden furniture online that leaves our facility is:</p><ul><li>Disassembled professionally to minimize shipping damage risk</li><li>Wrapped in multilayer protection designed for Indian transportation conditions</li><li>Delivered with installation included in major cities</li><li>Inspected before shipping by our quality team</li><li>Backed by comprehensive warranty and after-sales support</li></ul><p>We've learned from 25 years of furniture delivery experience, and it shows. Our damage rate is less than 1%, and when issues do occur, we fix them immediately—no endless email chains or customer service runarounds.</p><h2>The Induscraft Craftsmanship Difference</h2><p>Walking through our Jodhpur workshop is like stepping into a living museum of furniture-making. Some of our master craftsmen have been with us for over two decades—they learned from their fathers, who learned from their grandfathers. This isn't assembly-line furniture. This is traditional Indian woodworking applied to contemporary designs.</p><h3>Traditional Joinery in a Modern Context</h3><p>When we say our solid wood furniture is built to last, we mean it literally. Our craftsmen use mortise and tenon joints—the same joinery technique used in structures that have stood for centuries. These joints don't rely on screws or glue to hold together (though we use those too, for added strength). They rely on precisely cut wood fitting together so perfectly that the joint itself provides structural integrity.</p><p>Compare this to the cam-lock assembly you'll find in engineered wood furniture. Those metal fasteners loosen over time. The particle board they screw into deteriorates. Within a few years, you're dealing with wobbly furniture that needs replacement.</p><p>Our wooden dining table designs will still be rock-solid decades from now. The joints might actually get tighter as the wood naturally expands and contracts with seasonal changes. This is furniture built the way your great-grandparents built it—to become family heirlooms.</p><h3>Hand-Finished Beauty</h3><p>Every wooden coffee table that leaves our workshop has been hand-sanded through multiple grits, checked for smooth edges, and finished by craftsmen who take pride in their work. You won't find rough spots, uneven staining, or the kind of \"acceptable\" flaws that mass-production tolerates.</p><p>This attention to detail extends to every category. Whether you're ordering a coffee table with storage or a king-size bed hydraulic storage unit, you're getting furniture that's been inspected by human eyes and human hands—not rushed through an automated process with minimal quality control.</p><h2>Shop Bedroom Furniture, Dining Room Furniture, and Living Room Furniture Collections</h2><p>Our online furniture store is organized around how you actually live and shop. Need to furnish a specific room? Our category pages make it easy to explore all options for that space.</p><h3>Bedroom Furniture: Your Personal Sanctuary</h3><p>Beyond beds, our <strong>bedroom furniture</strong> collection includes everything needed for a complete, cohesive bedroom:</p><ul><li>Bedside tables designed for modern living, with drawer storage and thoughtful details like built-in charging stations</li><li>Armoires in solid wood offering spacious storage with customizable interior configurations</li><li>Mirrors that range from freestanding floor mirrors to elegant wall-mounted designs that complement our furniture collections</li></ul><p>Every piece is designed to coordinate with our bed collections, making it simple to create a pulled-together look without hiring an interior designer.</p><h3>Dining Room Furniture: More Than Just Tables and Chairs</h3><p>A complete dining room furniture setup includes more than seating. Our collection features:</p><ul><li>Dining Sets that combine tables and chairs in perfectly coordinated configurations</li><li>Dining Tables available separately for those mixing and matching their own combinations</li><li>Dining Chairs in various styles from traditional to contemporary designs</li><li>Benches that maximize seating while saving space</li><li>Sideboards & Cabinets for elegant dining storage and serving surfaces</li><li>Kitchen Cabinets in solid wood that bring warmth and durability to your cooking space</li><li>Bar Cabinets for sophisticated home entertaining</li><li>Bar Stools that complement your bar setup with solid wood construction</li></ul><p>All designed to complement our dining set of 4 chairs and larger dining configurations, with matching wood tones and design details that tie the room together.</p><h3>Living Room Furniture: Creating Spaces for Connection</h3><p>Beyond coffee tables, our living room furniture range includes:</p><ul><li>Sofa Sets upholstered over solid wood frames for lasting comfort</li><li>Console Tables perfect for entryways or behind sofas</li><li>TV Units and entertainment centers that actually accommodate modern electronics</li><li>Display Units and bookshelves for showcasing collections and memories</li><li>Swings that bring traditional Indian charm to contemporary living spaces</li><li>Chaise lounges for adding luxury and additional seating</li></ul><p>Each category is designed to work together, making it easy to create a cohesive living room that reflects your style while handling real-world use.</p><h2>Visit Our Stores: Experience Solid Wood Furniture In Person</h2><p>While our best furniture store online experience is comprehensive, we understand that some decisions benefit from seeing and touching the furniture in person. Our physical locations in Jodhpur, Bangalore, Pune, and Vadodara offer the full Induscraft experience:</p><h3>Jodhpur: Where It All Begins</h3><p>Our Jodhpur location is more than a showroom—it's connected to our manufacturing facility. Here you can see the entire process, from raw wood selection to finished furniture. It's the perfect place to discuss custom projects, understand wood grading, and meet the craftsmen who'll build your furniture.</p><h3>Bangalore, Pune, and Vadodara: Full-Service Showrooms</h3><p>Our metro showrooms feature curated collections of our most popular pieces, including complete room setups that demonstrate how our solid wood furniture works in real spaces. Our design consultants can help you visualize pieces in your home, discuss customization options, and place orders—all with the confidence that comes from seeing the quality firsthand.</p><p>Can't visit? Our virtual consultation service provides a similar experience through video calls, digital catalogs, and shipped wood samples.</p><h2>Furniture Buying Made Confident: Our Promise to You</h2><p>Buying wooden furniture online requires trust. You're making significant investments in pieces you haven't seen in person. We've built our entire business model around earning and keeping that trust:</p><h3>Transparent Product Information</h3><p>Every product page includes:</p><ul><li><strong>Actual wood type</strong> (we specify sheesham, mango, teak—not vague \"hardwood\")</li><li><strong>Exact dimensions</strong> with detailed drawings</li><li><strong>Weight capacity</strong> where relevant</li><li><strong>Assembly requirements</strong> and complexity level</li><li><strong>High-resolution photos</strong> showing grain, finish, and details</li><li><strong>Customer reviews</strong> from verified purchases</li></ul><h3>Clear, Honest Policies</h3><p>Our return policy, warranty terms, and delivery timelines are written in plain language. No legal jargon designed to confuse. If something goes wrong, we fix it—period.</p><h3>After-Sales Support That Actually Helps</h3><p>Our customer service team includes people who understand furniture, not just script-readers. When you call with a question about your king-size bed with storage hydraulic mechanism, you'll talk to someone who can actually help troubleshoot and solve the issue.</p><h2>Bring Home Furniture That Tells a Story</h2><p>In a world of disposable furniture and planned obsolescence, choosing solid wood furniture is a quiet rebellion. It's a decision that says you value quality over convenience, craftsmanship over cost-cutting, and longevity over temporary trends.</p><p>When you buy a sheesham wood bed from Induscraft, you're not just buying a place to sleep. You're investing in furniture that will witness your children's first steps, countless bedtime stories, lazy Sunday mornings, and eventually—if you're fortunate—your grandchildren's visits. That 6 chair dining set will host thousands of meals, difficult conversations, joyful celebrations, and ordinary weekday dinners that become extraordinary memories in retrospect.</p><p>This is what furniture should be—not just functional objects, but the silent witnesses to your life.</p><p>For 25 years, Induscraft has been crafting these witnesses. As India's first online furniture store, we pioneered the idea that you shouldn't have to compromise on quality just because you're shopping online. That wooden furniture online could match—and exceed—what you'd find in expensive showrooms. That best pricing and best quality could coexist.</p><p>Whether you're furnishing your first apartment with a dining set for small space, upgrading to a king-size bed with storage after years of making do, or simply treating your home to the wooden coffee table it deserves, we're here to help. Our craftsmen in Jodhpur are ready to build furniture specifically for your home. Our design team is available to discuss customization. Our delivery network is standing by to bring solid wood quality to your doorstep.</p><p>Visit one of our stores in Jodhpur, Bangalore, Pune, or Vadodara. Browse our complete collection online. Call our team with questions. However you choose to explore Induscraft, you'll find the same commitment: 100% solid wood furniture, honest pricing, and craftsmanship that lasts.</p><p>Because the best furniture store online isn't the one with the slickest website or the biggest advertising budget. It's the one that's still standing—still crafting, still caring, still building furniture to last—25 years later.</p><h3>Frequently Asked Questions About Buying Solid Wood Furniture Online</h3><h4>1. What makes solid wood furniture better than engineered wood?</h4><p>Solid wood furniture is cut from actual tree timber, making it significantly stronger, longer-lasting, and more resistant to daily wear than engineered wood (particle board, MDF, or plywood). In India's varying climate, solid wood adapts to humidity changes without warping or deteriorating. A solid sheesham wood dining table can last 20-30 years with minimal maintenance, while engineered wood typically needs replacement within 5-7 years. Solid wood can also be refinished, repaired, and restored—engineered wood cannot.</p><h4>2. How long does delivery take, and is installation included?</h4><p>Delivery timelines vary by location and whether you're ordering from our ready stock or requesting customization. Ready-stock items typically deliver within 7-15 days to major metros, while custom pieces take 4-6 weeks. Yes, installation is included in our delivery service for all major cities. Our team assembles the furniture and removes all packaging, leaving your room ready to use.</p><h4>3. Can I really customize dimensions and finishes?</h4><p>Absolutely. As manufacturers, we can modify almost any piece in our collection. Common customizations include adjusting length/width/height to fit specific spaces, changing wood finish colors, adding storage features, and modifying design details. Custom orders typically add 2-3 weeks to delivery time but don't carry the premium pricing you'd pay elsewhere—because you're working directly with the factory, not through a middleman.</p><h4>4. What wood types do you use, and how do I choose?</h4><p>We primarily work with sheesham (Indian Rosewood), mango wood, and teak. Sheesham is our most popular choice—it's extremely durable, naturally termite-resistant, and features beautiful grain patterns. It's ideal for furniture that gets heavy daily use like dining tables and beds. Mango wood is slightly lighter in color with a more rustic grain—perfect for farmhouse or contemporary styles. Teak is premium hardwood with exceptional weather resistance. Our product specialists can recommend the best wood for your specific piece and use case.</p><h4>5. Is buying expensive furniture online safe? What if it arrives damaged?</h4><p>We've perfected furniture shipping over 25 years of online sales. Each piece is professionally disassembled (where applicable), wrapped in multiple protective layers, and shipped in custom packaging. Our damage rate is under 1%. If damage does occur during transit, we replace or repair the piece immediately at no cost to you—no complicated claims process. Our physical stores in four cities and established 25-year reputation mean we're accountable in ways that fly-by-night online sellers aren't.</p><h4>6. What warranty do you offer, and what does it cover?</h4><p>All our solid wood furniture comes with a comprehensive 36-month warranty covering manufacturing defects, structural issues, and joinery failures. This warranty covers repair or replacement of defective components at no cost to you. Natural characteristics of wood—slight color variation, natural grain patterns, minor expansion/contraction with humidity—are not defects but inherent qualities of genuine solid wood that add to each piece's unique character.</p><h4>7. Do you ship to all parts of India?</h4><p>Yes, we ship pan-India. Installation service is available in major metros and tier-1 cities. For locations where we don't offer installation, we provide detailed assembly instructions and video guides. Many pieces—like our coffee tables and smaller items—arrive fully assembled.</p>",
+        "text_alignment": "left",
+        "section_alignment": "flex-start",
+        "enable_read_more": true,
+        "read_more_text": "Read more",
+        "show_less_text": "Show less",
+        "full_width": true,
+        "offset_top_desktop": 100,
+        "offset_bottom_desktop": 100,
+        "offset_top_mobile": 60,
+        "offset_bottom_mobile": 60
+      }
+    },
+    "simple_description_HjeCNb": {
+      "type": "simple-description",
+      "disabled": true,
+      "name": "Simple description",
+      "settings": {
+        "heading": "Popular Searches",
+        "subheading": "",
+        "content": "<p>Add text to share customers about your store, products, brand.</p>",
+        "content_alignment": "left",
+        "block_alignment": "flex-start",
+        "offset_top_desktop": 100,
+        "offset_bottom_desktop": 100,
+        "offset_top_mobile": 50,
+        "offset_bottom_mobile": 50
+      }
+    }
+  },
+  "order": [
+    "hero_slideshow_E3EWAJ",
+    "promo_category_grid_6cFaxi",
+    "video_reviews_TgzHtp",
+    "product_tabs_q3UzD8",
+    "text_marquee_ddMCr4",
+    "grid_images_3N84aw",
+    "stats_counter_CGAapm",
+    "tab_product_showcase_3de8RK",
+    "product_list_xgmXz4",
+    "room_layout_hotspot_C83QWC",
+    "shop_by_room_gRwpCY",
+    "parallax_video_maVmjE",
+    "product_marquee_QLmNFi",
+    "marquee_logos_eBfWNj",
+    "store_locations_mRgdca",
+    "google_reviews_mebiaR",
+    "hero_background_slider_E8fnEU",
+    "collection_list_q8Hacy",
+    "faq_section_7hemwP",
+    "simple_description_yHBCU7",
+    "text_section_DNJwbe",
+    "simple_description_HjeCNb"
+  ]
+}

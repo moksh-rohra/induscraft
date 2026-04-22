@@ -1,0 +1,511 @@
+{{ 'section-google-reviews.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    background-color: {{ section.settings.bg_color }};
+  }
+
+  @media screen and (min-width: 768px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+  
+  .section-{{ section.id }}-padding .google-reviews-title {
+      font-size: {{ section.settings.heading_size_mobile }}px;
+      color: {{ section.settings.heading_color }};
+  }
+  
+  @media screen and (min-width: 768px) {
+      .section-{{ section.id }}-padding .google-reviews-title {
+          font-size: {{ section.settings.heading_size }}px;
+      }
+  }
+  
+  .section-{{ section.id }}-padding .google-reviews-header {
+      text-align: {{ section.settings.heading_alignment }};
+  }
+{%- endstyle -%}
+
+<div class="google-reviews-section section-{{ section.id }}-padding">
+  {%- if section.settings.heading != blank -%}
+    <div class="google-reviews-header">
+      <h2 class="google-reviews-title">{{ section.settings.heading | escape }}</h2>
+    </div>
+  {%- endif -%}
+
+  {%- if section.blocks.size > 0 -%}
+    
+    {%- if section.settings.row_layout == 'single' -%}
+      {%- comment -%} Single Row Mode: All cards in one row {%- endcomment -%}
+      {%- capture all_content -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'review' -%}
+            {%- render 'google-review-card', block: block, verified_badge: section.settings.verified_badge -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endcapture -%}
+
+      <div class="gr-marquee-wrapper">
+        <div class="gr-marquee-content">
+          {{ all_content }}
+          {{ all_content }}
+          {{ all_content }}
+          {{ all_content }}
+          {{ all_content }}
+          {{ all_content }}
+        </div>
+      </div>
+
+    {%- else -%}
+      {%- comment -%} Double Row Mode: Separate top and bottom {%- endcomment -%}
+      {%- capture row1_content -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'review' and block.settings.row_position == 'top' -%}
+            {%- render 'google-review-card', block: block, verified_badge: section.settings.verified_badge -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endcapture -%}
+
+      {%- capture row2_content -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'review' and block.settings.row_position == 'bottom' -%}
+            {%- render 'google-review-card', block: block, verified_badge: section.settings.verified_badge -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endcapture -%}
+
+      <!-- Row 1 -->
+      {%- if row1_content != blank -%}
+      <div class="gr-marquee-wrapper{% if section.settings.row1_direction == 'rtl' %} reverse{% endif %}">
+        <div class="gr-marquee-content" style="animation-duration: {{ section.settings.row1_speed }}s;">
+          {{ row1_content }}
+          {{ row1_content }}
+          {{ row1_content }}
+          {{ row1_content }}
+          {{ row1_content }}
+          {{ row1_content }}
+        </div>
+      </div>
+      {%- endif -%}
+
+      <!-- Row 2 -->
+      {%- if row2_content != blank -%}
+      <div class="gr-marquee-wrapper{% if section.settings.row2_direction == 'rtl' %} reverse{% endif %}">
+        <div class="gr-marquee-content" style="animation-duration: {{ section.settings.row2_speed }}s;">
+          {{ row2_content }}
+          {{ row2_content }}
+          {{ row2_content }}
+          {{ row2_content }}
+          {{ row2_content }}
+          {{ row2_content }}
+        </div>
+      </div>
+      {%- endif -%}
+    {%- endif -%}
+  {%- endif -%}
+
+  {%- if section.settings.btn_link != blank and section.settings.btn_text != blank -%}
+    <div class="gr-write-btn-wrapper">
+      <a href="{{ section.settings.btn_link }}" class="gr-write-btn" target="_blank" rel="noopener noreferrer">
+        {{ section.settings.btn_text | escape }}
+      </a>
+    </div>
+  {%- endif -%}
+</div>
+
+<script>
+  // Physics-based Smooth Pause on Hover
+  document.querySelectorAll('.gr-marquee-wrapper').forEach(wrapper => {
+      const content = wrapper.querySelector('.gr-marquee-content');
+      
+      wrapper.addEventListener('mouseenter', () => {
+          content.getAnimations().forEach(anim => {
+              // Ensure we are controlling the scroll animation
+              if(anim.animationName === 'scroll') {
+                  // Decelerate to 0
+                  clearInterval(anim.speedTimer);
+                  anim.speedTimer = setInterval(() => {
+                      // Friction stop
+                      anim.playbackRate *= 0.9;
+                      if(anim.playbackRate < 0.05) {
+                          anim.playbackRate = 0;
+                          clearInterval(anim.speedTimer);
+                      }
+                  }, 20);
+              }
+          });
+      });
+      
+      wrapper.addEventListener('mouseleave', () => {
+          content.getAnimations().forEach(anim => {
+              if(anim.animationName === 'scroll') {
+                  // Accelerate back to 1
+                  clearInterval(anim.speedTimer);
+                  if(anim.playbackRate === 0) anim.playbackRate = 0.05; // Kickstart
+                  
+                  anim.speedTimer = setInterval(() => {
+                      anim.playbackRate *= 1.1; // Accelerate
+                      if(anim.playbackRate >= 0.98) {
+                          anim.playbackRate = 1;
+                          clearInterval(anim.speedTimer);
+                      }
+                  }, 20);
+              }
+          });
+      });
+  });
+
+  // Toggle Review Text
+  function toggleReviewText(btn) {
+      // Find the text element relative to the button
+      var textDiv = btn.previousElementSibling;
+      // Fallback
+      if (!textDiv || !textDiv.classList.contains('gr-review-text')) {
+          textDiv = btn.parentNode.querySelector('.gr-review-text');
+      }
+      
+      // Find the body wrapper (parent of text-column) to toggle layout mode
+      var bodyWrapper = btn.closest('.gr-body-wrapper');
+
+      if (textDiv.classList.contains('expanded')) {
+          textDiv.classList.remove('expanded');
+          if(bodyWrapper) bodyWrapper.classList.remove('expanded-layout');
+          btn.innerText = 'Show more';
+      } else {
+          textDiv.classList.add('expanded');
+          if(bodyWrapper) bodyWrapper.classList.add('expanded-layout');
+          btn.innerText = 'Show less';
+      }
+  }
+
+  // Gallery Popup Logic
+  var grGalleryImages = [];
+  var grCurrentIndex = 0;
+
+  function openReviewPopup(event, imgElement) {
+       event.stopPropagation(); // Prevent container click if any
+       
+       var modal = document.getElementById('gr-image-modal');
+       var modalImg = document.getElementById('gr-modal-img');
+       var container = imgElement.closest('.gr-review-images-mixed-stack');
+       
+       // Get gallery from data attribute
+       grGalleryImages = JSON.parse(container.getAttribute('data-gallery'));
+       grCurrentIndex = parseInt(imgElement.getAttribute('data-index')) || 0;
+       
+       // Show image
+       modalImg.src = grGalleryImages[grCurrentIndex];
+       modal.style.display = "flex";
+       
+       // Show/hide arrows based on image count
+       document.getElementById('gr-modal-prev').style.display = grGalleryImages.length > 1 ? 'block' : 'none';
+       document.getElementById('gr-modal-next').style.display = grGalleryImages.length > 1 ? 'block' : 'none';
+       
+       // Pause all marquees
+       document.querySelectorAll('.gr-marquee-content').forEach(el => el.style.animationPlayState = 'paused');
+  }
+
+  function changeGalleryImage(direction) {
+      grCurrentIndex += direction;
+      if (grCurrentIndex < 0) grCurrentIndex = grGalleryImages.length - 1;
+      if (grCurrentIndex >= grGalleryImages.length) grCurrentIndex = 0;
+      document.getElementById('gr-modal-img').src = grGalleryImages[grCurrentIndex];
+  }
+
+  function closeReviewPopup() {
+      document.getElementById('gr-image-modal').style.display = "none";
+      grGalleryImages = [];
+      grCurrentIndex = 0;
+      // Resume marquees
+      document.querySelectorAll('.gr-marquee-content').forEach(el => el.style.animationPlayState = 'running');
+  }
+
+  // Close on outside click
+  window.onclick = function(event) {
+      var modal = document.getElementById('gr-image-modal');
+      if (event.target == modal) {
+          closeReviewPopup();
+      }
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', function(e) {
+      var modal = document.getElementById('gr-image-modal');
+      if (modal.style.display === 'flex') {
+          if (e.key === 'ArrowLeft') changeGalleryImage(-1);
+          if (e.key === 'ArrowRight') changeGalleryImage(1);
+          if (e.key === 'Escape') closeReviewPopup();
+      }
+  });
+</script>
+
+<!-- Modal HTML -->
+<div id="gr-image-modal" class="gr-modal">
+  <span class="gr-modal-close" onclick="closeReviewPopup()">&times;</span>
+  <span id="gr-modal-prev" class="gr-modal-nav gr-modal-prev" onclick="changeGalleryImage(-1)">&#10094;</span>
+  <img class="gr-modal-content" id="gr-modal-img" width="800" height="800" alt="Review Image">
+  <span id="gr-modal-next" class="gr-modal-nav gr-modal-next" onclick="changeGalleryImage(1)">&#10095;</span>
+</div>
+
+{% schema %}
+{
+  "name": "Google Reviews Marquee",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Google Reviews"
+    },
+    {
+      "type": "select",
+      "id": "row_layout",
+      "label": "Row Layout",
+      "options": [
+        { "value": "single", "label": "Single Row" },
+        { "value": "double", "label": "Double Row" }
+      ],
+      "default": "double",
+      "info": "Single row ignores individual card row positions."
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 16,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size (Desktop)",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "min": 14,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size (Mobile)",
+      "default": 22
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#202124"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "Heading Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Row 1 Settings"
+    },
+    {
+      "type": "select",
+      "id": "row1_direction",
+      "label": "Row 1 Direction",
+      "options": [
+        { "value": "ltr", "label": "Left to Right" },
+        { "value": "rtl", "label": "Right to Left" }
+      ],
+      "default": "ltr"
+    },
+    {
+      "type": "range",
+      "id": "row1_speed",
+      "min": 10,
+      "max": 150,
+      "step": 5,
+      "unit": "s",
+      "label": "Row 1 Speed (Seconds)",
+      "default": 40,
+      "info": "Lower is faster."
+    },
+    {
+      "type": "header",
+      "content": "Row 2 Settings"
+    },
+    {
+      "type": "select",
+      "id": "row2_direction",
+      "label": "Row 2 Direction",
+      "options": [
+        { "value": "ltr", "label": "Left to Right" },
+        { "value": "rtl", "label": "Right to Left" }
+      ],
+      "default": "rtl"
+    },
+    {
+      "type": "range",
+      "id": "row2_speed",
+      "min": 10,
+      "max": 150,
+      "step": 5,
+      "unit": "s",
+      "label": "Row 2 Speed (Seconds)",
+      "default": 40,
+      "info": "Lower is faster."
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button Label",
+      "default": "Leave a Review"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "verified_badge",
+      "label": "Custom Verified Badge Icon",
+      "info": "Upload a custom icon to replace the default checkmark."
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review Card",
+      "settings": [
+        {
+          "type": "select",
+          "id": "row_position",
+          "label": "Row Position",
+          "options": [
+            {
+              "value": "top",
+              "label": "Top Row"
+            },
+            {
+              "value": "bottom",
+              "label": "Bottom Row"
+            }
+          ],
+          "default": "top"
+        },
+        {
+          "type": "image_picker",
+          "id": "author_image",
+          "label": "Author Photo"
+        },
+        {
+          "type": "text",
+          "id": "author_name",
+          "label": "Author Name",
+          "default": "Happy Customer"
+        },
+        {
+          "type": "text",
+          "id": "time_text",
+          "label": "Time (e.g. 2 months ago)",
+          "default": "a month ago"
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "label": "Rating",
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Review Text",
+          "default": "I love the products! Great quality and fast shipping."
+        },
+        {
+           "type": "header",
+           "content": "Images (Max 3)"
+        },
+        {
+          "type": "image_picker",
+          "id": "review_image",
+          "label": "Review Image 1"
+        },
+        {
+          "type": "image_picker",
+          "id": "review_image_2",
+          "label": "Review Image 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "review_image_3",
+          "label": "Review Image 3"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Google Reviews Marquee",
+      "blocks": [
+        {
+          "type": "review",
+          "settings": { "row_position": "top" }
+        },
+        {
+          "type": "review",
+          "settings": { "row_position": "top" }
+        },
+        {
+          "type": "review",
+          "settings": { "row_position": "bottom" }
+        },
+           {
+          "type": "review",
+          "settings": { "row_position": "bottom" }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

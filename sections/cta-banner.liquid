@@ -1,0 +1,412 @@
+{%- comment -%}
+------------------------------------------------------------------------------
+  Section: CTA Banner
+  A centered call-to-action section with icon, heading, text, and buttons
+------------------------------------------------------------------------------
+{%- endcomment -%}
+
+{%- style -%}
+    /* Section Padding */
+    #shopify-section-{{ section.id }} {
+        padding-top: {{ section.settings.padding_top_mobile }}px;
+        padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+        background-color: {{ section.settings.background_color }};
+    }
+
+    @media screen and (min-width: 768px) {
+        #shopify-section-{{ section.id }} {
+            padding-top: {{ section.settings.padding_top_desktop }}px;
+            padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+        }
+    }
+
+    /* Main Container */
+    #shopify-section-{{ section.id }} .cta-banner {
+        width: 100%;
+        max-width: {{ section.settings.max_width }}px;
+        margin: 0 auto;
+        padding: 0 20px;
+        text-align: center;
+    }
+
+    /* Icon/Image */
+    #shopify-section-{{ section.id }} .cta-banner__icon {
+        display: inline-block;
+        margin-bottom: 16px;
+    }
+
+    #shopify-section-{{ section.id }} .cta-banner__icon img,
+    #shopify-section-{{ section.id }} .cta-banner__icon svg {
+        width: {{ section.settings.icon_size_mobile }}px;
+        height: auto;
+        object-fit: contain;
+    }
+
+    @media (min-width: 768px) {
+        #shopify-section-{{ section.id }} .cta-banner__icon img,
+        #shopify-section-{{ section.id }} .cta-banner__icon svg {
+            width: {{ section.settings.icon_size_desktop }}px;
+        }
+    }
+
+    /* Label */
+    #shopify-section-{{ section.id }} .cta-banner__label {
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: {{ section.settings.label_color }};
+        margin-bottom: 12px;
+    }
+
+    @media (min-width: 768px) {
+        #shopify-section-{{ section.id }} .cta-banner__label {
+            font-size: 13px;
+            letter-spacing: 2.5px;
+        }
+    }
+
+    /* Heading */
+    #shopify-section-{{ section.id }} .cta-banner__heading {
+        margin: 0 0 16px 0;
+        font-size: {{ section.settings.heading_font_size_mobile }}px;
+        line-height: 1.2;
+        color: {{ section.settings.heading_color }};
+    }
+
+    @media (min-width: 768px) {
+        #shopify-section-{{ section.id }} .cta-banner__heading {
+            font-size: {{ section.settings.heading_font_size_desktop }}px;
+            margin-bottom: 20px;
+        }
+    }
+
+    /* Description */
+    #shopify-section-{{ section.id }} .cta-banner__description {
+        max-width: 700px;
+        margin: 0 auto 24px auto;
+        font-size: 15px;
+        line-height: 1.6;
+        color: {{ section.settings.text_color }};
+    }
+
+    @media (min-width: 768px) {
+        #shopify-section-{{ section.id }} .cta-banner__description {
+            font-size: 16px;
+            margin-bottom: 28px;
+        }
+    }
+
+    /* Primary Button Wrapper */
+    #shopify-section-{{ section.id }} .cta-banner__button-wrapper {
+        margin-bottom: 20px;
+    }
+
+    /* Secondary Link */
+    #shopify-section-{{ section.id }} .cta-banner__secondary-link {
+        font-size: 14px;
+        color: {{ section.settings.text_color }};
+    }
+
+    #shopify-section-{{ section.id }} .cta-banner__secondary-link a {
+        color: {{ section.settings.heading_color }};
+        text-decoration: underline;
+        font-weight: 500;
+        transition: opacity 0.2s ease;
+    }
+
+    #shopify-section-{{ section.id }} .cta-banner__secondary-link a:hover {
+        opacity: 0.7;
+    }
+
+    /* Button transparent background override for this section */
+    #shopify-section-{{ section.id }} .button-new.button--primary,
+    #shopify-section-{{ section.id }} .button-new.button--secondary {
+        background-color: transparent;
+    }
+
+    #shopify-section-{{ section.id }} .button-new.button--primary:hover,
+    #shopify-section-{{ section.id }} .button-new.button--secondary:hover {
+        background-color: transparent;
+    }
+
+    /* Use theme's default hover color for the fill animation */
+    #shopify-section-{{ section.id }} .button-new.button--primary::before {
+        background-color: var(--button-background-color-primary-hover);
+    }
+
+    #shopify-section-{{ section.id }} .button-new.button--secondary::before {
+        background-color: var(--button-background-color-secondary-hover);
+    }
+{%- endstyle -%}
+
+<section class="cta-banner">
+    {%- if section.settings.icon != blank -%}
+        <div class="cta-banner__icon">
+            {{ section.settings.icon | image_url: width: 200 | image_tag }}
+        </div>
+    {%- endif -%}
+
+    {%- if section.settings.label != blank -%}
+        <p class="cta-banner__label">{{ section.settings.label }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.heading != blank -%}
+        <h2 class="cta-banner__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.description != blank -%}
+        <p class="cta-banner__description">{{ section.settings.description }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.button_text != blank and section.settings.button_link != blank -%}
+        <div class="cta-banner__button-wrapper">
+            <a
+                href="{{ section.settings.button_link }}"
+                class="focus-visible-outline {% if section.settings.button_style == 'circle' %}button-circle{% else %}button-new button--{{ section.settings.button_style }}{% endif %}"
+                aria-label="{{ section.settings.button_text | escape }}"
+            >
+                {{ section.settings.button_text }}
+            </a>
+        </div>
+    {%- endif -%}
+
+    {%- if section.settings.secondary_text != blank -%}
+        <div class="cta-banner__secondary-link">
+            {{ section.settings.secondary_text }}
+            {%- if section.settings.secondary_link_text != blank and section.settings.secondary_link != blank -%}
+                <a href="{{ section.settings.secondary_link }}">{{ section.settings.secondary_link_text }} ›</a>
+            {%- endif -%}
+        </div>
+    {%- endif -%}
+</section>
+
+{% schema %}
+{
+    "name": "CTA Banner",
+    "settings": [
+        {
+            "type": "header",
+            "content": "Icon"
+        },
+        {
+            "type": "image_picker",
+            "id": "icon",
+            "label": "Icon Image"
+        },
+        {
+            "type": "range",
+            "id": "icon_size_desktop",
+            "min": 20,
+            "max": 120,
+            "step": 4,
+            "unit": "px",
+            "label": "Icon Size (Desktop)",
+            "default": 40
+        },
+        {
+            "type": "range",
+            "id": "icon_size_mobile",
+            "min": 20,
+            "max": 80,
+            "step": 4,
+            "unit": "px",
+            "label": "Icon Size (Mobile)",
+            "default": 32
+        },
+        {
+            "type": "header",
+            "content": "Content"
+        },
+        {
+            "type": "text",
+            "id": "label",
+            "label": "Label",
+            "default": "DESIGN CREW"
+        },
+        {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading",
+            "default": "Let Us Bring Your Vision to Life"
+        },
+        {
+            "type": "range",
+            "id": "heading_font_size_desktop",
+            "min": 24,
+            "max": 60,
+            "step": 2,
+            "unit": "px",
+            "label": "Heading Font Size (Desktop)",
+            "default": 36
+        },
+        {
+            "type": "range",
+            "id": "heading_font_size_mobile",
+            "min": 20,
+            "max": 40,
+            "step": 2,
+            "unit": "px",
+            "label": "Heading Font Size (Mobile)",
+            "default": 26
+        },
+        {
+            "type": "textarea",
+            "id": "description",
+            "label": "Description",
+            "default": "You have the dream and we have the expert advice. Together, we'll make home your favorite destination."
+        },
+        {
+            "type": "header",
+            "content": "Primary Button"
+        },
+        {
+            "type": "text",
+            "id": "button_text",
+            "label": "Button Text",
+            "default": "BOOK AN APPOINTMENT"
+        },
+        {
+            "type": "url",
+            "id": "button_link",
+            "label": "Button Link"
+        },
+        {
+            "type": "select",
+            "id": "button_style",
+            "label": "Button Style",
+            "options": [
+                {
+                    "value": "primary",
+                    "label": "Primary"
+                },
+                {
+                    "value": "secondary",
+                    "label": "Secondary"
+                },
+                {
+                    "value": "circle",
+                    "label": "Circle"
+                }
+            ],
+            "default": "primary"
+        },
+        {
+            "type": "header",
+            "content": "Secondary Link"
+        },
+        {
+            "type": "text",
+            "id": "secondary_text",
+            "label": "Secondary Text",
+            "default": "Quick Question?"
+        },
+        {
+            "type": "text",
+            "id": "secondary_link_text",
+            "label": "Secondary Link Text",
+            "default": "Let's Chat"
+        },
+        {
+            "type": "url",
+            "id": "secondary_link",
+            "label": "Secondary Link"
+        },
+        {
+            "type": "header",
+            "content": "Colors"
+        },
+        {
+            "type": "color",
+            "id": "background_color",
+            "label": "Background Color",
+            "default": "#F5F3EE"
+        },
+        {
+            "type": "color",
+            "id": "heading_color",
+            "label": "Heading Color",
+            "default": "#2C3E50"
+        },
+        {
+            "type": "color",
+            "id": "text_color",
+            "label": "Text Color",
+            "default": "#5A6A7A"
+        },
+        {
+            "type": "color",
+            "id": "label_color",
+            "label": "Label Color",
+            "default": "#5A6A7A"
+        },
+        {
+            "type": "header",
+            "content": "Layout"
+        },
+        {
+            "type": "range",
+            "id": "max_width",
+            "min": 600,
+            "max": 1400,
+            "step": 50,
+            "unit": "px",
+            "label": "Max Content Width",
+            "default": 900
+        },
+        {
+            "type": "range",
+            "id": "padding_top_desktop",
+            "min": 0,
+            "max": 120,
+            "step": 4,
+            "unit": "px",
+            "label": "Padding Top (Desktop)",
+            "default": 60
+        },
+        {
+            "type": "range",
+            "id": "padding_bottom_desktop",
+            "min": 0,
+            "max": 120,
+            "step": 4,
+            "unit": "px",
+            "label": "Padding Bottom (Desktop)",
+            "default": 60
+        },
+        {
+            "type": "range",
+            "id": "padding_top_mobile",
+            "min": 0,
+            "max": 80,
+            "step": 4,
+            "unit": "px",
+            "label": "Padding Top (Mobile)",
+            "default": 40
+        },
+        {
+            "type": "range",
+            "id": "padding_bottom_mobile",
+            "min": 0,
+            "max": 80,
+            "step": 4,
+            "unit": "px",
+            "label": "Padding Bottom (Mobile)",
+            "default": 40
+        }
+    ],
+    "presets": [
+        {
+            "name": "CTA Banner",
+            "settings": {
+                "label": "DESIGN CREW",
+                "heading": "Let Us Bring Your Vision to Life",
+                "description": "You have the dream and we have the expert advice. Together, we'll make home your favorite destination.",
+                "button_text": "BOOK AN APPOINTMENT",
+                "secondary_text": "Quick Question?",
+                "secondary_link_text": "Let's Chat"
+            }
+        }
+    ]
+}
+{% endschema %}

@@ -1,0 +1,90 @@
+{% comment %}
+------------------------------------------------------------------------------
+  Snippet: Product Payment Badges
+  A row of up to 7 payment method badges/icons.
+------------------------------------------------------------------------------
+{% endcomment %}
+
+{%- assign badge_bg_color = block.settings.badge_bg_color | default: '#f5f5f5' -%}
+{%- assign badge_size = block.settings.badge_size | default: 50 -%}
+{%- assign badge_size_mobile = block.settings.badge_size_mobile | default: 40 -%}
+{%- assign badge_spacing = block.settings.badge_spacing | default: 10 -%}
+{%- assign badge_radius = block.settings.badge_radius | default: 8 -%}
+
+<style>
+  .product-payment-badges-{{ block.id }} {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: {{ block.settings.alignment | default: 'flex-start' }};
+    gap: {{ badge_spacing }}px;
+    padding: {{ block.settings.padding_top | default: 15 }}px 0 {{ block.settings.padding_bottom | default: 15 }}px;
+    margin-top: {{ block.settings.margin_top | default: 0 }}px;
+    margin-bottom: {{ block.settings.margin_bottom | default: 0 }}px;
+  }
+  .product-payment-badges-{{ block.id }} .payment-badge {
+    width: {{ badge_size }}px;
+    height: {{ badge_size | times: 0.6 | round }}px;
+    background-color: {{ badge_bg_color }};
+    border-radius: {{ badge_radius }}px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px 0px;
+    box-sizing: border-box;
+  }
+  .product-payment-badges-{{ block.id }} .payment-badge img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+  @media (max-width: 480px) {
+    .product-payment-badges-{{ block.id }} .payment-badge {
+      width: {{ badge_size_mobile }}px;
+      height: {{ badge_size_mobile | times: 0.6 | round }}px;
+    }
+  }
+</style>
+
+<div class="product-payment-badges product-payment-badges-{{ block.id }}" {{ block.shopify_attributes }}>
+  {%- if block.settings.badge1_image != blank -%}
+    <div class="payment-badge">
+      <img src="{{ block.settings.badge1_image | image_url: width: 120 }}" alt="{{ block.settings.badge1_alt | default: 'Payment method' | escape }}" width="{{ badge_size }}" height="{{ badge_size | times: 0.6 | round }}" loading="lazy">
+    </div>
+  {%- endif -%}
+
+  {%- if block.settings.badge2_image != blank -%}
+    <div class="payment-badge">
+      <img src="{{ block.settings.badge2_image | image_url: width: 120 }}" alt="{{ block.settings.badge2_alt | default: 'Payment method' | escape }}" width="{{ badge_size }}" height="{{ badge_size | times: 0.6 | round }}" loading="lazy">
+    </div>
+  {%- endif -%}
+
+  {%- if block.settings.badge3_image != blank -%}
+    <div class="payment-badge">
+      <img src="{{ block.settings.badge3_image | image_url: width: 120 }}" alt="{{ block.settings.badge3_alt | default: 'Payment method' | escape }}" width="{{ badge_size }}" height="{{ badge_size | times: 0.6 | round }}" loading="lazy">
+    </div>
+  {%- endif -%}
+
+  {%- if block.settings.badge4_image != blank -%}
+    <div class="payment-badge">
+      <img src="{{ block.settings.badge4_image | image_url: width: 120 }}" alt="{{ block.settings.badge4_alt | default: 'Payment method' | escape }}" width="{{ badge_size }}" height="{{ badge_size | times: 0.6 | round }}" loading="lazy">
+    </div>
+  {%- endif -%}
+
+  {%- if block.settings.badge5_image != blank -%}
+    <div class="payment-badge">
+      <img src="{{ block.settings.badge5_image | image_url: width: 120 }}" alt="{{ block.settings.badge5_alt | default: 'Payment method' | escape }}" width="{{ badge_size }}" height="{{ badge_size | times: 0.6 | round }}" loading="lazy">
+    </div>
+  {%- endif -%}
+
+  {%- if block.settings.badge6_image != blank -%}
+    <div class="payment-badge">
+      <img src="{{ block.settings.badge6_image | image_url: width: 120 }}" alt="{{ block.settings.badge6_alt | default: 'Payment method' | escape }}" width="{{ badge_size }}" height="{{ badge_size | times: 0.6 | round }}" loading="lazy">
+    </div>
+  {%- endif -%}
+
+  {%- if block.settings.badge7_image != blank -%}
+    <div class="payment-badge">
+      <img src="{{ block.settings.badge7_image | image_url: width: 120 }}" alt="{{ block.settings.badge7_alt | default: 'Payment method' | escape }}" width="{{ badge_size }}" height="{{ badge_size | times: 0.6 | round }}" loading="lazy">
+    </div>
+  {%- endif -%}
+</div>

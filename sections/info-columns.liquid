@@ -1,0 +1,173 @@
+{{ 'section-info-columns.css' | asset_url | stylesheet_tag }}
+
+{%- assign bg_color = section.settings.background_color | default: '#ffffff' -%}
+{%- assign text_color = section.settings.text_color | default: '#555555' -%}
+{%- assign heading_color = section.settings.heading_color | default: '#1a1a1a' -%}
+{%- assign cols = section.settings.columns_per_row | default: 3 -%}
+
+<section class="info-columns-section" style="--ic-bg: {{ bg_color }}; --ic-text: {{ text_color }}; --ic-heading: {{ heading_color }}; --ic-cols: {{ cols }};">
+  <div class="info-columns__inner">
+    {%- if section.settings.section_heading != blank -%}
+      <h2 class="info-columns__section-heading">{{ section.settings.section_heading }}</h2>
+    {%- endif -%}
+
+    <div class="info-columns__grid">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'column' -%}
+          {%- assign card_bg = block.settings.card_background | default: '#f7f7f7' -%}
+          {%- assign icon_size = block.settings.icon_size | default: 40 -%}
+          {%- assign icon_gap = block.settings.icon_gap | default: 14 -%}
+          <div class="info-columns__card" style="--card-bg: {{ card_bg }}; --icon-size: {{ icon_size }}px; --icon-gap: {{ icon_gap }}px;" {{ block.shopify_attributes }}>
+            {%- if block.settings.icon != blank -%}
+              <div class="info-columns__icon">
+                <img src="{{ block.settings.icon | image_url: width: 200 }}" alt="{{ block.settings.heading | escape }}" loading="lazy" width="{{ block.settings.icon.width }}" height="{{ block.settings.icon.height }}">
+              </div>
+            {%- endif -%}
+            {%- if block.settings.heading != blank -%}
+              <h3 class="info-columns__heading">{{ block.settings.heading }}</h3>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <div class="info-columns__text">{{ block.settings.text }}</div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.show_button and section.settings.button_label != blank -%}
+      <div class="info-columns__button-wrap">
+        <a href="{{ section.settings.button_link | default: '#' }}" class="button-new button--primary">
+          {{ section.settings.button_label }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Info Columns",
+  "tag": "section",
+  "class": "info-columns-wrapper",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_heading",
+      "label": "Section heading"
+    },
+    {
+      "type": "range",
+      "id": "columns_per_row",
+      "label": "Cards per row",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#555555"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_button",
+      "label": "Show button",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Learn More"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": "Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon / Image"
+        },
+        {
+          "type": "range",
+          "id": "icon_size",
+          "label": "Icon size (px)",
+          "min": 20,
+          "max": 100,
+          "step": 5,
+          "default": 40,
+          "unit": "px"
+        },
+        {
+          "type": "range",
+          "id": "icon_gap",
+          "label": "Icon bottom gap (px)",
+          "min": 0,
+          "max": 40,
+          "step": 2,
+          "default": 14,
+          "unit": "px"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Card heading"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Add your card text here.</p>"
+        },
+        {
+          "type": "color",
+          "id": "card_background",
+          "label": "Card background color",
+          "default": "#f7f7f7"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Info Columns",
+      "blocks": [
+        { "type": "column", "settings": { "heading": "Column 1" } },
+        { "type": "column", "settings": { "heading": "Column 2" } },
+        { "type": "column", "settings": { "heading": "Column 3" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,296 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "default-page": {
+      "type": "default-page-template",
+      "disabled": true,
+      "settings": {
+        "offset_top_desktop": 60,
+        "offset_bottom_desktop": 60,
+        "offset_top_mobile": 30,
+        "offset_bottom_mobile": 30
+      }
+    },
+    "big_stagger_text_hRdnwq": {
+      "type": "big-stagger-text",
+      "blocks": {
+        "text_block_fepKAK": {
+          "type": "text_block",
+          "settings": {
+            "text": "Bengaluru",
+            "text_color": "#181210",
+            "font_size_d": 120,
+            "font_size_m": 32,
+            "use_theme_font": false,
+            "text_align": "center",
+            "is_bold": true
+          }
+        }
+      },
+      "block_order": [
+        "text_block_fepKAK"
+      ],
+      "name": "Big Stagger Text",
+      "settings": {
+        "bg_color": "rgba(0,0,0,0)",
+        "padding_top_d": 100,
+        "padding_bottom_d": 100,
+        "padding_top_m": 60,
+        "padding_bottom_m": 60
+      }
+    },
+    "store_location_EY6c8n": {
+      "type": "store-location",
+      "name": "Store location",
+      "settings": {
+        "reverse_content": false,
+        "title": "Bengaluru",
+        "subtitle": "",
+        "address_title": "Address",
+        "address_text": "<p>2nd Floor, 1689, 27th Main Rd, </p><p>BDA Layout, HSR Layout, Bengaluru, Karnataka 560102</p>",
+        "schedule_title": "Schedule",
+        "schedule_text": "<p>Mon-Wed: 10:30 am–8:30 pm</p><p>Thu-Fri: 10:30 am–9 pm</p><p>Saturday: 9:30 am–9 pm</p><p>Sunday: 8 am–8:30 pm</p>",
+        "phone_title": "Phone",
+        "phone_text": "<p>07795235450</p>",
+        "email_title": "Email",
+        "email_text": "<p>sales@induscraft.com</p>",
+        "first_button_text": "Contact Us",
+        "first_button_link": "tel:07795235450",
+        "first_button_style": "secondary",
+        "second_button_text": "Book Store Visit",
+        "second_button_link": "shopify://collections",
+        "second_button_style": "primary",
+        "second_button_popup": true,
+        "popup_heading": "Book a Store Visit",
+        "popup_description": "Fill in your details and we'll get in touch with you shortly.",
+        "popup_submit_label": "Submit Request",
+        "text_alignment": "left",
+        "google_map_api_key": "",
+        "map_query": "Eiffel+Tower,Paris+France",
+        "map_embed_url": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3889.005547613727!2d77.64893277485322!3d12.907364587402112!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae15baa35ebd71%3A0xe6c90f45cf79c574!2sInduscraft!5e0!3m2!1sen!2sin!4v1770057966280!5m2!1sen!2sin\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade",
+        "full_width": true,
+        "offset_top_desktop": 0,
+        "offset_bottom_desktop": 0,
+        "offset_top_mobile": 0,
+        "offset_bottom_mobile": 0
+      }
+    },
+    "google_reviews_YhD4rj": {
+      "type": "google-reviews",
+      "blocks": {
+        "review_9i9trM": {
+          "type": "review",
+          "settings": {
+            "row_position": "top",
+            "author_image": "shopify://shop_images/unnamed_1.png",
+            "author_name": "Gunjan Baid",
+            "time_text": "a month ago",
+            "rating": 5,
+            "text": "Thanku induscraft for bringing my imagination into reality .\nBeing a marwari it's mandatory to enjoy food   with family, sitting on the floor, having one big thaal with lots and lots of dishes . But as our elders are aging it's difficult to sit on the floor and this makes a Little difference in our joy.\nSo u make an incredible dining set and hold the family together.\nThanku induscraft",
+            "review_image": "shopify://shop_images/review3.png"
+          }
+        },
+        "review_YtYz8z": {
+          "type": "review",
+          "settings": {
+            "row_position": "top",
+            "author_name": "Manish Kumar HPCL",
+            "time_text": "2 month ago",
+            "rating": 5,
+            "text": "The variety and quality of furniture here are absolutely superb! Every piece reflects excellent craftsmanship and attention to detail. Although the prices are slightly on the premium side, the overall experience justifies the investment. The service is prompt, and the shopping experience is smooth without any delays. If you're looking for quality furniture with a great selection, this is the place to go without hesitation!"
+          }
+        },
+        "review_9RDgdA": {
+          "type": "review",
+          "settings": {
+            "row_position": "top",
+            "author_name": "Rajendra Khatri",
+            "time_text": "5 years ago",
+            "rating": 5,
+            "text": "I visited Induscraft to see a double bed. I purchased king-size double bed with storage. It was really a great purchase for me. Very decent look and very high quality finishing attracted me so much that I also brought one dining table with four chairs design. It was delivered on promised time. It was great experience visiting Induscraft. Quality and finishing of both product is excellent.  I also ordered a customized dressing  table, which is yet to be delivered. It is now one-stop shop for all of my furniture solutions in future.",
+            "review_image": "shopify://shop_images/review5_2_c72fd280-fb97-4b6e-9144-7cfa1d2e6036.png",
+            "review_image_2": "shopify://shop_images/review5_7ee03161-9e17-49e2-90a3-dc08ef4c278e.png",
+            "review_image_3": "shopify://shop_images/review4_1cdb6dc1-8240-4d1e-b9fb-50cf723f52ca.png"
+          }
+        },
+        "review_j9QWkH": {
+          "type": "review",
+          "settings": {
+            "row_position": "top",
+            "author_name": "Dhawal Solanki",
+            "time_text": "6 month ago",
+            "rating": 5,
+            "text": "\"Induscraft\"\nA brand where Furniture is not just the product but feeling. The class, the elegance of the Furniture is unmatched.",
+            "review_image": "shopify://shop_images/review6.png",
+            "review_image_2": "shopify://shop_images/review7.png"
+          }
+        },
+        "review_GjMGkm": {
+          "type": "review",
+          "settings": {
+            "row_position": "top",
+            "author_name": "Sandeep Singh Grover",
+            "time_text": "2 years ago",
+            "rating": 5,
+            "text": "Actually our association with Induscraft is almost for a decade when we visited their stall at a fair and were impressed with the SHESHAM product and then only decided to purchase sofa 3+1+1 with customised 3 seater satty (which is now part of cateloug of INDUSCRAFT) and still the same is pride of our living room.  Recently I ordered one king size double bed with mattress, alongwith two sofa chairs and a coffee table, as expected excellent quality and superb finish.  Feel proud to be associated with INDUSCRAFT.",
+            "review_image": "shopify://shop_images/review8.png"
+          }
+        },
+        "review_EakqEK": {
+          "type": "review",
+          "settings": {
+            "row_position": "bottom",
+            "author_image": "shopify://shop_images/unnamed.png",
+            "author_name": "Nipun Kachhawaha",
+            "time_text": "2 month ago",
+            "rating": 5,
+            "text": "I recently got this bed and I am extremely happy with the quality and craftsmanship. The wood finish is premium, and the structure feels sturdy and durable. The headboard storage space is a very practical feature, allowing me to keep books, remotes, and other essentials neatly organized and within reach.\n\nThe mattress fits perfectly, and the bed looks elegant in the room, giving it a classy and modern feel. The drawers and side table add extra convenience for storing daily items. Overall, this bed is a perfect combination of style, comfort, and functionality. Highly recommended!",
+            "review_image": "shopify://shop_images/Screenshot_2026-01-20_103804.png",
+            "review_image_2": "shopify://shop_images/review2.png"
+          }
+        },
+        "review_NGpEFt": {
+          "type": "review",
+          "settings": {
+            "row_position": "bottom",
+            "author_image": "shopify://shop_images/unnamed_2.png",
+            "author_name": "Varun khatri",
+            "time_text": "5 months ago",
+            "rating": 5,
+            "text": "Superb furniture from indus craft",
+            "review_image": "shopify://shop_images/review9.png",
+            "review_image_2": "shopify://shop_images/review9_1.png"
+          }
+        },
+        "review_3pjJPp": {
+          "type": "review",
+          "settings": {
+            "row_position": "bottom",
+            "author_name": "Neeraj Bohra",
+            "time_text": "a year ago",
+            "rating": 5,
+            "text": "Quality products,  Best services and pocket friendly prices.",
+            "review_image": "shopify://shop_images/review10.png",
+            "review_image_2": "shopify://shop_images/review11.png"
+          }
+        },
+        "review_bafNHD": {
+          "type": "review",
+          "settings": {
+            "row_position": "bottom",
+            "author_image": "shopify://shop_images/unnamed_3.png",
+            "author_name": "Harsh Jain",
+            "time_text": "a year ago",
+            "rating": 5,
+            "text": "Top class quality and top class perfection with the best wood and style just amazing loving it everyday more and more .",
+            "review_image": "shopify://shop_images/review_3.png",
+            "review_image_2": "shopify://shop_images/review.png",
+            "review_image_3": "shopify://shop_images/review_2.png"
+          }
+        },
+        "review_Dqaqk7": {
+          "type": "review",
+          "settings": {
+            "row_position": "bottom",
+            "author_name": "Sumona Nath",
+            "time_text": "3 years ago",
+            "rating": 5,
+            "text": "Bought these beautiful Sofas recently. Very happy with the buy.",
+            "review_image": "shopify://shop_images/review_5.png"
+          }
+        }
+      },
+      "block_order": [
+        "review_9i9trM",
+        "review_YtYz8z",
+        "review_9RDgdA",
+        "review_j9QWkH",
+        "review_GjMGkm",
+        "review_EakqEK",
+        "review_NGpEFt",
+        "review_3pjJPp",
+        "review_bafNHD",
+        "review_Dqaqk7"
+      ],
+      "name": "Google Reviews Marquee",
+      "settings": {
+        "heading": "Homes Transformed. Stories Shared.",
+        "row_layout": "double",
+        "heading_size": 38,
+        "heading_size_mobile": 22,
+        "heading_color": "#181210",
+        "heading_alignment": "center",
+        "row1_direction": "ltr",
+        "row1_speed": 150,
+        "row2_direction": "ltr",
+        "row2_speed": 120,
+        "bg_color": "rgba(0,0,0,0)",
+        "btn_text": "Leave a Review",
+        "btn_link": "",
+        "verified_badge": "shopify://shop_images/verified.png",
+        "padding_top": 60,
+        "padding_bottom": 36
+      }
+    },
+    "product_recommendations_KLPkg7": {
+      "type": "product-recommendations",
+      "name": "Product recommendations",
+      "settings": {
+        "subheading": "",
+        "button_label": "",
+        "button_link": "",
+        "button_style": "primary",
+        "show_recommendations": true,
+        "enable_shopify_recommendations": false,
+        "collection": "bangalore",
+        "heading": "Recommendations",
+        "products_to_show": 4,
+        "show_recently_viewed": false,
+        "recently_viewed_label": "Recently viewed",
+        "recently_viewed_limit": 4,
+        "layout": "alternative",
+        "enable_cards_indent": false,
+        "full_width": true,
+        "offset_top_desktop": 50,
+        "offset_bottom_desktop": 100,
+        "offset_top_mobile": 25,
+        "offset_bottom_mobile": 60
+      }
+    },
+    "page_content_rWFDmA": {
+      "type": "page-content",
+      "name": "Page Content",
+      "settings": {
+        "font_size": 16,
+        "font_size_mobile": 14,
+        "line_height": 1.7,
+        "text_align": "left",
+        "max_width": "1000",
+        "text_color": "#555555",
+        "heading_color": "#2C2A28",
+        "link_color": "#8B7355",
+        "bg_color": "rgba(0,0,0,0)",
+        "padding_top": 20,
+        "padding_bottom": 60,
+        "padding_top_mobile": 24,
+        "padding_bottom_mobile": 40
+      }
+    }
+  },
+  "order": [
+    "default-page",
+    "big_stagger_text_hRdnwq",
+    "store_location_EY6c8n",
+    "google_reviews_YhD4rj",
+    "product_recommendations_KLPkg7",
+    "page_content_rWFDmA"
+  ]
+}

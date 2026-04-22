@@ -1,0 +1,386 @@
+{%- comment -%}
+  Curved Text Image Section
+  =========================
+  A 50/50 layout section featuring rich text and a curved image.
+  Designed for "Redefining the landscape..." style blocks.
+{%- endcomment -%}
+
+{{ 'text-image-curved.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  #text-image-curved-{{ section.id }} {
+    --section-bg-color: {{ section.settings.background_color }};
+    --section-text-color: {{ section.settings.text_color }};
+    
+    --margin-top-desktop: {{ section.settings.margin_top }}px;
+    --margin-bottom-desktop: {{ section.settings.margin_bottom }}px;
+    --margin-top-mobile: {{ section.settings.margin_top_mobile }}px;
+    --margin-bottom-mobile: {{ section.settings.margin_bottom_mobile }}px;
+    
+    --padding-vertical-desktop: {{ section.settings.padding_top }}px;
+    --padding-vertical-mobile: {{ section.settings.mobile_padding_top }}px;
+    --text-horizontal-padding: {{ section.settings.text_padding }}px;
+    --text-horizontal-padding-mobile: {{ section.settings.text_padding_mobile }}px;
+
+    --heading-size-desktop: {{ section.settings.heading_size }}px;
+    --heading-size-mobile: {{ section.settings.heading_size_mobile }}px;
+    --text-size-desktop: {{ section.settings.text_size }}px;
+    --text-size-mobile: {{ section.settings.text_size_mobile }}px;
+
+    --curve-radius: {{ section.settings.curve_radius }}px;
+    --image-width: {{ section.settings.image_width }}%;
+    
+    /* Layout Alignment */
+    /* Layout Alignment */
+    --text-alignment: {{ section.settings.text_alignment }};
+    --content-width: {{ section.settings.content_width }}%;
+    --image-column-width: {{ 100 | minus: section.settings.content_width }}%;
+    --vertical-alignment: {{ section.settings.vertical_alignment }};
+  }
+  
+  #text-image-curved-{{ section.id }} .text-image-curved__content {
+    align-items: {{ section.settings.text_alignment | replace: 'left', 'flex-start' | replace: 'right', 'flex-end' | replace: 'center', 'center' }};
+    text-align: {{ section.settings.text_alignment }};
+  }
+{%- endstyle -%}
+
+<section id="text-image-curved-{{ section.id }}" class="text-image-curved" data-section-id="{{ section.id }}">
+  <div class="text-image-curved__wrapper layout--image-{{ section.settings.image_position }}">
+    
+    <!-- Content Column -->
+    <div class="text-image-curved__content">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="text-image-curved__heading">
+            {{ section.settings.heading | replace: 'p>', 'span>' }}
+        </h2>
+      {%- endif -%}
+      
+      {%- if section.settings.text != blank -%}
+        <div class="text-image-curved__text rte">
+          {{ section.settings.text }}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+        <div class="text-image-curved__btn-wrapper">
+             {%- if section.settings.button_style == 'circle' -%}
+            <a href="{{ section.settings.button_link }}" class="button-circle" aria-label="{{ section.settings.button_label }}">
+              <span class="button__text">{{ section.settings.button_label }}</span>
+              <span class="button-new__icon-container">
+                <span class="button-new__icon-wrapper">
+                  {% render 'icons-new', icon: 'arrow-right' %}
+                </span>
+              </span>
+            </a>
+          {%- else -%}
+             <a href="{{ section.settings.button_link }}" class="button-new button--{{ section.settings.button_style }}">
+              {{ section.settings.button_label }}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <!-- Image Column -->
+    <div class="text-image-curved__image-container">
+      {%- assign image_class = 'text-image-curved__image curve--' | append: section.settings.curve_style -%}
+      {%- if section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 1200 | image_tag:
+          class: image_class,
+          loading: 'lazy',
+          widths: '400, 600, 800, 1000, 1200'
+        }}
+      {%- else -%}
+        {{ 'image' | placeholder_svg_tag: image_class }}
+      {%- endif -%}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Curved Text Image",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image Position (Desktop)",
+      "options": [
+        { "value": "right", "label": "Right" },
+        { "value": "left", "label": "Left" }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "min": 30,
+      "max": 80,
+      "step": 5,
+      "unit": "%",
+      "label": "Content Column Width",
+      "default": 50
+    },
+    {
+      "type": "select",
+      "id": "vertical_alignment",
+      "label": "Vertical Alignment",
+      "options": [
+        { "value": "flex-start", "label": "Top" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Bottom" }
+      ],
+      "default": "center"
+    },
+     {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>Redefining the <em>landscape</em> of furniture since 1989.</p>",
+      "info": "Use Italics for Serif font style."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+     {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button Style",
+      "options": [
+        { "value": "primary", "label": "Primary" },
+        { "value": "secondary", "label": "Secondary" },
+        { "value": "circle", "label": "Circle" }
+      ],
+      "default": "primary"
+    },
+    {
+      "type": "header",
+      "content": "Image & Curve"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "curve_style",
+      "label": "Corner Curve Style",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "bottom-left", "label": "Bottom Left" },
+        { "value": "bottom-right", "label": "Bottom Right" },
+        { "value": "top-left", "label": "Top Left" },
+        { "value": "top-right", "label": "Top Right" },
+        { "value": "all", "label": "All Corners" }
+      ],
+      "default": "bottom-left"
+    },
+    {
+      "type": "range",
+      "id": "curve_radius",
+      "min": 0,
+      "max": 500,
+      "step": 10,
+      "unit": "px",
+      "label": "Curve Radius",
+      "default": 300
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Image Width",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 24,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size (Desktop)",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size (Mobile)",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Text Size (Desktop)",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "text_size_mobile",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Text Size (Mobile)",
+      "default": 14
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#1A1A1A"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Margin Top (Desktop)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Margin Bottom (Desktop)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Margin Top (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Margin Bottom (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Inner Padding Vertical",
+      "default": 60
+    },
+     {
+      "type": "range",
+      "id": "mobile_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile Inner Padding Vertical",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "text_padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Horizontal (Desktop)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "text_padding_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Horizontal (Mobile)",
+      "default": 20
+    }
+  ],
+  "presets": [
+    {
+      "name": "Curved Text Image"
+    }
+  ]
+}
+{% endschema %}

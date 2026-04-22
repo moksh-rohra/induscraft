@@ -1,0 +1,1300 @@
+{% doc %}
+  @prompt
+    A magazine style brochure, Can I get a little more blocks. I want to introduce my brand called Moakuzai which is a select collection of exclusive products made in oak. Then it should be followed by the segmented themes, the first line of products are in a collection called Yuki. 
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-magazine-brochure-{{ ai_gen_id }} {
+    max-width: {{ block.settings.max_width }}px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+
+  .ai-magazine-brochure__grid-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: {{ block.settings.grid_gap }}px;
+    margin-bottom: {{ block.settings.grid_gap }}px;
+  }
+
+  .ai-magazine-brochure__header-{{ ai_gen_id }} {
+    grid-column: 1 / -1;
+    text-align: {{ block.settings.header_alignment }};
+    margin-bottom: 40px;
+  }
+
+  .ai-magazine-brochure__title-{{ ai_gen_id }} {
+    font-size: {{ block.settings.title_size }}px;
+    color: {{ block.settings.title_color }};
+    margin: 0 0 16px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .ai-magazine-brochure__subtitle-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subtitle_size }}px;
+    color: {{ block.settings.subtitle_color }};
+    margin: 0;
+    font-weight: 400;
+    line-height: 1.6;
+  }
+
+  .ai-magazine-brochure__brand-intro-{{ ai_gen_id }} {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: {{ block.settings.grid_gap }}px;
+    margin-bottom: 60px;
+    padding: 60px 40px;
+    background-color: {{ block.settings.brand_bg_color }};
+    border-radius: {{ block.settings.border_radius }}px;
+  }
+
+  .ai-magazine-brochure__brand-content-{{ ai_gen_id }} {
+    grid-column: span 7;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .ai-magazine-brochure__brand-image-{{ ai_gen_id }} {
+    grid-column: span 5;
+  }
+
+  .ai-magazine-brochure__brand-logo-{{ ai_gen_id }} {
+    max-width: 200px;
+    margin-bottom: 24px;
+  }
+
+  .ai-magazine-brochure__brand-name-{{ ai_gen_id }} {
+    font-size: 56px;
+    font-weight: 700;
+    color: {{ block.settings.brand_text_color }};
+    margin: 0 0 16px;
+    letter-spacing: -0.02em;
+  }
+
+  .ai-magazine-brochure__brand-tagline-{{ ai_gen_id }} {
+    font-size: 20px;
+    color: {{ block.settings.brand_text_color }};
+    margin: 0 0 24px;
+    opacity: 0.8;
+    line-height: 1.6;
+  }
+
+  .ai-magazine-brochure__brand-description-{{ ai_gen_id }} {
+    font-size: 16px;
+    color: {{ block.settings.brand_text_color }};
+    margin: 0 0 32px;
+    line-height: 1.8;
+    opacity: 0.9;
+  }
+
+  .ai-magazine-brochure__brand-image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+    overflow: hidden;
+    border-radius: {{ block.settings.border_radius }}px;
+  }
+
+  .ai-magazine-brochure__brand-img-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-magazine-brochure__brand-image-placeholder-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-magazine-brochure__brand-image-placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  .ai-magazine-brochure__section-header-{{ ai_gen_id }} {
+    grid-column: 1 / -1;
+    margin-bottom: 32px;
+  }
+
+  .ai-magazine-brochure__section-title-{{ ai_gen_id }} {
+    font-size: 36px;
+    font-weight: 700;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 12px;
+    letter-spacing: -0.02em;
+  }
+
+  .ai-magazine-brochure__section-subtitle-{{ ai_gen_id }} {
+    font-size: 18px;
+    color: {{ block.settings.subtitle_color }};
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .ai-magazine-brochure__feature-large-{{ ai_gen_id }} {
+    grid-column: span 8;
+    position: relative;
+    overflow: hidden;
+    border-radius: {{ block.settings.border_radius }}px;
+    background-color: {{ block.settings.card_bg_color }};
+  }
+
+  .ai-magazine-brochure__feature-small-{{ ai_gen_id }} {
+    grid-column: span 4;
+    position: relative;
+    overflow: hidden;
+    border-radius: {{ block.settings.border_radius }}px;
+    background-color: {{ block.settings.card_bg_color }};
+  }
+
+  .ai-magazine-brochure__feature-medium-{{ ai_gen_id }} {
+    grid-column: span 6;
+    position: relative;
+    overflow: hidden;
+    border-radius: {{ block.settings.border_radius }}px;
+    background-color: {{ block.settings.card_bg_color }};
+  }
+
+  .ai-magazine-brochure__feature-third-{{ ai_gen_id }} {
+    grid-column: span 4;
+    position: relative;
+    overflow: hidden;
+    border-radius: {{ block.settings.border_radius }}px;
+    background-color: {{ block.settings.card_bg_color }};
+  }
+
+  .ai-magazine-brochure__image-wrapper-{{ ai_gen_id }} {
+    position: relative;
+    width: 100%;
+    padding-bottom: 75%;
+    overflow: hidden;
+  }
+
+  .ai-magazine-brochure__image-wrapper--tall-{{ ai_gen_id }} {
+    padding-bottom: 133%;
+  }
+
+  .ai-magazine-brochure__image-wrapper--square-{{ ai_gen_id }} {
+    padding-bottom: 100%;
+  }
+
+  .ai-magazine-brochure__image-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .ai-magazine-brochure__feature-large-{{ ai_gen_id }}:hover .ai-magazine-brochure__image-{{ ai_gen_id }},
+  .ai-magazine-brochure__feature-small-{{ ai_gen_id }}:hover .ai-magazine-brochure__image-{{ ai_gen_id }},
+  .ai-magazine-brochure__feature-medium-{{ ai_gen_id }}:hover .ai-magazine-brochure__image-{{ ai_gen_id }},
+  .ai-magazine-brochure__feature-third-{{ ai_gen_id }}:hover .ai-magazine-brochure__image-{{ ai_gen_id }} {
+    transform: scale(1.05);
+  }
+
+  .ai-magazine-brochure__image-placeholder-{{ ai_gen_id }} {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-magazine-brochure__image-placeholder-{{ ai_gen_id }} svg {
+    width: 60%;
+    height: 60%;
+    opacity: 0.3;
+  }
+
+  .ai-magazine-brochure__content-{{ ai_gen_id }} {
+    padding: 24px;
+  }
+
+  .ai-magazine-brochure__category-{{ ai_gen_id }} {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: {{ block.settings.accent_color }};
+    margin-bottom: 12px;
+  }
+
+  .ai-magazine-brochure__heading-{{ ai_gen_id }} {
+    font-size: 24px;
+    font-weight: 700;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 12px;
+    line-height: 1.2;
+  }
+
+  .ai-magazine-brochure__feature-large-{{ ai_gen_id }} .ai-magazine-brochure__heading-{{ ai_gen_id }} {
+    font-size: 32px;
+  }
+
+  .ai-magazine-brochure__description-{{ ai_gen_id }} {
+    font-size: 16px;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 16px;
+    line-height: 1.6;
+    opacity: 0.8;
+  }
+
+  .ai-magazine-brochure__link-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: {{ block.settings.accent_color }};
+    text-decoration: none;
+    transition: gap 0.3s ease;
+  }
+
+  .ai-magazine-brochure__link-{{ ai_gen_id }}:hover {
+    gap: 12px;
+  }
+
+  .ai-magazine-brochure__link-arrow-{{ ai_gen_id }} {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+  }
+
+  .ai-magazine-brochure__link-{{ ai_gen_id }}:hover .ai-magazine-brochure__link-arrow-{{ ai_gen_id }} {
+    transform: translateX(4px);
+  }
+
+  .ai-magazine-brochure__button-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    background-color: {{ block.settings.button_bg_color }};
+    color: {{ block.settings.button_text_color }};
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .ai-magazine-brochure__button-{{ ai_gen_id }}:hover {
+    background-color: {{ block.settings.button_hover_bg_color }};
+    transform: translateY(-2px);
+  }
+
+  @media screen and (max-width: 989px) {
+    .ai-magazine-brochure__brand-content-{{ ai_gen_id }},
+    .ai-magazine-brochure__brand-image-{{ ai_gen_id }} {
+      grid-column: span 12;
+    }
+
+    .ai-magazine-brochure__brand-intro-{{ ai_gen_id }} {
+      padding: 40px 24px;
+    }
+
+    .ai-magazine-brochure__brand-name-{{ ai_gen_id }} {
+      font-size: 40px;
+    }
+
+    .ai-magazine-brochure__feature-large-{{ ai_gen_id }},
+    .ai-magazine-brochure__feature-small-{{ ai_gen_id }},
+    .ai-magazine-brochure__feature-medium-{{ ai_gen_id }},
+    .ai-magazine-brochure__feature-third-{{ ai_gen_id }} {
+      grid-column: span 12;
+    }
+
+    .ai-magazine-brochure__image-wrapper--tall-{{ ai_gen_id }} {
+      padding-bottom: 75%;
+    }
+
+    .ai-magazine-brochure__feature-large-{{ ai_gen_id }} .ai-magazine-brochure__heading-{{ ai_gen_id }} {
+      font-size: 24px;
+    }
+
+    .ai-magazine-brochure__section-title-{{ ai_gen_id }} {
+      font-size: 28px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-magazine-brochure-{{ ai_gen_id }} {
+      padding: 20px 16px;
+    }
+
+    .ai-magazine-brochure__grid-{{ ai_gen_id }} {
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .ai-magazine-brochure__brand-intro-{{ ai_gen_id }} {
+      padding: 32px 20px;
+      margin-bottom: 40px;
+    }
+
+    .ai-magazine-brochure__brand-name-{{ ai_gen_id }} {
+      font-size: 32px;
+    }
+
+    .ai-magazine-brochure__brand-tagline-{{ ai_gen_id }} {
+      font-size: 16px;
+    }
+
+    .ai-magazine-brochure__title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.title_size | times: 0.7 }}px;
+    }
+
+    .ai-magazine-brochure__subtitle-{{ ai_gen_id }} {
+      font-size: {{ block.settings.subtitle_size | times: 0.85 }}px;
+    }
+
+    .ai-magazine-brochure__content-{{ ai_gen_id }} {
+      padding: 16px;
+    }
+
+    .ai-magazine-brochure__heading-{{ ai_gen_id }} {
+      font-size: 20px;
+    }
+
+    .ai-magazine-brochure__section-title-{{ ai_gen_id }} {
+      font-size: 24px;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-magazine-brochure-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  {% if block.settings.main_title != blank or block.settings.main_subtitle != blank %}
+    <div class="ai-magazine-brochure__header-{{ ai_gen_id }}">
+      {% if block.settings.main_title != blank %}
+        <h2 class="ai-magazine-brochure__title-{{ ai_gen_id }}">{{ block.settings.main_title }}</h2>
+      {% endif %}
+      {% if block.settings.main_subtitle != blank %}
+        <p class="ai-magazine-brochure__subtitle-{{ ai_gen_id }}">{{ block.settings.main_subtitle }}</p>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  {% if block.settings.show_brand_intro %}
+    <div class="ai-magazine-brochure__grid-{{ ai_gen_id }}">
+      <div class="ai-magazine-brochure__brand-intro-{{ ai_gen_id }}">
+        <div class="ai-magazine-brochure__brand-content-{{ ai_gen_id }}">
+          {% if block.settings.brand_logo %}
+            <img
+              src="{{ block.settings.brand_logo | image_url: width: 400 }}"
+              alt="{{ block.settings.brand_logo.alt | escape }}"
+              loading="lazy"
+              class="ai-magazine-brochure__brand-logo-{{ ai_gen_id }}"
+            >
+          {% endif %}
+          {% if block.settings.brand_name != blank %}
+            <h2 class="ai-magazine-brochure__brand-name-{{ ai_gen_id }}">{{ block.settings.brand_name }}</h2>
+          {% endif %}
+          {% if block.settings.brand_tagline != blank %}
+            <p class="ai-magazine-brochure__brand-tagline-{{ ai_gen_id }}">{{ block.settings.brand_tagline }}</p>
+          {% endif %}
+          {% if block.settings.brand_description != blank %}
+            <div class="ai-magazine-brochure__brand-description-{{ ai_gen_id }}">{{ block.settings.brand_description }}</div>
+          {% endif %}
+          {% if block.settings.brand_button_link != blank %}
+            <a href="{{ block.settings.brand_button_link }}" class="ai-magazine-brochure__button-{{ ai_gen_id }}">
+              {{ block.settings.brand_button_text }}
+              <svg class="ai-magazine-brochure__link-arrow-{{ ai_gen_id }}" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          {% endif %}
+        </div>
+        <div class="ai-magazine-brochure__brand-image-{{ ai_gen_id }}">
+          <div class="ai-magazine-brochure__brand-image-wrapper-{{ ai_gen_id }}">
+            {% if block.settings.brand_image %}
+              <img
+                src="{{ block.settings.brand_image | image_url: width: 800 }}"
+                alt="{{ block.settings.brand_image.alt | escape }}"
+                loading="lazy"
+                width="{{ block.settings.brand_image.width }}"
+                height="{{ block.settings.brand_image.height }}"
+                class="ai-magazine-brochure__brand-img-{{ ai_gen_id }}"
+              >
+            {% else %}
+              <div class="ai-magazine-brochure__brand-image-placeholder-{{ ai_gen_id }}">
+                {{ 'image' | placeholder_svg_tag }}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  {% if block.settings.show_collection_section %}
+    <div class="ai-magazine-brochure__grid-{{ ai_gen_id }}">
+      <div class="ai-magazine-brochure__section-header-{{ ai_gen_id }}">
+        {% if block.settings.collection_title != blank %}
+          <h3 class="ai-magazine-brochure__section-title-{{ ai_gen_id }}">{{ block.settings.collection_title }}</h3>
+        {% endif %}
+        {% if block.settings.collection_subtitle != blank %}
+          <p class="ai-magazine-brochure__section-subtitle-{{ ai_gen_id }}">{{ block.settings.collection_subtitle }}</p>
+        {% endif %}
+      </div>
+
+      {% if block.settings.collection_feature_1_enabled %}
+        <div class="ai-magazine-brochure__feature-large-{{ ai_gen_id }}">
+          <div class="ai-magazine-brochure__image-wrapper-{{ ai_gen_id }}">
+            {% if block.settings.collection_feature_1_image %}
+              <img
+                src="{{ block.settings.collection_feature_1_image | image_url: width: 1200 }}"
+                alt="{{ block.settings.collection_feature_1_image.alt | escape }}"
+                loading="lazy"
+                width="{{ block.settings.collection_feature_1_image.width }}"
+                height="{{ block.settings.collection_feature_1_image.height }}"
+                class="ai-magazine-brochure__image-{{ ai_gen_id }}"
+              >
+            {% else %}
+              <div class="ai-magazine-brochure__image-placeholder-{{ ai_gen_id }}">
+                {{ 'product-1' | placeholder_svg_tag }}
+              </div>
+            {% endif %}
+          </div>
+          <div class="ai-magazine-brochure__content-{{ ai_gen_id }}">
+            {% if block.settings.collection_feature_1_category != blank %}
+              <span class="ai-magazine-brochure__category-{{ ai_gen_id }}">{{ block.settings.collection_feature_1_category }}</span>
+            {% endif %}
+            {% if block.settings.collection_feature_1_title != blank %}
+              <h3 class="ai-magazine-brochure__heading-{{ ai_gen_id }}">{{ block.settings.collection_feature_1_title }}</h3>
+            {% endif %}
+            {% if block.settings.collection_feature_1_description != blank %}
+              <div class="ai-magazine-brochure__description-{{ ai_gen_id }}">{{ block.settings.collection_feature_1_description }}</div>
+            {% endif %}
+            {% if block.settings.collection_feature_1_link != blank %}
+              <a href="{{ block.settings.collection_feature_1_link }}" class="ai-magazine-brochure__link-{{ ai_gen_id }}">
+                {{ block.settings.collection_feature_1_link_text }}
+                <svg class="ai-magazine-brochure__link-arrow-{{ ai_gen_id }}" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+
+      {% if block.settings.collection_feature_2_enabled %}
+        <div class="ai-magazine-brochure__feature-small-{{ ai_gen_id }}">
+          <div class="ai-magazine-brochure__image-wrapper-{{ ai_gen_id }} ai-magazine-brochure__image-wrapper--tall-{{ ai_gen_id }}">
+            {% if block.settings.collection_feature_2_image %}
+              <img
+                src="{{ block.settings.collection_feature_2_image | image_url: width: 600 }}"
+                alt="{{ block.settings.collection_feature_2_image.alt | escape }}"
+                loading="lazy"
+                width="{{ block.settings.collection_feature_2_image.width }}"
+                height="{{ block.settings.collection_feature_2_image.height }}"
+                class="ai-magazine-brochure__image-{{ ai_gen_id }}"
+              >
+            {% else %}
+              <div class="ai-magazine-brochure__image-placeholder-{{ ai_gen_id }}">
+                {{ 'product-2' | placeholder_svg_tag }}
+              </div>
+            {% endif %}
+          </div>
+          <div class="ai-magazine-brochure__content-{{ ai_gen_id }}">
+            {% if block.settings.collection_feature_2_category != blank %}
+              <span class="ai-magazine-brochure__category-{{ ai_gen_id }}">{{ block.settings.collection_feature_2_category }}</span>
+            {% endif %}
+            {% if block.settings.collection_feature_2_title != blank %}
+              <h3 class="ai-magazine-brochure__heading-{{ ai_gen_id }}">{{ block.settings.collection_feature_2_title }}</h3>
+            {% endif %}
+            {% if block.settings.collection_feature_2_description != blank %}
+              <div class="ai-magazine-brochure__description-{{ ai_gen_id }}">{{ block.settings.collection_feature_2_description }}</div>
+            {% endif %}
+            {% if block.settings.collection_feature_2_link != blank %}
+              <a href="{{ block.settings.collection_feature_2_link }}" class="ai-magazine-brochure__link-{{ ai_gen_id }}">
+                {{ block.settings.collection_feature_2_link_text }}
+                <svg class="ai-magazine-brochure__link-arrow-{{ ai_gen_id }}" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="ai-magazine-brochure__grid-{{ ai_gen_id }}">
+      {% if block.settings.collection_feature_3_enabled %}
+        <div class="ai-magazine-brochure__feature-third-{{ ai_gen_id }}">
+          <div class="ai-magazine-brochure__image-wrapper-{{ ai_gen_id }} ai-magazine-brochure__image-wrapper--square-{{ ai_gen_id }}">
+            {% if block.settings.collection_feature_3_image %}
+              <img
+                src="{{ block.settings.collection_feature_3_image | image_url: width: 600 }}"
+                alt="{{ block.settings.collection_feature_3_image.alt | escape }}"
+                loading="lazy"
+                width="{{ block.settings.collection_feature_3_image.width }}"
+                height="{{ block.settings.collection_feature_3_image.height }}"
+                class="ai-magazine-brochure__image-{{ ai_gen_id }}"
+              >
+            {% else %}
+              <div class="ai-magazine-brochure__image-placeholder-{{ ai_gen_id }}">
+                {{ 'product-3' | placeholder_svg_tag }}
+              </div>
+            {% endif %}
+          </div>
+          <div class="ai-magazine-brochure__content-{{ ai_gen_id }}">
+            {% if block.settings.collection_feature_3_category != blank %}
+              <span class="ai-magazine-brochure__category-{{ ai_gen_id }}">{{ block.settings.collection_feature_3_category }}</span>
+            {% endif %}
+            {% if block.settings.collection_feature_3_title != blank %}
+              <h3 class="ai-magazine-brochure__heading-{{ ai_gen_id }}">{{ block.settings.collection_feature_3_title }}</h3>
+            {% endif %}
+            {% if block.settings.collection_feature_3_description != blank %}
+              <div class="ai-magazine-brochure__description-{{ ai_gen_id }}">{{ block.settings.collection_feature_3_description }}</div>
+            {% endif %}
+            {% if block.settings.collection_feature_3_link != blank %}
+              <a href="{{ block.settings.collection_feature_3_link }}" class="ai-magazine-brochure__link-{{ ai_gen_id }}">
+                {{ block.settings.collection_feature_3_link_text }}
+                <svg class="ai-magazine-brochure__link-arrow-{{ ai_gen_id }}" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+
+      {% if block.settings.collection_feature_4_enabled %}
+        <div class="ai-magazine-brochure__feature-third-{{ ai_gen_id }}">
+          <div class="ai-magazine-brochure__image-wrapper-{{ ai_gen_id }} ai-magazine-brochure__image-wrapper--square-{{ ai_gen_id }}">
+            {% if block.settings.collection_feature_4_image %}
+              <img
+                src="{{ block.settings.collection_feature_4_image | image_url: width: 600 }}"
+                alt="{{ block.settings.collection_feature_4_image.alt | escape }}"
+                loading="lazy"
+                width="{{ block.settings.collection_feature_4_image.width }}"
+                height="{{ block.settings.collection_feature_4_image.height }}"
+                class="ai-magazine-brochure__image-{{ ai_gen_id }}"
+              >
+            {% else %}
+              <div class="ai-magazine-brochure__image-placeholder-{{ ai_gen_id }}">
+                {{ 'product-4' | placeholder_svg_tag }}
+              </div>
+            {% endif %}
+          </div>
+          <div class="ai-magazine-brochure__content-{{ ai_gen_id }}">
+            {% if block.settings.collection_feature_4_category != blank %}
+              <span class="ai-magazine-brochure__category-{{ ai_gen_id }}">{{ block.settings.collection_feature_4_category }}</span>
+            {% endif %}
+            {% if block.settings.collection_feature_4_title != blank %}
+              <h3 class="ai-magazine-brochure__heading-{{ ai_gen_id }}">{{ block.settings.collection_feature_4_title }}</h3>
+            {% endif %}
+            {% if block.settings.collection_feature_4_description != blank %}
+              <div class="ai-magazine-brochure__description-{{ ai_gen_id }}">{{ block.settings.collection_feature_4_description }}</div>
+            {% endif %}
+            {% if block.settings.collection_feature_4_link != blank %}
+              <a href="{{ block.settings.collection_feature_4_link }}" class="ai-magazine-brochure__link-{{ ai_gen_id }}">
+                {{ block.settings.collection_feature_4_link_text }}
+                <svg class="ai-magazine-brochure__link-arrow-{{ ai_gen_id }}" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+
+      {% if block.settings.collection_feature_5_enabled %}
+        <div class="ai-magazine-brochure__feature-third-{{ ai_gen_id }}">
+          <div class="ai-magazine-brochure__image-wrapper-{{ ai_gen_id }} ai-magazine-brochure__image-wrapper--square-{{ ai_gen_id }}">
+            {% if block.settings.collection_feature_5_image %}
+              <img
+                src="{{ block.settings.collection_feature_5_image | image_url: width: 600 }}"
+                alt="{{ block.settings.collection_feature_5_image.alt | escape }}"
+                loading="lazy"
+                width="{{ block.settings.collection_feature_5_image.width }}"
+                height="{{ block.settings.collection_feature_5_image.height }}"
+                class="ai-magazine-brochure__image-{{ ai_gen_id }}"
+              >
+            {% else %}
+              <div class="ai-magazine-brochure__image-placeholder-{{ ai_gen_id }}">
+                {{ 'product-5' | placeholder_svg_tag }}
+              </div>
+            {% endif %}
+          </div>
+          <div class="ai-magazine-brochure__content-{{ ai_gen_id }}">
+            {% if block.settings.collection_feature_5_category != blank %}
+              <span class="ai-magazine-brochure__category-{{ ai_gen_id }}">{{ block.settings.collection_feature_5_category }}</span>
+            {% endif %}
+            {% if block.settings.collection_feature_5_title != blank %}
+              <h3 class="ai-magazine-brochure__heading-{{ ai_gen_id }}">{{ block.settings.collection_feature_5_title }}</h3>
+            {% endif %}
+            {% if block.settings.collection_feature_5_description != blank %}
+              <div class="ai-magazine-brochure__description-{{ ai_gen_id }}">{{ block.settings.collection_feature_5_description }}</div>
+            {% endif %}
+            {% if block.settings.collection_feature_5_link != blank %}
+              <a href="{{ block.settings.collection_feature_5_link }}" class="ai-magazine-brochure__link-{{ ai_gen_id }}">
+                {{ block.settings.collection_feature_5_link_text }}
+                <svg class="ai-magazine-brochure__link-arrow-{{ ai_gen_id }}" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  {% if block.settings.show_additional_features %}
+    <div class="ai-magazine-brochure__grid-{{ ai_gen_id }}">
+      {% if block.settings.feature_1_enabled %}
+        <div class="ai-magazine-brochure__feature-medium-{{ ai_gen_id }}">
+          <div class="ai-magazine-brochure__image-wrapper-{{ ai_gen_id }}">
+            {% if block.settings.feature_1_image %}
+              <img
+                src="{{ block.settings.feature_1_image | image_url: width: 800 }}"
+                alt="{{ block.settings.feature_1_image.alt | escape }}"
+                loading="lazy"
+                width="{{ block.settings.feature_1_image.width }}"
+                height="{{ block.settings.feature_1_image.height }}"
+                class="ai-magazine-brochure__image-{{ ai_gen_id }}"
+              >
+            {% else %}
+              <div class="ai-magazine-brochure__image-placeholder-{{ ai_gen_id }}">
+                {{ 'collection-1' | placeholder_svg_tag }}
+              </div>
+            {% endif %}
+          </div>
+          <div class="ai-magazine-brochure__content-{{ ai_gen_id }}">
+            {% if block.settings.feature_1_category != blank %}
+              <span class="ai-magazine-brochure__category-{{ ai_gen_id }}">{{ block.settings.feature_1_category }}</span>
+            {% endif %}
+            {% if block.settings.feature_1_title != blank %}
+              <h3 class="ai-magazine-brochure__heading-{{ ai_gen_id }}">{{ block.settings.feature_1_title }}</h3>
+            {% endif %}
+            {% if block.settings.feature_1_description != blank %}
+              <div class="ai-magazine-brochure__description-{{ ai_gen_id }}">{{ block.settings.feature_1_description }}</div>
+            {% endif %}
+            {% if block.settings.feature_1_link != blank %}
+              <a href="{{ block.settings.feature_1_link }}" class="ai-magazine-brochure__link-{{ ai_gen_id }}">
+                {{ block.settings.feature_1_link_text }}
+                <svg class="ai-magazine-brochure__link-arrow-{{ ai_gen_id }}" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+
+      {% if block.settings.feature_2_enabled %}
+        <div class="ai-magazine-brochure__feature-medium-{{ ai_gen_id }}">
+          <div class="ai-magazine-brochure__image-wrapper-{{ ai_gen_id }}">
+            {% if block.settings.feature_2_image %}
+              <img
+                src="{{ block.settings.feature_2_image | image_url: width: 800 }}"
+                alt="{{ block.settings.feature_2_image.alt | escape }}"
+                loading="lazy"
+                width="{{ block.settings.feature_2_image.width }}"
+                height="{{ block.settings.feature_2_image.height }}"
+                class="ai-magazine-brochure__image-{{ ai_gen_id }}"
+              >
+            {% else %}
+              <div class="ai-magazine-brochure__image-placeholder-{{ ai_gen_id }}">
+                {{ 'collection-2' | placeholder_svg_tag }}
+              </div>
+            {% endif %}
+          </div>
+          <div class="ai-magazine-brochure__content-{{ ai_gen_id }}">
+            {% if block.settings.feature_2_category != blank %}
+              <span class="ai-magazine-brochure__category-{{ ai_gen_id }}">{{ block.settings.feature_2_category }}</span>
+            {% endif %}
+            {% if block.settings.feature_2_title != blank %}
+              <h3 class="ai-magazine-brochure__heading-{{ ai_gen_id }}">{{ block.settings.feature_2_title }}</h3>
+            {% endif %}
+            {% if block.settings.feature_2_description != blank %}
+              <div class="ai-magazine-brochure__description-{{ ai_gen_id }}">{{ block.settings.feature_2_description }}</div>
+            {% endif %}
+            {% if block.settings.feature_2_link != blank %}
+              <a href="{{ block.settings.feature_2_link }}" class="ai-magazine-brochure__link-{{ ai_gen_id }}">
+                {{ block.settings.feature_2_link_text }}
+                <svg class="ai-magazine-brochure__link-arrow-{{ ai_gen_id }}" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Magazine brochure",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Main heading"
+    },
+    {
+      "type": "text",
+      "id": "main_title",
+      "label": "Title",
+      "default": "Discover Moakuzai"
+    },
+    {
+      "type": "textarea",
+      "id": "main_subtitle",
+      "label": "Subtitle",
+      "default": "A curated collection of exclusive oak products"
+    },
+    {
+      "type": "select",
+      "id": "header_alignment",
+      "label": "Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 24,
+      "max": 72,
+      "step": 4,
+      "unit": "px",
+      "label": "Title size",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "min": 14,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Subtitle size",
+      "default": 18
+    },
+    {
+      "type": "header",
+      "content": "Brand introduction"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_brand_intro",
+      "label": "Show brand introduction",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "brand_logo",
+      "label": "Brand logo"
+    },
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Brand name",
+      "default": "Moakuzai"
+    },
+    {
+      "type": "text",
+      "id": "brand_tagline",
+      "label": "Tagline",
+      "default": "Exclusive Oak Collection"
+    },
+    {
+      "type": "richtext",
+      "id": "brand_description",
+      "label": "Description",
+      "default": "<p>Moakuzai represents the finest selection of exclusive products crafted from premium oak. Each piece embodies timeless elegance and exceptional craftsmanship.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "brand_image",
+      "label": "Brand image"
+    },
+    {
+      "type": "url",
+      "id": "brand_button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "text",
+      "id": "brand_button_text",
+      "label": "Button text",
+      "default": "Explore Collection"
+    },
+    {
+      "type": "color",
+      "id": "brand_bg_color",
+      "label": "Background color",
+      "default": "#f5f1ed"
+    },
+    {
+      "type": "color",
+      "id": "brand_text_color",
+      "label": "Text color",
+      "default": "#2c2c2c"
+    },
+    {
+      "type": "header",
+      "content": "Collection section"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_collection_section",
+      "label": "Show collection section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "collection_title",
+      "label": "Section title",
+      "default": "Yuki Collection"
+    },
+    {
+      "type": "text",
+      "id": "collection_subtitle",
+      "label": "Section subtitle",
+      "default": "The first line of Moakuzai products"
+    },
+    {
+      "type": "header",
+      "content": "Collection feature 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "collection_feature_1_enabled",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "collection_feature_1_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "collection_feature_1_category",
+      "label": "Category",
+      "default": "Yuki"
+    },
+    {
+      "type": "text",
+      "id": "collection_feature_1_title",
+      "label": "Title",
+      "default": "Signature Oak Furniture"
+    },
+    {
+      "type": "richtext",
+      "id": "collection_feature_1_description",
+      "label": "Description",
+      "default": "<p>Handcrafted pieces that blend traditional techniques with modern design.</p>"
+    },
+    {
+      "type": "url",
+      "id": "collection_feature_1_link",
+      "label": "Link"
+    },
+    {
+      "type": "text",
+      "id": "collection_feature_1_link_text",
+      "label": "Link text",
+      "default": "View collection"
+    },
+    {
+      "type": "header",
+      "content": "Collection feature 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "collection_feature_2_enabled",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "collection_feature_2_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "collection_feature_2_category",
+      "label": "Category",
+      "default": "Yuki"
+    },
+    {
+      "type": "text",
+      "id": "collection_feature_2_title",
+      "label": "Title",
+      "default": "Oak Dining Sets"
+    },
+    {
+      "type": "richtext",
+      "id": "collection_feature_2_description",
+      "label": "Description",
+      "default": "<p>Elegant dining solutions for modern homes.</p>"
+    },
+    {
+      "type": "url",
+      "id": "collection_feature_2_link",
+      "label": "Link"
+    },
+    {
+      "type": "text",
+      "id": "collection_feature_2_link_text",
+      "label": "Link text",
+      "default": "Explore"
+    },
+    {
+      "type": "header",
+      "content": "Collection feature 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "collection_feature_3_enabled",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "collection_feature_3_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "collection_feature_3_category",
+      "label": "Category",
+      "default": "Yuki"
+    },
+    {
+      "type": "text",
+      "id": "collection_feature_3_title",
+      "label": "Title",
+      "default": "Oak Tables"
+    },
+    {
+      "type": "richtext",
+      "id": "collection_feature_3_description",
+      "label": "Description",
+      "default": "<p>Timeless centerpieces.</p>"
+    },
+    {
+      "type": "url",
+      "id": "collection_feature_3_link",
+      "label": "Link"
+    },
+    {
+      "type": "text",
+      "id": "collection_feature_3_link_text",
+      "label": "Link text",
+      "default": "Shop now"
+    },
+    {
+      "type": "header",
+      "content": "Collection feature 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "collection_feature_4_enabled",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "collection_feature_4_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "collection_feature_4_category",
+      "label": "Category",
+      "default": "Yuki"
+    },
+    {
+      "type": "text",
+      "id": "collection_feature_4_title",
+      "label": "Title",
+      "default": "Oak Chairs"
+    },
+    {
+      "type": "richtext",
+      "id": "collection_feature_4_description",
+      "label": "Description",
+      "default": "<p>Comfort meets style.</p>"
+    },
+    {
+      "type": "url",
+      "id": "collection_feature_4_link",
+      "label": "Link"
+    },
+    {
+      "type": "text",
+      "id": "collection_feature_4_link_text",
+      "label": "Link text",
+      "default": "Discover"
+    },
+    {
+      "type": "header",
+      "content": "Collection feature 5"
+    },
+    {
+      "type": "checkbox",
+      "id": "collection_feature_5_enabled",
+      "label": "Enable",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "collection_feature_5_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "collection_feature_5_category",
+      "label": "Category",
+      "default": "Yuki"
+    },
+    {
+      "type": "text",
+      "id": "collection_feature_5_title",
+      "label": "Title",
+      "default": "Oak Accessories"
+    },
+    {
+      "type": "richtext",
+      "id": "collection_feature_5_description",
+      "label": "Description",
+      "default": "<p>Perfect finishing touches.</p>"
+    },
+    {
+      "type": "url",
+      "id": "collection_feature_5_link",
+      "label": "Link"
+    },
+    {
+      "type": "text",
+      "id": "collection_feature_5_link_text",
+      "label": "Link text",
+      "default": "View all"
+    },
+    {
+      "type": "header",
+      "content": "Additional features"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_additional_features",
+      "label": "Show additional features",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "feature_1_enabled",
+      "label": "Enable feature 1",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "feature_1_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "feature_1_category",
+      "label": "Category",
+      "default": "Craftsmanship"
+    },
+    {
+      "type": "text",
+      "id": "feature_1_title",
+      "label": "Title",
+      "default": "Artisan Quality"
+    },
+    {
+      "type": "richtext",
+      "id": "feature_1_description",
+      "label": "Description",
+      "default": "<p>Every piece is crafted with meticulous attention to detail.</p>"
+    },
+    {
+      "type": "url",
+      "id": "feature_1_link",
+      "label": "Link"
+    },
+    {
+      "type": "text",
+      "id": "feature_1_link_text",
+      "label": "Link text",
+      "default": "Learn more"
+    },
+    {
+      "type": "checkbox",
+      "id": "feature_2_enabled",
+      "label": "Enable feature 2",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "feature_2_image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "feature_2_category",
+      "label": "Category",
+      "default": "Sustainability"
+    },
+    {
+      "type": "text",
+      "id": "feature_2_title",
+      "label": "Title",
+      "default": "Eco-Friendly Materials"
+    },
+    {
+      "type": "richtext",
+      "id": "feature_2_description",
+      "label": "Description",
+      "default": "<p>Sustainably sourced oak for a better tomorrow.</p>"
+    },
+    {
+      "type": "url",
+      "id": "feature_2_link",
+      "label": "Link"
+    },
+    {
+      "type": "text",
+      "id": "feature_2_link_text",
+      "label": "Link text",
+      "default": "Read more"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 800,
+      "max": 1600,
+      "step": 100,
+      "unit": "px",
+      "label": "Maximum width",
+      "default": 1400
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "min": 8,
+      "max": 40,
+      "step": 4,
+      "unit": "px",
+      "label": "Grid gap",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 24,
+      "step": 2,
+      "unit": "px",
+      "label": "Border radius",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color",
+      "label": "Card background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#8b6f47"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button background",
+      "default": "#2c2c2c"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "button_hover_bg_color",
+      "label": "Button hover background",
+      "default": "#8b6f47"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Magazine brochure"
+    }
+  ]
+}
+{% endschema %}

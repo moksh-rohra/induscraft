@@ -1,0 +1,262 @@
+{%- comment -%}
+------------------------------------------------------------------------------
+  Section: Sticky WhatsApp Button
+  A floating circular WhatsApp CTA button fixed to the bottom-right corner.
+------------------------------------------------------------------------------
+{%- endcomment -%}
+
+{%- assign whatsapp_number = section.settings.whatsapp_number -%}
+{%- assign show_on_mobile  = section.settings.show_on_mobile -%}
+{%- assign show_on_desktop = section.settings.show_on_desktop -%}
+{%- assign show_after_scroll = section.settings.show_after_scroll -%}
+{%- assign scroll_distance  = section.settings.scroll_distance -%}
+
+{%- comment -%} Don't render if WhatsApp number missing {%- endcomment -%}
+{%- if whatsapp_number == blank -%}
+  {%- if request.design_mode -%}
+    <div style="text-align:center;padding:20px;opacity:0.5;">
+      <p>Sticky WhatsApp Button: Please add WhatsApp number in section settings.</p>
+    </div>
+  {%- endif -%}
+  {%- break -%}
+{%- endif -%}
+
+{%- style -%}
+  /* ---- Sticky WhatsApp Button Section ---- */
+  .sticky-whatsapp-btn-section-{{ section.id }} {
+    position: fixed;
+    z-index: 998;
+    bottom: {{ section.settings.offset_bottom }}px;
+    right: {{ section.settings.offset_side }}px;
+    transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease, bottom 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Visibility by device */
+  {% unless show_on_desktop %}
+    @media (min-width: 768px) {
+      .sticky-whatsapp-btn-section-{{ section.id }} {
+        display: none !important;
+      }
+    }
+  {% endunless %}
+
+  {% unless show_on_mobile %}
+    @media (max-width: 767.98px) {
+      .sticky-whatsapp-btn-section-{{ section.id }} {
+        display: none !important;
+      }
+    }
+  {% endunless %}
+
+  /* Mobile positioning */
+  @media (max-width: 767.98px) {
+    .sticky-whatsapp-btn-section-{{ section.id }} {
+      bottom: {{ section.settings.offset_bottom_mobile }}px;
+      right: {{ section.settings.offset_side_mobile }}px;
+    }
+  }
+
+  /* Show after scroll */
+  {% if show_after_scroll %}
+    .sticky-whatsapp-btn-section-{{ section.id }}.is-hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translateY(20px);
+    }
+    .sticky-whatsapp-btn-section-{{ section.id }}.is-visible {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+  {% endif %}
+
+  /* Button styling - circular with only logo */
+  .sticky-whatsapp-btn-section-{{ section.id }} .whatsapp-btn__link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    min-width: 56px;
+    min-height: 56px;
+    border-radius: 50%;
+    background-color: #25D366;
+    color: #ffffff;
+    fill: #ffffff;
+    text-decoration: none;
+    border: none;
+    padding: 0;
+    box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .sticky-whatsapp-btn-section-{{ section.id }} .whatsapp-btn__link:hover {
+    background-color: #20BA5A;
+    box-shadow: 0 6px 25px rgba(37, 211, 102, 0.6);
+    transform: scale(1.1);
+  }
+
+  .sticky-whatsapp-btn-section-{{ section.id }} .whatsapp-btn__link svg,
+  .sticky-whatsapp-btn-section-{{ section.id }} .whatsapp-btn__link img {
+    width: 28px;
+    height: 28px;
+  }
+
+  /* Shift up when sticky add-to-cart is showing */
+  body.sticky-atc-active .sticky-whatsapp-btn-section-{{ section.id }} {
+    bottom: calc({{ section.settings.offset_bottom }}px + 70px);
+  }
+
+  @media (max-width: 767.98px) {
+    body.sticky-atc-active .sticky-whatsapp-btn-section-{{ section.id }} {
+      bottom: calc({{ section.settings.offset_bottom_mobile }}px + 70px);
+    }
+  }
+{%- endstyle -%}
+
+<div
+  class="sticky-whatsapp-btn-section-{{ section.id }} {% if show_after_scroll %}is-hidden{% endif %}"
+  data-sticky-whatsapp-btn-section
+  {% if show_after_scroll %}
+    data-scroll-show="true"
+    data-scroll-distance="{{ scroll_distance }}"
+  {% endif %}
+>
+  <a
+    href="https://api.whatsapp.com/send?phone={{ whatsapp_number | remove: ' ' | remove: '-' | remove: '(' | remove: ')' }}&text={{ section.settings.message | url_encode }}"
+    class="whatsapp-btn__link"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Contact us on WhatsApp"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.413-2.393-1.476-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-4.946 1.348l-.354.214-3.675-.964.984 3.595-.235.374a9.847 9.847 0 001.438 5.825c1.74 2.682 5.045 4.426 8.594 4.426 2.396 0 4.651-.822 6.469-2.463 1.817-1.64 2.825-3.87 2.825-6.191 0-4.697-3.359-8.514-7.738-8.514z" />
+    </svg>
+  </a>
+</div>
+
+{% if show_after_scroll %}
+<script>
+  (function() {
+    var section = document.querySelector('.sticky-whatsapp-btn-section-{{ section.id }}');
+    if (!section) return;
+    var distance = parseInt(section.getAttribute('data-scroll-distance'), 10) || 200;
+    function onScroll() {
+      if (window.scrollY >= distance) {
+        section.classList.remove('is-hidden');
+        section.classList.add('is-visible');
+      } else {
+        section.classList.add('is-hidden');
+        section.classList.remove('is-visible');
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+</script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Sticky WhatsApp Button",
+  "settings": [
+    {
+      "type": "header",
+      "content": "WhatsApp Settings"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_number",
+      "label": "WhatsApp Number",
+      "placeholder": "+1234567890",
+      "info": "Include country code without spaces or symbols"
+    },
+    {
+      "type": "text",
+      "id": "message",
+      "label": "Default message",
+      "default": "Hello! I'm interested in your products.",
+      "info": "Message that appears when user clicks the button"
+    },
+    {
+      "type": "header",
+      "content": "Position"
+    },
+    {
+      "type": "range",
+      "id": "offset_bottom",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Distance from bottom (Desktop)",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "offset_side",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Distance from right (Desktop)",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "offset_bottom_mobile",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Distance from bottom (Mobile)",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "offset_side_mobile",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Distance from right (Mobile)",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Display"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_on_mobile",
+      "label": "Show on mobile",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_on_desktop",
+      "label": "Show on desktop",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_after_scroll",
+      "label": "Show after scroll",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "scroll_distance",
+      "min": 0,
+      "max": 1000,
+      "step": 100,
+      "unit": "px",
+      "label": "Scroll distance to show button",
+      "default": 200
+    }
+  ]
+}
+{% endschema %}

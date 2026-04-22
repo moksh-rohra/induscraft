@@ -1,0 +1,283 @@
+/* ============================================================
+   Newsletter Section — Minimal Modern Design
+   ============================================================ */
+
+.newsletter-section {
+  position: relative;
+  background: var(--ns-bg);
+  overflow: hidden;
+}
+
+/* ---- Inner / Content ---- */
+.newsletter-section__inner {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 640px;
+  padding: 60px 20px;
+  margin: 0 auto;
+}
+
+/* ---- Badge ---- */
+.newsletter-section__badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ns-accent);
+  border: 1px solid var(--ns-accent);
+  border-radius: 100px;
+  padding: 4px 14px;
+  margin-bottom: 20px;
+}
+
+/* ---- Heading ---- */
+.newsletter-section__heading {
+  color: var(--ns-heading);
+  font-size: clamp(1.6rem, 3.5vw, 2.75rem);
+  line-height: 1.15;
+  margin: 0 0 14px;
+  letter-spacing: -0.02em;
+}
+
+/* ---- Subtext ---- */
+.newsletter-section__subtext {
+  color: var(--ns-subtext);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0 0 36px;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ---- Form ---- */
+.newsletter-section__form {
+  width: 100%;
+}
+
+.newsletter-section__field-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--ns-input-bg);
+  border: 1px solid var(--ns-input-border);
+  border-radius: 100px;
+  padding: 6px 6px 6px 22px;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.newsletter-section__field-wrap:focus-within {
+  border-color: var(--ns-accent);
+  box-shadow: 0 0 0 3px rgba(200, 169, 126, 0.15);
+}
+
+/* ---- Input — no underline, no theme overrides ---- */
+.newsletter-section__input,
+.newsletter-section__input:focus,
+.newsletter-section__input:active {
+  flex: 1;
+  background: transparent !important;
+  border: none !important;
+  border-bottom: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  color: var(--ns-input-text);
+  font-size: 0.9rem;
+  padding: 8px 0;
+  margin: 0 !important;
+  margin-bottom: 0 !important;
+  min-width: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.newsletter-section__input::placeholder {
+  color: var(--ns-subtext);
+  opacity: 0.7;
+}
+
+/* ---- Theme button tweaks inside form ---- */
+.newsletter-section__btn.button-new {
+  flex-shrink: 0;
+  white-space: nowrap;
+  margin: 0;
+}
+
+/* ---- Error / Success ---- */
+.newsletter-section__error {
+  color: #e05f5f;
+  font-size: 0.82rem;
+  margin-top: 10px;
+}
+
+.newsletter-section__success {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--ns-accent);
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 16px 0;
+}
+
+/* ---- Privacy note ---- */
+.newsletter-section__privacy {
+  color: var(--ns-subtext);
+  font-size: 0.78rem;
+  margin-top: 14px;
+  opacity: 0.7;
+}
+
+/* ============================================================
+   Decorative Elements
+   ============================================================ */
+
+.newsletter-section__deco {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.newsletter-section__deco-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid var(--ns-accent);
+  opacity: 0.08;
+}
+
+.newsletter-section__deco-ring--1 {
+  width: 420px;
+  height: 420px;
+  top: -120px;
+  left: -100px;
+}
+
+.newsletter-section__deco-ring--2 {
+  width: 300px;
+  height: 300px;
+  bottom: -100px;
+  right: -60px;
+  opacity: 0.05;
+}
+
+.newsletter-section__deco-dot {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--ns-accent);
+}
+
+.newsletter-section__deco-dot--1 {
+  width: 6px;
+  height: 6px;
+  top: 18%;
+  right: 12%;
+  opacity: 0.4;
+}
+
+.newsletter-section__deco-dot--2 {
+  width: 4px;
+  height: 4px;
+  bottom: 22%;
+  left: 8%;
+  opacity: 0.25;
+}
+
+.newsletter-section__deco-dot--3 {
+  width: 8px;
+  height: 8px;
+  top: 55%;
+  right: 5%;
+  opacity: 0.15;
+}
+
+/* ============================================================
+   Responsive Breakpoints
+   ============================================================ */
+
+/* Tablet landscape and up (992px+) — full side-by-side pill */
+@media (min-width: 992px) {
+  .newsletter-section__inner {
+    max-width: 680px;
+  }
+}
+
+/* Tablet portrait (768px–991px) */
+@media (min-width: 768px) and (max-width: 991px) {
+  .newsletter-section__inner {
+    max-width: 600px;
+    padding: 60px 24px;
+  }
+
+  .newsletter-section__heading {
+    font-size: 1.9rem;
+  }
+}
+
+/* Small tablet / large mobile (481px–767px) */
+@media (min-width: 481px) and (max-width: 767px) {
+  .newsletter-section__inner {
+    max-width: 100%;
+    padding: 48px 24px;
+  }
+
+  .newsletter-section__heading {
+    font-size: 1.7rem;
+  }
+
+  .newsletter-section__field-wrap {
+    padding: 6px 6px 6px 18px;
+  }
+}
+
+/* Mobile (max 480px) — stack vertically */
+@media (max-width: 480px) {
+  .newsletter-section__inner {
+    padding: 40px 16px;
+  }
+
+  .newsletter-section__heading {
+    font-size: 1.5rem;
+  }
+
+  .newsletter-section__subtext {
+    font-size: 0.88rem;
+  }
+
+  .newsletter-section__field-wrap {
+    flex-direction: column;
+    border-radius: 16px;
+    padding: 14px 16px;
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  .newsletter-section__input,
+  .newsletter-section__input:focus {
+    width: 100%;
+    font-size: 1rem;
+    padding: 4px 0;
+    text-align: center;
+  }
+
+  .newsletter-section__btn.button-new {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Shrink decorative rings on mobile */
+  .newsletter-section__deco-ring--1 {
+    width: 260px;
+    height: 260px;
+    top: -80px;
+    left: -80px;
+  }
+
+  .newsletter-section__deco-ring--2 {
+    width: 200px;
+    height: 200px;
+  }
+}

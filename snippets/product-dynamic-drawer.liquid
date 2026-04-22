@@ -1,0 +1,40 @@
+{%- comment -%}
+  Snippet: Product Dynamic Drawer
+  Renders a toggle button for a drawer whose content comes from a product metafield.
+  Used inside the block loop in product-form.liquid.
+{%- endcomment -%}
+
+{%- assign design = settings.design -%}
+{%- assign dd_label   = block.settings.button_label -%}
+{%- assign dd_heading  = block.settings.drawer_heading -%}
+{%- assign dd_content  = block.settings.drawer_content -%}
+
+{%- if dd_label != blank and dd_content != blank -%}
+  {%- capture icon_arrow -%}
+    {%- if design == 'alternate' -%}
+      <span class="button-link-new__icon-wrapper">
+        <span class="button-link-new__icon">
+          {% render 'icons-new', icon: 'arrow-right' %}
+        </span>
+      </span>
+    {%- else -%}
+      {% include 'icons-small', icon: 'arrow-right' %}
+    {%- endif -%}
+  {%- endcapture -%}
+
+  {%- assign toggle_id = 'DynamicDrawer-' | append: block.id -%}
+
+  <div class="{% if design == 'alternate' %}product-drawers-new{% else %}product-drawers{% endif %}" {{ block.shopify_attributes }}>
+    <div class="product-drawers__item">
+      <button
+        type="button"
+        class="product-drawers__item-toggle {% if design == 'alternate' %}button-link-new{% endif %}"
+        data-target="{{ toggle_id }}"
+        data-js-toggle="{{ toggle_id }}"
+      >
+        {{- dd_label -}}
+        {{- icon_arrow -}}
+      </button>
+    </div>
+  </div>
+{%- endif -%}

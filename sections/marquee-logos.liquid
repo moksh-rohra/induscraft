@@ -1,0 +1,467 @@
+{% style %}
+    #shopify-section-{{ section.id }} {
+        {% if section.settings.enable_transparent_bg %}
+            background-color: transparent;
+        {% else %}
+            background-color: {{ section.settings.background_color }};
+        {% endif %}
+        padding-top: {{ section.settings.padding_top_mobile }}px;
+        padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+        overflow: hidden;
+    }
+
+    @media screen and (min-width: 768px) {
+        #shopify-section-{{ section.id }} {
+            padding-top: {{ section.settings.padding_top_desktop }}px;
+            padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+        }
+    }
+
+    .marquee-wrapper {
+        display: flex;
+        overflow: hidden;
+        user-select: none;
+        width: 100%;
+    }
+
+    .marquee-track {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        /* Speed moves the track from 0 to -100% of itself (which is -50% of total width if duplicated once, 
+           but to be safer with different screen widths, we often use -100% of the single set width).
+           However, simplest CSS infinite scroll of arbitrary width content:
+           1. Two identical sets.
+           2. Animate translateX from 0 to -50%.
+        */
+        gap: {{ section.settings.gap_mobile }}px;
+        animation: marquee-scroll {{ section.settings.speed }}s linear infinite;
+        min-width: 100%;
+    }
+    
+    /* Make sure the second track follows immediately with same gap */
+    .marquee-track + .marquee-track {
+        margin-left: {{ section.settings.gap_mobile }}px;
+    }
+
+    .marquee-logo {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .marquee-logo a, .marquee-logo img {
+        display: block;
+        height: auto;
+    }
+
+    .marquee-logo img {
+        height: {{ section.settings.logo_height_mobile }}px;
+        width: auto;
+        object-fit: contain;
+        max-width: none; /* Prevent constraint */
+        background-color: {{ section.settings.logo_background }};
+        border-radius: {{ section.settings.logo_radius }}px;
+        padding: {% if section.settings.logo_background != 'rgba(0,0,0,0)' and section.settings.logo_background != blank %}10px{% else %}0{% endif %};
+    }
+
+    /* Pause on hover option */
+    {% if section.settings.pause_on_hover %}
+    .marquee-wrapper:hover .marquee-track {
+        animation-play-state: paused;
+    }
+    {% endif %}
+
+    @keyframes marquee-scroll {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(calc(-100% - {{ section.settings.gap_mobile }}px)); 
+        }
+    }
+
+    @media (min-width: 768px) {
+        .marquee-track {
+            gap: {{ section.settings.gap_desktop }}px;
+        }
+        
+        .marquee-track + .marquee-track {
+            margin-left: {{ section.settings.gap_desktop }}px;
+        }
+
+        .marquee-logo img {
+            height: {{ section.settings.logo_height_desktop }}px;
+        }
+
+        @keyframes marquee-scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(-100% - {{ section.settings.gap_desktop }}px));
+            }
+        }
+    }
+    
+    /* Marquee Header */
+    .marquee-header {
+        text-align: center;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 0 20px;
+        margin-bottom: 30px;
+    }
+    
+    .marquee-heading {
+        font-family: var(--heading-font-family);
+        font-size: {{ section.settings.heading_size_mobile }}px;
+        font-weight: 600;
+        color: {{ section.settings.heading_color }};
+        margin: 0 0 10px 0;
+        line-height: 1.2;
+    }
+    
+    .marquee-description {
+        font-size: {{ section.settings.description_size_mobile }}px;
+        color: {{ section.settings.description_color }};
+        margin: 0;
+        line-height: 1.6;
+    }
+    
+    @media (min-width: 768px) {
+        .marquee-header {
+            margin-bottom: 40px;
+        }
+        
+        .marquee-heading {
+            font-size: {{ section.settings.heading_size_desktop }}px;
+        }
+        
+        .marquee-description {
+            font-size: {{ section.settings.description_size_desktop }}px;
+        }
+    }
+{% endstyle %}
+
+<div class="marquee-section">
+    {%- if section.settings.heading != blank or section.settings.description != blank -%}
+        <div class="marquee-header">
+            {%- if section.settings.heading != blank -%}
+                <h2 class="marquee-heading">{{ section.settings.heading }}</h2>
+            {%- endif -%}
+            {%- if section.settings.description != blank -%}
+                <p class="marquee-description">{{ section.settings.description }}</p>
+            {%- endif -%}
+        </div>
+    {%- endif -%}
+    
+    <div class="marquee-wrapper">
+        <!-- Track 1 -->
+        <div class="marquee-track">
+            {% for block in section.blocks %}
+                <div class="marquee-logo" {{ block.shopify_attributes }}>
+                    {% if block.settings.link != blank %}
+                        <a href="{{ block.settings.link }}">
+                    {% endif %}
+                    
+                    {% if block.settings.image != blank %}
+                        {{ block.settings.image | image_url: height: section.settings.logo_height_desktop | image_tag: loading: 'lazy', alt: block.settings.image.alt }}
+                    {% else %}
+                        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                    {% endif %}
+
+                    {% if block.settings.link != blank %}
+                        </a>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Track 2 (Duplicate for continuous loop) -->
+        <div class="marquee-track" aria-hidden="true">
+            {% for block in section.blocks %}
+                <div class="marquee-logo">
+                    {% if block.settings.link != blank %}
+                        <a href="{{ block.settings.link }}" tabindex="-1">
+                    {% endif %}
+                    
+                    {% if block.settings.image != blank %}
+                        {{ block.settings.image | image_url: height: section.settings.logo_height_desktop | image_tag: loading: 'lazy', alt: block.settings.image.alt }}
+                    {% else %}
+                        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                    {% endif %}
+
+                    {% if block.settings.link != blank %}
+                        </a>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+        
+        <!-- Track 3 (Extra safety for very wide screens/few logos) -->
+        <div class="marquee-track" aria-hidden="true">
+            {% for block in section.blocks %}
+                <div class="marquee-logo">
+                    {% if block.settings.link != blank %}
+                        <a href="{{ block.settings.link }}" tabindex="-1">
+                    {% endif %}
+                    
+                    {% if block.settings.image != blank %}
+                        {{ block.settings.image | image_url: height: section.settings.logo_height_desktop | image_tag: loading: 'lazy', alt: block.settings.image.alt }}
+                    {% else %}
+                        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+                    {% endif %}
+
+                    {% if block.settings.link != blank %}
+                        </a>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% schema %}
+{
+    "name": "Marquee Logos",
+    "settings": [
+        {
+            "type": "header",
+            "content": "Heading & Description"
+        },
+        {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading"
+        },
+        {
+            "type": "textarea",
+            "id": "description",
+            "label": "Description"
+        },
+        {
+            "type": "color",
+            "id": "heading_color",
+            "label": "Heading Color",
+            "default": "#2C2A28"
+        },
+        {
+            "type": "range",
+            "id": "heading_size_desktop",
+            "min": 18,
+            "max": 60,
+            "step": 2,
+            "unit": "px",
+            "label": "Heading Size (Desktop)",
+            "default": 32
+        },
+        {
+            "type": "range",
+            "id": "heading_size_mobile",
+            "min": 16,
+            "max": 40,
+            "step": 2,
+            "unit": "px",
+            "label": "Heading Size (Mobile)",
+            "default": 24
+        },
+        {
+            "type": "color",
+            "id": "description_color",
+            "label": "Description Color",
+            "default": "#666666"
+        },
+        {
+            "type": "range",
+            "id": "description_size_desktop",
+            "min": 12,
+            "max": 24,
+            "step": 1,
+            "unit": "px",
+            "label": "Description Size (Desktop)",
+            "default": 16
+        },
+        {
+            "type": "range",
+            "id": "description_size_mobile",
+            "min": 12,
+            "max": 20,
+            "step": 1,
+            "unit": "px",
+            "label": "Description Size (Mobile)",
+            "default": 14
+        },
+        {
+            "type": "header",
+            "content": "Background"
+        },
+        {
+            "type": "color",
+            "id": "background_color",
+            "label": "Background Color",
+            "default": "#f5f5f5"
+        },
+        {
+            "type": "checkbox",
+            "id": "enable_transparent_bg",
+            "label": "Enable Transparent Background",
+            "default": false
+        },
+        {
+            "type": "range",
+            "id": "speed",
+            "min": 5,
+            "max": 60,
+            "step": 1,
+            "unit": "s",
+            "label": "Animation Speed",
+            "default": 20,
+            "info": "Lower is faster"
+        },
+        {
+            "type": "checkbox",
+            "id": "pause_on_hover",
+            "label": "Pause on hover",
+            "default": true
+        },
+        {
+            "type": "header",
+            "content": "Logo Settings"
+        },
+        {
+            "type": "range",
+            "id": "logo_height_desktop",
+            "min": 20,
+            "max": 150,
+            "step": 2,
+            "unit": "px",
+            "label": "Logo Height (Desktop)",
+            "default": 60
+        },
+        {
+            "type": "range",
+            "id": "logo_height_mobile",
+            "min": 20,
+            "max": 100,
+            "step": 2,
+            "unit": "px",
+            "label": "Logo Height (Mobile)",
+            "default": 40
+        },
+        {
+            "type": "color",
+            "id": "logo_background",
+            "label": "Logo Background Color",
+            "default": "transparent"
+        },
+        {
+            "type": "range",
+            "id": "logo_radius",
+            "min": 0,
+            "max": 50,
+            "step": 2,
+            "unit": "px",
+            "label": "Logo Border Radius",
+            "default": 0
+        },
+        {
+            "type": "range",
+            "id": "gap_desktop",
+            "min": 20,
+            "max": 200,
+            "step": 5,
+            "unit": "px",
+            "label": "Space between logos (Desktop)",
+            "default": 80
+        },
+        {
+            "type": "range",
+            "id": "gap_mobile",
+            "min": 10,
+            "max": 100,
+            "step": 5,
+            "unit": "px",
+            "label": "Space between logos (Mobile)",
+            "default": 40
+        },
+        {
+            "type": "header",
+            "content": "Padding"
+        },
+        {
+            "type": "range",
+            "id": "padding_top_desktop",
+            "min": 0,
+            "max": 100,
+            "step": 4,
+            "unit": "px",
+            "label": "Padding Top (Desktop)",
+            "default": 40
+        },
+        {
+            "type": "range",
+            "id": "padding_bottom_desktop",
+            "min": 0,
+            "max": 100,
+            "step": 4,
+            "unit": "px",
+            "label": "Padding Bottom (Desktop)",
+            "default": 40
+        },
+        {
+            "type": "range",
+            "id": "padding_top_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 4,
+            "unit": "px",
+            "label": "Padding Top (Mobile)",
+            "default": 20
+        },
+        {
+            "type": "range",
+            "id": "padding_bottom_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 4,
+            "unit": "px",
+            "label": "Padding Bottom (Mobile)",
+            "default": 20
+        }
+    ],
+    "blocks": [
+        {
+            "type": "logo",
+            "name": "Logo",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Logo Image"
+                },
+                {
+                    "type": "url",
+                    "id": "link",
+                    "label": "Link (Optional)"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Marquee Logos",
+            "category": "Image",
+            "blocks": [
+                { "type": "logo" },
+                { "type": "logo" },
+                { "type": "logo" },
+                { "type": "logo" },
+                { "type": "logo" }
+            ]
+        }
+    ]
+}
+{% endschema %}

@@ -1,0 +1,231 @@
+{{ 'big-stagger-text.css' | asset_url | stylesheet_tag }}
+
+<section 
+  id="big-stagger-text-{{ section.id }}" 
+  class="big-stagger-text"
+  style="
+    --bg-color: {{ section.settings.bg_color }};
+    --pt-d: {{ section.settings.padding_top_d }}px;
+    --pb-d: {{ section.settings.padding_bottom_d }}px;
+    --pt-m: {{ section.settings.padding_top_m }}px;
+    --pb-m: {{ section.settings.padding_bottom_m }}px;
+  "
+>
+  <div class="big-stagger-text__container">
+    {%- for block in section.blocks -%}
+      <div class="big-stagger-text__item" {{ block.shopify_attributes }}
+        style="
+          --text-color: {{ block.settings.text_color }};
+          --font-size-d: {{ block.settings.font_size_d }}px;
+          --font-size-m: {{ block.settings.font_size_m }}px;
+          --text-align: {{ block.settings.text_align }};
+          --font-weight: {% if block.settings.is_bold %}bold{% else %}normal{% endif %};
+        "
+      >
+        <h2 class="big-stagger-text__heading {% if block.settings.use_theme_font %}font-body{% else %}font-bristone{% endif %}">
+          {{ block.settings.text }}
+        </h2>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/SplitText.min.js" defer></script>
+
+<script>
+  (function() {
+    function initBigStaggerText() {
+      if(typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+      gsap.registerPlugin(ScrollTrigger);
+      if(typeof SplitText !== 'undefined') {
+          gsap.registerPlugin(SplitText);
+      }
+
+      const sectionId = '{{ section.id }}';
+      const container = document.getElementById(`big-stagger-text-${sectionId}`);
+      if(!container) return;
+      
+      if(container.dataset.init === "true") return;
+      container.dataset.init = "true";
+
+      const items = container.querySelectorAll(".big-stagger-text__item");
+
+      items.forEach((item) => {
+          const heading = item.querySelector("h2");
+
+          if(typeof SplitText !== 'undefined' && heading) {
+              const split = new SplitText(heading, {
+                  type: "words, chars",
+                  wordsClass: "word",
+                  charsClass: "char"
+              });
+              
+              // Initial state: push characters down
+              gsap.set(split.chars, { y: "125%" });
+              
+              split.chars.forEach((char, index) => {
+                  ScrollTrigger.create({
+                      trigger: item, // Use the item wrapper as trigger
+                      // Adjust start/end based on index for staggered effect relative to scroll position
+                      start: `top+=${index * 10 - 200} 70%`, 
+                      end: `top+=${index * 10} 70%`,
+                      scrub: 1,
+                      invalidateOnRefresh: true,
+                      animation: gsap.to(char, {
+                          y: "0%",
+                          ease: "none"
+                      })
+                  });
+              });
+          }
+      });
+      
+      ScrollTrigger.refresh();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener("DOMContentLoaded", initBigStaggerText);
+    } else {
+      initBigStaggerText();
+    }
+    
+    window.addEventListener("load", () => ScrollTrigger.refresh());
+    window.addEventListener("resize", () => ScrollTrigger.refresh());
+
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Big Stagger Text",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#141414"
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_d",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Top (Desktop)",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_d",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Bottom (Desktop)",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding_top_m",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Top (Mobile)",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_m",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Bottom (Mobile)",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text_block",
+      "name": "Text Block",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Text",
+          "default": "STAGGER TEXT"
+        },
+        {
+          "type": "color",
+          "id": "text_color",
+          "label": "Text Color",
+          "default": "#FFFFFF"
+        },
+        {
+            "type": "range",
+            "id": "font_size_d",
+            "min": 20,
+            "max": 200,
+            "step": 5,
+            "unit": "px",
+            "label": "Font Size (Desktop)",
+            "default": 120
+        },
+        {
+            "type": "range",
+            "id": "font_size_m",
+            "min": 16,
+            "max": 100,
+            "step": 2,
+            "unit": "px",
+            "label": "Font Size (Mobile)",
+            "default": 48
+        },
+        {
+            "type": "checkbox",
+            "id": "use_theme_font",
+            "label": "Use Theme Default Font",
+            "default": false,
+            "info": "If unchecked, uses 'Bristone' font."
+        },
+        {
+            "type": "select",
+            "id": "text_align",
+            "label": "Alignment",
+            "options": [
+                { "value": "left", "label": "Left" },
+                { "value": "center", "label": "Center" },
+                { "value": "right", "label": "Right" }
+            ],
+            "default": "center"
+        },
+        {
+            "type": "checkbox",
+            "id": "is_bold",
+            "label": "Bold Text",
+            "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Big Stagger Text",
+      "blocks": [
+        { "type": "text_block", "settings": { "text": "BIG TEXT" } },
+        { "type": "text_block", "settings": { "text": "ANIMATION" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

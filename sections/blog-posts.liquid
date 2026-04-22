@@ -1,0 +1,285 @@
+{% comment %}
+	- Blog Post Section
+	- Renders a full blog post with right sidebar
+	- Highly customizable via theme editor
+	- Responsive, accessible, SEO-friendly
+{% endcomment %}
+
+{% assign blog_post = article %}
+{% assign blog_obj = blog %}
+{% assign post_obj = blog_post | default: blog.articles.first %}
+
+<section id="shopify-section-{{ section.id }}" class="cbp2-section" style="background: {{ section.settings.background_color }}; color: {{ section.settings.text_color }}; padding-top: {{ section.settings.section_padding_top }}px; padding-bottom: {{ section.settings.section_padding_bottom }}px;">
+	<div class="cbp2-container cbp2-layout-{{ section.settings.layout_style }}" style="--cbp2-gutter: {{ section.settings.gutter_space }}px;">
+		<div class="cbp2-main" style="max-width: {{ section.settings.content_max_width }}px;">
+			<article class="cbp2-article" itemscope itemtype="https://schema.org/Article">
+				<header class="cbp2-article__header">
+					<h1 class="cbp2-article__title" itemprop="headline">{{ post_obj.title }}</h1>
+					{% if section.settings.show_meta %}
+						<div class="cbp2-article__meta">
+							<span class="cbp2-article__date" itemprop="datePublished">{{ post_obj.published_at | date: section.settings.date_format }}</span>
+							{% if post_obj.author %}
+								<span class="cbp2-article__author">by <a href="{{ routes.search_url }}?q=author:{{ post_obj.author | url_encode }}" rel="author" itemprop="author">{{ post_obj.author }}</a></span>
+							{% endif %}
+							{% if post_obj.tags.size > 0 %}
+								<span class="cbp2-article__category">in <a href="/blogs/{{ blog_obj.handle }}/tagged/{{ post_obj.tags.first | handleize }}">{{ post_obj.tags.first }}</a></span>
+							{% endif %}
+						</div>
+					{% endif %}
+				</header>
+				<figure class="cbp2-article__hero">
+					{% assign hero_img = section.blocks | where: 'type', 'hero_image' | first %}
+					{% if hero_img.settings.image != blank %}
+						<img src="{{ hero_img.settings.image | image_url: width: 1200 }}" alt="{{ hero_img.settings.hero_alt_text | escape }}" width="1200" height="auto" loading="{% if section.settings.enable_lazyload %}lazy{% else %}auto{% endif %}" class="cbp2-article__hero-img" itemprop="image">
+						{% if section.settings.show_hero_caption and hero_img.settings.hero_alt_text != blank %}
+							<figcaption class="cbp2-article__hero-caption">{{ hero_img.settings.hero_alt_text }}</figcaption>
+						{% endif %}
+					{% elsif post_obj.image %}
+						<img src="{{ post_obj.image | image_url: width: 1200 }}" alt="{{ post_obj.title | escape }}" width="1200" height="auto" loading="{% if section.settings.enable_lazyload %}lazy{% else %}auto{% endif %}" class="cbp2-article__hero-img" itemprop="image">
+						{% if section.settings.show_hero_caption and post_obj.excerpt != blank %}
+							<figcaption class="cbp2-article__hero-caption">{{ post_obj.excerpt }}</figcaption>
+						{% endif %}
+					{% endif %}
+				</figure>
+				<div class="cbp2-article__content" itemprop="articleBody">
+					{{ post_obj.content }}
+				</div>
+				<hr class="cbp2-article__divider">
+				{% if section.settings.enable_comments %}
+					<div class="cbp2-comments">
+						{% case section.settings.comment_provider %}
+							{% when 'shopify' %}
+								{% form 'new_comment', post_obj %}
+									<input type="text" name="comment[author]" placeholder="{{ section.settings.comment_placeholder_name }}" required class="cbp2-input">
+									<input type="email" name="comment[email]" placeholder="{{ section.settings.comment_placeholder_email }}" required class="cbp2-input">
+									<textarea name="comment[body]" placeholder="{{ section.settings.comment_placeholder_message }}" required class="cbp2-input"></textarea>
+									<button type="submit" class="cbp2-btn">Submit</button>
+								{% endform %}
+							{% when 'disqus' %}
+								<div id="disqus_thread"></div>
+								<script>
+									var disqus_config = function () {
+										this.page.url = '{{ shop.url }}{{ post_obj.url }}';
+										this.page.identifier = '{{ post_obj.id }}';
+									};
+									(function() {
+										var d = document, s = d.createElement('script');
+										s.src = 'https://{{ section.settings.comment_endpoint | default: 'EXAMPLE' }}.disqus.com/embed.js';
+										s.setAttribute('data-timestamp', +new Date());
+										(d.head || d.body).appendChild(s);
+									})();
+								</script>
+							{% when 'custom' %}
+								<form action="{{ section.settings.comment_endpoint }}" method="post" class="cbp2-comments__custom">
+									<input type="text" name="name" placeholder="{{ section.settings.comment_placeholder_name }}" required class="cbp2-input">
+									<input type="email" name="email" placeholder="{{ section.settings.comment_placeholder_email }}" required class="cbp2-input">
+									<textarea name="message" placeholder="{{ section.settings.comment_placeholder_message }}" required class="cbp2-input"></textarea>
+									<button type="submit" class="cbp2-btn">Submit</button>
+								</form>
+						{% endcase %}
+					</div>
+				{% endif %}
+			</article>
+		</div>
+		<aside class="cbp2-sidebar">
+			{% if section.settings.show_search %}
+				<div class="cbp2-sidebar__search">
+					<form action="{{ routes.search_url }}" method="get" role="search">
+						<input type="search" name="q" class="cbp2-input cbp2-input--search" placeholder="Search..." aria-label="Search blog">
+						<button type="submit" class="cbp2-btn cbp2-btn--search" aria-label="Search"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2" fill="none"/><line x1="21" y1="21" x2="16.65" y2="16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+					</form>
+				</div>
+			{% endif %}
+			{% if section.settings.categories_menu != blank %}
+				<div class="cbp2-sidebar__categories">
+					<h3 class="cbp2-sidebar__heading">Categories</h3>
+					<ul class="cbp2-list">
+						{% assign cat_menu = linklists[section.settings.categories_menu] %}
+						{% for link in cat_menu.links %}
+							<li><a href="{{ link.url }}">{{ link.title }}</a></li>
+						{% endfor %}
+					</ul>
+				</div>
+			{% endif %}
+			<div class="cbp2-sidebar__recent-posts">
+				<h3 class="cbp2-sidebar__heading">Recent Posts</h3>
+				<ul class="cbp2-list">
+					{% for recent in blog.articles limit: 5 %}
+						<li class="cbp2-recent">
+							<a href="{{ recent.url }}" class="cbp2-recent__link">
+								{% if recent.image %}
+									<img src="{{ recent.image | image_url: width: 200 }}" alt="{{ recent.title | escape }}" width="70" height="70" loading="{% if section.settings.enable_lazyload %}lazy{% else %}auto{% endif %}" class="cbp2-recent__img">
+								{% endif %}
+								<div class="cbp2-recent__meta">
+									<span class="cbp2-recent__title">{{ recent.title }}</span>
+									<span class="cbp2-recent__date">{{ recent.published_at | date: section.settings.date_format }}</span>
+								</div>
+							</a>
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+			{% if section.settings.show_popular_products and section.settings.popular_products.size > 0 %}
+				<div class="cbp2-sidebar__products">
+					<h3 class="cbp2-sidebar__heading">Popular Products</h3>
+					<div class="cbp2-products">
+						{% for product in section.settings.popular_products limit: 6 %}
+							{% assign prod = all_products[product] %}
+							{% if prod %}
+								<div class="cbp2-product-card">
+									<a href="{{ prod.url }}" class="cbp2-product-card__img-wrap">
+										<img src="{{ prod.featured_image | image_url: width: 200 }}" alt="{{ prod.title | escape }}" width="56" height="56" loading="{% if section.settings.enable_lazyload %}lazy{% else %}auto{% endif %}">
+									</a>
+									<div class="cbp2-product-card__info">
+										<a href="{{ prod.url }}" class="cbp2-product-card__title">{{ prod.title | truncate: 40 }}</a>
+										<div class="cbp2-product-card__price">{{ prod.price | money }}</div>
+										{% if prod.metafields.reviews.rating %}
+											<div class="cbp2-product-card__rating">&#9733; {{ prod.metafields.reviews.rating }}/5</div>
+										{% endif %}
+									</div>
+								</div>
+							{% endif %}
+						{% endfor %}
+					</div>
+				</div>
+			{% endif %}
+			{% if section.settings.promo_image != blank or section.settings.promo_heading != blank %}
+				<div class="cbp2-sidebar__promo" style="background-image: url('{{ section.settings.promo_image | image_url: width: 600 }}');">
+					<div class="cbp2-sidebar__promo-overlay">
+						<h3 class="cbp2-sidebar__promo-heading">{{ section.settings.promo_heading }}</h3>
+						<p class="cbp2-sidebar__promo-text">{{ section.settings.promo_text }}</p>
+						{% if section.settings.promo_button_text and section.settings.promo_button_link %}
+							<a href="{{ section.settings.promo_button_link }}" class="cbp2-btn">{{ section.settings.promo_button_text }}</a>
+						{% endif %}
+					</div>
+				</div>
+			{% endif %}
+			{% if section.settings.show_tags and post_obj.tags.size > 0 %}
+				<div class="cbp2-sidebar__tags">
+					<h3 class="cbp2-sidebar__heading">{{ section.settings.tags_heading | default: 'Tags' }}</h3>
+					<div class="cbp2-tags">
+						{% for tag in post_obj.tags %}
+							<a href="/blogs/{{ blog.handle }}/tagged/{{ tag | handleize }}" class="cbp2-tag">{{ tag }}</a>
+						{% endfor %}
+					</div>
+				</div>
+			{% endif %}
+		</aside>
+	</div>
+	<style>
+		.cbp2-section { font-family: inherit; max-width: 1250px; margin: 0 auto; }
+		.cbp2-container { display: flex; flex-wrap: wrap; gap: var(--cbp2-gutter, 32px); max-width: 1250px; margin: 0 auto; }
+		.cbp2-main { flex: 0 1 75%; min-width: 0; }
+		.cbp2-sidebar { flex: 0 1 25%; min-width: 260px; max-width: 400px; display: flex; flex-direction: column; gap: 32px; }
+		.cbp2-article { background: transparent; padding: 0; border-radius: 0; }
+		.cbp2-article__title { font-size: {{ section.settings.heading_font_size }}px; font-weight: bold; margin-bottom: 0.5em; }
+		.cbp2-article__meta { color: #777; font-size: 0.95em; margin-bottom: 1.5em; display: flex; gap: 1.5em; flex-wrap: wrap; }
+		.cbp2-article__hero { 
+			margin-bottom: 2em; 
+			margin-left: 0px;
+			margin-right: 0px;
+		}
+		.cbp2-article__hero-img { width: 100%; height: auto; border-radius: 8px; display: block; }
+		.cbp2-article__hero-caption { color: #888; font-size: 0.95em; margin-top: 0.5em; text-align: center; }
+		.cbp2-article__content { font-size: {{ section.settings.body_font_size }}px; line-height: 1.7; margin-bottom: 2em; }
+		.cbp2-article__divider { border: none; border-top: 1px solid #eee; margin: 2em 0; }
+		.cbp2-article__tags { margin-bottom: 1em; }
+		.cbp2-tag { display: inline-block; background: #f2f2f2; color: #444; border-radius: 999px; padding: 0.2em 1em; margin-right: 0.5em; font-size: 0.95em; text-decoration: none; }
+		.cbp2-article__share { display: flex; align-items: center; gap: 0.5em; margin-bottom: 1em; }
+		.cbp2-share { display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; width: 32px; height: 32px; background: #f2f2f2; color: {{ section.settings.accent_color }}; transition: background 0.2s; }
+		.cbp2-share:hover { background: {{ section.settings.accent_color }}; color: #fff; }
+		.cbp2-article__nav { display: flex; justify-content: space-between; gap: 1em; margin-top: 2em; }
+		.cbp2-article__nav-link { font-size: 0.95em; color: {{ section.settings.accent_color }}; text-decoration: none; }
+		.cbp2-article__nav-link:hover { text-decoration: underline; }
+		.cbp2-comments { margin-top: 2em; }
+		.cbp2-input { width: 100%; padding: 0.7em 1em; border-radius: 999px; border: 1px solid #e0e0e0; background: #fafbfc; margin-bottom: 1em; font-size: 1em; }
+		.cbp2-sidebar__search form { display: flex; align-items: stretch; }
+		.cbp2-input--search { border-radius: 999px 0 0 999px; flex: 1; margin-bottom: 0; }
+		.cbp2-btn { display: inline-block; border: none; border-radius: 999px; background: {{ section.settings.accent_color }}; color: #fff; padding: 0.6em 1.6em; font-size: 1em; cursor: pointer; text-decoration: none; transition: background 0.2s; }
+		.cbp2-btn:hover { background: #222; color: #fff; }
+		.cbp2-btn--search { border-radius: 0 999px 999px 0; padding: 0.7em 1.2em; background: {{ section.settings.accent_color }}; margin-left: -1px; }
+		.cbp2-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1.7em; }
+		.cbp2-sidebar__heading { font-size: 1.3em; font-weight: 600; margin-bottom: 0.7em; }
+		.cbp2-recent { display: flex; align-items: center; gap: 0.7em; }
+		.cbp2-recent__link { display: flex; align-items: center; gap: 1.2em; text-decoration: none; color: inherit; }
+		.cbp2-recent__img { width: 70px; height: 70px; object-fit: cover; border-radius: 8px; background: #f2f2f2; }
+		.cbp2-recent__meta { display: flex; flex-direction: column; }
+		.cbp2-recent__title { font-size: 1em; font-weight: 500; color: inherit; }
+		.cbp2-recent__date { color: #888; font-size: 0.9em; }
+		.cbp2-products { display: flex; flex-direction: column; gap: 1em; }
+		.cbp2-product-card { display: flex; gap: 1em; background: #fafbfc; border-radius: 12px; padding: 0.7em; align-items: center; }
+		.cbp2-product-card__img-wrap { flex: 0 0 56px; display: block; }
+		.cbp2-product-card__img-wrap img { width: 56px; height: 56px; object-fit: cover; border-radius: 8px; background: #f2f2f2; }
+		.cbp2-product-card__info { flex: 1; }
+		.cbp2-product-card__title { font-size: 1em; color: inherit; text-decoration: none; font-weight: 500; }
+		.cbp2-product-card__price { color: {{ section.settings.accent_color }}; font-weight: 600; font-size: 1em; }
+		.cbp2-product-card__rating { color: #f5b50a; font-size: 0.95em; }
+		.cbp2-sidebar__promo { position: relative; border-radius: 16px; overflow: hidden; min-height: 240px; background-size: cover; background-position: center; }
+		.cbp2-sidebar__promo-overlay { background: rgba(0,0,0,0.45); min-height: 240px; color: #fff; padding: 2em 1.2em; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; z-index: 1; }
+		.cbp2-sidebar__promo-heading { font-size: 1.2em; font-weight: 700; margin-bottom: 0.5em; }
+		.cbp2-sidebar__promo-text { font-size: 1em; margin-bottom: 1em; }
+		.cbp2-tags { display: flex; flex-wrap: wrap; gap: 0.5em; }
+		.cbp2-tag { background: #f2f2f2; color: #444; border-radius: 999px; padding: 0.2em 1em; font-size: 0.95em; text-decoration: none; }
+		@media (max-width: 900px) {
+			.cbp2-container { flex-direction: column; gap: 40px; }
+			.cbp2-main, .cbp2-sidebar { max-width: 100%; width: 100%; }
+			.cbp2-main { margin-bottom: 2em; }
+		}
+		@media (max-width: 600px) {
+			.cbp2-article__title { font-size: calc({{ section.settings.heading_font_size }}px * 0.8); }
+			.cbp2-sidebar { gap: 24px; }
+			.cbp2-product-card { flex-direction: column; align-items: flex-start; }
+		}
+		{{ section.settings.custom_css }}
+	</style>
+</section>
+
+{% schema %}
+{
+	"name": "Custom Blog Post 2",
+	"tag": "section",
+	"class": "section-custom-blog-post2",
+	"settings": [
+		{ "type": "radio", "id": "layout_style", "label": "Layout style", "options": [ { "value": "default", "label": "Two-column" }, { "value": "full-width", "label": "Sidebar below" } ], "default": "default" },
+		{ "type": "checkbox", "id": "show_meta", "label": "Show meta (date/author/category)", "default": true },
+		{ "type": "text", "id": "date_format", "label": "Date format", "default": "%B %d, %Y" },
+		{ "type": "checkbox", "id": "show_hero_caption", "label": "Show hero caption", "default": true },
+		{ "type": "range", "id": "content_max_width", "label": "Content max width", "min": 500, "max": 1000, "step": 10, "default": 760 },
+		{ "type": "color", "id": "background_color", "label": "Background color", "default": "#fff" },
+		{ "type": "color", "id": "text_color", "label": "Text color", "default": "#222" },
+		{ "type": "color", "id": "accent_color", "label": "Accent color (buttons, links)", "default": "#111" },
+		{ "type": "range", "id": "heading_font_size", "label": "Heading font size", "min": 20, "max": 60, "step": 2, "default": 36 },
+		{ "type": "range", "id": "body_font_size", "label": "Body font size", "min": 14, "max": 22, "step": 1, "default": 17 },
+		{ "type": "range", "id": "section_padding_top", "label": "Section padding top", "min": 0, "max": 120, "step": 4, "default": 40 },
+		{ "type": "range", "id": "section_padding_bottom", "label": "Section padding bottom", "min": 0, "max": 120, "step": 4, "default": 40 },
+		{ "type": "range", "id": "gutter_space", "label": "Gutter space (columns)", "min": 8, "max": 120, "step": 2, "default": 32 },
+		{ "type": "textarea", "id": "custom_css", "label": "Custom CSS" },
+		{ "type": "checkbox", "id": "enable_lazyload", "label": "Enable lazyload for images", "default": true },
+
+		{ "type": "header", "content": "Sidebar" },
+		{ "type": "checkbox", "id": "show_search", "label": "Show search", "default": true },
+		{ "type": "link_list", "id": "categories_menu", "label": "Categories menu" },
+		{ "type": "number", "id": "recent_posts_count", "label": "Recent posts count", "default": 3 },
+		{ "type": "select", "id": "recent_posts_image_size", "label": "Recent posts image size", "options": [ { "value": "small", "label": "Small" }, { "value": "medium", "label": "Medium" }, { "value": "large", "label": "Large" } ], "default": "small" },
+		{ "type": "product_list", "id": "popular_products", "label": "Popular products", "limit": 6 },
+		{ "type": "checkbox", "id": "show_popular_products", "label": "Show popular products", "default": true },
+		{ "type": "image_picker", "id": "promo_image", "label": "Promo image" },
+		{ "type": "text", "id": "promo_heading", "label": "Promo heading" },
+		{ "type": "text", "id": "promo_text", "label": "Promo text" },
+		{ "type": "text", "id": "promo_button_text", "label": "Promo button text" },
+		{ "type": "url", "id": "promo_button_link", "label": "Promo button link" },
+		{ "type": "checkbox", "id": "show_tags", "label": "Show tags cloud", "default": true },
+		{ "type": "text", "id": "tags_heading", "label": "Tags heading", "default": "Tags" }
+	],
+	"blocks": [
+		{ "type": "hero_image", "name": "Hero image override", "settings": [
+			{ "type": "image_picker", "id": "image", "label": "Hero image" },
+			{ "type": "text", "id": "hero_alt_text", "label": "Hero image alt text" }
+		] },
+		{ "type": "header", "name": "Article options" }
+	],
+	"presets": [
+		{ "name": "Blog Post", "category": "Blog" }
+	]
+}
+{% endschema %}

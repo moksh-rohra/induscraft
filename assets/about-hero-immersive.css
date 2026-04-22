@@ -1,0 +1,293 @@
+/* ==========================================================================
+   About Hero Immersive - CSS
+   ========================================================================== */
+
+.about-hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background-color: var(--about-hero-bg, #FAFAFA);
+}
+
+.about-hero__wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 52% 48%;
+    gap: 0;
+    z-index: 1;
+}
+
+/* ==========================================================================
+   Left Column - Text Content with Stepped Cut-Out
+   ========================================================================== */
+
+.about-hero__content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 80px;
+    padding-bottom: 180px;
+    overflow: visible;
+    will-change: transform;
+    background-color: var(--about-hero-bg, #FAFAFA);
+    clip-path: polygon(0 0,
+            100% 0,
+            100% 60%,
+            70% 60%,
+            70% 100%,
+            0 100%);
+    z-index: 5;
+}
+
+.about-hero__content-inner {
+    max-width: 520px;
+    will-change: transform, opacity;
+}
+
+.about-hero__tagline {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: var(--tagline-size-desktop, 14px);
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--about-hero-tagline, #1A1A1A);
+    margin-bottom: 24px;
+}
+
+.about-hero__tagline::before {
+    content: '';
+    display: block;
+    width: 8px;
+    height: 8px;
+    background-color: currentColor;
+}
+
+.about-hero .about-hero__heading {
+    font-size: var(--heading-size-desktop, 42px) !important;
+    font-family: var(--heading-font, var(--base-font-family)) !important;
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--about-hero-text, #1A1A1A);
+    margin: 0 0 32px 0;
+}
+
+.about-hero__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 28px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    color: #FFFFFF;
+    background-color: #1A1A1A;
+    border: 1px solid #1A1A1A;
+    transition: all 0.3s ease;
+}
+
+.about-hero__cta:hover {
+    background-color: transparent;
+    color: #1A1A1A;
+}
+
+.about-hero__cta svg {
+    transition: transform 0.3s ease;
+}
+
+.about-hero__cta:hover svg {
+    transform: translateX(4px);
+}
+
+/* ==========================================================================
+   Brand Text - Large Decorative Text (Spans Full Width)
+   ========================================================================== */
+
+.about-hero__brand-text {
+    /* background-color: #FAFAFA; */
+    position: absolute;
+    bottom: 0px;
+    padding: 20px 40px 20px 0;
+    left: 0;
+    overflow: visible;
+    will-change: transform, opacity;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.about-hero__brand-text span {
+    display: block;
+    font-size: var(--brand-text-size-desktop, 120px);
+    font-family: var(--brand-text-font, var(--heading-font-family));
+    font-weight: 700;
+    line-height: 0.85;
+    color: var(--about-hero-text, #1A1A1A);
+    white-space: nowrap;
+    text-transform: capitalize;
+    letter-spacing: -0.05em;
+    padding-left: 40px;
+}
+
+/* ==========================================================================
+   Right Column - Image Container
+   ========================================================================== */
+
+.about-hero__image-container {
+    position: absolute;
+    top: 0;
+    left: 52%;
+    width: 48%;
+    height: 100vh;
+    overflow: hidden;
+    will-change: width, left;
+    z-index: 1;
+}
+
+.about-hero__image-wrapper {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    will-change: transform;
+}
+
+.about-hero__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.about-hero__image--placeholder {
+    background-color: #E0E0E0;
+}
+
+/* ==========================================================================
+   Mobile Styles
+   ========================================================================== */
+
+@media screen and (max-width: 767px) {
+    .about-hero {
+        height: auto;
+        overflow: visible;
+        min-height: auto;
+    }
+
+    .about-hero__spacer {
+        display: none;
+    }
+
+    .about-hero__wrapper {
+        position: relative;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        will-change: auto;
+    }
+
+    .about-hero__content {
+        order: 1;
+        padding: 60px 24px 40px;
+        clip-path: none;
+        display: flex;
+        flex-direction: column;
+        overflow: visible;
+    }
+
+    .about-hero__content-inner {
+        max-width: 100%;
+    }
+
+    .about-hero__tagline {
+        order: 1;
+        margin-bottom: 16px;
+        font-size: var(--tagline-size-mobile, 12px);
+    }
+
+    .about-hero .about-hero__heading {
+        order: 2;
+        font-size: var(--heading-size-mobile, 32px) !important;
+        margin-bottom: 24px;
+    }
+
+    .about-hero__cta {
+        display: none;
+    }
+
+    .about-hero__brand-text {
+        position: relative;
+        order: 3;
+        bottom: auto;
+        left: auto;
+        right: auto;
+        width: 100%;
+        margin-top: 20px;
+        padding-left: 24px;
+        padding-right: 24px;
+        will-change: auto;
+    }
+
+    .about-hero__brand-text span {
+        font-size: var(--brand-text-size-mobile, 56px);
+        -webkit-text-stroke: 1px currentColor;
+        padding-left: 0;
+        letter-spacing: 0;
+        will-change: auto;
+    }
+
+    .about-hero__image-container {
+        position: relative;
+        order: 4;
+        left: auto;
+        width: 100%;
+        height: 300px;
+        overflow: visible;
+        will-change: auto;
+    }
+
+    .about-hero__image-wrapper {
+        position: relative;
+        top: 0;
+        height: 100%;
+        will-change: auto;
+    }
+
+    .about-hero__image {
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+/* ==========================================================================
+   Tablet Styles
+   ========================================================================== */
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .about-hero__content {
+        padding: 40px 48px;
+    }
+
+    .about-hero__heading {
+        font-size: 36px;
+    }
+
+    .about-hero__brand-text span {
+        font-size: 100px;
+    }
+}
+
+/* ==========================================================================
+   CSS Custom Properties (set via Liquid inline styles)
+   ========================================================================== */
+
+.about-hero {
+    --about-hero-bg: #FAFAFA;
+    --about-hero-text: #1A1A1A;
+    --about-hero-tagline: #1A1A1A;
+}

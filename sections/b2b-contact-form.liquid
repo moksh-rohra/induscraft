@@ -1,0 +1,261 @@
+{{ 'b2b-contact-form.css' | asset_url | stylesheet_tag }}
+
+<section 
+  id="b2b-contact-form-{{ section.id }}" 
+  class="b2b-contact-form"
+  style="
+    --bg-color: {{ section.settings.bg_color }};
+    --heading-color: {{ section.settings.heading_color }};
+    --heading-size-d: {{ section.settings.heading_size_d }}px;
+    --heading-size-m: {{ section.settings.heading_size_m }}px;
+    --desc-color: {{ section.settings.desc_color }};
+    --desc-size: {{ section.settings.desc_size }}px;
+    --label-color: {{ section.settings.label_color }};
+    --input-border-color: {{ section.settings.input_border_color }};
+  "
+>
+  <div class="b2b-contact-form__container">
+    <!-- Header -->
+    <div class="b2b-contact-form__header">
+      <h1 class="b2b-contact-form__heading">{{ section.settings.heading }}</h1>
+      <p class="b2b-contact-form__description">{{ section.settings.description }}</p>
+    </div>
+
+    <!-- Form -->
+    {%- if request.design_mode -%}
+      <!-- Static preview for Theme Editor -->
+      <div class="b2b-contact-form__form">
+        <div class="b2b-contact-form__row">
+          <div class="b2b-contact-form__field">
+            <label class="b2b-contact-form__label">
+              {{ section.settings.first_name_label }}<span class="required">*</span>
+            </label>
+            <input type="text" class="b2b-contact-form__input" placeholder="">
+          </div>
+          <div class="b2b-contact-form__field">
+            <label class="b2b-contact-form__label">
+              {{ section.settings.last_name_label }}
+            </label>
+            <input type="text" class="b2b-contact-form__input" placeholder="">
+          </div>
+        </div>
+
+        <div class="b2b-contact-form__field">
+          <label class="b2b-contact-form__label">
+            {{ section.settings.email_label }}<span class="required">*</span>
+          </label>
+          <input type="email" class="b2b-contact-form__input" placeholder="">
+        </div>
+
+        <div class="b2b-contact-form__field">
+          <label class="b2b-contact-form__label">
+            {{ section.settings.message_label }}
+          </label>
+          <textarea class="b2b-contact-form__textarea" placeholder=""></textarea>
+        </div>
+
+        <button type="button" class="button-new button--{{ section.settings.button_style }}">
+          {{ section.settings.button_text }}
+        </button>
+      </div>
+    {%- else -%}
+      <!-- Actual form for live site -->
+      {%- form 'contact', class: 'b2b-contact-form__form' -%}
+        {%- if form.posted_successfully? -%}
+          <p class="b2b-contact-form__success">{{ section.settings.success_message }}</p>
+        {%- endif -%}
+
+        <div class="b2b-contact-form__row">
+          <div class="b2b-contact-form__field">
+            <label class="b2b-contact-form__label" for="contact-first-name-{{ section.id }}">
+              {{ section.settings.first_name_label }}<span class="required">*</span>
+            </label>
+            <input 
+              type="text" 
+              id="contact-first-name-{{ section.id }}" 
+              name="contact[first_name]" 
+              class="b2b-contact-form__input"
+              required
+            >
+          </div>
+          <div class="b2b-contact-form__field">
+            <label class="b2b-contact-form__label" for="contact-last-name-{{ section.id }}">
+              {{ section.settings.last_name_label }}
+            </label>
+            <input 
+              type="text" 
+              id="contact-last-name-{{ section.id }}" 
+              name="contact[last_name]" 
+              class="b2b-contact-form__input"
+            >
+          </div>
+        </div>
+
+        <div class="b2b-contact-form__field">
+          <label class="b2b-contact-form__label" for="contact-email-{{ section.id }}">
+            {{ section.settings.email_label }}<span class="required">*</span>
+          </label>
+          <input 
+            type="email" 
+            id="contact-email-{{ section.id }}" 
+            name="contact[email]" 
+            class="b2b-contact-form__input"
+            required
+          >
+        </div>
+
+        <div class="b2b-contact-form__field">
+          <label class="b2b-contact-form__label" for="contact-message-{{ section.id }}">
+            {{ section.settings.message_label }}
+          </label>
+          <textarea 
+            id="contact-message-{{ section.id }}" 
+            name="contact[body]" 
+            class="b2b-contact-form__textarea"
+          ></textarea>
+        </div>
+
+        <button type="submit" class="button-new button--{{ section.settings.button_style }}">
+          {{ section.settings.button_text }}
+        </button>
+      {%- endform -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "B2B Contact Form",
+  "settings": [
+    { "type": "header", "content": "Colors" },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    { "type": "header", "content": "Heading" },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Contact"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#141414"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_d",
+      "min": 40,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Heading Size (Desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "heading_size_m",
+      "min": 32,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Heading Size (Mobile)",
+      "default": 48
+    },
+    { "type": "header", "content": "Description" },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Have a question or want to discuss an upcoming project? Feel free to reach out to us. We're here to help."
+    },
+    {
+      "type": "color",
+      "id": "desc_color",
+      "label": "Description Color",
+      "default": "#666666"
+    },
+    {
+      "type": "range",
+      "id": "desc_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Description Size",
+      "default": 16
+    },
+    { "type": "header", "content": "Form Labels" },
+    {
+      "type": "text",
+      "id": "first_name_label",
+      "label": "First Name Label",
+      "default": "First name"
+    },
+    {
+      "type": "text",
+      "id": "last_name_label",
+      "label": "Last Name Label",
+      "default": "Last name"
+    },
+    {
+      "type": "text",
+      "id": "email_label",
+      "label": "Email Label",
+      "default": "Email"
+    },
+    {
+      "type": "text",
+      "id": "message_label",
+      "label": "Message Label",
+      "default": "Message"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Label Color",
+      "default": "#141414"
+    },
+    {
+      "type": "color",
+      "id": "input_border_color",
+      "label": "Input Border Color",
+      "default": "#cccccc"
+    },
+    { "type": "header", "content": "Button" },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Send"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button Style",
+      "options": [
+        { "value": "primary", "label": "Primary (Double Border)" },
+        { "value": "secondary", "label": "Secondary (Solid Rounded)" }
+      ],
+      "default": "primary"
+    },
+    { "type": "header", "content": "Messages" },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success Message",
+      "default": "Thank you for your message. We'll get back to you soon!"
+    }
+  ],
+  "presets": [
+    {
+      "name": "B2B Contact Form"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,788 @@
+{%- comment -%}
+------------------------------------------------------------------------------
+  Section: Product Marquee
+  A centered heading with CTA button and infinite horizontal product image marquee
+------------------------------------------------------------------------------
+{%- endcomment -%}
+
+{%- style -%}
+    /* Section Padding & Background */
+    #shopify-section-{{ section.id }} {
+        padding-top: {{ section.settings.padding_top_mobile }}px;
+        padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+        {% if section.settings.enable_transparent_bg %}
+            background-color: transparent;
+        {% else %}
+            background-color: {{ section.settings.background_color }};
+        {% endif %}
+        overflow: hidden;
+    }
+
+    @media screen and (min-width: 768px) {
+        #shopify-section-{{ section.id }} {
+            padding-top: {{ section.settings.padding_top_desktop }}px;
+            padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+        }
+    }
+
+    /* Content Container */
+    #shopify-section-{{ section.id }} .product-marquee__content {
+        max-width: 100%;
+        margin: 0 auto;
+        padding-left: {{ section.settings.content_padding_left_mobile }}px;
+        padding-right: {{ section.settings.content_padding_right_mobile }}px;
+        text-align: center;
+        margin-bottom: {{ section.settings.content_spacing_mobile }}px;
+    }
+
+    @media (min-width: 768px) {
+        #shopify-section-{{ section.id }} .product-marquee__content {
+            margin-bottom: {{ section.settings.content_spacing_desktop }}px;
+            padding-left: {{ section.settings.content_padding_left_desktop }}px;
+            padding-right: {{ section.settings.content_padding_right_desktop }}px;
+        }
+    }
+
+    /* Heading */
+    #shopify-section-{{ section.id }} .product-marquee__heading {
+        margin: 0 0 {{ section.settings.heading_bottom_spacing }}px 0;
+        font-size: {{ section.settings.heading_font_size_mobile }}px;
+        line-height: 1.15;
+        color: {{ section.settings.heading_color }};
+        font-weight: {{ section.settings.heading_font_weight }};
+        letter-spacing: {{ section.settings.heading_letter_spacing }}px;
+        text-align: {{ section.settings.heading_alignment }};
+    }
+
+    @media (min-width: 768px) {
+        #shopify-section-{{ section.id }} .product-marquee__heading {
+            font-size: {{ section.settings.heading_font_size_desktop }}px;
+        }
+    }
+
+    /* Description */
+    #shopify-section-{{ section.id }} .product-marquee__description {
+        margin: 0 auto {{ section.settings.description_bottom_spacing }}px auto;
+        font-size: 15px;
+        line-height: 1.6;
+        color: {{ section.settings.text_color }};
+        text-align: {{ section.settings.description_alignment }};
+    }
+
+    @media (min-width: 768px) {
+        #shopify-section-{{ section.id }} .product-marquee__description {
+            font-size: 16px;
+        }
+    }
+
+    /* Button - uses theme default styles */
+
+    /* === Marquee Styles === */
+    #shopify-section-{{ section.id }} .product-marquee__wrapper {
+        display: flex;
+        overflow: hidden;
+        user-select: none;
+        width: 100%;
+        padding-left: {{ section.settings.marquee_padding_left_mobile }}px;
+        padding-right: {{ section.settings.marquee_padding_right_mobile }}px;
+    }
+
+    #shopify-section-{{ section.id }} .product-marquee__track {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: {{ section.settings.image_gap_mobile }}px;
+        animation: product-marquee-scroll-{{ section.id }} {{ section.settings.animation_speed }}s linear infinite;
+        min-width: 100%;
+    }
+
+    /* Direction control */
+    {% if section.settings.animation_direction == 'right' %}
+    #shopify-section-{{ section.id }} .product-marquee__track {
+        animation-direction: reverse;
+    }
+    {% endif %}
+
+    /* Gap for subsequent tracks */
+    #shopify-section-{{ section.id }} .product-marquee__track + .product-marquee__track {
+        margin-left: {{ section.settings.image_gap_mobile }}px;
+    }
+
+    /* Individual image item */
+    #shopify-section-{{ section.id }} .product-marquee__item {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #shopify-section-{{ section.id }} .product-marquee__item a {
+        display: block;
+    }
+
+    #shopify-section-{{ section.id }} .product-marquee__item img {
+        height: var(--item-height-mobile);
+        width: var(--item-width-mobile, auto); /* Use variable or default to auto */
+        /* Constrain width to prevent overly wide images if auto */
+        max-width: {{ section.settings.max_image_width_mobile }}px; 
+        object-fit: cover;
+        border-radius: {{ section.settings.image_border_radius }}px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    {% if section.settings.enable_image_hover %}
+    #shopify-section-{{ section.id }} .product-marquee__item img:hover {
+        transform: scale(1.03);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+    {% endif %}
+
+    /* Pause on hover */
+    {% if section.settings.pause_on_hover %}
+    #shopify-section-{{ section.id }} .product-marquee__wrapper:hover .product-marquee__track {
+        animation-play-state: paused;
+    }
+    {% endif %}
+
+    /* Animation Keyframes */
+    @keyframes product-marquee-scroll-{{ section.id }} {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(calc(-100% - {{ section.settings.image_gap_mobile }}px));
+        }
+    }
+
+    /* Desktop Styles */
+    @media (min-width: 768px) {
+        #shopify-section-{{ section.id }} .product-marquee__wrapper {
+            padding-left: {{ section.settings.marquee_padding_left_desktop }}px;
+            padding-right: {{ section.settings.marquee_padding_right_desktop }}px;
+        }
+
+        #shopify-section-{{ section.id }} .product-marquee__track {
+            gap: {{ section.settings.image_gap_desktop }}px;
+        }
+
+        #shopify-section-{{ section.id }} .product-marquee__track + .product-marquee__track {
+            margin-left: {{ section.settings.image_gap_desktop }}px;
+        }
+
+        #shopify-section-{{ section.id }} .product-marquee__item img {
+            height: var(--item-height-desktop);
+            width: var(--item-width-desktop, auto);
+            max-width: {{ section.settings.max_image_width_desktop }}px;
+        }
+
+        @keyframes product-marquee-scroll-{{ section.id }} {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(-100% - {{ section.settings.image_gap_desktop }}px));
+            }
+        }
+    }
+{%- endstyle -%}
+
+<section class="product-marquee">
+    {%- comment -%} Content Section {%- endcomment -%}
+    <div class="product-marquee__content">
+        {%- if section.settings.heading != blank -%}
+            <h2 class="product-marquee__heading">{{ section.settings.heading }}</h2>
+        {%- endif -%}
+
+        {%- if section.settings.description != blank -%}
+            <p class="product-marquee__description">{{ section.settings.description }}</p>
+        {%- endif -%}
+
+        {%- if section.settings.button_text != blank and section.settings.button_link != blank -%}
+            <a 
+                href="{{ section.settings.button_link }}" 
+                class="focus-visible-outline {% if section.settings.button_style == 'circle' %}button-circle{% else %}button-new button--{{ section.settings.button_style }}{% endif %}">
+                {{ section.settings.button_text }}
+            </a>
+        {%- endif -%}
+    </div>
+
+    {%- comment -%} Marquee Section {%- endcomment -%}
+    {%- if section.blocks.size > 0 -%}
+        <div class="product-marquee__wrapper">
+            {%- comment -%} Track 1 {%- endcomment -%}
+            <div class="product-marquee__track">
+                {%- for block in section.blocks -%}
+                    {%- assign width_style_desktop = 'auto' -%}
+                    {%- assign width_style_mobile = 'auto' -%}
+                    {%- if block.settings.width_mode == 'custom' -%}
+                        {%- assign width_style_desktop = block.settings.image_width_desktop | append: 'px' -%}
+                        {%- assign width_style_mobile = block.settings.image_width_mobile | append: 'px' -%}
+                    {%- endif -%}
+                    
+                    <div class="product-marquee__item" {{ block.shopify_attributes }} 
+                         style="--item-height-desktop: {{ block.settings.image_height_desktop }}px; --item-height-mobile: {{ block.settings.image_height_mobile }}px; --item-width-desktop: {{ width_style_desktop }}; --item-width-mobile: {{ width_style_mobile }};">
+                        {%- if block.settings.link != blank -%}
+                            <a href="{{ block.settings.link }}">
+                        {%- endif -%}
+
+                        {%- if block.settings.image != blank -%}
+                            {{ block.settings.image | image_url: height: block.settings.image_height_desktop | image_tag: loading: 'lazy', alt: block.settings.image.alt }}
+                        {%- else -%}
+                            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                        {%- endif -%}
+
+                        {%- if block.settings.link != blank -%}
+                            </a>
+                        {%- endif -%}
+                    </div>
+                {%- endfor -%}
+            </div>
+
+            {%- comment -%} Track 2 (Duplicate for seamless loop) {%- endcomment -%}
+            <div class="product-marquee__track" aria-hidden="true">
+                {%- for block in section.blocks -%}
+                    {%- assign width_style_desktop = 'auto' -%}
+                    {%- assign width_style_mobile = 'auto' -%}
+                    {%- if block.settings.width_mode == 'custom' -%}
+                        {%- assign width_style_desktop = block.settings.image_width_desktop | append: 'px' -%}
+                        {%- assign width_style_mobile = block.settings.image_width_mobile | append: 'px' -%}
+                    {%- endif -%}
+
+                    <div class="product-marquee__item"
+                         style="--item-height-desktop: {{ block.settings.image_height_desktop }}px; --item-height-mobile: {{ block.settings.image_height_mobile }}px; --item-width-desktop: {{ width_style_desktop }}; --item-width-mobile: {{ width_style_mobile }};">
+                        {%- if block.settings.link != blank -%}
+                            <a href="{{ block.settings.link }}" tabindex="-1">
+                        {%- endif -%}
+
+                        {%- if block.settings.image != blank -%}
+                            {{ block.settings.image | image_url: height: block.settings.image_height_desktop | image_tag: loading: 'lazy', alt: block.settings.image.alt }}
+                        {%- else -%}
+                            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                        {%- endif -%}
+
+                        {%- if block.settings.link != blank -%}
+                            </a>
+                        {%- endif -%}
+                    </div>
+                {%- endfor -%}
+            </div>
+            
+            {%- comment -%} Track 3 (Extra safety) {%- endcomment -%}
+            <div class="product-marquee__track" aria-hidden="true">
+                {%- for block in section.blocks -%}
+                    {%- assign width_style_desktop = 'auto' -%}
+                    {%- assign width_style_mobile = 'auto' -%}
+                    {%- if block.settings.width_mode == 'custom' -%}
+                        {%- assign width_style_desktop = block.settings.image_width_desktop | append: 'px' -%}
+                        {%- assign width_style_mobile = block.settings.image_width_mobile | append: 'px' -%}
+                    {%- endif -%}
+
+                    <div class="product-marquee__item"
+                         style="--item-height-desktop: {{ block.settings.image_height_desktop }}px; --item-height-mobile: {{ block.settings.image_height_mobile }}px; --item-width-desktop: {{ width_style_desktop }}; --item-width-mobile: {{ width_style_mobile }};">
+                        {%- if block.settings.link != blank -%}
+                            <a href="{{ block.settings.link }}" tabindex="-1">
+                        {%- endif -%}
+
+                        {%- if block.settings.image != blank -%}
+                            {{ block.settings.image | image_url: height: block.settings.image_height_desktop | image_tag: loading: 'lazy', alt: block.settings.image.alt }}
+                        {%- else -%}
+                            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                        {%- endif -%}
+
+                        {%- if block.settings.link != blank -%}
+                            </a>
+                        {%- endif -%}
+                    </div>
+                {%- endfor -%}
+            </div>
+        </div>
+    {%- endif -%}
+</section>
+
+{% schema %}
+{
+    "name": "Product Marquee",
+    "settings": [
+        {
+            "type": "header",
+            "content": "Heading"
+        },
+        {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading",
+            "default": "Transform your space with our stunning furniture collection"
+        },
+        {
+            "type": "select",
+            "id": "heading_alignment",
+            "label": "Heading alignment",
+            "options": [
+                { "value": "left", "label": "Left" },
+                { "value": "center", "label": "Center" },
+                { "value": "right", "label": "Right" }
+            ],
+            "default": "center"
+        },
+        {
+            "type": "range",
+            "id": "heading_font_size_desktop",
+            "min": 24,
+            "max": 72,
+            "step": 2,
+            "unit": "px",
+            "label": "Heading Font Size (Desktop)",
+            "default": 42
+        },
+        {
+            "type": "range",
+            "id": "heading_font_size_mobile",
+            "min": 18,
+            "max": 48,
+            "step": 2,
+            "unit": "px",
+            "label": "Heading Font Size (Mobile)",
+            "default": 26
+        },
+        {
+            "type": "select",
+            "id": "heading_font_weight",
+            "label": "Heading Font Weight",
+            "options": [
+                { "value": "400", "label": "Normal" },
+                { "value": "500", "label": "Medium" },
+                { "value": "600", "label": "Semi Bold" },
+                { "value": "700", "label": "Bold" }
+            ],
+            "default": "500"
+        },
+        {
+            "type": "range",
+            "id": "heading_letter_spacing",
+            "min": -2,
+            "max": 5,
+            "step": 0.5,
+            "unit": "px",
+            "label": "Heading Letter Spacing",
+            "default": 0
+        },
+        {
+            "type": "range",
+            "id": "heading_bottom_spacing",
+            "min": 8,
+            "max": 60,
+            "step": 4,
+            "unit": "px",
+            "label": "Heading Bottom Spacing",
+            "default": 24
+        },
+        {
+            "type": "header",
+            "content": "Description"
+        },
+        {
+            "type": "textarea",
+            "id": "description",
+            "label": "Description (Optional)"
+        },
+        {
+            "type": "select",
+            "id": "description_alignment",
+            "label": "Description alignment",
+            "options": [
+                { "value": "left", "label": "Left" },
+                { "value": "center", "label": "Center" },
+                { "value": "right", "label": "Right" }
+            ],
+            "default": "center"
+        },
+        {
+            "type": "range",
+            "id": "description_bottom_spacing",
+            "min": 8,
+            "max": 40,
+            "step": 4,
+            "unit": "px",
+            "label": "Description Bottom Spacing",
+            "default": 20
+        },
+        {
+            "type": "header",
+            "content": "Button"
+        },
+        {
+            "type": "text",
+            "id": "button_text",
+            "label": "Button Text",
+            "default": "Shop Now"
+        },
+        {
+            "type": "url",
+            "id": "button_link",
+            "label": "Button Link"
+        },
+        {
+            "type": "select",
+            "id": "button_style",
+            "label": "Button Style",
+            "options": [
+                { "value": "primary", "label": "Primary" },
+                { "value": "secondary", "label": "Secondary" },
+                { "value": "circle", "label": "Circle" }
+            ],
+            "default": "primary"
+        },
+        {
+            "type": "header",
+            "content": "Marquee Settings"
+        },
+        {
+            "type": "range",
+            "id": "animation_speed",
+            "min": 10,
+            "max": 80,
+            "step": 5,
+            "unit": "s",
+            "label": "Animation Speed",
+            "default": 30
+        },
+        {
+            "type": "select",
+            "id": "animation_direction",
+            "label": "Animation Direction",
+            "options": [
+                { "value": "left", "label": "Left" },
+                { "value": "right", "label": "Right" }
+            ],
+            "default": "left"
+        },
+        {
+            "type": "checkbox",
+            "id": "pause_on_hover",
+            "label": "Pause on Hover",
+            "default": true
+        },
+        {
+            "type": "header",
+            "content": "Image Constraints"
+        },
+        {
+            "type": "range",
+            "id": "max_image_width_desktop",
+            "min": 100,
+            "max": 500,
+            "step": 10,
+            "unit": "px",
+            "label": "Max Image Width (Desktop)",
+            "default": 300,
+            "info": "Prevents images from becoming too wide"
+        },
+        {
+            "type": "range",
+            "id": "max_image_width_mobile",
+            "min": 80,
+            "max": 300,
+            "step": 10,
+            "unit": "px",
+            "label": "Max Image Width (Mobile)",
+            "default": 200
+        },
+        {
+            "type": "range",
+            "id": "image_gap_desktop",
+            "min": 8,
+            "max": 60,
+            "step": 4,
+            "unit": "px",
+            "label": "Gap Between Images (Desktop)",
+            "default": 20
+        },
+        {
+            "type": "range",
+            "id": "image_gap_mobile",
+            "min": 8,
+            "max": 40,
+            "step": 4,
+            "unit": "px",
+            "label": "Gap Between Images (Mobile)",
+            "default": 12
+        },
+        {
+            "type": "range",
+            "id": "image_border_radius",
+            "min": 0,
+            "max": 30,
+            "step": 2,
+            "unit": "px",
+            "label": "Image Border Radius",
+            "default": 8
+        },
+        {
+            "type": "checkbox",
+            "id": "enable_image_hover",
+            "label": "Enable Image Hover Effect",
+            "default": true
+        },
+        {
+            "type": "header",
+            "content": "Colors"
+        },
+        {
+            "type": "color",
+            "id": "background_color",
+            "label": "Background Color",
+            "default": "#ffffff"
+        },
+        {
+            "type": "checkbox",
+            "id": "enable_transparent_bg",
+            "label": "Enable Transparent Background",
+            "default": false
+        },
+        {
+            "type": "color",
+            "id": "heading_color",
+            "label": "Heading Color",
+            "default": "#1a1a1a"
+        },
+        {
+            "type": "color",
+            "id": "text_color",
+            "label": "Text Color",
+            "default": "#666666"
+        },
+        {
+            "type": "header",
+            "content": "Layout"
+        },
+        {
+            "type": "range",
+            "id": "content_spacing_desktop",
+            "min": 20,
+            "max": 80,
+            "step": 4,
+            "unit": "px",
+            "label": "Content to Marquee Spacing (Desktop)",
+            "default": 48
+        },
+        {
+            "type": "range",
+            "id": "content_spacing_mobile",
+            "min": 16,
+            "max": 60,
+            "step": 4,
+            "unit": "px",
+            "label": "Content to Marquee Spacing (Mobile)",
+            "default": 32
+        },
+        {
+            "type": "range",
+            "id": "content_padding_left_desktop",
+            "min": 0,
+            "max": 160,
+            "step": 4,
+            "unit": "px",
+            "label": "Content Left Padding (Desktop)",
+            "default": 40
+        },
+        {
+            "type": "range",
+            "id": "content_padding_right_desktop",
+            "min": 0,
+            "max": 160,
+            "step": 4,
+            "unit": "px",
+            "label": "Content Right Padding (Desktop)",
+            "default": 40
+        },
+        {
+            "type": "range",
+            "id": "content_padding_left_mobile",
+            "min": 0,
+            "max": 80,
+            "step": 4,
+            "unit": "px",
+            "label": "Content Left Padding (Mobile)",
+            "default": 20
+        },
+        {
+            "type": "range",
+            "id": "content_padding_right_mobile",
+            "min": 0,
+            "max": 80,
+            "step": 4,
+            "unit": "px",
+            "label": "Content Right Padding (Mobile)",
+            "default": 20
+        },
+        {
+            "type": "range",
+            "id": "marquee_padding_left_desktop",
+            "min": 0,
+            "max": 160,
+            "step": 4,
+            "unit": "px",
+            "label": "Marquee Left Padding (Desktop)",
+            "default": 40
+        },
+        {
+            "type": "range",
+            "id": "marquee_padding_right_desktop",
+            "min": 0,
+            "max": 160,
+            "step": 4,
+            "unit": "px",
+            "label": "Marquee Right Padding (Desktop)",
+            "default": 40
+        },
+        {
+            "type": "range",
+            "id": "marquee_padding_left_mobile",
+            "min": 0,
+            "max": 80,
+            "step": 4,
+            "unit": "px",
+            "label": "Marquee Left Padding (Mobile)",
+            "default": 16
+        },
+        {
+            "type": "range",
+            "id": "marquee_padding_right_mobile",
+            "min": 0,
+            "max": 80,
+            "step": 4,
+            "unit": "px",
+            "label": "Marquee Right Padding (Mobile)",
+            "default": 16
+        },
+        {
+            "type": "range",
+            "id": "padding_top_desktop",
+            "min": 0,
+            "max": 120,
+            "step": 4,
+            "unit": "px",
+            "label": "Padding Top (Desktop)",
+            "default": 60
+        },
+        {
+            "type": "range",
+            "id": "padding_bottom_desktop",
+            "min": 0,
+            "max": 120,
+            "step": 4,
+            "unit": "px",
+            "label": "Padding Bottom (Desktop)",
+            "default": 60
+        },
+        {
+            "type": "range",
+            "id": "padding_top_mobile",
+            "min": 0,
+            "max": 80,
+            "step": 4,
+            "unit": "px",
+            "label": "Padding Top (Mobile)",
+            "default": 40
+        },
+        {
+            "type": "range",
+            "id": "padding_bottom_mobile",
+            "min": 0,
+            "max": 80,
+            "step": 4,
+            "unit": "px",
+            "label": "Padding Bottom (Mobile)",
+            "default": 40
+        }
+    ],
+    "blocks": [
+        {
+            "type": "image",
+            "name": "Product Image",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Image"
+                },
+                {
+                    "type": "range",
+                    "id": "image_height_desktop",
+                    "min": 150,
+                    "max": 500,
+                    "step": 10,
+                    "unit": "px",
+                    "label": "Height (Desktop)",
+                    "default": 300
+                },
+                {
+                    "type": "range",
+                    "id": "image_height_mobile",
+                    "min": 100,
+                    "max": 300,
+                    "step": 10,
+                    "unit": "px",
+                    "label": "Height (Mobile)",
+                    "default": 200
+                },
+                {
+                    "type": "header",
+                    "content": "Width Settings"
+                },
+                {
+                    "type": "select",
+                    "id": "width_mode",
+                    "label": "Image Width Mode",
+                    "options": [
+                        { "value": "auto", "label": "Auto (Respect Aspect Ratio)" },
+                        { "value": "custom", "label": "Custom Fixed Width" }
+                    ],
+                    "default": "auto",
+                    "info": "Choose 'Auto' to let height determine width, or 'Custom' to force a specific width."
+                },
+                {
+                    "type": "range",
+                    "id": "image_width_desktop",
+                    "min": 50,
+                    "max": 600,
+                    "step": 10,
+                    "unit": "px",
+                    "label": "Custom Width (Desktop)",
+                    "default": 300
+                },
+                {
+                    "type": "range",
+                    "id": "image_width_mobile",
+                    "min": 50,
+                    "max": 400,
+                    "step": 10,
+                    "unit": "px",
+                    "label": "Custom Width (Mobile)",
+                    "default": 200
+                },
+                {
+                    "type": "url",
+                    "id": "link",
+                    "label": "Link (Optional)"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Product Marquee",
+            "category": "Image",
+            "blocks": [
+                { "type": "image" },
+                { "type": "image" },
+                { "type": "image" },
+                { "type": "image" },
+                { "type": "image" },
+                { "type": "image" }
+            ]
+        }
+    ]
+}
+{% endschema %}

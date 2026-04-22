@@ -1,0 +1,743 @@
+{% style %}
+    #shopify-section-{{- section.id -}} {
+        padding-top: {{- section.settings.offset_top_mobile -}}px;
+        padding-bottom: {{- section.settings.offset_bottom_mobile -}}px;
+    }
+
+    @media screen and (min-width: 768px) {
+        #shopify-section-{{- section.id -}} {
+            padding-top: {{- section.settings.offset_top_desktop -}}px;
+            padding-bottom: {{- section.settings.offset_bottom_desktop -}}px;
+        }
+    }
+
+    /* Main Section Layout */
+    .spaces-hero-{{ section.id }} {
+        width: 100%;
+        position: relative;
+    }
+
+    .spaces-hero__image-wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        min-height: {{ section.settings.mobile_height }}px;
+        overflow: visible;
+    }
+
+    @media screen and (max-width: 899.98px) {
+        .spaces-hero__image-wrapper {
+            overflow-x: clip;
+        }
+    }
+
+    @media screen and (min-width: 768px) {
+        .spaces-hero__image-wrapper {
+            {%- if section.settings.full_height -%}
+                min-height: 100vh;
+            {%- else -%}
+                min-height: {{ section.settings.desktop_height }}vh;
+            {%- endif -%}
+        }
+    }
+    
+    .spaces-hero__image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* --- Hotspot Styles --- */
+    .spaces-hotspot__container {
+        position: absolute;
+        top: var(--y-pos-mobile);
+        left: var(--x-pos-mobile);
+        transform: translate(-50%, -50%);
+        z-index: 50;
+        pointer-events: auto;
+    }
+
+    @media screen and (min-width: 768px) {
+        .spaces-hotspot__container {
+            top: var(--y-pos);
+            left: var(--x-pos);
+        }
+    }
+
+    /* The Hotspot Icon - Gray circle with white dot */
+    .spaces-hotspot__btn {
+        width: {{ section.settings.hotspot_size_mobile }}px;
+        height: {{ section.settings.hotspot_size_mobile }}px;
+        border-radius: 50%;
+        background: {{ section.settings.hotspot_background }};
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        position: relative;
+        z-index: 51;
+    }
+
+    .spaces-hotspot__btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    /* The White Dot in center */
+    .spaces-hotspot__dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: {{ section.settings.hotspot_dot_color }};
+        pointer-events: none;
+    }
+
+    @media screen and (min-width: 768px) {
+        .spaces-hotspot__btn {
+            width: {{ section.settings.hotspot_size_desktop }}px;
+            height: {{ section.settings.hotspot_size_desktop }}px;
+        }
+        
+        .spaces-hotspot__dot {
+            width: 8px;
+            height: 8px;
+        }
+    }
+
+    /* The Product Card Popup */
+    .spaces-hotspot__card {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%) translateY(-8px);
+        overflow: hidden;
+        z-index: 1;
+        display: flex;
+        visibility: hidden;
+        opacity: 0;
+        width: auto;
+        min-width: 180px;
+        max-width: 220px;
+        background-color: #fff;
+        border-radius: 4px;
+        transition-property: opacity, visibility, transform;
+        transition-duration: 0.25s;
+        transition-timing-function: ease-out;
+        word-break: break-word;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        pointer-events: none;
+    }
+
+    .spaces-hotspot__card.spaces-hotspot__card--top {
+        bottom: calc(100% + 12px);
+    }
+
+    .spaces-hotspot__card.spaces-hotspot__card--bottom {
+        top: calc(100% + 12px);
+    }
+
+    /* Mobile auto-position override (below 900px) */
+    @media screen and (max-width: 899.98px) {
+        /* Vertical positioning */
+        .spaces-hotspot__card.spaces-hotspot__card--mobile-top {
+            bottom: calc(100% + 12px);
+            top: auto;
+        }
+
+        .spaces-hotspot__card.spaces-hotspot__card--mobile-bottom {
+            top: calc(100% + 12px);
+            bottom: auto;
+        }
+
+        /* Horizontal positioning - align card to section edges */
+        .spaces-hotspot__card.spaces-hotspot__card--mobile-align-left {
+            left: 0;
+            right: auto;
+            transform: translateX(calc(var(--x-pos-mobile) * -1%)) translateY(0);
+        }
+
+        .spaces-hotspot__card.spaces-hotspot__card--mobile-align-right {
+            left: auto;
+            right: 0;
+            transform: translateX(calc((100 - var(--x-pos-mobile)) * 1%)) translateY(0);
+        }
+
+        .spaces-hotspot__card.spaces-hotspot__card--mobile-align-center {
+            left: 50%;
+            transform: translateX(-50%) translateY(0);
+        }
+    }
+
+    /* Show card on hover (desktop) */
+    @media (hover: hover) and (pointer: fine) {
+        .spaces-hotspot__container:hover .spaces-hotspot__card {
+            z-index: 2;
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+            pointer-events: auto;
+        }
+    }
+
+    /* Active state for touch/click */
+    .spaces-hotspot__card.is-active {
+        z-index: 2;
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+        pointer-events: auto;
+    }
+
+    /* Always show cards mode - Desktop (900px and above) */
+    {%- if section.settings.always_show_cards -%}
+    @media screen and (min-width: 900px) {
+        .spaces-hero-{{ section.id }} .spaces-hotspot__card {
+            z-index: 2;
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+            pointer-events: auto;
+        }
+    }
+    {%- endif -%}
+
+    /* Always show cards mode - Mobile (below 900px) */
+    {%- if section.settings.always_show_cards_mobile -%}
+    @media screen and (max-width: 899.98px) {
+        .spaces-hero-{{ section.id }} .spaces-hotspot__card {
+            z-index: 2;
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+            pointer-events: auto;
+        }
+    }
+    {%- endif -%}
+
+    .spaces-hotspot__content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        padding: 12px 14px;
+        gap: 10px;
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .spaces-hotspot__info {
+        flex-grow: 1;
+        min-width: 0;
+    }
+
+    .spaces-hotspot__title {
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 1.3;
+        color: #000;
+        margin: 0 0 2px 0;
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .spaces-hotspot__subtitle {
+        font-size: 11px;
+        color: #666;
+        margin: 0 0 4px 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .spaces-hotspot__price {
+        font-size: 14px;
+        font-weight: 700;
+        color: #000;
+        display: flex;
+        align-items: baseline;
+        gap: 4px;
+    }
+
+    .spaces-hotspot__price-currency {
+        font-size: 11px;
+        font-weight: 400;
+    }
+
+    .spaces-hotspot__arrow {
+        flex-shrink: 0;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #999;
+        transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    .spaces-hotspot__content:hover .spaces-hotspot__arrow {
+        transform: translateX(3px);
+        color: #333;
+    }
+
+    .spaces-hotspot__arrow svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    /* Mobile specific styles */
+    @media (max-width: 767.98px) {
+        .spaces-hotspot__card {
+            min-width: 160px;
+            max-width: 200px;
+        }
+        
+        .spaces-hotspot__title {
+            font-size: 12px;
+        }
+        
+        .spaces-hotspot__subtitle {
+            font-size: 10px;
+        }
+        
+        .spaces-hotspot__price {
+            font-size: 13px;
+        }
+    }
+
+    /* Mobile Modal Overlay */
+    .spaces-hero-mobile-overlay {
+        display: none;
+    }
+
+    @media (max-width: 767.98px) {
+        .spaces-hero-mobile-overlay {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.2);
+            z-index: 199;
+        }
+
+        .spaces-hero-mobile-overlay.is-active {
+            display: block;
+        }
+    }
+
+{% endstyle %}
+
+<div class="spaces-hero-{{ section.id }}" id="spaces-hero-{{ section.id }}">
+    <div class="spaces-hero__image-wrapper">
+        {%- assign image = section.settings.background_image -%}
+        {%- if image != blank -%}
+            {{ image | image_url: width: 3000 | image_tag: 
+                class: 'spaces-hero__image', 
+                widths: '550, 750, 1100, 1500, 2000, 3000',
+                sizes: '100vw'
+            }}
+        {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'spaces-hero__image placeholder-svg' }}
+        {%- endif -%}
+
+        {%- comment -%} Hotspot Blocks {%- endcomment -%}
+        {% for block in section.blocks %}
+            {% if block.type == 'hotspot' %}
+                {% assign product = block.settings.product %}
+                {% assign product_image = block.settings.product_image | default: product.featured_image %}
+                {% assign y_pos = block.settings.vertical_position %}
+                {% assign x_pos = block.settings.horizontal_position %}
+                {% assign y_pos_mobile = block.settings.vertical_position_mobile | default: y_pos %}
+                {% assign x_pos_mobile = block.settings.horizontal_position_mobile | default: x_pos %}
+
+                {%- comment -%} Desktop card position (respects manual setting) {%- endcomment -%}
+                {%- capture popup_position_class -%}
+                    {%- if block.settings.card_position == 'top' -%}
+                        spaces-hotspot__card--top
+                    {%- elsif block.settings.card_position == 'bottom' -%}
+                        spaces-hotspot__card--bottom
+                    {%- elsif y_pos >= 50 -%}
+                        spaces-hotspot__card--top
+                    {%- else -%}
+                        spaces-hotspot__card--bottom
+                    {%- endif -%}
+                {%- endcapture -%}
+
+                {%- comment -%} Mobile card position (always auto based on mobile vertical position) {%- endcomment -%}
+                {%- capture mobile_position_class -%}
+                    {%- if y_pos_mobile >= 50 -%}
+                        spaces-hotspot__card--mobile-top
+                    {%- else -%}
+                        spaces-hotspot__card--mobile-bottom
+                    {%- endif -%}
+                {%- endcapture -%}
+
+                {%- comment -%} Mobile horizontal alignment (auto based on horizontal position) {%- endcomment -%}
+                {%- capture mobile_align_class -%}
+                    {%- if x_pos_mobile >= 65 -%}
+                        spaces-hotspot__card--mobile-align-right
+                    {%- elsif x_pos_mobile <= 35 -%}
+                        spaces-hotspot__card--mobile-align-left
+                    {%- else -%}
+                        spaces-hotspot__card--mobile-align-center
+                    {%- endif -%}
+                {%- endcapture -%}
+
+                <div 
+                    class="spaces-hotspot__container" 
+                    style="--y-pos: {{ y_pos }}%; --x-pos: {{ x_pos }}%; --y-pos-mobile: {{ y_pos_mobile }}%; --x-pos-mobile: {{ x_pos_mobile }}%;"
+                    {{ block.shopify_attributes }}
+                >
+                    <button class="spaces-hotspot__btn js-spaces-hotspot-btn" type="button" aria-label="View Product">
+                        <span class="spaces-hotspot__dot"></span>
+                    </button>
+                    
+                    <div class="spaces-hotspot__card {{ popup_position_class }} {{ mobile_position_class }} {{ mobile_align_class }}">
+                        {% if product != blank %}
+                            <a href="{{ product.url }}" class="spaces-hotspot__content">
+                                <div class="spaces-hotspot__info">
+                                    <span class="spaces-hotspot__title">{{ product.title }}</span>
+                                    {% if product.type != blank %}
+                                        <p class="spaces-hotspot__subtitle">{{ product.type }}</p>
+                                    {% endif %}
+                                    <div class="spaces-hotspot__price">
+                                        <span class="spaces-hotspot__price-currency">{{ cart.currency.symbol }}</span>
+                                        <span>{{ product.price | money_without_currency }}</span>
+                                    </div>
+                                </div>
+                                <span class="spaces-hotspot__arrow">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </span>
+                            </a>
+                        {% else %}
+                            <div class="spaces-hotspot__content">
+                                <div class="spaces-hotspot__info">
+                                    <span class="spaces-hotspot__title">Example Product</span>
+                                    <p class="spaces-hotspot__subtitle">Category</p>
+                                    <div class="spaces-hotspot__price">
+                                        <span class="spaces-hotspot__price-currency">Rs.</span>
+                                        <span>1,600</span>
+                                    </div>
+                                </div>
+                                <span class="spaces-hotspot__arrow">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </span>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    
+    <!-- Mobile Overlay -->
+    <div class="spaces-hero-mobile-overlay js-spaces-overlay"></div>
+</div>
+
+<script>
+    (function() {
+        const initSection = (container) => {
+            if (!container) return;
+            
+            const isMobile = () => window.innerWidth < 768;
+            const overlay = container.querySelector('.js-spaces-overlay');
+            
+            const closeAllCards = () => {
+                container.querySelectorAll('.spaces-hotspot__card.is-active').forEach(card => {
+                    card.classList.remove('is-active');
+                });
+                container.querySelectorAll('.spaces-hotspot__btn.is-active').forEach(btn => {
+                    btn.classList.remove('is-active');
+                });
+                if (overlay) overlay.classList.remove('is-active');
+            };
+
+            const handleHotspotClick = (e) => {
+                const btn = e.target.closest('.js-spaces-hotspot-btn');
+                
+                if (btn) {
+                    // On touch devices, toggle the card
+                    if (isMobile() || !window.matchMedia('(hover: hover)').matches) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        
+                        const isActive = btn.classList.contains('is-active');
+                        const card = btn.nextElementSibling;
+                        
+                        closeAllCards();
+                        
+                        if (!isActive && card) {
+                            btn.classList.add('is-active');
+                            card.classList.add('is-active');
+                            if (overlay) overlay.classList.add('is-active');
+                        }
+                    }
+                } else if (e.target.closest('.js-spaces-overlay')) {
+                    closeAllCards();
+                } else if (!e.target.closest('.spaces-hotspot__card') && !e.target.closest('.spaces-hotspot__btn')) {
+                    closeAllCards();
+                }
+            };
+
+            container.removeEventListener('click', handleHotspotClick);
+            container.addEventListener('click', handleHotspotClick);
+        };
+
+        const sectionId = 'spaces-hero-{{ section.id }}';
+        
+        // Init on Load
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById(sectionId);
+            initSection(container);
+        });
+
+        // Init on Editor
+        document.addEventListener('shopify:section:load', (e) => {
+            const container = e.target.querySelector('[id^="spaces-hero-"]');
+            if (container) {
+                initSection(container);
+            }
+        });
+    })();
+</script>
+
+{% schema %}
+{
+    "name": "Spaces Hero",
+    "tag": "section",
+    "class": "spaces-hero-section",
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "background_image",
+            "label": "Background Image"
+        },
+        {
+            "type": "checkbox",
+            "id": "full_height",
+            "label": "Full Screen Height",
+            "default": true,
+            "info": "Only affects desktop. Mobile uses its own height setting."
+        },
+        {
+            "type": "range",
+            "id": "desktop_height",
+            "min": 40,
+            "max": 100,
+            "step": 5,
+            "unit": "vh",
+            "label": "Desktop Height",
+            "default": 80,
+            "info": "Used when Full Screen Height is disabled"
+        },
+        {
+            "type": "range",
+            "id": "mobile_height",
+            "min": 200,
+            "max": 800,
+            "step": 10,
+            "unit": "px",
+            "label": "Mobile Height",
+            "default": 400
+        },
+        {
+            "type": "header",
+            "content": "Hotspot Style"
+        },
+        {
+            "type": "color",
+            "id": "hotspot_background",
+            "label": "Hotspot Background",
+            "default": "rgba(128, 128, 128, 0.7)"
+        },
+        {
+            "type": "color",
+            "id": "hotspot_dot_color",
+            "label": "Hotspot Dot Color",
+            "default": "#ffffff"
+        },
+        {
+            "type": "range",
+            "id": "hotspot_size_desktop",
+            "min": 20,
+            "max": 50,
+            "step": 2,
+            "unit": "px",
+            "label": "Hotspot Size (Desktop)",
+            "default": 32
+        },
+        {
+            "type": "range",
+            "id": "hotspot_size_mobile",
+            "min": 18,
+            "max": 40,
+            "step": 2,
+            "unit": "px",
+            "label": "Hotspot Size (Mobile)",
+            "default": 28
+        },
+        {
+            "type": "checkbox",
+            "id": "always_show_cards",
+            "label": "Always Show Product Cards (Desktop)",
+            "default": false,
+            "info": "Show cards permanently on screens 900px and above"
+        },
+        {
+            "type": "checkbox",
+            "id": "always_show_cards_mobile",
+            "label": "Always Show Product Cards (Mobile)",
+            "default": false,
+            "info": "Show cards permanently on screens below 900px"
+        },
+        {
+            "type": "header",
+            "content": "Padding"
+        },
+        {
+            "type": "range",
+            "id": "offset_top_desktop",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Desktop offset top",
+            "default": 0
+        },
+        {
+            "type": "range",
+            "id": "offset_bottom_desktop",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Desktop offset bottom",
+            "default": 0
+        },
+        {
+            "type": "range",
+            "id": "offset_top_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Mobile offset top",
+            "default": 0
+        },
+        {
+            "type": "range",
+            "id": "offset_bottom_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Mobile offset bottom",
+            "default": 0
+        }
+    ],
+    "blocks": [
+        {
+            "type": "hotspot",
+            "name": "Hotspot",
+            "settings": [
+                {
+                    "type": "product",
+                    "id": "product",
+                    "label": "Product"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "product_image",
+                    "label": "Custom Product Image",
+                    "info": "Optional: Override the product's featured image"
+                },
+                {
+                    "type": "header",
+                    "content": "Position (Desktop)"
+                },
+                {
+                    "type": "range",
+                    "id": "horizontal_position",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "default": 50,
+                    "unit": "%",
+                    "label": "Horizontal Position"
+                },
+                {
+                    "type": "range",
+                    "id": "vertical_position",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "default": 50,
+                    "unit": "%",
+                    "label": "Vertical Position"
+                },
+                {
+                    "type": "header",
+                    "content": "Position (Mobile)"
+                },
+                {
+                    "type": "range",
+                    "id": "horizontal_position_mobile",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "default": 50,
+                    "unit": "%",
+                    "label": "Horizontal Position"
+                },
+                {
+                    "type": "range",
+                    "id": "vertical_position_mobile",
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "default": 50,
+                    "unit": "%",
+                    "label": "Vertical Position"
+                },
+                {
+                    "type": "header",
+                    "content": "Card Options"
+                },
+                {
+                    "type": "select",
+                    "id": "card_position",
+                    "label": "Card Position",
+                    "default": "auto",
+                    "options": [
+                        { "value": "auto", "label": "Auto (based on vertical position)" },
+                        { "value": "top", "label": "Above Hotspot" },
+                        { "value": "bottom", "label": "Below Hotspot" }
+                    ]
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Spaces Hero",
+            "blocks": [
+                { "type": "hotspot" },
+                { "type": "hotspot" },
+                { "type": "hotspot" }
+            ]
+        }
+    ]
+}
+{% endschema %}

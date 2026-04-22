@@ -1,0 +1,690 @@
+{% schema %}
+{
+  "name": "Product Reviews",
+  "settings": [
+    {
+      "type": "text",
+      "id": "Section-heading",
+      "label": "Section Heading",
+      "default": "Customer Reviews"
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size_desktop",
+      "min": 16,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Font Size (Desktop)",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size_mobile",
+      "min": 14,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Font Size (Mobile)",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "heading_bottom_spacing",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Heading Bottom Spacing",
+      "default": 24
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Section Title",
+      "default": "Overall rating for"
+    },
+    {
+      "type": "text",
+      "id": "product_title",
+      "label": "Product Title",
+      "default": "Product Name"
+    },
+    {
+      "type": "image_picker",
+      "id": "image-1",
+      "label": "First Image"
+    },
+    {
+      "type": "url",
+      "id": "url-1",
+      "label": "First Image link"
+    },
+    {
+      "type": "image_picker",
+      "id": "image-2",
+      "label": " Second Image"
+    },
+    {
+      "type": "url",
+      "id": "url-2",
+      "label": "Second Image link"
+    },
+
+    {
+      "type": "image_picker",
+      "id": "image-3",
+      "label": " Third Image"
+    },
+    {
+      "type": "url",
+      "id": "url-3",
+      "label": "Third Image link"
+    },
+    {
+      "type": "image_picker",
+      "id": "image-4",
+      "label": "Fourth Image"
+    },
+    {
+      "type": "url",
+      "id": "url-4",
+      "label": "Fourth Image link"
+    },
+    {
+      "type": "range",
+      "id": "max_height",
+      "min": 300,
+      "max": 800,
+      "step": 50,
+      "unit": "px",
+      "label": "Reviews Container Height",
+      "default": 500
+    },
+    {
+      "type": "range",
+      "id": "rateing",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "label": "Rating Rate",
+      "default": 5
+    },
+    {
+      "type": "text",
+      "id": "total-review",
+      "label": "Total Review Text",
+      "default": "2986 Reviews"
+    },
+        {
+      "type": "text",
+      "id": "top-Selling",
+      "label": "Top Selling Products",
+      "default": "Hot Selling Froduct Of Week"
+    },
+    {
+      "type": "url",
+      "id": "collection",
+      "label": " Choose Collection Url"
+    },
+    {
+      "type": "image_picker",
+      "id": "image-collection",
+      "label": "Collection Image"
+    },
+
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "limit": 20,
+      "settings": [
+        {
+          "type": "text",
+          "id": "reviewer_name",
+          "label": "Reviewer Name",
+          "default": "Customer Name"
+        },
+        {
+          "type": "text",
+          "id": "review_title",
+          "label": "Review Title",
+          "default": "Review Heading"
+        },
+        {
+          "type": "range",
+          "id": "rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "label": "Rating",
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "review_text",
+          "label": "Review Content",
+          "default": "Share your review text here"
+        },
+        {
+          "type": "image_picker",
+          "id": "image-1",
+          "label": "First Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image-2",
+          "label": "Second Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image-3",
+          "label": "Third Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "image-4",
+          "label": "Fourth Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Reviews",
+      "blocks": [
+        {
+          "type": "review"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+<div class="section-{{ section.id }}-padding">
+  <div class="page-width">
+    <h2 class="customer-reviews-heading">{{ section.settings['Section-heading'] }}</h2>
+    <div class="review-section">
+      <div class="container">
+        <div class="flex review-flex">
+          <!-- Left Side - Rating Overview -->
+          <div class="rating-overview">
+            <h3 class="section-title">{{ section.settings.section_title }}</h3>
+            <h2 class="induscraft-review-title">{{ section.settings.product_title }}</h2>
+            <div class="review-image-container flex gap-1">
+              <a href="{{ section.settings.url-1 }}" target="_blank">
+                {% render 'picture',
+                  class: '',
+                  mobileSrc: section.settings['image-1'],
+                  desktopSrc: section.settings['image-1']
+                %}
+              </a>
+              <a href="{{ section.settings.url-2 }}" target="_blank">
+                {% render 'picture',
+                  class: '',
+                  mobileSrc: section.settings['image-2'],
+                  desktopSrc: section.settings['image-2']
+                %}
+              </a>
+              <a href="{{ section.settings.url-3 }}" target="_blank">
+                {% render 'picture',
+                  class: '',
+                  mobileSrc: section.settings['image-3'],
+                  desktopSrc: section.settings['image-3']
+                %}
+              </a>
+              <a href="{{ section.settings.url-4 }}" target="_blank">
+                {% render 'picture',
+                  class: '',
+                  mobileSrc: section.settings['image-4'],
+                  desktopSrc: section.settings['image-4']
+                %}
+              </a>
+            </div>
+
+            {% assign total_rating = 0 %}
+            {% assign review_count = section.blocks.size %}
+
+            {% if review_count > 0 %}
+              <div class="average-rating">
+                5
+                <span class="max-rating">/5</span>
+              </div>
+              <div class="flex gap-1">
+                <div class="rating-stars">
+                  {% for i in (1..5) %}
+                    {% if i <= section.settings.rating %}
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 14 14" fill="#eb442a">
+                        <path d="M11.2041 13.4847C11.2854 13.5324 11.3856 13.4614 11.364 13.3711L10.2665 8.76271C10.2575 8.72485 10.2707 8.68522 10.3008 8.65975L13.9628 5.56053C14.0345 5.49985 13.9962 5.3848 13.9017 5.37688L9.07419 4.97235C9.03456 4.96903 9.00007 4.94458 8.98455 4.90882L7.09882 0.56391C7.06184 0.478697 6.93818 0.478697 6.9012 0.56391L5.01547 4.90882C4.99995 4.94458 4.96545 4.96903 4.92583 4.97235L0.0982952 5.37688C0.00376339 5.3848 -0.034516 5.49985 0.0371876 5.56053L3.69925 8.65975C3.72934 8.68522 3.74253 8.72485 3.7335 8.76271L2.63591 13.3711C2.61442 13.4614 2.71463 13.5324 2.79589 13.4847L6.94457 11.0405C6.97866 11.0204 7.02134 11.0204 7.05544 11.0405L11.2041 13.4847Z" fill="#eb442a"></path>
+                      </svg>
+                    {% else %}
+
+                    {% endif %}
+                  {% endfor %}
+                </div>
+
+                <div class="review-count">{{ section.settings['total-review'] }}</div>
+              </div>
+              {% if  section.settings.collection  != blank %}
+                 <div class="h4 sel-heading">{{ section.settings.top-Selling }}</div>
+              <a href="{{ section.settings.collection }}" class="review-col-image">
+                {% render 'picture',
+                  class: '',
+                  mobileSrc: section.settings['image-collection'],
+                  desktopSrc: section.settings['image-collection']
+                %}
+
+                <div class="collection-view">View Products</div>
+              </a>
+            {% endif %}
+            {% endif %}
+          </div>
+
+          <!-- Right Side - Reviews List -->
+          <div class="reviews-container" style="max-height: {{ section.settings.max_height }}px;">
+            {% for block in section.blocks %}
+              {% if block.type == 'review' %}
+                <div class="review-card" {{ block.shopify_attributes }}>
+                  <div class="review-header">
+                    <div>
+                      <p class="reviewer-name">{{ block.settings.reviewer_name }}</p>
+                      <h3 class="review-title">{{ block.settings.review_title }}</h3>
+                    </div>
+                    <div class="rating">
+                      {% for i in (1..5) %}
+                        {% if i <= block.settings.rating %}
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 14 14"
+                            fill="#eb442a"
+                          >
+                            <path d="M11.2041 13.4847C11.2854 13.5324 11.3856 13.4614 11.364 13.3711L10.2665 8.76271C10.2575 8.72485 10.2707 8.68522 10.3008 8.65975L13.9628 5.56053C14.0345 5.49985 13.9962 5.3848 13.9017 5.37688L9.07419 4.97235C9.03456 4.96903 9.00007 4.94458 8.98455 4.90882L7.09882 0.56391C7.06184 0.478697 6.93818 0.478697 6.9012 0.56391L5.01547 4.90882C4.99995 4.94458 4.96545 4.96903 4.92583 4.97235L0.0982952 5.37688C0.00376339 5.3848 -0.034516 5.49985 0.0371876 5.56053L3.69925 8.65975C3.72934 8.68522 3.74253 8.72485 3.7335 8.76271L2.63591 13.3711C2.61442 13.4614 2.71463 13.5324 2.79589 13.4847L6.94457 11.0405C6.97866 11.0204 7.02134 11.0204 7.05544 11.0405L11.2041 13.4847Z" fill="#eb442a"></path>
+                          </svg>
+                        {% else %}
+
+                        {% endif %}
+                      {% endfor %}
+                    </div>
+                  </div>
+                  <p class="review-text">{{ block.settings.review_text }}</p>
+                  <div class="clint-images">
+                    <div class="clintimage">
+                      {% render 'picture',
+                        class: '',
+                        mobileSrc: block.settings['image-1'],
+                        desktopSrc: block.settings['image-1']
+                      %}
+                    </div>
+                    <div class="clintimage">
+                      {% render 'picture',
+                        class: '',
+                        mobileSrc: block.settings['image-2'],
+                        desktopSrc: block.settings['image-2']
+                      %}
+                    </div>
+                    <div class="clintimage">
+                      {% render 'picture',
+                        class: '',
+                        mobileSrc: block.settings['image-3'],
+                        desktopSrc: block.settings['image-3']
+                      %}
+                    </div>
+                    <div class="clintimage">
+                      {% render 'picture',
+                        class: '',
+                        mobileSrc: block.settings['image-4'],
+                        desktopSrc: block.settings['image-4']
+                      %}
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% style %}
+  .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    }
+
+    @media screen and (min-width: 750px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+
+    }
+    .review-flex {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 2rem;
+    }
+    .sel-heading{
+      padding-block:.5rem;
+    }
+    .collection-view{
+      text-align: center;
+      background-color: #eb442a;
+      color:#fff;
+      padding:.5rem;
+    }
+
+    .section-{{ section.id }}-padding .customer-reviews-heading {
+      text-align: center;
+      font-size: {{ section.settings.heading_font_size_mobile }}px;
+      margin-bottom: {{ section.settings.heading_bottom_spacing }}px;
+      line-height: 1.2;
+    }
+
+    @media screen and (min-width: 750px) {
+      .section-{{ section.id }}-padding .customer-reviews-heading {
+        font-size: {{ section.settings.heading_font_size_desktop }}px;
+      }
+    }
+
+    .review-section {
+      padding-bottom: 2rem;
+    }
+
+    .average-rating {
+      font-size: 4.8rem;
+      font-weight: bold;
+      color: #eb442a;
+    }
+    .induscraft-review-title {
+      font-size: 3.4rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    .clint-images{
+      display:flex;
+      gap:1rem;
+    }
+    .review-col-image{
+      display:block;
+      width:70%;
+      height:auto;
+    }
+    .review-col-image img{
+      width:100%;
+      height:70%;
+    }
+
+    .clintimage{
+      width:calc(25% - 10px);
+    }
+    .clintimage img{
+      height:auto;
+      width:100%;
+    }
+    .rating-overview {
+      width: 40%;
+      flex-shrink: 0;
+    }
+    .review-image-container img {
+      width: 80px;
+      height: auto;
+    }
+    .reviews-container {
+      width: 60%;
+      flex-grow: 1;
+    }
+
+    .max-rating {
+      font-size: 2rem;
+    }
+
+    .rating-stars {
+      font-size: 2rem;
+      color: #eb442a;
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .review-count {
+      color: #000;
+    }
+
+    .reviews-container {
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: #ff7f6f #eee;
+    }
+
+    .review-card {
+      background-color: #fff;
+      border: 1px solid #eee;
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+
+    .review-title {
+      font-weight: bold;
+      font-size: 1.125rem;
+    }
+
+    .reviewer-name {
+      color: #eb442a;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .rating {
+      color: #eb442a;
+      font-size: 2rem;
+    }
+
+    .review-text {
+      color: #4b5563;
+      font-size:12px;
+    }
+
+    .reviews-container::-webkit-scrollbar {
+      width: 8px;
+      height: 30%;
+      max-height: 30%;
+    }
+
+    .reviews-container::-webkit-scrollbar-track {
+      background: #eee;
+      border-radius: 4px;
+      height: 30%;
+      max-height: 30%;
+    }
+
+    .reviews-container::-webkit-scrollbar-thumb {
+      background-color: #ff7f6f;
+      border-radius: 4px;
+      height: 30%;
+      max-height: 30%;
+    }
+    .section-title{
+      color:#eb442a;
+    }
+    @media screen and (max-width: 990px) {
+      .review-flex {
+        gap: 1.5rem;
+      }
+      .rating-overview {
+        width: 35%;
+      }
+      .reviews-container {
+        width: 65%;
+      }
+      .average-rating {
+        font-size: 3.6rem;
+      }
+      .induscraft-review-title {
+        font-size: 2.6rem;
+      }
+      .review-col-image {
+        width: 100%;
+      }
+    }
+
+    @media screen and (max-width: 749px) {
+      .review-flex {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      .rating-overview,
+      .reviews-container {
+        width: 100%;
+      }
+      .rating svg {
+        width: 12px;
+        height: 12px;
+      }
+      .reviews-container {
+        max-height: 400px !important;
+        padding-top: 1.2rem;
+      }
+      .review-col-image {
+        width: 100%;
+        height: auto;
+      }
+      .average-rating {
+        font-size: 3rem;
+      }
+      .induscraft-review-title {
+        font-size: 2.2rem;
+      }
+    }
+{% endstyle %}
+
+<script>
+  // Create popup elements
+  const popupOverlay = document.createElement('div');
+  popupOverlay.className = 'popup-overlay';
+  popupOverlay.style.cssText = `
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  cursor: pointer;
+`;
+
+  const popupImage = document.createElement('img');
+  popupImage.className = 'popup-image';
+  popupImage.style.cssText = `
+  max-width: 90%;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 8px;
+  cursor: auto;
+`;
+
+  const closeButton = document.createElement('button');
+  closeButton.innerHTML = '×';
+  closeButton.className = 'popup-close';
+  closeButton.style.cssText = `
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 40px;
+  cursor: pointer;
+`;
+
+  popupOverlay.appendChild(popupImage);
+  popupOverlay.appendChild(closeButton);
+  document.body.appendChild(popupOverlay);
+
+  // Function to handle image click
+  function initializeImagePopup() {
+    const clientImages = document.querySelectorAll('.clintimage img');
+
+    clientImages.forEach((img) => {
+      img.style.cursor = 'pointer';
+
+      img.addEventListener('click', function (e) {
+        e.stopPropagation();
+        const imgSrc = this.getAttribute('src');
+        popupImage.src = imgSrc;
+        popupOverlay.style.display = 'flex';
+        document.body.style.overflow = 'hidden'; // Prevent scrolling when popup is open
+      });
+    });
+
+    // Close popup when clicking overlay or close button
+    popupOverlay.addEventListener('click', function () {
+      closePopup();
+    });
+
+    closeButton.addEventListener('click', function (e) {
+      e.stopPropagation();
+      closePopup();
+    });
+
+    // Prevent popup from closing when clicking the image
+    popupImage.addEventListener('click', function (e) {
+      e.stopPropagation();
+    });
+
+    // Close popup with escape key
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        closePopup();
+      }
+    });
+  }
+
+  function closePopup() {
+    popupOverlay.style.display = 'none';
+    document.body.style.overflow = ''; // Restore scrolling
+  }
+
+  // Initialize popup functionality when DOM is loaded
+  document.addEventListener('DOMContentLoaded', initializeImagePopup);
+
+  // Re-initialize for dynamic content (if reviews are loaded dynamically)
+  document.addEventListener('shopify:section:load', initializeImagePopup);
+</script>

@@ -1,0 +1,356 @@
+{% comment %}
+  Spaces Gallery - GSAP-powered image slider
+  Click left/right images to slide & grow them to center
+{% endcomment %}
+
+{{ 'section-spaces-gallery.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .spaces-gallery-{{ section.id }} {
+    min-height: {{ section.settings.mobile_height }}px;
+    background-color: {{ section.settings.bg_color }};
+    padding: {{ section.settings.padding_top_mobile }}px 0 {{ section.settings.padding_bottom_mobile }}px;
+  }
+
+  .spaces-gallery-{{ section.id }} .spaces-gallery__slides {
+    height: {{ section.settings.mobile_height | minus: 80 }}px;
+  }
+
+  .spaces-gallery-{{ section.id }} .spaces-gallery__slide {
+    border-radius: {{ section.settings.image_border_radius }}px;
+  }
+
+  @media screen and (min-width: 768px) {
+    .spaces-gallery-{{ section.id }} {
+      min-height: {{ section.settings.desktop_height }}px;
+      padding: {{ section.settings.padding_top_desktop }}px 0 {{ section.settings.padding_bottom_desktop }}px;
+    }
+
+    .spaces-gallery-{{ section.id }} .spaces-gallery__slides {
+      height: {{ section.settings.desktop_height | minus: 100 }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="spaces-gallery spaces-gallery-{{ section.id }}" data-section-id="{{ section.id }}">
+  <div class="spaces-gallery__wrapper">
+    <div class="spaces-gallery__slides js-spaces-gallery-slides">
+      {%- for block in section.blocks -%}
+        <div 
+          class="spaces-gallery__slide js-spaces-gallery-slide" 
+          data-index="{{ forloop.index0 }}"
+          {{ block.shopify_attributes }}
+        >
+          {%- if block.settings.image != blank -%}
+            {{ block.settings.image | image_url: width: 1200 | image_tag:
+              class: 'spaces-gallery__image',
+              widths: '400, 600, 800, 1000, 1200',
+              sizes: '(max-width: 768px) 80vw, 50vw',
+              loading: 'lazy'
+            }}
+          {%- else -%}
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'spaces-gallery__image placeholder-svg' }}
+          {%- endif -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const section = document.querySelector('.spaces-gallery-{{ section.id }}');
+    if (!section) return;
+
+    const slides = section.querySelectorAll('.js-spaces-gallery-slide');
+    if (slides.length === 0) return;
+
+    // Wait for GSAP to load
+    const checkGSAP = setInterval(function() {
+      if (typeof gsap !== 'undefined') {
+        clearInterval(checkGSAP);
+        initGallery();
+      }
+    }, 100);
+
+    function initGallery() {
+      let currentIndex = 0;
+      const totalSlides = slides.length;
+      const animDuration = {{ section.settings.animation_duration | divided_by: 1000.0 }};
+
+      // Sizing config
+      const config = {
+        desktop: {
+          activeWidth: 65,
+          activeHeight: 100,
+          sideWidth: 12,
+          sideHeight: 65,
+          farWidth: 12,
+          farHeight: 50,
+          sideOffset: 41,
+          farOffset: 55
+        },
+        mobile: {
+          activeWidth: 75,
+          activeHeight: 100,
+          sideWidth: 25,
+          sideHeight: 55,
+          farWidth: 15,
+          farHeight: 45,
+          sideOffset: 48,
+          farOffset: 58
+        }
+      };
+
+      function getConfig() {
+        return window.innerWidth >= 768 ? config.desktop : config.mobile;
+      }
+
+      function getSlidePosition(index) {
+        const cfg = getConfig();
+        const diff = index - currentIndex;
+        const containerWidth = section.querySelector('.spaces-gallery__slides').offsetWidth;
+        const containerHeight = section.querySelector('.spaces-gallery__slides').offsetHeight;
+
+        let position = { 
+          x: 0, 
+          width: 0, 
+          height: 0, 
+          opacity: 1, 
+          zIndex: 1,
+          pointerEvents: 'auto'
+        };
+
+        if (diff === 0) {
+          position.width = (containerWidth * cfg.activeWidth) / 100;
+          position.height = (containerHeight * cfg.activeHeight) / 100;
+          position.x = (containerWidth - position.width) / 2;
+          position.zIndex = 5;
+          position.pointerEvents = 'none';
+        } else if (diff === -1 || (diff === totalSlides - 1 && totalSlides > 2)) {
+          position.width = (containerWidth * cfg.sideWidth) / 100;
+          position.height = (containerHeight * cfg.sideHeight) / 100;
+          position.x = (containerWidth * (50 - cfg.sideOffset)) / 100 - position.width / 2;
+          position.zIndex = 3;
+        } else if (diff === 1 || (diff === -(totalSlides - 1) && totalSlides > 2)) {
+          position.width = (containerWidth * cfg.sideWidth) / 100;
+          position.height = (containerHeight * cfg.sideHeight) / 100;
+          position.x = (containerWidth * (50 + cfg.sideOffset)) / 100 - position.width / 2;
+          position.zIndex = 3;
+        } else if (diff === -2 || (diff === totalSlides - 2 && totalSlides > 3)) {
+          position.width = (containerWidth * cfg.farWidth) / 100;
+          position.height = (containerHeight * cfg.farHeight) / 100;
+          position.x = (containerWidth * (50 - cfg.farOffset)) / 100 - position.width / 2;
+          position.zIndex = 2;
+        } else if (diff === 2 || (diff === -(totalSlides - 2) && totalSlides > 3)) {
+          position.width = (containerWidth * cfg.farWidth) / 100;
+          position.height = (containerHeight * cfg.farHeight) / 100;
+          position.x = (containerWidth * (50 + cfg.farOffset)) / 100 - position.width / 2;
+          position.zIndex = 2;
+        } else {
+          position.opacity = 0;
+          position.width = (containerWidth * cfg.farWidth) / 100;
+          position.height = (containerHeight * cfg.farHeight) / 100;
+          position.x = diff < 0 ? -position.width : containerWidth;
+          position.pointerEvents = 'none';
+        }
+
+        return position;
+      }
+
+      function positionSlides(animate) {
+        slides.forEach(function(slide, index) {
+          const pos = getSlidePosition(index);
+          const topOffset = (section.querySelector('.spaces-gallery__slides').offsetHeight - pos.height) / 2;
+
+          if (animate) {
+            gsap.to(slide, {
+              left: pos.x,
+              top: topOffset,
+              width: pos.width,
+              height: pos.height,
+              opacity: pos.opacity,
+              zIndex: pos.zIndex,
+              duration: animDuration,
+              ease: 'power2.out'
+            });
+          } else {
+            slide.style.left = pos.x + 'px';
+            slide.style.top = topOffset + 'px';
+            slide.style.width = pos.width + 'px';
+            slide.style.height = pos.height + 'px';
+            slide.style.opacity = pos.opacity;
+            slide.style.zIndex = pos.zIndex;
+          }
+          slide.style.pointerEvents = pos.pointerEvents;
+        });
+      }
+
+      function goToSlide(index) {
+        if (index === currentIndex) return;
+        currentIndex = index;
+        if (currentIndex < 0) currentIndex = totalSlides - 1;
+        if (currentIndex >= totalSlides) currentIndex = 0;
+        positionSlides(true);
+      }
+
+      // Click handlers
+      slides.forEach(function(slide, index) {
+        slide.addEventListener('click', function() {
+          goToSlide(index);
+        });
+      });
+
+      // Initial positioning
+      positionSlides(false);
+
+      // Reposition on resize
+      let resizeTimeout;
+      window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(function() {
+          positionSlides(false);
+        }, 150);
+      });
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Spaces Gallery",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#FAF7F2"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "desktop_height",
+      "min": 400,
+      "max": 900,
+      "step": 50,
+      "unit": "px",
+      "label": "Desktop Height",
+      "default": 600
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "min": 300,
+      "max": 700,
+      "step": 50,
+      "unit": "px",
+      "label": "Mobile Height",
+      "default": 400
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "unit": "px",
+      "label": "Image Border Radius",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "animation_duration",
+      "min": 300,
+      "max": 1200,
+      "step": 100,
+      "unit": "ms",
+      "label": "Animation Duration",
+      "default": 600
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Top (Desktop)",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Bottom (Desktop)",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Top (Mobile)",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Bottom (Mobile)",
+      "default": 30
+    }
+  ],
+  "blocks": [
+    {
+      "type": "gallery_slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title (optional)"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link (optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Spaces Gallery",
+      "blocks": [
+        { "type": "gallery_slide" },
+        { "type": "gallery_slide" },
+        { "type": "gallery_slide" }
+      ]
+    }
+  ]
+}
+{% endschema %}

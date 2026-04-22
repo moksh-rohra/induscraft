@@ -1,0 +1,312 @@
+{% comment %}
+  FAQ Section - Accordion-style FAQ with two-column layout
+{% endcomment %}
+
+{{ 'section-faq.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .faq-section-{{ section.id }} {
+    background-color: {{ section.settings.bg_color }};
+    padding: {{ section.settings.padding_top_mobile }}px 20px {{ section.settings.padding_bottom_mobile }}px;
+  }
+
+  .faq-section-{{ section.id }} .faq-section__label {
+    color: {{ section.settings.text_color }};
+  }
+
+  .faq-section-{{ section.id }} .faq-section__label-icon {
+    background-color: {{ section.settings.accent_color }};
+  }
+
+  .faq-section-{{ section.id }} .faq-section__heading {
+    color: {{ section.settings.heading_color }};
+    font-size: {{ section.settings.heading_size_mobile }}px;
+  }
+
+  .faq-section-{{ section.id }} .faq-section__description {
+    color: {{ section.settings.text_color }};
+  }
+
+  .faq-section-{{ section.id }} .faq-section__question {
+    color: {{ section.settings.heading_color }};
+  }
+
+  .faq-section-{{ section.id }} .faq-section__question:hover {
+    color: {{ section.settings.accent_color }};
+  }
+
+  .faq-section-{{ section.id }} .faq-section__answer-content {
+    color: {{ section.settings.text_color }};
+  }
+
+  @media screen and (min-width: 768px) {
+    .faq-section-{{ section.id }} {
+      padding: {{ section.settings.padding_top_desktop }}px 40px {{ section.settings.padding_bottom_desktop }}px;
+    }
+
+    .faq-section-{{ section.id }} .faq-section__heading {
+      font-size: {{ section.settings.heading_size }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="faq-section faq-section-{{ section.id }}" data-section-id="{{ section.id }}">
+  <div class="faq-section__container page-width">
+    <!-- Left Column - Header -->
+    <div class="faq-section__header">
+      {%- if section.settings.label != blank -%}
+        <div class="faq-section__label">
+          <span class="faq-section__label-icon"></span>
+          {{ section.settings.label }}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <h2 class="faq-section__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.description != blank -%}
+        <p class="faq-section__description">{{ section.settings.description }}</p>
+      {%- endif -%}
+    </div>
+
+    <!-- Right Column - Accordion -->
+    <div class="faq-section__accordion">
+      {%- for block in section.blocks -%}
+        <div class="faq-section__item" {{ block.shopify_attributes }}>
+          <button class="faq-section__question" type="button" aria-expanded="false">
+            <span>{{ block.settings.question }}</span>
+            <span class="faq-section__icon"></span>
+          </button>
+          <div class="faq-section__answer">
+            <div class="faq-section__answer-content">
+              {{ block.settings.answer }}
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const section = document.querySelector('.faq-section-{{ section.id }}');
+    if (!section) return;
+
+    const items = section.querySelectorAll('.faq-section__item');
+    
+    items.forEach(function(item) {
+      const question = item.querySelector('.faq-section__question');
+      
+      question.addEventListener('click', function() {
+        const isActive = item.classList.contains('active');
+        
+        // Close all items
+        items.forEach(function(i) {
+          i.classList.remove('active');
+          i.querySelector('.faq-section__question').setAttribute('aria-expanded', 'false');
+        });
+        
+        // Open clicked item if it wasn't active
+        if (!isActive) {
+          item.classList.add('active');
+          question.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "FAQ Section",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "FAQ"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Your Questions, Answered"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Find quick answers to the most common questions about our handcrafted furniture and design services."
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color",
+      "default": "#E85A2C"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 32,
+      "max": 64,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size (Desktop)",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "min": 20,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size (Mobile)",
+      "default": 32
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 150,
+      "step": 10,
+      "unit": "px",
+      "label": "Padding Top (Desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 150,
+      "step": 10,
+      "unit": "px",
+      "label": "Padding Bottom (Desktop)",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "label": "Padding Top (Mobile)",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "label": "Padding Bottom (Mobile)",
+      "default": 50
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq_item",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "What makes Induscraft furniture unique?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "Each piece is handcrafted by skilled artisans using traditional techniques passed down through generations. We use premium quality materials and sustainable sourcing practices."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ Section",
+      "blocks": [
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "What materials do you use in your furniture?",
+            "answer": "We specialize in solid wood furniture using premium materials like Sheesham, Mango wood, and reclaimed teak. Each piece is carefully crafted to ensure durability and timeless beauty."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you offer custom furniture designs?",
+            "answer": "Yes! We love bringing unique visions to life. Our design team works closely with you to create custom pieces that perfectly fit your space and style preferences."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is the typical delivery timeline?",
+            "answer": "Standard items ship within 2-3 weeks. Custom orders typically take 4-6 weeks depending on complexity. We'll keep you updated throughout the entire process."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you provide interior design consultation?",
+            "answer": "Absolutely! Our experienced design consultants can help you plan your entire space, from furniture selection to layout optimization. Book a free consultation to get started."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "What is your return and warranty policy?",
+            "answer": "We offer a 30-day return policy for standard items and a 5-year warranty on all our furniture. We stand behind the quality of our craftsmanship."
+          }
+        },
+        {
+          "type": "faq_item",
+          "settings": {
+            "question": "Do you ship internationally?",
+            "answer": "Yes, we ship worldwide! Shipping costs and delivery times vary by location. Contact us for a custom quote for international orders."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

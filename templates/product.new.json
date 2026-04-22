@@ -1,0 +1,943 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "product-template": {
+      "type": "product-template",
+      "blocks": {
+        "badges": {
+          "type": "badges",
+          "settings": {}
+        },
+        "vendor": {
+          "type": "vendor",
+          "disabled": true,
+          "settings": {}
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "warranty_icon_ENTwJc": {
+          "type": "warranty_icon",
+          "settings": {
+            "warranty_metafield": "{{ product.metafields.custom.warranty_icon.value }}{{ product.metafields.custom.shipping_label.value }}{{ product.metafields.custom.delivery_time.value }} Warranty",
+            "icon_color": "#ffffff",
+            "background_color": "#ec4855",
+            "text_color": "#ffffff"
+          }
+        },
+        "custom_liquid_6cGfY7": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<ul class=\"product-short-desc\">\n  {% assign features = product.metafields.custom.short_description | newline_to_br | split: '<br />' %}\n  {% for feature in features %}\n    {% if feature != blank %}\n      <li>{{ feature }}</li>\n    {% endif %}\n  {% endfor %}\n</ul>"
+          }
+        },
+        "sales_point_AqACwt": {
+          "type": "sales_point",
+          "settings": {
+            "sales_point_text": ""
+          }
+        },
+        "sku_reviews": {
+          "type": "sku_reviews",
+          "settings": {
+            "show_sku": true,
+            "sku_text": "Art: %SKU%"
+          }
+        },
+        "options": {
+          "type": "options",
+          "settings": {
+            "show_labels": true,
+            "show_size_guide": true,
+            "variant_picker": "radio",
+            "size_guide_option_name": "Size",
+            "size_guide_tab_general_name": "Dimensions",
+            "size_guide_tab_model_name": "Parameters of the model in the photo",
+            "size_guide_title": "Size guide",
+            "size_guide_text": "Size Guide"
+          }
+        },
+        "inventory_status_QiBVdn": {
+          "type": "inventory_status",
+          "settings": {
+            "inv_low_stock_text": "Low stock",
+            "inv_high_stock_text": "In stock, ready to ship",
+            "low_stock_threshold": 10,
+            "show_inventory_quantity": true,
+            "text_color": "#2c2a28",
+            "low_stock_color": "#f5b231",
+            "high_stock_color": "#81b154",
+            "show_background": true,
+            "background_color": "#ececec",
+            "background_opacity": 35
+          }
+        },
+        "quantity": {
+          "type": "quantity",
+          "settings": {
+            "show_label": true
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "custom_liquid_LPHjLb": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "<img src=\"https://cdn.shopify.com/s/files/1/0661/0570/4633/files/Welcome_Offer_at_Induscraft_b6f75f3c-7fc1-462f-aa21-6e3fb4f0acac.png?v=1772249445\" class=\"offerbanner\">"
+          }
+        },
+        "add_to_cart": {
+          "type": "add_to_cart",
+          "settings": {
+            "button_type": "secondary",
+            "show_additional_buttons": true,
+            "show_enabled_payment_types": false,
+            "show_gift_card_recipient": true
+          }
+        },
+        "trust_badges_NzPwXq": {
+          "type": "trust_badges",
+          "settings": {
+            "badge1_icon": "shopify://shop_images/free-shipping.png",
+            "badge1_title": "Free Shipping Sitewide",
+            "badge1_subtitle": "",
+            "badge2_icon": "shopify://shop_images/trusted.png",
+            "badge2_title": "Trusted by Thousands",
+            "badge2_subtitle": "",
+            "badge3_icon": "shopify://shop_images/return-box.png",
+            "badge3_title": "Free Return",
+            "badge3_subtitle": "T&C Apply",
+            "icon_size": 100,
+            "icon_content_spacing": 0,
+            "title_font_size": 14,
+            "subtitle_font_size": 12,
+            "icon_color": "rgba(0,0,0,0)",
+            "icon_bg_color": "rgba(0,0,0,0)",
+            "text_color": "#1a1a1a",
+            "subtext_color": "#888888",
+            "padding_top": 0,
+            "padding_bottom": 0,
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "show_border_top": false,
+            "show_border_bottom": false,
+            "border_color": "#e5e5e5"
+          }
+        },
+        "gift_wrap_product_3WD9JQ": {
+          "type": "gift_wrap_product",
+          "settings": {}
+        },
+        "pickup_availability": {
+          "type": "pickup_availability",
+          "settings": {}
+        },
+        "drawers_Q344TG": {
+          "type": "drawers",
+          "settings": {
+            "show_description": true,
+            "description_toggle_text": "DESCRIPTION",
+            "description_drawer_title": "Description",
+            "shipping_and_returns": "",
+            "shipping_and_returns_toggle_text": "Shipping and returns",
+            "shipping_and_returns_drawer_title": "Shipping and returns",
+            "custom_drawer_title_1": "CARE & INSTRUCTIONS",
+            "custom_drawer_text_1": "<p>{{ product.metafields.descriptors.care_guide | metafield_tag }}</p>",
+            "custom_drawer_title_2": "DELIVERY & INSTALLATION",
+            "custom_drawer_text_2": "<p>{{ product.metafields.custom.delivery_and_installation | metafield_tag }}</p>",
+            "custom_drawer_title_3": "WARRANTY",
+            "custom_drawer_text_3": "<p>{{ product.metafields.custom.warranty | metafield_tag }}</p>"
+          }
+        },
+        "complementary": {
+          "type": "complementary",
+          "settings": {
+            "heading": "Pairs well with:"
+          }
+        },
+        "trust_badges_G6mUUM": {
+          "type": "trust_badges",
+          "settings": {
+            "badge1_icon": "shopify://shop_images/data-encryption.png",
+            "badge1_title": "Your data is safe & encrypted",
+            "badge1_subtitle": "",
+            "badge2_icon": "shopify://shop_images/payment-method.png",
+            "badge2_title": "Pay easily with major providers",
+            "badge2_subtitle": "",
+            "badge3_icon": "shopify://shop_images/ssl_1.png",
+            "badge3_title": "SSL Secured Checkout",
+            "badge3_subtitle": "",
+            "icon_size": 100,
+            "icon_content_spacing": 0,
+            "title_font_size": 14,
+            "subtitle_font_size": 12,
+            "icon_color": "rgba(0,0,0,0)",
+            "icon_bg_color": "rgba(0,0,0,0)",
+            "text_color": "#1a1a1a",
+            "subtext_color": "#888888",
+            "padding_top": 0,
+            "padding_bottom": 20,
+            "margin_top": 0,
+            "margin_bottom": 0,
+            "show_border_top": false,
+            "show_border_bottom": false,
+            "border_color": "#e5e5e5"
+          }
+        },
+        "payment_badges_wwfmEb": {
+          "type": "payment_badges",
+          "settings": {
+            "badge1_image": "shopify://shop_images/paypal.svg",
+            "badge1_alt": "",
+            "badge2_image": "shopify://shop_images/mastercard.svg",
+            "badge2_alt": "",
+            "badge3_image": "shopify://shop_images/visa.svg",
+            "badge3_alt": "",
+            "badge4_image": "shopify://shop_images/amazon-pay.svg",
+            "badge4_alt": "",
+            "badge5_image": "shopify://shop_images/google-pay.svg",
+            "badge5_alt": "",
+            "badge6_alt": "",
+            "badge7_alt": "",
+            "badge_size": 80,
+            "badge_size_mobile": 55,
+            "badge_spacing": 10,
+            "badge_radius": 8,
+            "alignment": "center",
+            "badge_bg_color": "#f5f5f5",
+            "padding_top": 16,
+            "padding_bottom": 16,
+            "margin_top": 0,
+            "margin_bottom": 0
+          }
+        }
+      },
+      "block_order": [
+        "badges",
+        "vendor",
+        "title",
+        "warranty_icon_ENTwJc",
+        "custom_liquid_6cGfY7",
+        "sales_point_AqACwt",
+        "sku_reviews",
+        "options",
+        "inventory_status_QiBVdn",
+        "quantity",
+        "price",
+        "custom_liquid_LPHjLb",
+        "add_to_cart",
+        "trust_badges_NzPwXq",
+        "gift_wrap_product_3WD9JQ",
+        "pickup_availability",
+        "drawers_Q344TG",
+        "complementary",
+        "trust_badges_G6mUUM",
+        "payment_badges_wwfmEb"
+      ],
+      "settings": {
+        "is_lazy": true,
+        "is_zoom_enabled": true,
+        "show_borders": true,
+        "show_arrows_mobile": true,
+        "enable_rounded_borders": true,
+        "media_layout": "carousel",
+        "thumbnails_position": "bottom",
+        "show_thumbnails_mobile": true,
+        "media_height": "full_size",
+        "stacked_smooth_scroll": true,
+        "is_enable_media_scroller": false,
+        "show_taxes_included": true,
+        "show_pay_installments": true,
+        "show_share_buttons": true,
+        "share_show_share_icon": true,
+        "share_show_facebook": false,
+        "share_show_twitter": false,
+        "share_show_instagram": true,
+        "share_show_whatsapp": true,
+        "show_sticky_add_to_cart": false,
+        "border_color": "#e6e6e6",
+        "ui_button_color": "#000000",
+        "ui_button_background_color": "#ffffff",
+        "offset_top_desktop": 0,
+        "offset_bottom_desktop": 100,
+        "offset_top_mobile": 0,
+        "offset_bottom_mobile": 32
+      }
+    },
+    "products_bundle_PHhCwV": {
+      "type": "products-bundle",
+      "disabled": true,
+      "name": "Products bundle",
+      "settings": {
+        "label": "",
+        "heading": "Select and save",
+        "subheading": "<p>Select 3 products and get 25% discount</p>",
+        "product_list": [],
+        "button_label": "Add to cart",
+        "button_disabled_label": "Choose products",
+        "button_type": "primary",
+        "show_total": true,
+        "border_color": "#e6e6e6",
+        "checkbox_color": "#000000",
+        "full_width": false,
+        "offset_top_desktop": 30,
+        "offset_bottom_desktop": 30,
+        "offset_top_mobile": 30,
+        "offset_bottom_mobile": 30
+      }
+    },
+    "simple-description": {
+      "type": "simple-description",
+      "disabled": true,
+      "settings": {
+        "heading": "Simple description",
+        "subheading": "Subheading",
+        "content": "<p>Add text to share customers about your store, products, brand.</p>",
+        "content_alignment": "left",
+        "block_alignment": "flex-start",
+        "offset_top_desktop": 100,
+        "offset_bottom_desktop": 100,
+        "offset_top_mobile": 50,
+        "offset_bottom_mobile": 50
+      }
+    },
+    "image_with_text_6Rx7cd": {
+      "type": "image-with-text",
+      "disabled": true,
+      "settings": {
+        "image_position": "left",
+        "text_alignment": "left",
+        "first_desktop_image": "shopify://shop_images/hemant.jpg",
+        "heading": "Built to Last, Designed to Inspire",
+        "subheading": "Quality Promise",
+        "text_content": "<p>Behind every piece of furniture lies our commitment to excellence. We source only the finest materials from sustainable suppliers and employ traditional techniques refined over generations. </p>",
+        "button_label": "Explore",
+        "button_aria_label": "Explore",
+        "button_url": "/",
+        "button_style": "primary",
+        "is_show_border_top": false,
+        "is_show_border_bottom": false,
+        "border_color": "#e6e6e6",
+        "full_width": true,
+        "offset_top_desktop": 0,
+        "offset_bottom_desktop": 100,
+        "offset_top_mobile": 0,
+        "offset_bottom_mobile": 60
+      }
+    },
+    "call_back_cta_banner_aEF66N": {
+      "type": "call-back-cta-banner",
+      "name": "Call-Back CTA Banner",
+      "settings": {
+        "heading": "Let’s Design It Together",
+        "description": "Have questions or need guidance? Our team is here to help you make the right choice.",
+        "button_1_label": "Request  a Call Back",
+        "enable_popup": true,
+        "button_1_link": "shopify://collections",
+        "button_1_style": "secondary",
+        "popup_heading": "Request a Call Back",
+        "popup_description": "Fill in your details and we'll get in touch with you shortly.",
+        "popup_submit_label": "Submit Request",
+        "button_2_label": "Call Us +91 7820955777",
+        "button_2_link": "tel:+91 7820955777",
+        "button_2_style": "primary",
+        "background": "linear-gradient(135deg, rgba(211, 47, 47, 1), rgba(255, 87, 34, 1) 25%, rgba(255, 152, 0, 1) 50%, rgba(255, 193, 7, 1) 75%, rgba(255, 179, 0, 1) 100%)",
+        "background_image": "shopify://shop_images/ctaforcallback.gif",
+        "overlay_color": "#595959",
+        "overlay_opacity": 10,
+        "text_color": "#ffffff",
+        "border_radius": 20,
+        "full_width": false,
+        "offset_top_desktop": 20,
+        "offset_bottom_desktop": 50,
+        "offset_top_mobile": 30,
+        "offset_bottom_mobile": 30
+      }
+    },
+    "product-recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "subheading": "",
+        "button_label": "",
+        "button_link": "shopify://collections/accent-chair",
+        "button_style": "primary",
+        "show_recommendations": true,
+        "enable_shopify_recommendations": true,
+        "collection": "",
+        "heading": "Recommendations",
+        "products_to_show": 6,
+        "show_recently_viewed": false,
+        "recently_viewed_label": "Recently viewed",
+        "recently_viewed_limit": 4,
+        "layout": "alternative",
+        "enable_cards_indent": false,
+        "full_width": true,
+        "offset_top_desktop": 0,
+        "offset_bottom_desktop": 100,
+        "offset_top_mobile": 0,
+        "offset_bottom_mobile": 50
+      }
+    },
+    "product_recommendations_qtfhkJ": {
+      "type": "product-recommendations",
+      "settings": {
+        "subheading": "",
+        "button_label": "",
+        "button_link": "shopify://collections/accent-chair",
+        "button_style": "primary",
+        "show_recommendations": false,
+        "enable_shopify_recommendations": true,
+        "collection": "accent-chair",
+        "heading": "Recommendations",
+        "products_to_show": 6,
+        "show_recently_viewed": true,
+        "recently_viewed_label": "Recently viewed",
+        "recently_viewed_limit": 8,
+        "layout": "alternative",
+        "enable_cards_indent": false,
+        "full_width": true,
+        "offset_top_desktop": 0,
+        "offset_bottom_desktop": 100,
+        "offset_top_mobile": 0,
+        "offset_bottom_mobile": 50
+      }
+    },
+    "video_reviews_MjYgLF": {
+      "type": "video-reviews",
+      "blocks": {
+        "vr_video_card_EUCA6h": {
+          "type": "vr_video_card",
+          "settings": {
+            "video": "shopify://files/videos/video-testimonial-12.mp4",
+            "video_url": "",
+            "reviewer_name": "Happy Customer"
+          }
+        },
+        "vr_video_card_KECV7m": {
+          "type": "vr_video_card",
+          "settings": {
+            "video": "shopify://files/videos/20260114_205827.mp4",
+            "video_url": "",
+            "reviewer_name": "Happy Customer"
+          }
+        },
+        "vr_video_card_RDfndH": {
+          "type": "vr_video_card",
+          "settings": {
+            "video": "shopify://files/videos/Video testimonial 13.mp4",
+            "video_url": "",
+            "reviewer_name": "Happy Customer"
+          }
+        },
+        "vr_video_card_AtjGkW": {
+          "type": "vr_video_card",
+          "settings": {
+            "video": "shopify://files/videos/WhatsApp Video 2026-01-28 at 16.42.48.mp4",
+            "video_url": "",
+            "reviewer_name": "Happy Customer"
+          }
+        },
+        "vr_video_card_rCPfNA": {
+          "type": "vr_video_card",
+          "settings": {
+            "video": "shopify://files/videos/WhatsApp Video 2026-01-28 at 16.46.43 (1).mp4",
+            "video_url": "",
+            "reviewer_name": "Happy Customer"
+          }
+        },
+        "vr_video_card_Uat3Ug": {
+          "type": "vr_video_card",
+          "settings": {
+            "video": "shopify://files/videos/WhatsApp Video 2026-01-28 at 16.46.42.mp4",
+            "video_url": "",
+            "reviewer_name": "Happy Customer"
+          }
+        },
+        "vr_video_card_AmTWwQ": {
+          "type": "vr_video_card",
+          "settings": {
+            "video": "shopify://files/videos/WhatsApp Video 2026-01-28 at 16.44.13.mp4",
+            "video_url": "",
+            "reviewer_name": "Happy Customer"
+          }
+        },
+        "vr_video_card_RqmVzJ": {
+          "type": "vr_video_card",
+          "settings": {
+            "video": "shopify://files/videos/WhatsApp Video 2026-01-28 at 16.46.44.mp4",
+            "video_url": "",
+            "reviewer_name": "Happy Customer"
+          }
+        },
+        "vr_video_card_wEekVt": {
+          "type": "vr_video_card",
+          "settings": {
+            "video": "shopify://files/videos/WhatsApp Video 2026-01-28 at 16.42.48 (1).mp4",
+            "video_url": "",
+            "reviewer_name": "Happy Customer"
+          }
+        },
+        "vr_video_card_gfdiQx": {
+          "type": "vr_video_card",
+          "settings": {
+            "video": "shopify://files/videos/WhatsApp Video 2026-01-28 at 16.46.45.mp4",
+            "video_url": "",
+            "reviewer_name": "Happy Customer"
+          }
+        },
+        "vr_video_card_qQU7xE": {
+          "type": "vr_video_card",
+          "settings": {
+            "video": "shopify://files/videos/WhatsApp Video 2026-01-28 at 16.46.43.mp4",
+            "video_url": "",
+            "reviewer_name": "Happy Customer"
+          }
+        },
+        "vr_video_card_67R7EB": {
+          "type": "vr_video_card",
+          "settings": {
+            "video": "shopify://files/videos/WhatsApp Video 2026-01-28 at 16.42.48 (2).mp4",
+            "video_url": "",
+            "reviewer_name": "Happy Customer"
+          }
+        },
+        "vr_video_card_CY9r94": {
+          "type": "vr_video_card",
+          "settings": {
+            "video": "shopify://files/videos/WhatsApp Video 2026-01-28 at 16.42.49.mp4",
+            "video_url": "",
+            "reviewer_name": ""
+          }
+        },
+        "vr_video_card_RXEUNx": {
+          "type": "vr_video_card",
+          "settings": {
+            "video": "shopify://files/videos/videoplayback_2.mp4",
+            "video_url": "",
+            "reviewer_name": ""
+          }
+        }
+      },
+      "block_order": [
+        "vr_video_card_EUCA6h",
+        "vr_video_card_KECV7m",
+        "vr_video_card_RDfndH",
+        "vr_video_card_AtjGkW",
+        "vr_video_card_rCPfNA",
+        "vr_video_card_Uat3Ug",
+        "vr_video_card_AmTWwQ",
+        "vr_video_card_RqmVzJ",
+        "vr_video_card_wEekVt",
+        "vr_video_card_gfdiQx",
+        "vr_video_card_qQU7xE",
+        "vr_video_card_67R7EB",
+        "vr_video_card_CY9r94",
+        "vr_video_card_RXEUNx"
+      ],
+      "name": "Video Reviews Marquee",
+      "settings": {
+        "heading": "Customer Video Reviews",
+        "heading_size": 38,
+        "heading_size_mobile": 22,
+        "heading_color": "#181210",
+        "heading_alignment": "left",
+        "card_width": 300,
+        "card_height": 450,
+        "card_width_mobile": 220,
+        "card_height_mobile": 350,
+        "scroll_speed": 120,
+        "pause_on_hover": false,
+        "bg_color": "rgba(0,0,0,0)",
+        "play_button_color": "#fdf0d5",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "google_reviews_aTMyag": {
+      "type": "google-reviews",
+      "blocks": {
+        "review_p8PanG": {
+          "type": "review",
+          "settings": {
+            "row_position": "top",
+            "author_image": "shopify://shop_images/unnamed_1.png",
+            "author_name": "Gunjan Baid",
+            "time_text": "a month ago",
+            "rating": 5,
+            "text": "Thanku induscraft for bringing my imagination into reality .\nBeing a marwari it's mandatory to enjoy food   with family, sitting on the floor, having one big thaal with lots and lots of dishes . But as our elders are aging it's difficult to sit on the floor and this makes a Little difference in our joy.\nSo u make an incredible dining set and hold the family together.\nThanku induscraft",
+            "review_image": "shopify://shop_images/review3.png"
+          }
+        },
+        "review_pRfCHV": {
+          "type": "review",
+          "settings": {
+            "row_position": "top",
+            "author_name": "Manish Kumar HPCL",
+            "time_text": "2 month ago",
+            "rating": 5,
+            "text": "The variety and quality of furniture here are absolutely superb! Every piece reflects excellent craftsmanship and attention to detail. Although the prices are slightly on the premium side, the overall experience justifies the investment. The service is prompt, and the shopping experience is smooth without any delays. If you're looking for quality furniture with a great selection, this is the place to go without hesitation!"
+          }
+        },
+        "review_YcN4w9": {
+          "type": "review",
+          "settings": {
+            "row_position": "top",
+            "author_name": "Rajendra Khatri",
+            "time_text": "5 years ago",
+            "rating": 5,
+            "text": "I visited Induscraft to see a double bed. I purchased king-size double bed with storage. It was really a great purchase for me. Very decent look and very high quality finishing attracted me so much that I also brought one dining table with four chairs design. It was delivered on promised time. It was great experience visiting Induscraft. Quality and finishing of both product is excellent.  I also ordered a customized dressing  table, which is yet to be delivered. It is now one-stop shop for all of my furniture solutions in future.",
+            "review_image": "shopify://shop_images/review5_2_c72fd280-fb97-4b6e-9144-7cfa1d2e6036.png",
+            "review_image_2": "shopify://shop_images/review5_7ee03161-9e17-49e2-90a3-dc08ef4c278e.png",
+            "review_image_3": "shopify://shop_images/review4_1cdb6dc1-8240-4d1e-b9fb-50cf723f52ca.png"
+          }
+        },
+        "review_mHLzAH": {
+          "type": "review",
+          "settings": {
+            "row_position": "top",
+            "author_name": "Dhawal Solanki",
+            "time_text": "6 month ago",
+            "rating": 5,
+            "text": "\"Induscraft\"\nA brand where Furniture is not just the product but feeling. The class, the elegance of the Furniture is unmatched.",
+            "review_image": "shopify://shop_images/review6.png",
+            "review_image_2": "shopify://shop_images/review7.png"
+          }
+        },
+        "review_y7BFna": {
+          "type": "review",
+          "settings": {
+            "row_position": "top",
+            "author_name": "Sandeep Singh Grover",
+            "time_text": "2 years ago",
+            "rating": 5,
+            "text": "Actually our association with Induscraft is almost for a decade when we visited their stall at a fair and were impressed with the SHESHAM product and then only decided to purchase sofa 3+1+1 with customised 3 seater satty (which is now part of cateloug of INDUSCRAFT) and still the same is pride of our living room.  Recently I ordered one king size double bed with mattress, alongwith two sofa chairs and a coffee table, as expected excellent quality and superb finish.  Feel proud to be associated with INDUSCRAFT.",
+            "review_image": "shopify://shop_images/review8.png"
+          }
+        },
+        "review_RgiYC8": {
+          "type": "review",
+          "settings": {
+            "row_position": "bottom",
+            "author_image": "shopify://shop_images/unnamed.png",
+            "author_name": "Nipun Kachhawaha",
+            "time_text": "2 month ago",
+            "rating": 5,
+            "text": "I recently got this bed and I am extremely happy with the quality and craftsmanship. The wood finish is premium, and the structure feels sturdy and durable. The headboard storage space is a very practical feature, allowing me to keep books, remotes, and other essentials neatly organized and within reach.\n\nThe mattress fits perfectly, and the bed looks elegant in the room, giving it a classy and modern feel. The drawers and side table add extra convenience for storing daily items. Overall, this bed is a perfect combination of style, comfort, and functionality. Highly recommended!",
+            "review_image": "shopify://shop_images/Screenshot_2026-01-20_103804.png",
+            "review_image_2": "shopify://shop_images/review2.png"
+          }
+        },
+        "review_C6TegB": {
+          "type": "review",
+          "settings": {
+            "row_position": "bottom",
+            "author_image": "shopify://shop_images/unnamed_2.png",
+            "author_name": "Varun khatri",
+            "time_text": "5 months ago",
+            "rating": 5,
+            "text": "Superb furniture from indus craft",
+            "review_image": "shopify://shop_images/review9.png",
+            "review_image_2": "shopify://shop_images/review9_1.png"
+          }
+        },
+        "review_6bKdtm": {
+          "type": "review",
+          "settings": {
+            "row_position": "bottom",
+            "author_name": "Neeraj Bohra",
+            "time_text": "a year ago",
+            "rating": 5,
+            "text": "Quality products,  Best services and pocket friendly prices.",
+            "review_image": "shopify://shop_images/review10.png",
+            "review_image_2": "shopify://shop_images/review11.png"
+          }
+        },
+        "review_Rmi6Dr": {
+          "type": "review",
+          "settings": {
+            "row_position": "bottom",
+            "author_image": "shopify://shop_images/unnamed_3.png",
+            "author_name": "Harsh Jain",
+            "time_text": "a year ago",
+            "rating": 5,
+            "text": "Top class quality and top class perfection with the best wood and style just amazing loving it everyday more and more .",
+            "review_image": "shopify://shop_images/review_3.png",
+            "review_image_2": "shopify://shop_images/review.png",
+            "review_image_3": "shopify://shop_images/review_2.png"
+          }
+        },
+        "review_9BqLfi": {
+          "type": "review",
+          "settings": {
+            "row_position": "bottom",
+            "author_name": "Sumona Nath",
+            "time_text": "3 years ago",
+            "rating": 5,
+            "text": "Bought these beautiful Sofas recently. Very happy with the buy.",
+            "review_image": "shopify://shop_images/review_5.png"
+          }
+        }
+      },
+      "block_order": [
+        "review_p8PanG",
+        "review_pRfCHV",
+        "review_YcN4w9",
+        "review_mHLzAH",
+        "review_y7BFna",
+        "review_RgiYC8",
+        "review_C6TegB",
+        "review_6bKdtm",
+        "review_Rmi6Dr",
+        "review_9BqLfi"
+      ],
+      "name": "Google Reviews Marquee",
+      "settings": {
+        "heading": "Loved by Customers Across India",
+        "row_layout": "double",
+        "heading_size": 38,
+        "heading_size_mobile": 22,
+        "heading_color": "#202124",
+        "heading_alignment": "left",
+        "row1_direction": "ltr",
+        "row1_speed": 150,
+        "row2_direction": "ltr",
+        "row2_speed": 120,
+        "bg_color": "rgba(0,0,0,0)",
+        "btn_text": "Leave a Review",
+        "btn_link": "",
+        "verified_badge": "shopify://shop_images/verified.png",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "product_marquee_q8XVpd": {
+      "type": "product-marquee",
+      "blocks": {
+        "image_QcxDi6": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/f31dd5a0-9821-4420-8622-68ed9452555a.jpg",
+            "image_height_desktop": 300,
+            "image_height_mobile": 200,
+            "width_mode": "custom",
+            "image_width_desktop": 300,
+            "image_width_mobile": 200,
+            "link": "shopify://products/aeron-sheesham-coffee-table-with-glass-top"
+          }
+        },
+        "image_iLeETi": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/771ef96c-137e-48ff-8c3c-807cb565159a.jpg",
+            "image_height_desktop": 300,
+            "image_height_mobile": 200,
+            "width_mode": "custom",
+            "image_width_desktop": 300,
+            "image_width_mobile": 200,
+            "link": "shopify://products/antilia-sheesham-coffee-table-with-2-stools"
+          }
+        },
+        "image_rPrb7r": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/3a6759a3-b506-42c3-adba-631bfeadc330.jpg",
+            "image_height_desktop": 300,
+            "image_height_mobile": 200,
+            "width_mode": "custom",
+            "image_width_desktop": 300,
+            "image_width_mobile": 200,
+            "link": "shopify://products/brass-fusion-6-seater-royal-dining-set"
+          }
+        },
+        "image_HQbJng": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/8291269f-9632-4ec9-9aab-11beddb0e30f.jpg",
+            "image_height_desktop": 300,
+            "image_height_mobile": 200,
+            "width_mode": "custom",
+            "image_width_desktop": 300,
+            "image_width_mobile": 200,
+            "link": "shopify://products/bohemian-solid-wood-floral-motif-bed"
+          }
+        },
+        "image_nwcKAU": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/a7a8400f-b2bd-4ec8-a542-411ea68c98ff.jpg",
+            "image_height_desktop": 300,
+            "image_height_mobile": 200,
+            "width_mode": "custom",
+            "image_width_desktop": 300,
+            "image_width_mobile": 200,
+            "link": "shopify://products/dema-sheesham-traditional-slatted-headboard-bed"
+          }
+        },
+        "image_gk9AKM": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/db9df8d0-00ed-4633-bef1-ebcbd5ca3f21.jpg",
+            "image_height_desktop": 300,
+            "image_height_mobile": 200,
+            "width_mode": "custom",
+            "image_width_desktop": 300,
+            "image_width_mobile": 200,
+            "link": ""
+          }
+        },
+        "image_3a8qz3": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/7aa1215e-910d-43e3-9d27-bfbad8447729.jpg",
+            "image_height_desktop": 300,
+            "image_height_mobile": 200,
+            "width_mode": "custom",
+            "image_width_desktop": 300,
+            "image_width_mobile": 200,
+            "link": "shopify://products/disa-sheesham-handcrafted-carved-bed"
+          }
+        },
+        "image_9qnLff": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/f045f3f4-a370-4c84-bb3d-72716f00fc85.jpg",
+            "image_height_desktop": 300,
+            "image_height_mobile": 200,
+            "width_mode": "custom",
+            "image_width_desktop": 300,
+            "image_width_mobile": 200,
+            "link": ""
+          }
+        },
+        "image_yETbBr": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/771ef96c-137e-48ff-8c3c-807cb565159a.jpg",
+            "image_height_desktop": 300,
+            "image_height_mobile": 200,
+            "width_mode": "custom",
+            "image_width_desktop": 300,
+            "image_width_mobile": 200,
+            "link": ""
+          }
+        },
+        "image_ThR7pi": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/2e52599f-6bbd-4d00-a17a-3ce9a3bcae57.jpg",
+            "image_height_desktop": 300,
+            "image_height_mobile": 200,
+            "width_mode": "custom",
+            "image_width_desktop": 300,
+            "image_width_mobile": 200,
+            "link": ""
+          }
+        },
+        "image_kfFLaU": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/f4772be0-3224-4964-8e85-c0453627b563.jpg",
+            "image_height_desktop": 300,
+            "image_height_mobile": 200,
+            "width_mode": "custom",
+            "image_width_desktop": 300,
+            "image_width_mobile": 200,
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_QcxDi6",
+        "image_iLeETi",
+        "image_rPrb7r",
+        "image_HQbJng",
+        "image_nwcKAU",
+        "image_gk9AKM",
+        "image_3a8qz3",
+        "image_9qnLff",
+        "image_yETbBr",
+        "image_ThR7pi",
+        "image_kfFLaU"
+      ],
+      "name": "Product Marquee",
+      "settings": {
+        "heading": "Styled by You. Crafted by Induscraft.",
+        "heading_alignment": "left",
+        "heading_font_size_desktop": 38,
+        "heading_font_size_mobile": 22,
+        "heading_font_weight": "500",
+        "heading_letter_spacing": 0,
+        "heading_bottom_spacing": 24,
+        "description": "Our Products in Real Homes",
+        "description_alignment": "left",
+        "description_bottom_spacing": 20,
+        "button_text": "Shop Now",
+        "button_link": "",
+        "button_style": "primary",
+        "animation_speed": 50,
+        "animation_direction": "right",
+        "pause_on_hover": true,
+        "max_image_width_desktop": 300,
+        "max_image_width_mobile": 200,
+        "image_gap_desktop": 32,
+        "image_gap_mobile": 12,
+        "image_border_radius": 20,
+        "enable_image_hover": false,
+        "background_color": "rgba(0,0,0,0)",
+        "enable_transparent_bg": false,
+        "heading_color": "#1a1a1a",
+        "text_color": "#666666",
+        "content_spacing_desktop": 48,
+        "content_spacing_mobile": 32,
+        "content_padding_left_desktop": 60,
+        "content_padding_right_desktop": 60,
+        "content_padding_left_mobile": 20,
+        "content_padding_right_mobile": 20,
+        "marquee_padding_left_desktop": 0,
+        "marquee_padding_right_desktop": 0,
+        "marquee_padding_left_mobile": 16,
+        "marquee_padding_right_mobile": 16,
+        "padding_top_desktop": 60,
+        "padding_bottom_desktop": 60,
+        "padding_top_mobile": 32,
+        "padding_bottom_mobile": 60
+      }
+    },
+    "custom_liquid_jDqqEz": {
+      "type": "custom-liquid",
+      "disabled": true,
+      "name": "Custom liquid",
+      "settings": {
+        "custom_liquid": "<img src=\"https://cdn.shopify.com/s/files/1/0661/0570/4633/files/Welcome_Offer_at_Induscraft.png?v=1771923204\" class=\"offerbanner\">",
+        "offset_top_desktop": 60,
+        "offset_bottom_desktop": 60,
+        "offset_top_mobile": 30,
+        "offset_bottom_mobile": 30
+      }
+    }
+  },
+  "order": [
+    "product-template",
+    "products_bundle_PHhCwV",
+    "simple-description",
+    "image_with_text_6Rx7cd",
+    "call_back_cta_banner_aEF66N",
+    "product-recommendations",
+    "product_recommendations_qtfhkJ",
+    "video_reviews_MjYgLF",
+    "google_reviews_aTMyag",
+    "product_marquee_q8XVpd",
+    "custom_liquid_jDqqEz"
+  ]
+}

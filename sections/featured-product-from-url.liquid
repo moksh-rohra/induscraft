@@ -1,0 +1,905 @@
+{%- comment -%}
+------------------------------------------------------------------------------
+  Section: Featured Product from URL
+  Custom two-panel layout:
+    Left  — Featured product card (image, title, price, Add to Cart)
+    Right — Similar products carousel (Recommendations API)
+  Activated by URL params: ?product={handle}&variant={id}&featured=1
+------------------------------------------------------------------------------
+{%- endcomment -%}
+
+{% style %}
+  /* ── Container ── */
+  .fpurl-{{ section.id }} {
+    display: none;
+    background: {{ section.settings.background_color }};
+    color: {{ section.settings.text_color }};
+    padding: {{ section.settings.padding_top_mobile }}px 20px {{ section.settings.padding_bottom_mobile }}px;
+  }
+
+  .fpurl-{{ section.id }}.is-visible {
+    display: block;
+    animation: fpurl-fadeIn 0.35s ease-out;
+  }
+
+  @keyframes fpurl-fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fpurl__wrap {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  /* ── LEFT: Featured product card ── */
+  .fpurl__hero {
+    display: flex;
+    flex-direction: row;
+    gap: 0;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #eee;
+    align-items: stretch;
+    min-height: 220px;
+  }
+
+  .fpurl__hero-img-wrap {
+    width: 50%;
+    flex-shrink: 0;
+    overflow: hidden;
+    background: #f8f8f8;
+    position: relative;
+  }
+
+  .fpurl__hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .fpurl__hero-info {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+    justify-content: start;
+  }
+
+  .fpurl__hero-title {
+    font-family: var(--font-heading-family, serif);
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.3;
+    margin: 0;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  a.fpurl__hero-title:hover { opacity: 0.75; }
+
+  .fpurl__hero-variant {
+    font-size: 13px;
+    opacity: 0.6;
+    margin: 0;
+  }
+
+  .fpurl__hero-prices {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 4px 0;
+  }
+
+  .fpurl__price {
+    font-family: var(--font-heading-family, serif);
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .fpurl__price--sale { color: var(--color-sale, #B13F3F); }
+
+  .fpurl__compare {
+    font-size: 14px;
+    text-decoration: line-through;
+    opacity: 0.45;
+    margin: 0;
+  }
+
+  .fpurl__badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 50px;
+    background: var(--color-sale, #B13F3F);
+    color: #fff;
+  }
+
+  .fpurl__hero-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  .fpurl__hero-actions .fpurl__btn--view {
+    display: none;
+  }
+
+  @media screen and (min-width: 768px) {
+    .fpurl__hero-actions .fpurl__btn--view {
+      display: inline-flex;
+    }
+  }
+
+  .fpurl__hero-actions .button-new {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 12px 20px;
+  }
+
+  .fpurl__hero-actions .button-new::after {
+    width: calc(100% - 10px);
+    height: calc(100% - 10px);
+  }
+
+  .fpurl__hero-actions .button-new.is-loading {
+    pointer-events: none;
+    opacity: 0.6;
+  }
+
+  /* ── RIGHT: Similar products ── */
+  .fpurl__similar {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .fpurl__similar-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .fpurl__similar-title {
+    font-family: var(--font-heading-family, serif);
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .fpurl__arrows {
+    display: flex;
+    gap: 6px;
+  }
+
+  .fpurl__arrow {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    background: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.2s, background 0.2s;
+    padding: 0;
+  }
+
+  .fpurl__arrow:hover {
+    border-color: #999;
+    background: #f5f5f5;
+  }
+
+  .fpurl__arrow:disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+
+  .fpurl__arrow svg {
+    width: 14px;
+    height: 14px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .fpurl__track-wrap {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .fpurl__track {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-snap-type: x mandatory;
+  }
+
+  .fpurl__track::-webkit-scrollbar { display: none; }
+
+  /* ── Similar product card ── */
+  .fpurl__card {
+    flex: 0 0 calc(50% - 6px);
+    min-width: 0;
+    scroll-snap-align: start;
+    overflow: hidden;
+    background: var(--product-card-footer-color, #fff);
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .fpurl__card-img-wrap {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: #f8f8f8;
+    position: relative;
+  }
+
+  .fpurl__card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: var(--product-card-object-fit, cover);
+    object-position: var(--img-desktop-pos, center);
+    display: block;
+    transition: opacity var(--timing-base, 0.4s);
+  }
+
+  .fpurl__card-info {
+    padding: 10px 8px 15px;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--product-card-footer-color, transparent);
+  }
+
+  .fpurl__card-name {
+    font-size: calc(var(--body-font-size, 14px) * 0.75);
+    font-weight: 400;
+    line-height: 1.5;
+    margin: 0 0 auto;
+    min-height: calc(var(--body-font-size, 14px) * 0.75 * 1.5 * 2);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    color: var(--settings-color-product-card-text, var(--color-gray, #666));
+    text-decoration: none;
+    word-break: break-word;
+    transition: opacity 0.4s ease-in-out;
+  }
+
+  .fpurl__card:hover .fpurl__card-name {
+    opacity: 0.6;
+  }
+
+  .fpurl__card-prices {
+    display: flex;
+    align-items: baseline;
+    gap: 7px;
+    flex-wrap: wrap;
+    margin-top: 5px;
+  }
+
+  .fpurl__card-price {
+    font-weight: 600;
+    font-size: calc(var(--body-font-size, 14px) * 0.75);
+    line-height: 1.5;
+    margin: 0;
+    color: var(--color-text-secondary, #2c2a28);
+  }
+
+  .fpurl__card-compare {
+    font-size: calc(var(--body-font-size, 14px) * 0.75);
+    font-weight: 400;
+    text-decoration: line-through;
+    color: var(--color-thirdly-text, #8b8885);
+    margin: 0;
+  }
+
+  /* ── Skeleton ── */
+  .fpurl__skeleton {
+    display: none;
+    background: {{ section.settings.background_color }};
+    padding: {{ section.settings.padding_top_mobile }}px 20px {{ section.settings.padding_bottom_mobile }}px;
+  }
+
+  .fpurl__skeleton.is-visible { display: block; }
+
+  .fpurl__sk-wrap {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .fpurl__sk-hero {
+    display: flex;
+    flex-direction: row;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #eee;
+    background: #fff;
+    min-height: 180px;
+  }
+
+  .fpurl__sk-img {
+    width: 50%;
+    flex-shrink: 0;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: fpurl-shimmer 1.5s infinite;
+  }
+
+  .fpurl__sk-lines {
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .fpurl__sk-line {
+    border-radius: 4px;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: fpurl-shimmer 1.5s infinite;
+  }
+
+  .fpurl__sk-line--t { height: 18px; width: 65%; }
+  .fpurl__sk-line--p { height: 20px; width: 30%; }
+  .fpurl__sk-line--b { height: 44px; width: 100%; border-radius: 50px; }
+
+  .fpurl__sk-sim {
+    display: flex;
+    gap: 12px;
+  }
+
+  .fpurl__sk-card {
+    flex: 0 0 calc(50% - 6px);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #eee;
+    background: #fff;
+  }
+
+  .fpurl__sk-card-img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: fpurl-shimmer 1.5s infinite;
+  }
+
+  .fpurl__sk-card-lines {
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .fpurl__sk-card-l {
+    height: 12px;
+    border-radius: 3px;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: fpurl-shimmer 1.5s infinite;
+  }
+
+  @keyframes fpurl-shimmer {
+    from { background-position: 200% 0; }
+    to { background-position: -200% 0; }
+  }
+
+  /* ── Desktop ── */
+  @media screen and (min-width: 768px) {
+    .fpurl-{{ section.id }} {
+      padding: {{ section.settings.padding_top_desktop }}px 40px {{ section.settings.padding_bottom_desktop }}px;
+    }
+
+    .fpurl__wrap {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+
+    .fpurl__hero {
+      width: 40%;
+      flex-shrink: 0;
+      position: sticky;
+      top: 20px;
+      min-height: 280px;
+    }
+
+    .fpurl__similar {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .fpurl__similar-title { font-size: 18px; }
+
+    .fpurl__card {
+      flex: 0 0 calc(50% - 6px);
+    }
+
+    .fpurl__hero-title { font-size: 20px; }
+    .fpurl__price { font-size: 18px; }
+
+    .fpurl__skeleton {
+      padding: {{ section.settings.padding_top_desktop }}px 40px {{ section.settings.padding_bottom_desktop }}px;
+    }
+
+    .fpurl__sk-wrap { flex-direction: row; }
+    .fpurl__sk-hero { width: 40%; flex-shrink: 0; }
+    .fpurl__sk-sim { flex: 1; }
+    .fpurl__sk-card { flex: 0 0 calc(50% - 6px); }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .fpurl__card {
+      flex: 0 0 calc(33.333% - 8px);
+    }
+
+    .fpurl__sk-card { flex: 0 0 calc(33.333% - 8px); }
+
+    .fpurl__hero-title { font-size: 24px; }
+    .fpurl__similar-title { font-size: 20px; }
+  }
+
+  @media screen and (min-width: 1200px) {
+    .fpurl__hero {
+      width: 50%;
+      min-height: 300px;
+    }
+
+    .fpurl__hero-title { font-size: 34px; }
+    .fpurl__price { font-size: 22px; }
+    .fpurl__similar-title { font-size: 22px; }
+
+    .fpurl__card {
+      flex: 0 0 calc(25% - 9px);
+    }
+
+    .fpurl__sk-hero { width: 50%; }
+    .fpurl__sk-card { flex: 0 0 calc(25% - 9px); }
+  }
+{% endstyle %}
+
+<!-- Skeleton -->
+<div class="fpurl__skeleton" id="fpurl-sk-{{ section.id }}">
+  <div class="fpurl__sk-wrap">
+    <div class="fpurl__sk-hero">
+      <div class="fpurl__sk-img"></div>
+      <div class="fpurl__sk-lines">
+        <div class="fpurl__sk-line fpurl__sk-line--t"></div>
+        <div class="fpurl__sk-line fpurl__sk-line--p"></div>
+        <div class="fpurl__sk-line fpurl__sk-line--b"></div>
+      </div>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;gap:16px;">
+      <div class="fpurl__sk-line" style="height:24px;width:45%;"></div>
+      <div class="fpurl__sk-sim">
+        <div class="fpurl__sk-card">
+          <div class="fpurl__sk-card-img"></div>
+          <div class="fpurl__sk-card-lines">
+            <div class="fpurl__sk-card-l" style="width:80%;"></div>
+            <div class="fpurl__sk-card-l" style="width:40%;"></div>
+          </div>
+        </div>
+        <div class="fpurl__sk-card">
+          <div class="fpurl__sk-card-img"></div>
+          <div class="fpurl__sk-card-lines">
+            <div class="fpurl__sk-card-l" style="width:70%;"></div>
+            <div class="fpurl__sk-card-l" style="width:35%;"></div>
+          </div>
+        </div>
+        <div class="fpurl__sk-card" style="display:none;">
+          <div class="fpurl__sk-card-img"></div>
+          <div class="fpurl__sk-card-lines">
+            <div class="fpurl__sk-card-l" style="width:75%;"></div>
+            <div class="fpurl__sk-card-l" style="width:45%;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Main content -->
+<div class="fpurl-{{ section.id }}" id="fpurl-{{ section.id }}">
+  <div class="fpurl__wrap">
+    <div class="fpurl__hero" id="fpurl-hero-{{ section.id }}"></div>
+    <div class="fpurl__similar" id="fpurl-sim-{{ section.id }}"></div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var productHandle = params.get('product');
+  var variantId = params.get('variant');
+  var featured = params.get('featured');
+
+  if (featured !== '1' || !productHandle) return;
+
+  var sectionId = {{ section.id | json }};
+  var skeleton = document.getElementById('fpurl-sk-' + sectionId);
+  var container = document.getElementById('fpurl-' + sectionId);
+  var heroEl = document.getElementById('fpurl-hero-' + sectionId);
+  var simEl = document.getElementById('fpurl-sim-' + sectionId);
+  var moneyFormat = {{ shop.money_format | json }};
+  var atcLabel = {{ section.settings.atc_label | json }};
+  var viewLabel = {{ section.settings.view_label | json }};
+  var simHeading = {{ section.settings.similar_heading | json }};
+  var atcBtnStyle = {{ section.settings.atc_button_style | json }};
+  var viewBtnStyle = {{ section.settings.view_button_style | json }};
+
+  skeleton.classList.add('is-visible');
+
+  /* ── Money formatter ── */
+  function formatMoney(cents, fmt) {
+    if (typeof cents === 'string') cents = cents.replace('.', '');
+    var rx = /\{\{\s*(\w+)\s*\}\}/;
+    var f = fmt || '₹{{amount}}';
+    var v = '';
+    function ic(n) {
+      var s = n.toString(), l = s.substring(s.length - 3), o = s.substring(0, s.length - 3);
+      if (o !== '') l = ',' + l;
+      return o.replace(/\B(?=(\d{2})+(?!\d))/g, ',') + l;
+    }
+    switch (f.match(rx)[1]) {
+      case 'amount': v = ic((cents / 100).toFixed(2)); break;
+      case 'amount_no_decimals': v = ic(Math.floor(cents / 100)); break;
+      default: v = ic((cents / 100).toFixed(2));
+    }
+    return f.replace(rx, v);
+  }
+
+  function esc(s) {
+    var d = document.createElement('div');
+    d.appendChild(document.createTextNode(s || ''));
+    return d.innerHTML;
+  }
+
+  function imgSize(src, size) {
+    if (!src) return '';
+    return src.replace(/(\.\w+)(\?|$)/, '_' + size + '$1$2');
+  }
+
+  /* ── Render hero product card ── */
+  function renderHero(product, variant) {
+    var img = '';
+    if (variant.featured_image && variant.featured_image.src) img = variant.featured_image.src;
+    else if (product.image && product.image.src) img = product.image.src;
+    else if (product.images && product.images.length) img = product.images[0].src;
+    img = imgSize(img, '600x');
+
+    var priceCents = Math.round(parseFloat(variant.price) * 100);
+    var onSale = variant.compare_at_price && parseFloat(variant.compare_at_price) > parseFloat(variant.price);
+    var priceH = '';
+
+    if (onSale) {
+      var compCents = Math.round(parseFloat(variant.compare_at_price) * 100);
+      var disc = Math.round((1 - parseFloat(variant.price) / parseFloat(variant.compare_at_price)) * 100);
+      priceH += '<span class="fpurl__price fpurl__price--sale">' + formatMoney(priceCents, moneyFormat) + '</span>';
+      priceH += '<span class="fpurl__compare">' + formatMoney(compCents, moneyFormat) + '</span>';
+      priceH += '<span class="fpurl__badge">-' + disc + '%</span>';
+    } else {
+      priceH += '<span class="fpurl__price">' + formatMoney(priceCents, moneyFormat) + '</span>';
+    }
+
+    var varH = '';
+    if (variant.title && variant.title !== 'Default Title') {
+      varH = '<p class="fpurl__hero-variant">' + esc(variant.title) + '</p>';
+    }
+
+    var productUrl = '/products/' + product.handle + (variant.id ? '?variant=' + variant.id : '');
+
+    var h = '';
+    if (img) {
+      h += '<div class="fpurl__hero-img-wrap">';
+      h += '<img class="fpurl__hero-img" src="' + img + '" alt="' + esc(product.title) + '" loading="eager" />';
+      h += '</div>';
+    }
+    h += '<div class="fpurl__hero-info">';
+    h += '<a href="' + productUrl + '" class="fpurl__hero-title">' + esc(product.title) + '</a>';
+    h += varH;
+    h += '<div class="fpurl__hero-prices">' + priceH + '</div>';
+    h += '<div class="fpurl__hero-actions">';
+    h += '<button class="button-new button--' + atcBtnStyle + ' fpurl__btn--atc" data-variant-id="' + variant.id + '">' + esc(atcLabel) + '</button>';
+    h += '<a href="' + productUrl + '" class="button-new button--' + viewBtnStyle + ' fpurl__btn--view">' + esc(viewLabel) + '</a>';
+    h += '</div>';
+    h += '</div>';
+
+    heroEl.innerHTML = h;
+
+    /* Add to Cart handler */
+    var atcBtn = heroEl.querySelector('.fpurl__btn--atc');
+    atcBtn.addEventListener('click', function() {
+      var btn = this;
+      var vid = btn.getAttribute('data-variant-id');
+      btn.classList.add('is-loading');
+      btn.textContent = 'Adding...';
+
+      fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items: [{ id: parseInt(vid), quantity: 1 }] })
+      })
+      .then(function(r) { return r.json(); })
+      .then(function() {
+        btn.textContent = 'Added ✓';
+        setTimeout(function() {
+          btn.classList.remove('is-loading');
+          btn.textContent = atcLabel;
+        }, 2000);
+        /* Update cart count if theme has a cart counter */
+        if (window.Shopify && window.Shopify.onCartUpdate) {
+          fetch('/cart.js').then(function(r) { return r.json(); }).then(function(cart) {
+            document.querySelectorAll('.js-cart-count, [data-cart-count]').forEach(function(el) {
+              el.textContent = cart.item_count;
+            });
+          });
+        }
+      })
+      .catch(function() {
+        btn.classList.remove('is-loading');
+        btn.textContent = atcLabel;
+      });
+    });
+  }
+
+  /* ── Render similar products section ── */
+  function renderSimilar(products) {
+    if (!products || products.length === 0) {
+      simEl.style.display = 'none';
+      return;
+    }
+
+    var h = '';
+    h += '<div class="fpurl__similar-head">';
+    h += '<h3 class="fpurl__similar-title">' + esc(simHeading) + '</h3>';
+    h += '<div class="fpurl__arrows">';
+    h += '<button class="fpurl__arrow fpurl__arrow--prev" aria-label="Previous" disabled>';
+    h += '<svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>';
+    h += '</button>';
+    h += '<button class="fpurl__arrow fpurl__arrow--next" aria-label="Next">';
+    h += '<svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg>';
+    h += '</button>';
+    h += '</div></div>';
+
+    h += '<div class="fpurl__track-wrap">';
+    h += '<div class="fpurl__track">';
+
+    products.forEach(function(p) {
+      var pImg = p.featured_image ? imgSize(p.featured_image, '400x') : '';
+      var pCents = Math.round(parseFloat(p.price) * 100);
+      var pUrl = '/products/' + p.handle;
+
+      h += '<a href="' + pUrl + '" class="fpurl__card">';
+      h += '<div class="fpurl__card-img-wrap">';
+      if (pImg) h += '<img class="fpurl__card-img" src="' + pImg + '" alt="' + esc(p.title) + '" loading="lazy" />';
+      h += '</div>';
+      h += '<div class="fpurl__card-info">';
+      h += '<p class="fpurl__card-name">' + esc(p.title) + '</p>';
+      h += '<div class="fpurl__card-prices">';
+      if (p.compare_at_price && parseFloat(p.compare_at_price) > parseFloat(p.price)) {
+        h += '<span class="fpurl__card-price fpurl__price--sale">' + formatMoney(pCents, moneyFormat) + '</span>';
+        h += '<span class="fpurl__card-compare">' + formatMoney(Math.round(parseFloat(p.compare_at_price) * 100), moneyFormat) + '</span>';
+      } else {
+        h += '<span class="fpurl__card-price">' + formatMoney(pCents, moneyFormat) + '</span>';
+      }
+      h += '</div></div></a>';
+    });
+
+    h += '</div></div>';
+    simEl.innerHTML = h;
+
+    /* Carousel scroll controls */
+    var track = simEl.querySelector('.fpurl__track');
+    var prev = simEl.querySelector('.fpurl__arrow--prev');
+    var next = simEl.querySelector('.fpurl__arrow--next');
+
+    function updateArrows() {
+      prev.disabled = track.scrollLeft <= 5;
+      next.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 5;
+    }
+
+    var scrollAmt = 280;
+    prev.addEventListener('click', function() {
+      track.scrollBy({ left: -scrollAmt, behavior: 'smooth' });
+    });
+    next.addEventListener('click', function() {
+      track.scrollBy({ left: scrollAmt, behavior: 'smooth' });
+    });
+    track.addEventListener('scroll', updateArrows);
+    setTimeout(updateArrows, 100);
+  }
+
+  /* ── Fetch product + recommendations ── */
+  fetch('/products/' + productHandle + '.json')
+    .then(function(r) {
+      if (!r.ok) throw new Error('Product not found');
+      return r.json();
+    })
+    .then(function(data) {
+      var product = data.product;
+      var variant = product.variants[0];
+
+      if (variantId) {
+        for (var i = 0; i < product.variants.length; i++) {
+          if (String(product.variants[i].id) === String(variantId)) {
+            variant = product.variants[i];
+            break;
+          }
+        }
+      }
+
+      renderHero(product, variant);
+
+      /* Fetch similar products */
+      return fetch('/recommendations/products.json?product_id=' + product.id + '&limit=10')
+        .then(function(r) { return r.json(); })
+        .then(function(recData) {
+          renderSimilar(recData.products || []);
+        })
+        .catch(function() {
+          /* If recommendations fail, hide similar section */
+          simEl.style.display = 'none';
+        });
+    })
+    .then(function() {
+      skeleton.classList.remove('is-visible');
+      container.classList.add('is-visible');
+    })
+    .catch(function(err) {
+      skeleton.classList.remove('is-visible');
+      console.warn('[Featured Product from URL]', err.message);
+    });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Featured Product from URL",
+  "tag": "section",
+  "class": "fpurl-section",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Shows a featured product card + similar products when URL contains ?product={handle}&variant={id}&featured=1"
+    },
+    {
+      "type": "header",
+      "content": "Featured Product"
+    },
+    {
+      "type": "text",
+      "id": "atc_label",
+      "label": "Add to Cart button label",
+      "default": "Add to Cart"
+    },
+    {
+      "type": "text",
+      "id": "view_label",
+      "label": "View Product button label",
+      "default": "View Product"
+    },
+    {
+      "type": "select",
+      "id": "atc_button_style",
+      "label": "Add to Cart button style",
+      "options": [
+        { "value": "primary", "label": "Primary" },
+        { "value": "secondary", "label": "Secondary" }
+      ],
+      "default": "secondary"
+    },
+    {
+      "type": "select",
+      "id": "view_button_style",
+      "label": "View Product button style",
+      "options": [
+        { "value": "primary", "label": "Primary" },
+        { "value": "secondary", "label": "Secondary" }
+      ],
+      "default": "primary"
+    },
+    {
+      "type": "header",
+      "content": "Similar Products"
+    },
+    {
+      "type": "text",
+      "id": "similar_heading",
+      "label": "Heading",
+      "default": "You May Also Like"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#f9f9f7"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#2c2a28"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Top (Desktop)",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Bottom (Desktop)",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Top (Mobile)",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Bottom (Mobile)",
+      "default": 20
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Product from URL"
+    }
+  ]
+}
+{% endschema %}
