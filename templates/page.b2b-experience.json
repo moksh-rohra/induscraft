@@ -1,1 +1,470 @@
-{"sections":{"hero":{"type":"b2b-hero","blocks":{"text1":{"type":"hero_text","settings":{"text":"SERVING","letter_spacing":-5,"letter_spacing_mobile":0,"font_size":200,"font_size_mobile":65,"font_weight":"bold"}},"desc1":{"type":"description","settings":{"description":"<p>At INDUSCRAFT we craft architectural experiences that blend innovation, functionality, and timeless aesthetics.<\/p>"}},"text2":{"type":"hero_text","settings":{"text":"B2B","letter_spacing":-5,"letter_spacing_mobile":0,"font_size":200,"font_size_mobile":60,"font_weight":"bold"}},"img1":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/ivett.jpg","caption_text":"HOSPITALITY","image_width":200,"image_height":150,"hover_reveal":true}},"text3":{"type":"hero_text","settings":{"text":"FOR","letter_spacing":-5,"letter_spacing_mobile":0,"font_size":200,"font_size_mobile":60,"font_weight":"bold"}},"image_WHKDRF":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/mike-van.jpg","caption_text":"COMMERCIAL","image_width":180,"image_height":150,"hover_reveal":true}},"text4":{"type":"hero_text","settings":{"text":"25","letter_spacing":-5,"letter_spacing_mobile":0,"font_size":200,"font_size_mobile":60,"font_weight":"bold"}},"image_ExiVxi":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/storiesofdesign.jpg","caption_text":"RESIDENTIAL","image_width":200,"image_height":150,"hover_reveal":true}},"text5":{"type":"hero_text","settings":{"text":"YEARS","letter_spacing":-5,"letter_spacing_mobile":0,"font_size":200,"font_size_mobile":60,"font_weight":"bold"}}},"block_order":["text1","desc1","text2","img1","text3","image_WHKDRF","text4","image_ExiVxi","text5"],"settings":{"bg_color":"#2a2420","bg_image":"shopify:\/\/shop_images\/hemant.jpg","bg_video":"shopify:\/\/files\/videos\/Induscraft-b2b.mp4","bg_overlay_opacity":30,"text_color":"#efefef","height_mobile":500}},"b2b_about_E6adAh":{"type":"b2b-about","name":"B2B About","settings":{"subheading":"COMMERCIAL SOLUTIONS","subheading_size":12,"subheading_size_mobile":12,"heading":"<p>At Induscraft, we design and manufacture furniture for hotels, restaurants, offices, and large-scale commercial projects. Backed by 25 years of experience, our craftsmanship, material integrity, and production capabilities ensure reliable delivery, consistent quality, and refined design across every project.<\/p>","heading_size":48,"heading_size_mobile":26,"pin_duration":100,"bg_color":"rgba(0,0,0,0)","subheading_color_reveal":"#000000","subheading_color_washed":"#0000001a","heading_color_reveal":"#000000","heading_color_washed":"#0000001a","margin_top_d":0,"margin_bottom_d":0,"margin_left_d":0,"margin_right_d":0,"padding_top_d":100,"padding_bottom_d":80,"padding_left_d":20,"padding_right_d":20,"margin_top_m":0,"margin_bottom_m":0,"margin_left_m":0,"margin_right_m":0,"padding_top_m":80,"padding_bottom_m":0,"padding_left_m":10,"padding_right_m":10}},"b2b_stats_fYWzF7":{"type":"b2b-stats","blocks":{"stat_8LFhTN":{"type":"stat","settings":{"number":"300+","prefix_text":"Commercial Projects Completed,","description":"from boutique spaces to multi-location developments worldwide."}},"stat_tGAW3x":{"type":"stat","settings":{"number":"25+","prefix_text":"Years in B2B Craftsmanship,","description":"delivering furniture solutions for hotels, offices, and large-scale projects."}},"stat_hUwWHP":{"type":"stat","settings":{"number":"98%","prefix_text":"On-Time Project Delivery,","description":"Built, tested, and installed exactly as promised."}}},"block_order":["stat_8LFhTN","stat_tGAW3x","stat_hUwWHP"],"name":"B2B Stats","settings":{"background_text":"INDUS","bg_text_size":400,"bg_text_bold":true,"min_height":400,"bg_color":"rgba(0,0,0,0)","bg_text_color":"#f2f2f2","number_color":"#3b3b3b","prefix_color":"#d33636","desc_color":"#646464","margin_top_d":0,"margin_bottom_d":0,"margin_left_d":0,"margin_right_d":0,"padding_top_d":0,"padding_bottom_d":0,"padding_left_d":20,"padding_right_d":20,"margin_top_m":0,"margin_bottom_m":0,"margin_left_m":0,"margin_right_m":0,"padding_top_m":60,"padding_bottom_m":60,"padding_left_m":20,"padding_right_m":20}},"big_stagger_text_njpgnp":{"type":"big-stagger-text","blocks":{"text_block_7UWHGk":{"type":"text_block","settings":{"text":"Here’s What We","text_color":"#3b3b3b","font_size_d":105,"font_size_m":36,"use_theme_font":false,"text_align":"left","is_bold":true}},"text_block_7yyiKr":{"type":"text_block","settings":{"text":"Deliver For B2B","text_color":"#3b3b3b","font_size_d":105,"font_size_m":36,"use_theme_font":false,"text_align":"left","is_bold":true}}},"block_order":["text_block_7UWHGk","text_block_7yyiKr"],"name":"Big Stagger Text","settings":{"bg_color":"rgba(0,0,0,0)","padding_top_d":60,"padding_bottom_d":0,"padding_top_m":20,"padding_bottom_m":60}},"work_showcase_tcy3w3":{"type":"work-showcase","blocks":{"showcase_item_ygqYkd":{"type":"showcase_item","settings":{"image":"shopify:\/\/shop_images\/25.png","overlay_color":"#000000","overlay_opacity":30,"heading":"RESTAURANTS & CAFÉS","center_heading_color":"#ffffff","center_heading_size_d":84,"center_heading_size_m":34,"footer_subheading":"B2B PROJECTS","footer_heading":"Custom Furniture for Restaurants & Cafés","footer_heading_color":"#ffffff","footer_heading_size_d":24,"footer_heading_size_m":18,"footer_heading_uppercase":false,"footer_desc":"Custom-crafted dining and lounge furniture designed for high-footfall hospitality spaces. From intimate cafés to large-format restaurants, our solutions combine durability, comfort, and brand-driven aesthetics built for continuous service environments.","footer_desc_color":"#ffffff","footer_desc_size_d":16,"footer_desc_size_m":14,"gallery_link_text":"View Restaurant & Café Projects","gallery_link_style":"secondary","gallery_image_1":"shopify:\/\/shop_images\/1_bfd080a3-1ff2-4c76-9d20-343f29efe04e.png","gallery_caption_1":"ARK Restaurant, Udaipur","gallery_image_2":"shopify:\/\/shop_images\/Untitled_design_9.png","gallery_caption_2":"Highland Park, Manali","gallery_image_3":"shopify:\/\/shop_images\/4_28c9c950-480c-48cb-a97b-b8dbe776c7f3.png","gallery_caption_3":"Lake View, Kodaikanal","gallery_caption_4":"","gallery_caption_5":"","gallery_caption_6":"Iskon","gallery_caption_7":"","gallery_caption_8":"","gallery_caption_9":"","gallery_caption_10":"","gallery_caption_11":"","gallery_caption_12":"","gallery_caption_13":"","gallery_caption_14":"","gallery_caption_15":""}},"showcase_item_83iFzF":{"type":"showcase_item","settings":{"image":"shopify:\/\/shop_images\/26.png","overlay_color":"#181210","overlay_opacity":30,"heading":"HOTELS & RESORTS","center_heading_color":"#ffffff","center_heading_size_d":100,"center_heading_size_m":24,"footer_subheading":"B2B PROJECTS","footer_heading":"Hotel & Resort Furniture Solutions","footer_heading_color":"#ffffff","footer_heading_size_d":24,"footer_heading_size_m":18,"footer_heading_uppercase":false,"footer_desc":"Comprehensive hospitality furniture programs for guest rooms, lobbies, dining zones, and outdoor spaces. Engineered for large-scale deployment, refined guest experience, and long-term structural performance.","footer_desc_color":"#ffffff","footer_desc_size_d":16,"footer_desc_size_m":14,"gallery_link_text":"Explore Hotel & Resort Projects","gallery_link_style":"secondary","gallery_image_1":"shopify:\/\/shop_images\/16911175_20090402440092129933.jpg","gallery_caption_1":"Aarya Lords Club, Rajkot","gallery_image_2":"shopify:\/\/shop_images\/324692221.jpg","gallery_caption_2":"Justa Rajputana Resort, Udaipur","gallery_image_3":"shopify:\/\/shop_images\/3_4c798728-0d07-47d1-87d8-271393476905.png","gallery_caption_3":"Justa Rajputana Resort, Udaipur","gallery_image_4":"shopify:\/\/shop_images\/4_4a70dfbd-1389-4c2c-8065-373c0889f919.png","gallery_caption_4":"Justa Rajputana Resort, Udaipur","gallery_image_5":"shopify:\/\/shop_images\/2_8a6672e7-3963-479f-90b4-b51d411218e2.png","gallery_caption_5":"Justa Rajputana Resort, Udaipur","gallery_image_6":"shopify:\/\/shop_images\/Untitled_design_7.png","gallery_caption_6":"Machan Hotel, Lonavala","gallery_image_7":"shopify:\/\/shop_images\/img20181123163930-largejpg.jpg","gallery_caption_7":"Sterling Holidays, Kodaikanal","gallery_image_8":"shopify:\/\/shop_images\/3_759b4727-e293-4e07-a558-30ee60cfbebc.png","gallery_caption_8":"Sterling Holidays, Kodaikanal","gallery_image_9":"shopify:\/\/shop_images\/1_7bd95d10-2902-4e62-929e-241540e521de.png","gallery_caption_9":"Sterling Holidays, Kodaikanal","gallery_image_10":"shopify:\/\/shop_images\/2_b49d5f44-3935-4798-8b7c-305f16ce541d.png","gallery_caption_10":"Sterling Holidays, Kodaikanal","gallery_image_11":"shopify:\/\/shop_images\/Untitled_design_8.png","gallery_caption_11":"Sayaji Hotel, Rajkot","gallery_caption_12":"","gallery_caption_13":"","gallery_caption_14":"","gallery_caption_15":""}}},"block_order":["showcase_item_ygqYkd","showcase_item_83iFzF"],"name":"Work Showcase","settings":{"bg_color":"rgba(0,0,0,0)","text_color":"#ffffff"}},"b2b_steps_izD44D":{"type":"b2b-steps","blocks":{"step_nfd9Fy":{"type":"step","settings":{"icon":"shopify:\/\/shop_images\/blueprint_1.png","title":"Project Brief & Scope","description":"Share your project requirements, timelines, quantities, and design intent.\nOur team reviews specifications to create a clear execution roadmap."}},"step_VRiUwM":{"type":"step","settings":{"icon":"shopify:\/\/shop_images\/creative-tools.png","title":"Design & Cost Planning","description":"We collaborate with architects and procurement teams to develop layouts, finishes, and detailed BOQs—ensuring cost clarity from day one."}},"step_ndqLef":{"type":"step","settings":{"icon":"shopify:\/\/shop_images\/electric-saw_1.png","title":"Manufacturing & Quality Control","description":"Furniture is crafted in-house using seasoned hardwoods, advanced machinery, and rigorous quality checks to meet commercial standards."}},"step_JLiQ3d":{"type":"step","settings":{"icon":"shopify:\/\/shop_images\/livingroom.png","title":"Delivery & Installation","description":"We manage logistics, on-site installation, and final inspection—so every space is handed over ready for operation."}},"cta_CUULBV":{"type":"cta","settings":{"bg_color":"#ffffff","heading":"LET’S START YOUR PROJECT","description":"Tell us about your requirements, volumes, and timelines — our B2B team will prepare a tailored proposal.","button_text":"Get a B2B Quote","button_link":"#b2b-contact-form-template--20676485185721__b2b_contact_form_FNfGew","button_style":"secondary"}}},"block_order":["step_nfd9Fy","step_VRiUwM","step_ndqLef","step_JLiQ3d","cta_CUULBV"],"name":"B2B Steps","settings":{"bg_color":"rgba(0,0,0,0)","subheading":"OUR B2B PROCESS","subheading_color":"#141414","subheading_size_d":12,"subheading_size_m":12,"heading":"A Proven, End-to-End Approach for Large-Scale Furniture Projects","heading_color":"#141414","heading_size_d":30,"heading_size_m":20}},"b2b_contact_form_FNfGew":{"type":"b2b-contact-form","name":"B2B Contact Form","settings":{"bg_color":"rgba(0,0,0,0)","heading":"Discuss Your Project With Us","heading_color":"#141414","heading_size_d":60,"heading_size_m":32,"description":"From hospitality to office spaces, our B2B experts are ready to collaborate on your next large-scale furniture requirement.","desc_color":"#666666","desc_size":16,"first_name_label":"First name","last_name_label":"Last name","email_label":"Email","message_label":"Message","label_color":"#141414","input_border_color":"#cccccc","button_text":"SUBMIT","button_style":"secondary","success_message":"Thank you for your message. We'll get back to you soon!"}}},"order":["hero","b2b_about_E6adAh","b2b_stats_fYWzF7","big_stagger_text_njpgnp","work_showcase_tcy3w3","b2b_steps_izD44D","b2b_contact_form_FNfGew"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "b2b-hero",
+      "blocks": {
+        "text1": {
+          "type": "hero_text",
+          "settings": {
+            "text": "SERVING",
+            "letter_spacing": -5,
+            "letter_spacing_mobile": 0,
+            "font_size": 200,
+            "font_size_mobile": 65,
+            "font_weight": "bold"
+          }
+        },
+        "desc1": {
+          "type": "description",
+          "settings": {
+            "description": "<p>At INDUSCRAFT we craft architectural experiences that blend innovation, functionality, and timeless aesthetics.</p>"
+          }
+        },
+        "text2": {
+          "type": "hero_text",
+          "settings": {
+            "text": "B2B",
+            "letter_spacing": -5,
+            "letter_spacing_mobile": 0,
+            "font_size": 200,
+            "font_size_mobile": 60,
+            "font_weight": "bold"
+          }
+        },
+        "img1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/ivett.jpg",
+            "caption_text": "HOSPITALITY",
+            "image_width": 200,
+            "image_height": 150,
+            "hover_reveal": true
+          }
+        },
+        "text3": {
+          "type": "hero_text",
+          "settings": {
+            "text": "FOR",
+            "letter_spacing": -5,
+            "letter_spacing_mobile": 0,
+            "font_size": 200,
+            "font_size_mobile": 60,
+            "font_weight": "bold"
+          }
+        },
+        "image_WHKDRF": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/mike-van.jpg",
+            "caption_text": "COMMERCIAL",
+            "image_width": 180,
+            "image_height": 150,
+            "hover_reveal": true
+          }
+        },
+        "text4": {
+          "type": "hero_text",
+          "settings": {
+            "text": "25",
+            "letter_spacing": -5,
+            "letter_spacing_mobile": 0,
+            "font_size": 200,
+            "font_size_mobile": 60,
+            "font_weight": "bold"
+          }
+        },
+        "image_ExiVxi": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/storiesofdesign.jpg",
+            "caption_text": "RESIDENTIAL",
+            "image_width": 200,
+            "image_height": 150,
+            "hover_reveal": true
+          }
+        },
+        "text5": {
+          "type": "hero_text",
+          "settings": {
+            "text": "YEARS",
+            "letter_spacing": -5,
+            "letter_spacing_mobile": 0,
+            "font_size": 200,
+            "font_size_mobile": 60,
+            "font_weight": "bold"
+          }
+        }
+      },
+      "block_order": [
+        "text1",
+        "desc1",
+        "text2",
+        "img1",
+        "text3",
+        "image_WHKDRF",
+        "text4",
+        "image_ExiVxi",
+        "text5"
+      ],
+      "settings": {
+        "bg_color": "#2a2420",
+        "bg_image": "shopify://shop_images/hemant.jpg",
+        "bg_video": "shopify://files/videos/Induscraft-b2b.mp4",
+        "bg_overlay_opacity": 30,
+        "text_color": "#efefef",
+        "height_mobile": 500
+      }
+    },
+    "b2b_about_E6adAh": {
+      "type": "b2b-about",
+      "name": "B2B About",
+      "settings": {
+        "subheading": "COMMERCIAL SOLUTIONS",
+        "subheading_size": 12,
+        "subheading_size_mobile": 12,
+        "heading": "<p>At Induscraft, we design and manufacture furniture for hotels, restaurants, offices, and large-scale commercial projects. Backed by 25 years of experience, our craftsmanship, material integrity, and production capabilities ensure reliable delivery, consistent quality, and refined design across every project.</p>",
+        "heading_size": 48,
+        "heading_size_mobile": 26,
+        "pin_duration": 100,
+        "bg_color": "rgba(0,0,0,0)",
+        "subheading_color_reveal": "#000000",
+        "subheading_color_washed": "#0000001a",
+        "heading_color_reveal": "#000000",
+        "heading_color_washed": "#0000001a",
+        "margin_top_d": 0,
+        "margin_bottom_d": 0,
+        "margin_left_d": 0,
+        "margin_right_d": 0,
+        "padding_top_d": 100,
+        "padding_bottom_d": 80,
+        "padding_left_d": 20,
+        "padding_right_d": 20,
+        "margin_top_m": 0,
+        "margin_bottom_m": 0,
+        "margin_left_m": 0,
+        "margin_right_m": 0,
+        "padding_top_m": 80,
+        "padding_bottom_m": 0,
+        "padding_left_m": 10,
+        "padding_right_m": 10
+      }
+    },
+    "b2b_stats_fYWzF7": {
+      "type": "b2b-stats",
+      "blocks": {
+        "stat_8LFhTN": {
+          "type": "stat",
+          "settings": {
+            "number": "300+",
+            "prefix_text": "Commercial Projects Completed,",
+            "description": "from boutique spaces to multi-location developments worldwide."
+          }
+        },
+        "stat_tGAW3x": {
+          "type": "stat",
+          "settings": {
+            "number": "25+",
+            "prefix_text": "Years in B2B Craftsmanship,",
+            "description": "delivering furniture solutions for hotels, offices, and large-scale projects."
+          }
+        },
+        "stat_hUwWHP": {
+          "type": "stat",
+          "settings": {
+            "number": "98%",
+            "prefix_text": "On-Time Project Delivery,",
+            "description": "Built, tested, and installed exactly as promised."
+          }
+        }
+      },
+      "block_order": [
+        "stat_8LFhTN",
+        "stat_tGAW3x",
+        "stat_hUwWHP"
+      ],
+      "name": "B2B Stats",
+      "settings": {
+        "background_text": "INDUS",
+        "bg_text_size": 400,
+        "bg_text_bold": true,
+        "min_height": 400,
+        "bg_color": "rgba(0,0,0,0)",
+        "bg_text_color": "#f2f2f2",
+        "number_color": "#3b3b3b",
+        "prefix_color": "#d33636",
+        "desc_color": "#646464",
+        "margin_top_d": 0,
+        "margin_bottom_d": 0,
+        "margin_left_d": 0,
+        "margin_right_d": 0,
+        "padding_top_d": 0,
+        "padding_bottom_d": 0,
+        "padding_left_d": 20,
+        "padding_right_d": 20,
+        "margin_top_m": 0,
+        "margin_bottom_m": 0,
+        "margin_left_m": 0,
+        "margin_right_m": 0,
+        "padding_top_m": 60,
+        "padding_bottom_m": 60,
+        "padding_left_m": 20,
+        "padding_right_m": 20
+      }
+    },
+    "big_stagger_text_njpgnp": {
+      "type": "big-stagger-text",
+      "blocks": {
+        "text_block_7UWHGk": {
+          "type": "text_block",
+          "settings": {
+            "text": "Here’s What We",
+            "text_color": "#3b3b3b",
+            "font_size_d": 105,
+            "font_size_m": 36,
+            "use_theme_font": false,
+            "text_align": "left",
+            "is_bold": true
+          }
+        },
+        "text_block_7yyiKr": {
+          "type": "text_block",
+          "settings": {
+            "text": "Deliver For B2B",
+            "text_color": "#3b3b3b",
+            "font_size_d": 105,
+            "font_size_m": 36,
+            "use_theme_font": false,
+            "text_align": "left",
+            "is_bold": true
+          }
+        }
+      },
+      "block_order": [
+        "text_block_7UWHGk",
+        "text_block_7yyiKr"
+      ],
+      "name": "Big Stagger Text",
+      "settings": {
+        "bg_color": "rgba(0,0,0,0)",
+        "padding_top_d": 60,
+        "padding_bottom_d": 0,
+        "padding_top_m": 20,
+        "padding_bottom_m": 60
+      }
+    },
+    "work_showcase_tcy3w3": {
+      "type": "work-showcase",
+      "blocks": {
+        "showcase_item_ygqYkd": {
+          "type": "showcase_item",
+          "settings": {
+            "image": "shopify://shop_images/25.png",
+            "overlay_color": "#000000",
+            "overlay_opacity": 30,
+            "heading": "RESTAURANTS & CAFÉS",
+            "center_heading_color": "#ffffff",
+            "center_heading_size_d": 72,
+            "center_heading_size_m": 34,
+            "footer_subheading": "B2B PROJECTS",
+            "footer_heading": "Custom Furniture for Restaurants & Cafés",
+            "footer_heading_color": "#ffffff",
+            "footer_heading_size_d": 24,
+            "footer_heading_size_m": 18,
+            "footer_heading_uppercase": false,
+            "footer_desc": "Custom-crafted dining and lounge furniture designed for high-footfall hospitality spaces. From intimate cafés to large-format restaurants, our solutions combine durability, comfort, and brand-driven aesthetics built for continuous service environments.",
+            "footer_desc_color": "#ffffff",
+            "footer_desc_size_d": 16,
+            "footer_desc_size_m": 14,
+            "gallery_link_text": "View Restaurant & Café Projects",
+            "gallery_link_style": "secondary",
+            "gallery_image_1": "shopify://shop_images/1_bfd080a3-1ff2-4c76-9d20-343f29efe04e.png",
+            "gallery_caption_1": "ARK Restaurant, Udaipur",
+            "gallery_image_2": "shopify://shop_images/Untitled_design_9.png",
+            "gallery_caption_2": "Highland Park, Manali",
+            "gallery_image_3": "shopify://shop_images/4_28c9c950-480c-48cb-a97b-b8dbe776c7f3.png",
+            "gallery_caption_3": "Lake View, Kodaikanal",
+            "gallery_caption_4": "",
+            "gallery_caption_5": "",
+            "gallery_caption_6": "Iskon",
+            "gallery_caption_7": "",
+            "gallery_caption_8": "",
+            "gallery_caption_9": "",
+            "gallery_caption_10": "",
+            "gallery_caption_11": "",
+            "gallery_caption_12": "",
+            "gallery_caption_13": "",
+            "gallery_caption_14": "",
+            "gallery_caption_15": ""
+          }
+        },
+        "showcase_item_83iFzF": {
+          "type": "showcase_item",
+          "settings": {
+            "image": "shopify://shop_images/26.png",
+            "overlay_color": "#181210",
+            "overlay_opacity": 30,
+            "heading": "HOTELS & RESORTS",
+            "center_heading_color": "#ffffff",
+            "center_heading_size_d": 100,
+            "center_heading_size_m": 24,
+            "footer_subheading": "B2B PROJECTS",
+            "footer_heading": "Hotel & Resort Furniture Solutions",
+            "footer_heading_color": "#ffffff",
+            "footer_heading_size_d": 24,
+            "footer_heading_size_m": 18,
+            "footer_heading_uppercase": false,
+            "footer_desc": "Comprehensive hospitality furniture programs for guest rooms, lobbies, dining zones, and outdoor spaces. Engineered for large-scale deployment, refined guest experience, and long-term structural performance.",
+            "footer_desc_color": "#ffffff",
+            "footer_desc_size_d": 16,
+            "footer_desc_size_m": 14,
+            "gallery_link_text": "Explore Hotel & Resort Projects",
+            "gallery_link_style": "secondary",
+            "gallery_image_1": "shopify://shop_images/16911175_20090402440092129933.jpg",
+            "gallery_caption_1": "Aarya Lords Club, Rajkot",
+            "gallery_image_2": "shopify://shop_images/324692221.jpg",
+            "gallery_caption_2": "Justa Rajputana Resort, Udaipur",
+            "gallery_image_3": "shopify://shop_images/3_4c798728-0d07-47d1-87d8-271393476905.png",
+            "gallery_caption_3": "Justa Rajputana Resort, Udaipur",
+            "gallery_image_4": "shopify://shop_images/4_4a70dfbd-1389-4c2c-8065-373c0889f919.png",
+            "gallery_caption_4": "Justa Rajputana Resort, Udaipur",
+            "gallery_image_5": "shopify://shop_images/2_8a6672e7-3963-479f-90b4-b51d411218e2.png",
+            "gallery_caption_5": "Justa Rajputana Resort, Udaipur",
+            "gallery_image_6": "shopify://shop_images/Untitled_design_7.png",
+            "gallery_caption_6": "Machan Hotel, Lonavala",
+            "gallery_image_7": "shopify://shop_images/img20181123163930-largejpg.jpg",
+            "gallery_caption_7": "Sterling Holidays, Kodaikanal",
+            "gallery_image_8": "shopify://shop_images/3_759b4727-e293-4e07-a558-30ee60cfbebc.png",
+            "gallery_caption_8": "Sterling Holidays, Kodaikanal",
+            "gallery_image_9": "shopify://shop_images/1_7bd95d10-2902-4e62-929e-241540e521de.png",
+            "gallery_caption_9": "Sterling Holidays, Kodaikanal",
+            "gallery_image_10": "shopify://shop_images/2_b49d5f44-3935-4798-8b7c-305f16ce541d.png",
+            "gallery_caption_10": "Sterling Holidays, Kodaikanal",
+            "gallery_image_11": "shopify://shop_images/Untitled_design_8.png",
+            "gallery_caption_11": "Sayaji Hotel, Rajkot",
+            "gallery_caption_12": "",
+            "gallery_caption_13": "",
+            "gallery_caption_14": "",
+            "gallery_caption_15": ""
+          }
+        }
+      },
+      "block_order": [
+        "showcase_item_ygqYkd",
+        "showcase_item_83iFzF"
+      ],
+      "name": "Work Showcase",
+      "settings": {
+        "bg_color": "rgba(0,0,0,0)",
+        "text_color": "#ffffff"
+      }
+    },
+    "b2b_steps_izD44D": {
+      "type": "b2b-steps",
+      "blocks": {
+        "step_nfd9Fy": {
+          "type": "step",
+          "settings": {
+            "icon": "shopify://shop_images/blueprint_1.png",
+            "title": "Project Brief & Scope",
+            "description": "Share your project requirements, timelines, quantities, and design intent.\nOur team reviews specifications to create a clear execution roadmap."
+          }
+        },
+        "step_VRiUwM": {
+          "type": "step",
+          "settings": {
+            "icon": "shopify://shop_images/creative-tools.png",
+            "title": "Design & Cost Planning",
+            "description": "We collaborate with architects and procurement teams to develop layouts, finishes, and detailed BOQs—ensuring cost clarity from day one."
+          }
+        },
+        "step_ndqLef": {
+          "type": "step",
+          "settings": {
+            "icon": "shopify://shop_images/electric-saw_1.png",
+            "title": "Manufacturing & Quality Control",
+            "description": "Furniture is crafted in-house using seasoned hardwoods, advanced machinery, and rigorous quality checks to meet commercial standards."
+          }
+        },
+        "step_JLiQ3d": {
+          "type": "step",
+          "settings": {
+            "icon": "shopify://shop_images/livingroom.png",
+            "title": "Delivery & Installation",
+            "description": "We manage logistics, on-site installation, and final inspection—so every space is handed over ready for operation."
+          }
+        },
+        "cta_CUULBV": {
+          "type": "cta",
+          "settings": {
+            "bg_color": "#ffffff",
+            "heading": "LET’S START YOUR PROJECT",
+            "description": "Tell us about your requirements, volumes, and timelines — our B2B team will prepare a tailored proposal.",
+            "button_text": "Get a B2B Quote",
+            "button_link": "#b2b-contact-form-template--20676485185721__b2b_contact_form_FNfGew",
+            "button_style": "secondary"
+          }
+        }
+      },
+      "block_order": [
+        "step_nfd9Fy",
+        "step_VRiUwM",
+        "step_ndqLef",
+        "step_JLiQ3d",
+        "cta_CUULBV"
+      ],
+      "name": "B2B Steps",
+      "settings": {
+        "bg_color": "rgba(0,0,0,0)",
+        "subheading": "OUR B2B PROCESS",
+        "subheading_color": "#141414",
+        "subheading_size_d": 12,
+        "subheading_size_m": 12,
+        "heading": "A Proven, End-to-End Approach for Large-Scale Furniture Projects",
+        "heading_color": "#141414",
+        "heading_size_d": 30,
+        "heading_size_m": 20
+      }
+    },
+    "b2b_contact_form_FNfGew": {
+      "type": "b2b-contact-form",
+      "name": "B2B Contact Form",
+      "settings": {
+        "bg_color": "rgba(0,0,0,0)",
+        "heading": "Discuss Your Project With Us",
+        "heading_color": "#141414",
+        "heading_size_d": 60,
+        "heading_size_m": 32,
+        "description": "From hospitality to office spaces, our B2B experts are ready to collaborate on your next large-scale furniture requirement.",
+        "desc_color": "#666666",
+        "desc_size": 16,
+        "first_name_label": "First name",
+        "last_name_label": "Last name",
+        "email_label": "Email",
+        "message_label": "Message",
+        "label_color": "#141414",
+        "input_border_color": "#cccccc",
+        "button_text": "SUBMIT",
+        "button_style": "secondary",
+        "success_message": "Thank you for your message. We'll get back to you soon!"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "b2b_about_E6adAh",
+    "b2b_stats_fYWzF7",
+    "big_stagger_text_njpgnp",
+    "work_showcase_tcy3w3",
+    "b2b_steps_izD44D",
+    "b2b_contact_form_FNfGew"
+  ]
+}
