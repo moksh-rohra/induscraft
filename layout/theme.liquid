@@ -187,8 +187,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			{{ content_for_layout }}
 		</main>
 
-		{%- sections 'footer-group' -%}
-
+		{%- section 'custom-footer' -%}
+		{%- section 'footer' -%}
 		{%- render 'page-preloader' -%}
 
 		{%- if settings.is_age_check_enable -%}
