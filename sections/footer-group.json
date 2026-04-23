@@ -1,10 +1,56 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "footer",
   "name": "Footer group",
   "sections": {
     "custom_footer": {
       "type": "custom-footer",
+      "blocks": {
+        "link_list_pJJgbF": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Useful Links",
+            "menu": ""
+          }
+        }
+      },
+      "block_order": [
+        "link_list_pJJgbF"
+      ],
       "settings": {
+        "intro_subheading": "Stay Connected",
+        "intro_heading": "Join our newsletter",
+        "intro_heading_size": 36,
+        "intro_description": "<p>Subscribe for latest updates and offers.</p>",
+        "intro_description_size": 16,
+        "contact_heading": "Business Inquires",
+        "contact_heading_size": 14,
+        "contact_email": "induscraft@gmail.com",
+        "contact_email_size": 24,
+        "contact_phone": "(+880) 72 611 3343",
+        "contact_phone_size": 24,
+        "contact_address": "",
+        "contact_address_size": 16,
+        "logo_text": "Induscraft.",
+        "full_width_logo": true,
+        "logo_font_size_desktop": 250,
+        "logo_font_size_mobile": 60,
+        "logo_text_color": "#1a1a1a",
+        "logo_image_width": 300,
+        "background_color": "#f4f4f0",
+        "text_color": "#1a1a1a",
+        "show_social": true,
+        "show_credits": true,
+        "padding_top": 80,
+        "padding_bottom": 40
       }
     }
   },
