@@ -2,13 +2,211 @@
   "type": "footer",
   "name": "Footer group",
   "sections": {
-    "custom_footer": {
-      "type": "custom-footer",
+    "sticky_button_f3kdCF": {
+      "type": "sticky-button",
+      "name": "Sticky Button",
       "settings": {
+        "button_text": "Have your own design? Click me!",
+        "button_link": "shopify://pages/custom-furniture",
+        "button_style": "secondary",
+        "open_new_tab": false,
+        "icon_size": 20,
+        "position": "bottom-left",
+        "offset_bottom": 30,
+        "offset_side": 30,
+        "offset_bottom_mobile": 15,
+        "offset_side_mobile": 15,
+        "show_on_desktop": true,
+        "show_on_mobile": true,
+        "hide_on_product_page": true,
+        "show_after_scroll": true,
+        "scroll_distance": 200,
+        "enable_pulse": false
+      }
+    },
+    "promotion_banner_popup_YqQCTc": {
+      "type": "promotion-banner-popup",
+      "disabled": true,
+      "name": "Promo Popup Modal",
+      "settings": {
+        "enable_popup": false,
+        "test_mode": false,
+        "trigger_type": "exit_intent",
+        "popup_delay": 3000,
+        "scroll_trigger_percent": 50,
+        "cookie_days": 3,
+        "image_desktop": "shopify://shop_images/option_7.jpg",
+        "show_badge": false,
+        "badge_text": "LIMITED OFFER",
+        "label": "HOLD ON",
+        "heading": "The fall season is here",
+        "description": "Check out <b>new Furnitures</b> that will keep your house alive.",
+        "button_text": "Shop Now",
+        "button_link": "shopify://collections",
+        "button_style": "secondary",
+        "glass_blur": 2,
+        "glass_opacity": 0.1,
+        "glass_color": "#fdf0d5",
+        "glass_width": 50,
+        "glass_height_mobile": 60,
+        "heading_size_desktop": 42,
+        "heading_size_mobile": 24,
+        "heading_weight": 800,
+        "description_size_desktop": 15,
+        "description_size_mobile": 14,
+        "overlay_color": "linear-gradient(270deg, rgba(0, 0, 0, 0.5), rgba(254, 10, 10, 0.7) 100%)",
+        "heading_color": "#181210",
+        "label_color": "#ec4855",
+        "text_color": "#444444",
+        "badge_text_color": "#ffffff",
+        "badge_bg_color": "linear-gradient(135deg, rgba(236, 72, 85, 1), rgba(238, 90, 36, 1) 100%)",
+        "button_text_color": "#ffffff",
+        "button_bg_color": "#000000",
+        "button_border_color": "#000000",
+        "button_text_hover": "#000000",
+        "button_bg_hover": "rgba(0,0,0,0)",
+        "button_border_hover": "#000000",
+        "button_radius": 4,
+        "close_bg_color": "#ffffffe6",
+        "close_icon_color": "#333333",
+        "close_bg_hover": "#ffffff",
+        "modal_max_width": 720,
+        "modal_height_desktop": 420,
+        "modal_height_mobile": 460,
+        "border_radius": 20,
+        "content_width": 55,
+        "content_padding_desktop": 50,
+        "content_padding_mobile": 30
+      }
+    },
+    "custom_footer_fAtM9x": {
+      "type": "custom-footer",
+      "blocks": {
+        "link_list_Y3KnEn": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Utility",
+            "menu": "footer-1"
+          }
+        },
+        "link_list_WrXTGe": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Useful Links",
+            "menu": "footer-4"
+          }
+        },
+        "link_list_zN6zUE": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Popular Searches",
+            "menu": "popular-searches"
+          }
+        }
+      },
+      "block_order": [
+        "link_list_Y3KnEn",
+        "link_list_WrXTGe",
+        "link_list_zN6zUE"
+      ],
+      "name": "Custom Footer",
+      "settings": {
+        "intro_subheading": "",
+        "intro_heading": "About",
+        "intro_heading_size": 35,
+        "intro_description": "<p>Induscraft creates finely crafted furniture rooted in Indian artistry and designed for modern living. From solid wood masterpieces to contemporary silhouettes, every piece is thoughtfully built for beauty, comfort, and lasting quality.</p>",
+        "intro_description_size": 14,
+        "contact_heading": "",
+        "contact_heading_size": 20,
+        "contact_email": "sales@induscraft.com",
+        "contact_email_size": 14,
+        "contact_phone": "+917821013706",
+        "contact_phone_size": 14,
+        "contact_address": "#112, Jodhpur - Barmer Rd, \nJodhpur, Rajasthan 342014",
+        "contact_address_size": 14,
+        "logo_text": "INDUSCRAFT.",
+        "full_width_logo": true,
+        "logo_font_size_desktop": 140,
+        "logo_font_size_mobile": 20,
+        "logo_text_color": "#fdf0d5",
+        "logo_image_width": 800,
+        "background_color": "#ec4855",
+        "text_color": "#ffffff",
+        "show_social": true,
+        "show_credits": false,
+        "padding_top": 80,
+        "padding_bottom": 40
+      }
+    },
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "text": {
+          "type": "text",
+          "settings": {
+            "heading": "About",
+            "text_content": "<p>The premier furniture shop in the UK for luxury and contemporary design. We specialize in handmade wooden furniture, iron cabinets and modern, contemporary collections that redefine elegance and functionality.</p>",
+            "show_media_links": true
+          }
+        },
+        "menu": {
+          "type": "menu",
+          "settings": {
+            "menu_heading": "Useful links",
+            "menu": "footer"
+          }
+        },
+        "menu_rxxDKx": {
+          "type": "menu",
+          "settings": {
+            "menu_heading": "Shop",
+            "menu": "footer"
+          }
+        },
+        "menu_xacidT": {
+          "type": "menu",
+          "settings": {
+            "menu_heading": "Policy",
+            "menu": "footer"
+          }
+        }
+      },
+      "block_order": [
+        "text",
+        "menu",
+        "menu_rxxDKx",
+        "menu_xacidT"
+      ],
+      "disabled": true,
+      "settings": {
+        "logo_image_width": 100,
+        "show_top_border": true,
+        "copyright_text": "Copyright © %date%.",
+        "show_back_to_top_button": false,
+        "is_show_country_selector": true,
+        "is_show_language_selector": true,
+        "is_show_payment_methods": true,
+        "enable_follow_on_shop": true,
+        "section_background": "#1b1b1b",
+        "border_top_color": "#e6e6e6",
+        "menu_headings_color": "#d3e3bb",
+        "text_color": "#ffffff",
+        "copyright_text_color": "#8d8d8d",
+        "link_color": "#ffffff",
+        "link_hover_color": "#dddddd",
+        "button_icon_color_social": "#ffffff",
+        "button_background_color_social": "rgba(0,0,0,0)",
+        "button_border_color_social": "#ffffff",
+        "button_icon_color_social_hover": "#000000",
+        "button_background_color_social_hover": "#ffffff",
+        "button_border_color_social_hover": "#000000"
       }
     }
   },
   "order": [
-    "custom_footer"
+    "sticky_button_f3kdCF",
+    "promotion_banner_popup_YqQCTc",
+    "custom_footer_fAtM9x",
+    "footer"
   ]
 }
