@@ -325,21 +325,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				display: none !important;
 			}
 			
+			/* Fallback for browsers that don't support :has() using EventBus class */
 			body.cart-drawer-open-active .mobile-floating-buttons,
 			body.cart-drawer-open-active [class*="sticky-whatsapp-btn-section-"],
+			body.cart-drawer-open-active .whatsapp-circular-btn,
+			body.cart-drawer-open-active .custom-furniture-toast,
 			body.cart-drawer-open-active .product-filters__open-menu-button-wrapper,
 			body.cart-drawer-open-active .product-sticky-add-to-cart,
 			body.cart-drawer-open-active .product-sticky-add-to-cart-new,
+			body.cart-drawer-open-active .js-sticky-add-to-cart {
+				display: none !important;
+			}
+
+			/* Modern foolproof CSS using :has() */
 			body:has(#CartDrawer.is-active) .mobile-floating-buttons,
 			body:has(#CartDrawer.is-active) [class*="sticky-whatsapp-btn-section-"],
+			body:has(#CartDrawer.is-active) .whatsapp-circular-btn,
+			body:has(#CartDrawer.is-active) .custom-furniture-toast,
 			body:has(#CartDrawer.is-active) .product-filters__open-menu-button-wrapper,
 			body:has(#CartDrawer.is-active) .product-sticky-add-to-cart,
 			body:has(#CartDrawer.is-active) .product-sticky-add-to-cart-new,
+			body:has(#CartDrawer.is-active) .js-sticky-add-to-cart,
 			body:has(#CartDrawer[aria-hidden="false"]) .mobile-floating-buttons,
 			body:has(#CartDrawer[aria-hidden="false"]) [class*="sticky-whatsapp-btn-section-"],
+			body:has(#CartDrawer[aria-hidden="false"]) .whatsapp-circular-btn,
+			body:has(#CartDrawer[aria-hidden="false"]) .custom-furniture-toast,
 			body:has(#CartDrawer[aria-hidden="false"]) .product-filters__open-menu-button-wrapper,
 			body:has(#CartDrawer[aria-hidden="false"]) .product-sticky-add-to-cart,
-			body:has(#CartDrawer[aria-hidden="false"]) .product-sticky-add-to-cart-new {
+			body:has(#CartDrawer[aria-hidden="false"]) .product-sticky-add-to-cart-new,
+			body:has(#CartDrawer[aria-hidden="false"]) .js-sticky-add-to-cart {
 				display: none !important;
 			}
 		</style>
