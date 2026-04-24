@@ -305,6 +305,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 					attributeFilter: ['aria-hidden', 'class']
 				});
 			}
+
+			if (window.themeCore && window.themeCore.EventBus) {
+				window.themeCore.EventBus.listen("cart:drawer:open", function() {
+					document.body.classList.add('cart-drawer-open-active');
+				});
+				window.themeCore.EventBus.listen("cart:drawer:refresh-and-open", function() {
+					document.body.classList.add('cart-drawer-open-active');
+				});
+				window.themeCore.EventBus.listen("cart:drawer:close", function() {
+					document.body.classList.remove('cart-drawer-open-active');
+				});
+			}
 		});
 		</script>
 		<style>
@@ -317,7 +329,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			body.cart-drawer-open-active [class*="sticky-whatsapp-btn-section-"],
 			body.cart-drawer-open-active .product-filters__open-menu-button-wrapper,
 			body.cart-drawer-open-active .product-sticky-add-to-cart,
-			body.cart-drawer-open-active .product-sticky-add-to-cart-new {
+			body.cart-drawer-open-active .product-sticky-add-to-cart-new,
+			body:has(#CartDrawer.is-active) .mobile-floating-buttons,
+			body:has(#CartDrawer.is-active) [class*="sticky-whatsapp-btn-section-"],
+			body:has(#CartDrawer.is-active) .product-filters__open-menu-button-wrapper,
+			body:has(#CartDrawer.is-active) .product-sticky-add-to-cart,
+			body:has(#CartDrawer.is-active) .product-sticky-add-to-cart-new,
+			body:has(#CartDrawer[aria-hidden="false"]) .mobile-floating-buttons,
+			body:has(#CartDrawer[aria-hidden="false"]) [class*="sticky-whatsapp-btn-section-"],
+			body:has(#CartDrawer[aria-hidden="false"]) .product-filters__open-menu-button-wrapper,
+			body:has(#CartDrawer[aria-hidden="false"]) .product-sticky-add-to-cart,
+			body:has(#CartDrawer[aria-hidden="false"]) .product-sticky-add-to-cart-new {
 				display: none !important;
 			}
 		</style>
