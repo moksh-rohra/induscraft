@@ -253,36 +253,71 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		<script>
 		document.addEventListener('DOMContentLoaded', function() {
 			const mainMenuDrawer = document.getElementById('headerDrawerMenu');
-			if (!mainMenuDrawer) return;
-
-			function updateMenuBodyClass() {
-				const ariaHidden = mainMenuDrawer.getAttribute('aria-hidden');
-				if (ariaHidden === 'false' || mainMenuDrawer.classList.contains('is-active')) {
-					document.body.classList.add('main-menu-open-active');
-				} else {
-					document.body.classList.remove('main-menu-open-active');
+			if (mainMenuDrawer) {
+				function updateMenuBodyClass() {
+					const ariaHidden = mainMenuDrawer.getAttribute('aria-hidden');
+					if (ariaHidden === 'false' || mainMenuDrawer.classList.contains('is-active')) {
+						document.body.classList.add('main-menu-open-active');
+					} else {
+						document.body.classList.remove('main-menu-open-active');
+					}
 				}
+
+				setTimeout(updateMenuBodyClass, 100);
+
+				const observer = new MutationObserver(function(mutations) {
+					mutations.forEach(function(mutation) {
+						if (mutation.type === 'attributes' && (mutation.attributeName === 'aria-hidden' || mutation.attributeName === 'class')) {
+							updateMenuBodyClass();
+						}
+					});
+				});
+
+				observer.observe(mainMenuDrawer, {
+					attributes: true,
+					attributeFilter: ['aria-hidden', 'class']
+				});
 			}
 
-			setTimeout(updateMenuBodyClass, 100);
-
-			const observer = new MutationObserver(function(mutations) {
-				mutations.forEach(function(mutation) {
-					if (mutation.type === 'attributes' && (mutation.attributeName === 'aria-hidden' || mutation.attributeName === 'class')) {
-						updateMenuBodyClass();
+			const cartDrawer = document.getElementById('CartDrawer');
+			if (cartDrawer) {
+				function updateCartBodyClass() {
+					const ariaHidden = cartDrawer.getAttribute('aria-hidden');
+					if (ariaHidden === 'false' || cartDrawer.classList.contains('is-active')) {
+						document.body.classList.add('cart-drawer-open-active');
+					} else {
+						document.body.classList.remove('cart-drawer-open-active');
 					}
-				});
-			});
+				}
 
-			observer.observe(mainMenuDrawer, {
-				attributes: true,
-				attributeFilter: ['aria-hidden', 'class']
-			});
+				setTimeout(updateCartBodyClass, 100);
+
+				const cartObserver = new MutationObserver(function(mutations) {
+					mutations.forEach(function(mutation) {
+						if (mutation.type === 'attributes' && (mutation.attributeName === 'aria-hidden' || mutation.attributeName === 'class')) {
+							updateCartBodyClass();
+						}
+					});
+				});
+
+				cartObserver.observe(cartDrawer, {
+					attributes: true,
+					attributeFilter: ['aria-hidden', 'class']
+				});
+			}
 		});
 		</script>
 		<style>
 			body.main-menu-open-active .product-filters__open-menu-button-wrapper,
 			body.main-menu-open-active .mobile-floating-buttons {
+				display: none !important;
+			}
+			
+			body.cart-drawer-open-active .mobile-floating-buttons,
+			body.cart-drawer-open-active [class*="sticky-whatsapp-btn-section-"],
+			body.cart-drawer-open-active .product-filters__open-menu-button-wrapper,
+			body.cart-drawer-open-active .product-sticky-add-to-cart,
+			body.cart-drawer-open-active .product-sticky-add-to-cart-new {
 				display: none !important;
 			}
 		</style>
