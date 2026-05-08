@@ -763,7 +763,7 @@
 	}
 }
 .shopify-model-viewer-ui {
-	background-color: white;
+	background-color: var(--color-background, white);
 }
 .shopify-model-viewer-ui .shopify-model-viewer-ui__controls-area {
 	display: flex;

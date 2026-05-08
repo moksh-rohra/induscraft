@@ -92,7 +92,7 @@
 	   object-fit: contain;
 	-o-object-position: center;
 	   object-position: center;
-	background-color: white;
+	background-color: var(--color-background, white);
 }
 .swipe .swipe__image-block-image {
 	position: absolute;

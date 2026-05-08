@@ -30,7 +30,7 @@
 	min-height: 50px;
 	padding: 14px;
 	background-color: var(--color-text-primary);
-	color: var(--color-background, #ffffff);
+	colorbackground: var(--color-background, #ffffff);
 	-webkit-tap-highlight-color: transparent;
 }
 
@@ -81,7 +81,7 @@
 	word-wrap: break-word;
 	-webkit-hyphens: auto;
 	        hyphens: auto;
-	color: var(--color-background, #ffffff);
+	colorbackground: var(--color-background, #ffffff);
 }
 .product-filters .product-filters__open-menu-button-counter {
 	display: flex;
@@ -96,7 +96,7 @@
 	font-size: calc(var(--body-font-size) * 0.625);
 	font-weight: 600;
 	line-height: 1.4;
-	color: var(--color-background, #ffffff);
+	colorbackground: var(--color-background, #ffffff);
 }
 .product-filters .product-filters__open-menu-button-counter.is-hidden {
 	display: none;
@@ -124,7 +124,7 @@
 	right: 0;
 	z-index: var(--layer-pop-out-overlay, 25);
 	opacity: 0.5;
-	background-color: #fff;
+	background-color: var(--color-background, #fff);
 	transition-property: background-color;
 	transition-duration: 0.3s;
 	transition-timing-function: ease-in-out;
@@ -187,7 +187,7 @@
 	align-items: center;
 	padding: 7px 20px;
 	border: 1px solid var(--color-border-thirdly);
-	background-color: var(--color-background, #ffffff);
+	backgroundbackground-color: var(--color-background, #ffffff);
 	font-size: calc(var(--body-font-size) * 0.875);
 	line-height: 1;
 	text-decoration: none;
@@ -211,11 +211,11 @@
 }
 .product-filters .product-filters__form-selected-button.product-filters__form-selected-button--black {
 	background-color: var(--color-text-primary, #000000);
-	color: var(--color-background, #ffffff);
+	colorbackground: var(--color-background, #ffffff);
 }
 @media (-moz-touch-enabled: 0), (hover: hover), (pointer: fine) {
 	.product-filters .product-filters__form-selected-button.product-filters__form-selected-button--black:hover {
-		background-color: var(--color-background, #ffffff);
+		backgroundbackground-color: var(--color-background, #ffffff);
 		color: var(--color-text-primary, #000000);
 	}
 }
@@ -312,7 +312,7 @@
 		font-size: calc(var(--body-font-size) * 0.625);
 		font-weight: 600;
 		line-height: 1.4;
-		color: var(--color-background, #ffffff);
+		colorbackground: var(--color-background, #ffffff);
 		border-radius: 100%;
 	}
 	.product-filters .product-filters__open-menu-button.is-fixed {

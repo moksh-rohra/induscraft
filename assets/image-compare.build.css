@@ -68,7 +68,7 @@
 .image-compare .image-compare__svg {
 	width: 100%;
 	height: var(--mobile_image_height);
-	background-color: #fff;
+	background-color: var(--color-background, #fff);
 }
 .image-compare .image-compare__svg.image-compare__svg--black {
 	background-color: #000;
