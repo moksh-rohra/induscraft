@@ -120,6 +120,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 		<script>
 			document.querySelector("html").classList.remove("no-js");
+			if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+				document.documentElement.classList.add('dark-mode');
+			}
 		</script>
 	</head>
 
@@ -357,5 +360,61 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 				display: none !important;
 			}
 		</style>
+		
+		<style>
+		.theme-toggle {
+			background: transparent;
+			color: inherit;
+			border: none;
+			padding: 0;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		html.dark-mode .sun-icon { display: none !important; }
+		html.dark-mode .moon-icon { display: block !important; }
+
+		/* Global Dark Mode Styles */
+		html.dark-mode body,
+		html.dark-mode .main-content {
+			background-color: #121212 !important;
+			color: #ffffff !important;
+		}
+		html.dark-mode .header, html.dark-mode .footer,
+		html.dark-mode .section-header {
+			background-color: #1a1a1a !important;
+			color: #ffffff !important;
+		}
+		html.dark-mode h1, html.dark-mode h2, html.dark-mode h3, 
+		html.dark-mode h4, html.dark-mode h5, html.dark-mode h6, 
+		html.dark-mode p, html.dark-mode span, html.dark-mode a {
+			color: #ffffff !important;
+		}
+		html.dark-mode .card, html.dark-mode .product-card, 
+		html.dark-mode .collection-card, html.dark-mode .card-wrapper {
+			background-color: #1e1e1e !important;
+			color: #ffffff !important;
+			border-color: #333 !important;
+		}
+		html.dark-mode .price, html.dark-mode .price-item {
+			color: #ffffff !important;
+		}
+		</style>
+		<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			const themeToggles = document.querySelectorAll('.theme-toggle');
+			themeToggles.forEach(toggle => {
+				toggle.addEventListener('click', () => {
+					document.documentElement.classList.toggle('dark-mode');
+					if (document.documentElement.classList.contains('dark-mode')) {
+						localStorage.setItem('theme', 'dark');
+					} else {
+						localStorage.setItem('theme', 'light');
+					}
+				});
+			});
+		});
+		</script>
 	</body>
 </html>
