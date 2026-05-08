@@ -375,15 +375,32 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		html.dark-mode .sun-icon { display: none !important; }
 		html.dark-mode .moon-icon { display: block !important; }
 
-		/* Global Dark Mode Styles */
+		/* Global Dark Mode Variables & Styles */
+		html.dark-mode {
+			--header-background: #1a1a1a !important;
+			--header-mobile-menu-bg: #1a1a1a !important;
+			--header-text-color: #ffffff !important;
+			--header-icon-color: #ffffff !important;
+			--background-color: #121212 !important;
+		}
+		
 		html.dark-mode body,
 		html.dark-mode .main-content {
 			background-color: #121212 !important;
 			color: #ffffff !important;
 		}
 		html.dark-mode .header, html.dark-mode .header-new, html.dark-mode .footer,
-		html.dark-mode .section-header {
+		html.dark-mode .section-header, 
+		html.dark-mode .header__container, 
+		html.dark-mode .drawer__body,
+		html.dark-mode .header-mobile__menu {
 			background-color: #1a1a1a !important;
+			color: #ffffff !important;
+		}
+		html.dark-mode .header__icon svg, 
+		html.dark-mode .header-mobile__menu-item-toggle-icon svg,
+		html.dark-mode .header-mobile__menu-item-icon-back svg {
+			fill: #ffffff !important;
 			color: #ffffff !important;
 		}
 		html.dark-mode h1, html.dark-mode h2, html.dark-mode h3, 
