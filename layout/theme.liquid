@@ -366,11 +366,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			background: transparent;
 			color: inherit;
 			border: none;
-			padding: 0;
 			cursor: pointer;
 			display: flex;
 			align-items: center;
 			justify-content: center;
+		}
+		@media (min-width: 1200px) {
+			.mobile-theme-toggle { display: none !important; }
+		}
+		@media (max-width: 1199.98px) {
+			.desktop-theme-toggle { display: none !important; }
 		}
 		html.dark-mode .sun-icon { display: none !important; }
 		html.dark-mode .moon-icon { display: block !important; }
