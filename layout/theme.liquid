@@ -433,6 +433,48 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		html.dark-mode .price, html.dark-mode .price-item {
 			color: #ffffff !important;
 		}
+		
+		/* --- New Dark Mode Overrides --- */
+		/* Form Inputs */
+		html.dark-mode input,
+		html.dark-mode textarea,
+		html.dark-mode select {
+			background-color: #1e1e1e !important;
+			color: #ffffff !important;
+			border-color: #333 !important;
+		}
+		
+		/* Override hardcoded section backgrounds (e.g. Custom Furniture page) */
+		html.dark-mode [id^="shopify-section-"] > section,
+		html.dark-mode [id^="shopify-section-"] > div {
+			background-color: transparent !important;
+		}
+		
+		/* Custom Furniture Specific */
+		html.dark-mode .custom-furniture-form__file-label {
+			background-color: #1e1e1e !important;
+			border-color: #333 !important;
+		}
+		html.dark-mode .custom-furniture-form__file-name,
+		html.dark-mode .custom-furniture-form__success {
+			background-color: rgba(46, 125, 50, 0.2) !important;
+			color: #81c784 !important;
+		}
+		html.dark-mode .custom-furniture-form__error {
+			background-color: rgba(198, 40, 40, 0.2) !important;
+			color: #e57373 !important;
+		}
+		
+		/* Slider Navigation Buttons */
+		html.dark-mode .shop-by-room__nav,
+		html.dark-mode .room-layout-prev,
+		html.dark-mode .room-layout-next {
+			background: rgba(30, 30, 30, 0.9) !important;
+			color: #ffffff !important;
+		}
+		html.dark-mode .shop-by-room__nav svg {
+			stroke: #ffffff !important;
+		}
 		</style>
 		<script>
 		document.addEventListener('DOMContentLoaded', () => {
