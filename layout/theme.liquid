@@ -425,14 +425,55 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		html.dark-mode label, html.dark-mode legend {
 			color: #ffffff !important;
 		}
-		html.dark-mode .card, html.dark-mode .product-card, 
-		html.dark-mode .collection-card, html.dark-mode .card-wrapper {
+		html.dark-mode .card, html.dark-mode .product-card, html.dark-mode .product-card-new,
+		html.dark-mode .collection-card, html.dark-mode .card-wrapper,
+		html.dark-mode .product-card-new .product-card__footer,
+		html.dark-mode .product-card .product-card__footer {
 			background-color: #1e1e1e !important;
 			color: #ffffff !important;
 			border-color: #333 !important;
 		}
 		html.dark-mode .price, html.dark-mode .price-item {
 			color: #ffffff !important;
+		}
+		
+		html.dark-mode .product-filters-new .product-filters__open-menu-button {
+			background-color: #1e1e1e !important;
+			color: #ffffff !important;
+			border-color: #333 !important;
+		}
+		
+		html.dark-mode .product-card-new .product-card__quick-view-text-button.product-card__quick-view-text-button--mobile {
+			background-color: #333 !important;
+			color: #ffffff !important;
+			border-color: #555 !important;
+		}
+		
+		/* Delivery Checker Dark Mode */
+		html.dark-mode .delivery-checker {
+			background: #1e1e1e !important;
+			border-color: #333 !important;
+		}
+		html.dark-mode .delivery-checker__heading,
+		html.dark-mode .delivery-checker__result-text,
+		html.dark-mode .delivery-checker__result-pincode {
+			color: #ffffff !important;
+		}
+		html.dark-mode .delivery-checker__input {
+			background: #121212 !important;
+			color: #ffffff !important;
+			border-color: #333 !important;
+		}
+		html.dark-mode .delivery-checker__result {
+			background: rgba(22, 163, 74, 0.1) !important;
+			border-color: rgba(22, 163, 74, 0.3) !important;
+		}
+		html.dark-mode .delivery-checker__result-unavailable {
+			background: rgba(217, 119, 6, 0.1) !important;
+			border-color: rgba(217, 119, 6, 0.3) !important;
+		}
+		html.dark-mode .delivery-checker__result-unavailable span {
+			color: #fcd34d !important;
 		}
 		
 		/* --- New Dark Mode Overrides --- */
