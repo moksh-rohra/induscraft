@@ -421,7 +421,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		}
 		html.dark-mode h1, html.dark-mode h2, html.dark-mode h3, 
 		html.dark-mode h4, html.dark-mode h5, html.dark-mode h6, 
-		html.dark-mode p, html.dark-mode span, html.dark-mode a {
+		html.dark-mode p, html.dark-mode span, html.dark-mode a,
+		html.dark-mode label, html.dark-mode legend {
 			color: #ffffff !important;
 		}
 		html.dark-mode .card, html.dark-mode .product-card, 
@@ -435,7 +436,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		}
 		
 		/* --- New Dark Mode Overrides --- */
-		/* Form Inputs */
+		/* Form Inputs & Labels */
 		html.dark-mode input,
 		html.dark-mode textarea,
 		html.dark-mode select {
@@ -444,10 +445,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			border-color: #333 !important;
 		}
 		
-		/* Override hardcoded section backgrounds (e.g. Custom Furniture page) */
+		html.dark-mode input::placeholder,
+		html.dark-mode textarea::placeholder {
+			color: #aaaaaa !important;
+		}
+		
+		html.dark-mode .required {
+			color: #ff5252 !important;
+		}
+		
+		/* Override hardcoded section backgrounds */
 		html.dark-mode [id^="shopify-section-"] > section,
 		html.dark-mode [id^="shopify-section-"] > div {
 			background-color: transparent !important;
+		}
+		
+		/* B2B / Bulk Order Specifics */
+		html.dark-mode .b2b-steps__card--cta {
+			background-color: #1e1e1e !important;
 		}
 		
 		/* Custom Furniture Specific */
@@ -456,7 +471,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 			border-color: #333 !important;
 		}
 		html.dark-mode .custom-furniture-form__file-name,
-		html.dark-mode .custom-furniture-form__success {
+		html.dark-mode .custom-furniture-form__success,
+		html.dark-mode .b2b-contact-form__success {
 			background-color: rgba(46, 125, 50, 0.2) !important;
 			color: #81c784 !important;
 		}
