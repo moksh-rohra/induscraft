@@ -1,0 +1,479 @@
+{%- comment -%}
+  ============================================
+  Trade Gallery
+  ============================================
+  Editorial header with bold typography +
+  full-width image slider. Each slide is a block
+  with image, title, year, category, and link.
+  ============================================
+{%- endcomment -%}
+
+{{ 'trade-gallery.css' | asset_url | stylesheet_tag }}
+
+{% style %}
+  #TradeGallery-{{ section.id }} {
+    --tg-bg: {{ section.settings.background_color }};
+    --tg-heading-color: {{ section.settings.heading_color }};
+    --tg-desc-color: {{ section.settings.description_color }};
+    --tg-heading-size: {{ section.settings.heading_size }}px;
+    --tg-heading-size-t: {{ section.settings.heading_size_tablet }}px;
+    --tg-heading-size-m: {{ section.settings.heading_size_mobile }}px;
+    --tg-card-bg: {{ section.settings.card_bg }};
+    --tg-pad-top: {{ section.settings.padding_top }}px;
+    --tg-pad-bottom: {{ section.settings.padding_bottom }}px;
+    --tg-pad-x: {{ section.settings.padding_x }}px;
+    --tg-slide-height: {{ section.settings.slide_height }}vh;
+    --tg-slide-height-t: {{ section.settings.slide_height_tablet }}vh;
+    --tg-slide-height-m: {{ section.settings.slide_height_mobile }}vh;
+  }
+{% endstyle %}
+
+<section
+  id="TradeGallery-{{ section.id }}"
+  class="trade-gallery"
+  data-section-id="{{ section.id }}"
+>
+
+  {%- comment -%} ── Editorial Header ── {%- endcomment -%}
+  <div class="trade-gallery__header">
+    <div class="trade-gallery__header-left">
+      {%- if section.settings.heading_line_1 != blank -%}
+        <h2 class="trade-gallery__heading trade-gallery__animate">
+          {{ section.settings.heading_line_1 | escape }}
+        </h2>
+      {%- endif -%}
+      {%- if section.settings.heading_line_2 != blank -%}
+        <div class="trade-gallery__heading-row trade-gallery__animate">
+          <span class="trade-gallery__label-icon"></span>
+          <h2 class="trade-gallery__heading">
+            {{ section.settings.heading_line_2 | escape }}
+          </h2>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="trade-gallery__header-right trade-gallery__animate">
+      {%- if section.settings.header_image != blank -%}
+        {{ section.settings.header_image | image_url: width: 200 | image_tag:
+          class: 'trade-gallery__header-thumb',
+          loading: 'lazy'
+        }}
+      {%- endif -%}
+      {%- if section.settings.description != blank -%}
+        <div class="trade-gallery__header-desc">
+          {{ section.settings.description }}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  {%- comment -%} ── Image Slider ── {%- endcomment -%}
+  {%- if section.blocks.size > 0 -%}
+    <div class="trade-gallery__slider-wrapper" id="TradeGallerySlider-{{ section.id }}">
+      <div class="trade-gallery__slider" id="TradeGalleryTrack-{{ section.id }}">
+
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'slide' -%}
+            <div class="trade-gallery__slide" {{ block.shopify_attributes }}>
+
+              {%- if block.settings.image != blank -%}
+                {{ block.settings.image | image_url: width: 2000 | image_tag:
+                  loading: 'lazy',
+                  class: 'trade-gallery__slide-image',
+                  widths: '600, 900, 1200, 1800, 2000',
+                  sizes: '100vw'
+                }}
+              {%- else -%}
+                <div style="width:100%;height:100%;background:#ddd;display:flex;align-items:center;justify-content:center;color:#999;font-size:14px;">
+                  Select an image
+                </div>
+              {%- endif -%}
+
+              {%- comment -%} Info Card Overlay {%- endcomment -%}
+              {%- if block.settings.title != blank or block.settings.year != blank or block.settings.category != blank -%}
+                <div class="trade-gallery__slide-info">
+                  {%- if block.settings.title != blank -%}
+                    <p class="trade-gallery__slide-title">{{ block.settings.title | escape }}</p>
+                  {%- endif -%}
+                  <div class="trade-gallery__slide-meta">
+                    {%- if block.settings.year != blank -%}
+                      <p class="trade-gallery__slide-year">{{ block.settings.year | escape }}</p>
+                    {%- endif -%}
+                    {%- if block.settings.category != blank -%}
+                      <p class="trade-gallery__slide-category">{{ block.settings.category | escape }}</p>
+                    {%- endif -%}
+                  </div>
+                  {%- if block.settings.link != blank -%}
+                    <a href="{{ block.settings.link }}" class="trade-gallery__slide-link">
+                      {{ block.settings.link_text | default: 'View Project' | escape }}
+                      <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                    </a>
+                  {%- endif -%}
+                  {%- if section.blocks.size > 1 -%}
+                    <div class="trade-gallery__card-nav">
+                      <button class="trade-gallery__card-arrow" data-direction="prev" aria-label="Previous slide">
+                        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+                      </button>
+                      <button class="trade-gallery__card-arrow" data-direction="next" aria-label="Next slide">
+                        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+                      </button>
+                    </div>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+
+      </div>
+
+      {%- if section.blocks.size > 1 -%}
+        <button class="trade-gallery__gallery-arrow trade-gallery__gallery-arrow--prev trade-gallery__card-arrow" data-direction="prev" aria-label="Previous slide">
+          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="trade-gallery__gallery-arrow trade-gallery__gallery-arrow--next trade-gallery__card-arrow" data-direction="next" aria-label="Next slide">
+          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      {%- endif -%}
+    </div>
+
+  {%- else -%}
+    <p style="text-align:center;padding:60px 20px;opacity:0.5;">Add slide blocks in the Theme Editor.</p>
+  {%- endif -%}
+
+</section>
+
+{%- comment -%} ── Slider JS + GSAP ── {%- endcomment -%}
+<script>
+(function () {
+  const sectionId = '{{ section.id }}';
+  const totalSlides = {{ section.blocks.size | default: 1 }};
+
+  function initTradeGallery() {
+    const track = document.getElementById('TradeGalleryTrack-' + sectionId);
+    const nav = document.getElementById('TradeGalleryNav-' + sectionId);
+    if (!track || totalSlides <= 1) return;
+
+    let current = 0;
+    const dots = document.querySelectorAll('#TradeGalleryDots-' + sectionId + ' .trade-gallery__dot');
+    const counter = document.getElementById('TradeGalleryCounter-' + sectionId);
+    const total = totalSlides;
+
+    function pad(n) { return n < 10 ? '0' + n : n; }
+
+    function goTo(index) {
+      if (index < 0) index = total - 1;
+      if (index >= total) index = 0;
+      current = index;
+
+      track.style.transform = 'translateX(-' + (current * 100) + '%)';
+
+      dots.forEach(function (dot, i) {
+        dot.classList.toggle('is-active', i === current);
+      });
+
+      if (counter) {
+        counter.textContent = pad(current + 1) + ' / ' + pad(total);
+      }
+    }
+
+    // Card arrow clicks
+    var wrapper = track.closest('.trade-gallery__slider-wrapper') || track.parentElement;
+    wrapper.addEventListener('click', function (e) {
+      var btn = e.target.closest('.trade-gallery__card-arrow');
+      if (!btn) return;
+      var dir = btn.dataset.direction;
+      goTo(dir === 'next' ? current + 1 : current - 1);
+    });
+
+    // Touch / swipe support
+    var startX = 0;
+    var isDragging = false;
+
+    track.addEventListener('touchstart', function (e) {
+      startX = e.touches[0].clientX;
+      isDragging = true;
+    }, { passive: true });
+
+    track.addEventListener('touchend', function (e) {
+      if (!isDragging) return;
+      isDragging = false;
+      var diff = startX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) {
+        goTo(diff > 0 ? current + 1 : current - 1);
+      }
+    }, { passive: true });
+
+    // Auto-play (optional — configurable via section settings)
+    var autoplay = {{ section.settings.autoplay | default: false }};
+    var interval = {{ section.settings.autoplay_speed | default: 5 }} * 1000;
+
+    if (autoplay && total > 1) {
+      var timer = setInterval(function () { goTo(current + 1); }, interval);
+      track.closest('.trade-gallery__slider-wrapper').addEventListener('mouseenter', function () {
+        clearInterval(timer);
+      });
+      track.closest('.trade-gallery__slider-wrapper').addEventListener('mouseleave', function () {
+        timer = setInterval(function () { goTo(current + 1); }, interval);
+      });
+    }
+  }
+
+  function initTradeGalleryAnimation() {
+    if (typeof gsap === 'undefined') {
+      setTimeout(initTradeGalleryAnimation, 100);
+      return;
+    }
+    if (typeof ScrollTrigger !== 'undefined') gsap.registerPlugin(ScrollTrigger);
+
+    var section = document.getElementById('TradeGallery-' + sectionId);
+    if (!section) return;
+
+    var els = section.querySelectorAll('.trade-gallery__animate');
+
+    gsap.fromTo(
+      els,
+      { y: 25, opacity: 0 },
+      {
+        y: 0, opacity: 1,
+        duration: 0.8, stagger: 0.12, ease: 'power3.out',
+        scrollTrigger: { trigger: section, start: 'top 85%' }
+      }
+    );
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () {
+      initTradeGallery();
+      initTradeGalleryAnimation();
+    });
+  } else {
+    initTradeGallery();
+    initTradeGalleryAnimation();
+  }
+
+  document.addEventListener('shopify:section:load', function (e) {
+    if (e.detail.sectionId === sectionId) {
+      initTradeGallery();
+      initTradeGalleryAnimation();
+    }
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Trade Gallery",
+  "tag": "section",
+  "class": "trade-gallery-section",
+  "max_blocks": 20,
+  "settings": [
+    {
+      "type": "header",
+      "content": "── Header ──"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading Line 1",
+      "default": "CRAFTED FOR"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_2",
+      "label": "Heading Line 2",
+      "default": "TRADE PARTNERS"
+    },
+    {
+      "type": "image_picker",
+      "id": "header_image",
+      "label": "Header Thumbnail"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Handcrafted solid wood furniture designed for hotels, restaurants, and commercial spaces. Explore our curated trade collections.</p>"
+    },
+
+    {
+      "type": "header",
+      "content": "── Gallery Height ──"
+    },
+    {
+      "type": "range",
+      "id": "slide_height",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "label": "Gallery Height (Desktop)",
+      "default": 70
+    },
+    {
+      "type": "range",
+      "id": "slide_height_tablet",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "label": "Gallery Height (Tablet)",
+      "default": 55
+    },
+    {
+      "type": "range",
+      "id": "slide_height_mobile",
+      "min": 30,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "label": "Gallery Height (Mobile)",
+      "default": 60
+    },
+
+    {
+      "type": "header",
+      "content": "── Typography ──"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 36,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size (Desktop)",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "heading_size_tablet",
+      "min": 28,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size (Tablet)",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "min": 24,
+      "max": 56,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size (Mobile)",
+      "default": 32
+    },
+
+    {
+      "type": "header",
+      "content": "── Colors ──"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#F8F6F2"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading / UI Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description Color",
+      "default": "#555555"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Info Card Background",
+      "default": "rgba(248, 246, 242, 0.95)"
+    },
+
+    {
+      "type": "header",
+      "content": "── Padding ──"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0, "max": 160, "step": 4, "unit": "px",
+      "label": "Top", "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0, "max": 160, "step": 4, "unit": "px",
+      "label": "Bottom", "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_x",
+      "min": 0, "max": 120, "step": 4, "unit": "px",
+      "label": "Horizontal", "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Slide Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Collection Name"
+        },
+        {
+          "type": "text",
+          "id": "year",
+          "label": "Year",
+          "default": "2026"
+        },
+        {
+          "type": "text",
+          "id": "category",
+          "label": "Category",
+          "default": "Solid Wood"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "text",
+          "id": "link_text",
+          "label": "Link Text",
+          "default": "Explore Collection"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trade Gallery",
+      "settings": {
+        "heading_line_1": "CRAFTED FOR",
+        "heading_line_2": "TRADE PARTNERS"
+      },
+      "blocks": [
+        { "type": "slide", "settings": { "title": "Sheesham Dining Collection", "year": "2026", "category": "Solid Wood", "link_text": "Explore Collection" } },
+        { "type": "slide", "settings": { "title": "Hotel Lobby Furniture", "year": "2026", "category": "Hospitality", "link_text": "Explore Collection" } },
+        { "type": "slide", "settings": { "title": "Retro Bed Collection", "year": "2025", "category": "Bedroom", "link_text": "Explore Collection" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

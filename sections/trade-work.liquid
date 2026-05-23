@@ -1,0 +1,550 @@
+{%- comment -%}
+  ============================================
+  Trade Work — "How We Work Together"
+  ============================================
+  Scroll-driven pinned process section.
+  LEFT:  Subheading + Section label + description
+         + image stack (cross-fades per step)
+  RIGHT: Numbered process steps that scroll
+         while left column stays pinned.
+
+  GSAP ScrollTrigger pins the left column on
+  desktop. Image changes when each step enters
+  the viewport trigger zone.
+  ============================================
+{%- endcomment -%}
+
+{{ 'trade-work.css' | asset_url | stylesheet_tag }}
+
+{% style %}
+  #TradeWork-{{ section.id }} {
+    /* Background & Spacing */
+    --tw-bg: {{ section.settings.background_color }};
+    --tw-pad-top: {{ section.settings.padding_top }}px;
+    --tw-pad-bottom: {{ section.settings.padding_bottom }}px;
+    --tw-pad-x: {{ section.settings.padding_x }}px;
+    --tw-pad-top-m: {{ section.settings.padding_top_mobile }}px;
+    --tw-pad-bottom-m: {{ section.settings.padding_bottom_mobile }}px;
+    --tw-pad-x-m: {{ section.settings.padding_x_mobile }}px;
+
+    /* Grid */
+    --tw-left-width: {{ section.settings.left_column_width }}%;
+    --tw-gap: {{ section.settings.columns_gap }}px;
+
+    /* Typography */
+    --tw-label-size: {{ section.settings.label_size }}px;
+    --tw-subheading-size: {{ section.settings.subheading_size }}px;
+    --tw-step-title-size: {{ section.settings.step_title_size }}px;
+    --tw-step-title-size-m: {{ section.settings.step_title_size_mobile }}px;
+    --tw-body-size: {{ section.settings.body_size }}px;
+
+    /* Colors */
+    --tw-heading-color: {{ section.settings.heading_color }};
+    --tw-subheading-color: {{ section.settings.subheading_color }};
+    --tw-desc-color: {{ section.settings.description_color }};
+    --tw-border-color: {{ section.settings.border_color }};
+  }
+{% endstyle %}
+
+<section
+  id="TradeWork-{{ section.id }}"
+  class="trade-work"
+  data-section-id="{{ section.id }}"
+>
+  <div class="trade-work__container">
+    <div class="trade-work__grid" id="TradeWorkGrid-{{ section.id }}">
+
+      {%- comment -%} ── LEFT COLUMN (pinned on desktop) ── {%- endcomment -%}
+      <div class="trade-work__left" id="TradeWorkLeft-{{ section.id }}">
+
+        {%- if section.settings.subheading != blank -%}
+          <p class="trade-work__subheading trade-work__animate">
+            {{ section.settings.subheading | escape }}
+          </p>
+        {%- endif -%}
+
+        {%- if section.settings.section_label != blank -%}
+          <h2 class="trade-work__section-label trade-work__animate">
+            {{ section.settings.section_label | escape }}
+          </h2>
+        {%- endif -%}
+
+        {%- if section.settings.left_description != blank -%}
+          <div class="trade-work__left-desc trade-work__animate">
+            {{ section.settings.left_description }}
+          </div>
+        {%- endif -%}
+
+        {%- comment -%} Image Stack — one image per step block {%- endcomment -%}
+        <div class="trade-work__image-stack trade-work__animate" id="TradeWorkImages-{{ section.id }}">
+          {%- for block in section.blocks -%}
+            {%- if block.type == 'step' -%}
+              <div
+                class="trade-work__image-item{% if forloop.first %} is-active{% endif %}"
+                data-step-index="{{ forloop.index0 }}"
+              >
+                {%- if block.settings.image != blank -%}
+                  {{ block.settings.image | image_url: width: 1200 | image_tag:
+                    loading: 'lazy',
+                    class: 'trade-work__step-image',
+                    widths: '400, 600, 800, 1000, 1200',
+                    sizes: '(max-width: 749px) 100vw, 40vw'
+                  }}
+                {%- else -%}
+                  <div class="trade-work__placeholder">
+                    Select an image
+                  </div>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+
+      </div>
+
+      {%- comment -%} ── RIGHT COLUMN (scrolling steps) ── {%- endcomment -%}
+      <div class="trade-work__steps" id="TradeWorkSteps-{{ section.id }}">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'step' -%}
+            <div
+              class="trade-work__step{% if forloop.first %} is-active{% endif %}"
+              data-step-index="{{ forloop.index0 }}"
+              {{ block.shopify_attributes }}
+            >
+              <div class="trade-work__step-header">
+                <h3 class="trade-work__step-title">
+                  {{ block.settings.title | escape }}
+                </h3>
+                <span class="trade-work__step-number">
+                  {%- if block.settings.custom_number != blank -%}
+                    ({{ block.settings.custom_number | escape }})
+                  {%- else -%}
+                    ({{ forloop.index | prepend: '00' | slice: -2, 2 }})
+                  {%- endif -%}
+                </span>
+              </div>
+
+              {%- if block.settings.description != blank -%}
+                <div class="trade-work__step-body">
+                  {{ block.settings.description }}
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{%- comment -%} ── GSAP ScrollTrigger: Pin + Image Cross-Fade ── {%- endcomment -%}
+<script>
+(function () {
+  const sectionId = '{{ section.id }}';
+  let ctx; // GSAP context for cleanup
+
+  function initTradeWork() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+      setTimeout(initTradeWork, 100);
+      return;
+    }
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const section = document.getElementById('TradeWork-' + sectionId);
+    const grid    = document.getElementById('TradeWorkGrid-' + sectionId);
+    const left    = document.getElementById('TradeWorkLeft-' + sectionId);
+    const stepsContainer = document.getElementById('TradeWorkSteps-' + sectionId);
+    const imagesContainer = document.getElementById('TradeWorkImages-' + sectionId);
+
+    if (!section || !grid || !left || !stepsContainer) return;
+
+    const steps  = stepsContainer.querySelectorAll('.trade-work__step');
+    const images = imagesContainer ? imagesContainer.querySelectorAll('.trade-work__image-item') : [];
+
+    if (steps.length === 0) return;
+
+    // ── Cleanup previous triggers (Editor reload) ──
+    if (ctx) {
+      ctx.revert();
+    }
+
+    // ── Calculate the vertical offset from the top of the left column
+    //    to the top of the image stack, so the first step aligns with the image ──
+    function setStepsOffset() {
+      if (window.innerWidth <= 749) return; // Skip on mobile
+      var imageStack = imagesContainer;
+      if (!imageStack) return;
+      var leftTop = left.getBoundingClientRect().top;
+      var imageTop = imageStack.getBoundingClientRect().top;
+      var offset = imageTop - leftTop;
+      stepsContainer.style.setProperty('--tw-steps-offset', offset + 'px');
+    }
+    setStepsOffset();
+
+    ctx = gsap.context(function () {
+
+      // ── Entrance animation ──
+      const animEls = section.querySelectorAll('.trade-work__animate');
+      gsap.fromTo(
+        animEls,
+        { y: 20, opacity: 0 },
+        {
+          y: 0, opacity: 1,
+          duration: 0.8, stagger: 0.12, ease: 'power3.out',
+          scrollTrigger: { trigger: section, start: 'top 85%' }
+        }
+      );
+
+      // ── Desktop only: Pin the left column ──
+      const mm = gsap.matchMedia();
+
+      mm.add('(min-width: 750px)', function () {
+
+        // Recalculate offset after layout settles
+        ScrollTrigger.addEventListener('refresh', setStepsOffset);
+
+        // Pin the left column while the right column scrolls
+        ScrollTrigger.create({
+          trigger: grid,
+          start: 'top 80px',
+          end: function () {
+            return '+=' + (stepsContainer.scrollHeight - left.offsetHeight);
+          },
+          pin: left,
+          pinSpacing: false
+        });
+
+        // ── Per-step image cross-fade + active state ──
+        // Use center-of-viewport trigger so only the step next to the image activates
+        steps.forEach(function (step, i) {
+          ScrollTrigger.create({
+            trigger: step,
+            start: 'top center',
+            end: 'bottom center',
+            onEnter: function () { activateStep(i); },
+            onEnterBack: function () { activateStep(i); }
+          });
+        });
+      });
+
+      // ── Mobile: simple scroll-reveal (no pinning) ──
+      mm.add('(max-width: 749px)', function () {
+        steps.forEach(function (step) {
+          gsap.fromTo(
+            step,
+            { y: 20, opacity: 0 },
+            {
+              y: 0, opacity: 1,
+              duration: 0.6, ease: 'power3.out',
+              scrollTrigger: {
+                trigger: step,
+                start: 'top 90%'
+              }
+            }
+          );
+        });
+      });
+
+    }, section);
+
+    function activateStep(index) {
+      // Update step active states
+      steps.forEach(function (s, j) {
+        s.classList.toggle('is-active', j === index);
+      });
+
+      // Cross-fade images
+      images.forEach(function (img, j) {
+        img.classList.toggle('is-active', j === index);
+      });
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTradeWork);
+  } else {
+    initTradeWork();
+  }
+
+  // Shopify Editor reload support
+  document.addEventListener('shopify:section:load', function (e) {
+    if (e.detail.sectionId === sectionId) {
+      if (ctx) ctx.revert();
+      ScrollTrigger.refresh();
+      initTradeWork();
+    }
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Trade Work",
+  "tag": "section",
+  "class": "trade-work-section",
+  "max_blocks": 8,
+  "settings": [
+    {
+      "type": "header",
+      "content": "── Left Column ──"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "(03)"
+    },
+    {
+      "type": "text",
+      "id": "section_label",
+      "label": "Section Label",
+      "default": "Our Process"
+    },
+    {
+      "type": "richtext",
+      "id": "left_description",
+      "label": "Left Description",
+      "default": "<p>A clear and collaborative approach — from vision to execution.</p>"
+    },
+
+    {
+      "type": "header",
+      "content": "── Typography ──"
+    },
+    {
+      "type": "range",
+      "id": "label_size",
+      "min": 14,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "label": "Section Label Size",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Subheading Size",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "step_title_size",
+      "min": 20,
+      "max": 56,
+      "step": 2,
+      "unit": "px",
+      "label": "Step Title Size (Desktop)",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "step_title_size_mobile",
+      "min": 18,
+      "max": 36,
+      "step": 2,
+      "unit": "px",
+      "label": "Step Title Size (Mobile)",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "body_size",
+      "min": 13,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Body Text Size",
+      "default": 15
+    },
+
+    {
+      "type": "header",
+      "content": "── Colors ──"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading / Title Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading / Number Color",
+      "default": "#888888"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Body Text Color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Step Divider Color",
+      "default": "rgba(0, 0, 0, 0.1)"
+    },
+
+    {
+      "type": "header",
+      "content": "── Layout ──"
+    },
+    {
+      "type": "range",
+      "id": "left_column_width",
+      "min": 25,
+      "max": 50,
+      "step": 5,
+      "unit": "%",
+      "label": "Left Column Width",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "columns_gap",
+      "min": 20,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Column Gap",
+      "default": 80
+    },
+
+    {
+      "type": "header",
+      "content": "── Padding (Desktop) ──"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0, "max": 160, "step": 4, "unit": "px",
+      "label": "Top", "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0, "max": 160, "step": 4, "unit": "px",
+      "label": "Bottom", "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_x",
+      "min": 0, "max": 120, "step": 4, "unit": "px",
+      "label": "Horizontal", "default": 60
+    },
+
+    {
+      "type": "header",
+      "content": "── Padding (Mobile) ──"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0, "max": 100, "step": 4, "unit": "px",
+      "label": "Top", "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0, "max": 100, "step": 4, "unit": "px",
+      "label": "Bottom", "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_x_mobile",
+      "min": 0, "max": 40, "step": 4, "unit": "px",
+      "label": "Horizontal", "default": 20
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Process Step",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Step Image",
+          "info": "Shown on the left when this step is active."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Step Title"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description",
+          "default": "<p>Describe this step of your process here.</p>"
+        },
+        {
+          "type": "text",
+          "id": "custom_number",
+          "label": "Custom Number",
+          "info": "Leave blank to auto-number (01, 02…)."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trade Work",
+      "settings": {
+        "subheading": "(03)",
+        "section_label": "Our Process",
+        "left_description": "<p>A clear and collaborative approach — from vision to execution.</p>",
+        "background_color": "#ffffff",
+        "heading_color": "#1a1a1a",
+        "subheading_color": "#888888",
+        "description_color": "#666666"
+      },
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "title": "Share Your Requirements",
+            "description": "<p>Tell us about your project — the spaces, styles, and quantities you need. We take the time to listen, understand your goals, and identify the right product lines for your vision. We offer early insight, identify opportunities, and set the tone for the collaboration ahead.</p>"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Get B2B Pricing",
+            "description": "<p>For projects above ₹5 lakh, unlock exclusive trade pricing with volume discounts. We offer tiered pricing slabs based on quantity, project scope, and partnership level — giving you the margin you need to grow your business.</p>"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Design & Customisation",
+            "description": "<p>Your vision becomes tangible form. Our team works with you on material selection, finishes, and dimensions. We refine layout, flow, and relationships — forming a clear framework for every future decision.</p>"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Production & Delivery",
+            "description": "<p>The design takes form through detailed production. Furniture, lighting, built-ins, and finishes are handcrafted by our artisans in Jodhpur. Quality-checked and delivered to your site with full logistics support across India — both technically and with care.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

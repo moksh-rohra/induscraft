@@ -1,4 +1,12 @@
-
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "featured_product_from_url_QziDdh": {
@@ -50,8 +58,8 @@
         "show_description": false,
         "enable_product_cards_indent": false,
         "show_color_swatch_in_filters": true,
-        "show_grid_selector": false,
-        "filters_type": "drawer",
+        "show_grid_selector": true,
+        "filters_type": "sidebar",
         "paginate_by": 20,
         "paginate_by_basic_grid": 16,
         "pagination_type": "pagination",

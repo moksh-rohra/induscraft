@@ -1,0 +1,585 @@
+{%- comment -%}
+  ============================================
+  Trade Contact — Two-Column Contact Section
+  ============================================
+  LEFT:  Subheading + Heading + Description
+  RIGHT: Trade enquiry contact form
+         (Name, Firm, Phone, City dropdown,
+          Project Brief)
+
+  Uses Shopify's built-in contact form.
+  ============================================
+{%- endcomment -%}
+
+{{ 'trade-contact.css' | asset_url | stylesheet_tag }}
+
+{% style %}
+  #TradeContact-{{ section.id }} {
+    /* Background & Spacing */
+    --tc-bg: {{ section.settings.background_color }};
+    --tc-pad-top: {{ section.settings.padding_top }}px;
+    --tc-pad-bottom: {{ section.settings.padding_bottom }}px;
+    --tc-pad-x: {{ section.settings.padding_x }}px;
+    --tc-pad-top-m: {{ section.settings.padding_top_mobile }}px;
+    --tc-pad-bottom-m: {{ section.settings.padding_bottom_mobile }}px;
+    --tc-pad-x-m: {{ section.settings.padding_x_mobile }}px;
+
+    /* Grid */
+    --tc-left-width: {{ section.settings.left_column_width }}%;
+    --tc-gap: {{ section.settings.columns_gap }}px;
+
+    /* Typography */
+    --tc-heading-size: {{ section.settings.heading_size }}px;
+    --tc-heading-size-m: {{ section.settings.heading_size_mobile }}px;
+    --tc-subheading-size: {{ section.settings.subheading_size }}px;
+    --tc-desc-size: {{ section.settings.description_size }}px;
+
+    /* Colors */
+    --tc-heading-color: {{ section.settings.heading_color }};
+    --tc-subheading-color: {{ section.settings.subheading_color }};
+    --tc-desc-color: {{ section.settings.description_color }};
+    --tc-label-color: {{ section.settings.label_color }};
+    --tc-border-color: {{ section.settings.border_color }};
+    --tc-accent-color: {{ section.settings.accent_color }};
+  }
+{% endstyle %}
+
+<section
+  id="TradeContact-{{ section.id }}"
+  class="trade-contact"
+  data-section-id="{{ section.id }}"
+>
+  <div class="trade-contact__container">
+    <div class="trade-contact__grid">
+
+      {%- comment -%} ── LEFT COLUMN — Content ── {%- endcomment -%}
+      <div class="trade-contact__left">
+        {%- if section.settings.subheading != blank -%}
+          <p class="trade-contact__subheading trade-contact__animate">
+            <span class="trade-contact__subheading-dot"></span>
+            {{ section.settings.subheading | escape }}
+          </p>
+        {%- endif -%}
+
+        {%- if section.settings.heading != blank -%}
+          <h2 class="trade-contact__heading trade-contact__animate">
+            {{ section.settings.heading }}
+          </h2>
+        {%- endif -%}
+
+        {%- if section.settings.description != blank -%}
+          <div class="trade-contact__description trade-contact__animate">
+            {{ section.settings.description }}
+          </div>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} ── RIGHT COLUMN — Form ── {%- endcomment -%}
+      <div class="trade-contact__form-wrapper trade-contact__animate">
+
+        {%- if request.design_mode -%}
+          {%- comment -%} Static preview for Theme Editor {%- endcomment -%}
+          <div class="trade-contact__form">
+
+            <div class="trade-contact__row">
+              <div class="trade-contact__field">
+                <label class="trade-contact__label">
+                  {{ section.settings.name_label }}<span class="required">*</span>
+                </label>
+                <input type="text" class="trade-contact__input" placeholder="{{ section.settings.name_placeholder }}">
+              </div>
+              <div class="trade-contact__field">
+                <label class="trade-contact__label">
+                  {{ section.settings.firm_label }}
+                </label>
+                <input type="text" class="trade-contact__input" placeholder="{{ section.settings.firm_placeholder }}">
+              </div>
+            </div>
+
+            <div class="trade-contact__row">
+              <div class="trade-contact__field">
+                <label class="trade-contact__label">
+                  {{ section.settings.phone_label }}<span class="required">*</span>
+                </label>
+                <input type="tel" class="trade-contact__input" placeholder="{{ section.settings.phone_placeholder }}">
+              </div>
+              <div class="trade-contact__field">
+                <label class="trade-contact__label">
+                  {{ section.settings.city_label }}<span class="required">*</span>
+                </label>
+                <div class="trade-contact__select-wrapper">
+                  <select class="trade-contact__select">
+                    <option value="" disabled selected>Select city</option>
+                    {%- assign city_list = section.settings.city_options | split: ',' -%}
+                    {%- for city in city_list -%}
+                      {%- assign trimmed_city = city | strip -%}
+                      <option value="{{ trimmed_city }}">{{ trimmed_city }}</option>
+                    {%- endfor -%}
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="trade-contact__field">
+              <label class="trade-contact__label">
+                {{ section.settings.message_label }}
+              </label>
+              <textarea class="trade-contact__textarea" placeholder="{{ section.settings.message_placeholder }}"></textarea>
+            </div>
+
+            <div class="trade-contact__submit-wrapper">
+              <button type="button" class="button-new button--{{ section.settings.button_style }}">
+                {{ section.settings.button_text }}
+              </button>
+            </div>
+          </div>
+
+        {%- else -%}
+          {%- comment -%} Actual Shopify contact form for live site {%- endcomment -%}
+          {%- form 'contact', class: 'trade-contact__form' -%}
+
+            {%- if form.posted_successfully? -%}
+              <p class="trade-contact__success">
+                {{ section.settings.success_message }}
+              </p>
+            {%- endif -%}
+
+            {%- if form.errors -%}
+              <div class="trade-contact__errors">
+                {{ form.errors | default_errors }}
+              </div>
+            {%- endif -%}
+
+            {%- comment -%} Hidden email field required by Shopify contact form {%- endcomment -%}
+            <input type="hidden" name="contact[email]" value="trade-enquiry@{{ shop.domain }}">
+            <input type="hidden" name="contact[tags]" value="trade-enquiry">
+
+            <div class="trade-contact__row">
+              <div class="trade-contact__field">
+                <label class="trade-contact__label" for="trade-name-{{ section.id }}">
+                  {{ section.settings.name_label }}<span class="required">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="trade-name-{{ section.id }}"
+                  name="contact[name]"
+                  class="trade-contact__input"
+                  placeholder="{{ section.settings.name_placeholder }}"
+                  required
+                >
+              </div>
+              <div class="trade-contact__field">
+                <label class="trade-contact__label" for="trade-firm-{{ section.id }}">
+                  {{ section.settings.firm_label }}
+                </label>
+                <input
+                  type="text"
+                  id="trade-firm-{{ section.id }}"
+                  name="contact[firm_name]"
+                  class="trade-contact__input"
+                  placeholder="{{ section.settings.firm_placeholder }}"
+                >
+              </div>
+            </div>
+
+            <div class="trade-contact__row">
+              <div class="trade-contact__field">
+                <label class="trade-contact__label" for="trade-phone-{{ section.id }}">
+                  {{ section.settings.phone_label }}<span class="required">*</span>
+                </label>
+                <input
+                  type="tel"
+                  id="trade-phone-{{ section.id }}"
+                  name="contact[phone]"
+                  class="trade-contact__input"
+                  placeholder="{{ section.settings.phone_placeholder }}"
+                  required
+                >
+              </div>
+              <div class="trade-contact__field">
+                <label class="trade-contact__label" for="trade-city-{{ section.id }}">
+                  {{ section.settings.city_label }}<span class="required">*</span>
+                </label>
+                <div class="trade-contact__select-wrapper">
+                  <select
+                    id="trade-city-{{ section.id }}"
+                    name="contact[city]"
+                    class="trade-contact__select"
+                    required
+                  >
+                    <option value="" disabled selected>Select city</option>
+                    {%- assign city_list = section.settings.city_options | split: ',' -%}
+                    {%- for city in city_list -%}
+                      {%- assign trimmed_city = city | strip -%}
+                      <option value="{{ trimmed_city }}">{{ trimmed_city }}</option>
+                    {%- endfor -%}
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="trade-contact__field">
+              <label class="trade-contact__label" for="trade-message-{{ section.id }}">
+                {{ section.settings.message_label }}
+              </label>
+              <textarea
+                id="trade-message-{{ section.id }}"
+                name="contact[body]"
+                class="trade-contact__textarea"
+                placeholder="{{ section.settings.message_placeholder }}"
+              ></textarea>
+            </div>
+
+            <div class="trade-contact__submit-wrapper">
+              <button type="submit" class="button-new button--{{ section.settings.button_style }}">
+                {{ section.settings.button_text }}
+              </button>
+            </div>
+
+          {%- endform -%}
+        {%- endif -%}
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{%- comment -%} ── GSAP Entrance Animation ── {%- endcomment -%}
+<script>
+(function () {
+  const sectionId = '{{ section.id }}';
+
+  function initTradeContact() {
+    if (typeof gsap === 'undefined') {
+      setTimeout(initTradeContact, 100);
+      return;
+    }
+    if (typeof ScrollTrigger !== 'undefined') gsap.registerPlugin(ScrollTrigger);
+
+    var section = document.getElementById('TradeContact-' + sectionId);
+    if (!section) return;
+
+    var els = section.querySelectorAll('.trade-contact__animate');
+    gsap.fromTo(
+      els,
+      { y: 20, opacity: 0 },
+      {
+        y: 0, opacity: 1,
+        duration: 0.8, stagger: 0.12, ease: 'power3.out',
+        scrollTrigger: { trigger: section, start: 'top 85%' }
+      }
+    );
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTradeContact);
+  } else {
+    initTradeContact();
+  }
+
+  document.addEventListener('shopify:section:load', function (e) {
+    if (e.detail.sectionId === sectionId) initTradeContact();
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Trade Contact",
+  "tag": "section",
+  "class": "trade-contact-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "── Left Column ──"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Get In Touch"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Let's Work Together"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Interested in trade pricing, bulk orders, or a custom project? Share your requirements and our team will get back to you within 24 hours.</p>"
+    },
+
+    {
+      "type": "header",
+      "content": "── Form Labels ──"
+    },
+    {
+      "type": "text",
+      "id": "name_label",
+      "label": "Name Label",
+      "default": "Your Name"
+    },
+    {
+      "type": "text",
+      "id": "name_placeholder",
+      "label": "Name Placeholder",
+      "default": "Full name"
+    },
+    {
+      "type": "text",
+      "id": "firm_label",
+      "label": "Firm Label",
+      "default": "Firm Name"
+    },
+    {
+      "type": "text",
+      "id": "firm_placeholder",
+      "label": "Firm Placeholder",
+      "default": "Company / Studio name"
+    },
+    {
+      "type": "text",
+      "id": "phone_label",
+      "label": "Phone Label",
+      "default": "Phone"
+    },
+    {
+      "type": "text",
+      "id": "phone_placeholder",
+      "label": "Phone Placeholder",
+      "default": "+91 XXXXX XXXXX"
+    },
+    {
+      "type": "text",
+      "id": "city_label",
+      "label": "City Label",
+      "default": "City"
+    },
+    {
+      "type": "text",
+      "id": "city_options",
+      "label": "City Options (comma-separated)",
+      "default": "Bangalore, Pune, Mumbai, Delhi NCR, Hyderabad, Chennai, Other",
+      "info": "Enter city names separated by commas."
+    },
+    {
+      "type": "text",
+      "id": "message_label",
+      "label": "Project Brief Label",
+      "default": "Project Brief"
+    },
+    {
+      "type": "text",
+      "id": "message_placeholder",
+      "label": "Project Brief Placeholder",
+      "default": "Tell us about your project — spaces, quantities, timelines…"
+    },
+
+    {
+      "type": "header",
+      "content": "── Button ──"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Submit Enquiry"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button Style",
+      "options": [
+        { "value": "primary", "label": "Primary" },
+        { "value": "secondary", "label": "Secondary" }
+      ],
+      "default": "secondary"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success Message",
+      "default": "Thank you for your enquiry! Our trade team will reach out within 24 hours."
+    },
+
+    {
+      "type": "header",
+      "content": "── Typography ──"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 28,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size (Desktop)",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "min": 22,
+      "max": 44,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size (Mobile)",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Subheading Size",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "min": 13,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Description Size",
+      "default": 15
+    },
+
+    {
+      "type": "header",
+      "content": "── Colors ──"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading Color",
+      "default": "#888888"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description Color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Form Label Color",
+      "default": "#888888"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Input Border Color",
+      "default": "rgba(0, 0, 0, 0.1)"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Required Asterisk Color",
+      "default": "#EC4855"
+    },
+
+    {
+      "type": "header",
+      "content": "── Layout ──"
+    },
+    {
+      "type": "range",
+      "id": "left_column_width",
+      "min": 30,
+      "max": 50,
+      "step": 5,
+      "unit": "%",
+      "label": "Left Column Width",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "columns_gap",
+      "min": 20,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": "Column Gap",
+      "default": 80
+    },
+
+    {
+      "type": "header",
+      "content": "── Padding (Desktop) ──"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0, "max": 160, "step": 4, "unit": "px",
+      "label": "Top", "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0, "max": 160, "step": 4, "unit": "px",
+      "label": "Bottom", "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_x",
+      "min": 0, "max": 120, "step": 4, "unit": "px",
+      "label": "Horizontal", "default": 60
+    },
+
+    {
+      "type": "header",
+      "content": "── Padding (Mobile) ──"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0, "max": 100, "step": 4, "unit": "px",
+      "label": "Top", "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0, "max": 100, "step": 4, "unit": "px",
+      "label": "Bottom", "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_x_mobile",
+      "min": 0, "max": 40, "step": 4, "unit": "px",
+      "label": "Horizontal", "default": 20
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trade Contact",
+      "settings": {
+        "subheading": "Get In Touch",
+        "heading": "Let's Work Together",
+        "description": "<p>Interested in trade pricing, bulk orders, or a custom project? Share your requirements and our team will get back to you within 24 hours.</p>",
+        "background_color": "#ffffff",
+        "heading_color": "#1a1a1a"
+      }
+    }
+  ]
+}
+{% endschema %}

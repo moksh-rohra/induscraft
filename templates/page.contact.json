@@ -96,12 +96,22 @@
             "highlight": "#112, Jodhpur - Barmer Rd, Jodhpur, Rajasthan 342014",
             "highlight_link": ""
           }
+        },
+        "ccf_contact_info_yYamXe": {
+          "type": "ccf_contact_info",
+          "settings": {
+            "title": "Correspondence",
+            "text": "For official communication.",
+            "highlight": "17/E 548 CHB, Jodhpur, Raj. 342008",
+            "highlight_link": ""
+          }
         }
       },
       "block_order": [
         "ccf_contact_info_yjNB6L",
         "ccf_contact_info_qhpKzm",
-        "ccf_contact_info_xtd4Qg"
+        "ccf_contact_info_xtd4Qg",
+        "ccf_contact_info_yYamXe"
       ],
       "name": "Contact Form",
       "settings": {
@@ -115,7 +125,7 @@
         "last_name_label": "Last name",
         "last_name_placeholder": "Craft",
         "email_label": "Email",
-        "email_placeholder": "induscraft@gmail.com",
+        "email_placeholder": "name@induscraft.com",
         "message_label": "Message",
         "message_placeholder": "How can we help you?",
         "show_privacy_checkbox": true,

@@ -1,0 +1,769 @@
+{%- comment -%}
+  ============================================
+  Trade Hero Section
+  ============================================
+  Full-screen background image/video with
+  split two-column content layout:
+  LEFT:  Subheading + Heading
+  RIGHT: Description + Two Buttons
+  
+  Features:
+  - Background image with separate mobile image
+  - Background video (Shopify-hosted)
+  - Adjustable dark overlay
+  - Two-column split layout with full position controls
+  - GSAP stagger-in animation
+  - Fully customizable via Theme Editor
+  ============================================
+{%- endcomment -%}
+
+{{ 'trade-hero.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign section_height_class = 'trade-hero--' | append: section.settings.section_height
+-%}
+
+{% style %}
+  #TradeHero-{{ section.id }} {
+    /* Background */
+    --trade-hero-bg-color: {{ section.settings.bg_fallback_color }};
+    --trade-hero-height-mobile: {{ section.settings.mobile_height }}vh;
+
+    /* Grid */
+    --trade-hero-left-width: {{ section.settings.left_column_width }}%;
+    --trade-hero-right-width: {{ section.settings.right_column_width }}%;
+    --trade-hero-columns-gap: {{ section.settings.columns_gap }}px;
+    --trade-hero-columns-gap-mobile: {{ section.settings.columns_gap_mobile }}px;
+
+    /* Padding Desktop */
+    --trade-hero-pad-top: {{ section.settings.padding_top_desktop }}px;
+    --trade-hero-pad-bottom: {{ section.settings.padding_bottom_desktop }}px;
+    --trade-hero-pad-left: {{ section.settings.padding_left_desktop }}px;
+    --trade-hero-pad-right: {{ section.settings.padding_right_desktop }}px;
+
+    /* Padding Mobile */
+    --trade-hero-pad-top-m: {{ section.settings.padding_top_mobile }}px;
+    --trade-hero-pad-bottom-m: {{ section.settings.padding_bottom_mobile }}px;
+    --trade-hero-pad-left-m: {{ section.settings.padding_left_mobile }}px;
+    --trade-hero-pad-right-m: {{ section.settings.padding_right_mobile }}px;
+
+    /* Typography */
+    --trade-hero-heading-color: {{ section.settings.heading_color }};
+    --trade-hero-subheading-color: {{ section.settings.subheading_color }};
+    --trade-hero-desc-color: {{ section.settings.description_color }};
+    --trade-hero-heading-size-d: {{ section.settings.heading_size_desktop }}px;
+    --trade-hero-heading-size-t: {{ section.settings.heading_size_desktop | times: 0.8 | round }}px;
+    --trade-hero-heading-size-m: {{ section.settings.heading_size_mobile }}px;
+    --trade-hero-subheading-size-d: {{ section.settings.subheading_size_desktop }}px;
+    --trade-hero-subheading-size-m: {{ section.settings.subheading_size_mobile }}px;
+    --trade-hero-desc-size-d: {{ section.settings.description_size_desktop }}px;
+    --trade-hero-desc-size-m: {{ section.settings.description_size_mobile }}px;
+    --trade-hero-desc-max-width: {{ section.settings.description_max_width }}px;
+  }
+
+  /* Override theme global heading styles (e.g. .design-alternate h1) */
+  #TradeHero-{{ section.id }} .trade-hero__heading {
+    font-size: {{ section.settings.heading_size_desktop }}px;
+  }
+  #TradeHero-{{ section.id }} .trade-hero__subheading {
+    font-size: {{ section.settings.subheading_size_desktop }}px;
+  }
+  #TradeHero-{{ section.id }} .trade-hero__description {
+    font-size: {{ section.settings.description_size_desktop }}px;
+    max-width: {{ section.settings.description_max_width }}px;
+  }
+
+  @media (max-width: 991px) {
+    #TradeHero-{{ section.id }} .trade-hero__heading {
+      font-size: {{ section.settings.heading_size_desktop | times: 0.8 | round }}px;
+    }
+  }
+
+  @media (max-width: 749px) {
+    #TradeHero-{{ section.id }} .trade-hero__heading {
+      font-size: {{ section.settings.heading_size_mobile }}px;
+    }
+    #TradeHero-{{ section.id }} .trade-hero__subheading {
+      font-size: {{ section.settings.subheading_size_mobile }}px;
+    }
+    #TradeHero-{{ section.id }} .trade-hero__description {
+      font-size: {{ section.settings.description_size_mobile }}px;
+    }
+  }
+{% endstyle %}
+
+<section
+  id="TradeHero-{{ section.id }}"
+  class="trade-hero {{ section_height_class }}"
+  data-section-id="{{ section.id }}"
+>
+  {%- comment -%} ── Inner content container for parallax animation ── {%- endcomment -%}
+  <div class="trade-hero__inner" id="TradeHeroContent-{{ section.id }}">
+  {%- comment -%} ── Background Media ── {%- endcomment -%}
+  <div class="trade-hero__media">
+    {%- if section.settings.bg_video != blank -%}
+      {{ section.settings.bg_video | video_tag:
+        autoplay: true,
+        loop: true,
+        muted: true,
+        playsinline: true,
+        class: 'trade-hero__bg-video'
+      }}
+    {%- elsif section.settings.bg_image != blank -%}
+      {{ section.settings.bg_image | image_url: width: 3840 | image_tag:
+        loading: 'eager',
+        class: 'trade-hero__bg-image trade-hero__bg-image--desktop',
+        widths: '375, 750, 1100, 1500, 2000, 3000, 3840',
+        sizes: '100vw'
+      }}
+      {%- if section.settings.bg_image_mobile != blank -%}
+        {{ section.settings.bg_image_mobile | image_url: width: 1500 | image_tag:
+          loading: 'eager',
+          class: 'trade-hero__bg-image trade-hero__bg-image--mobile',
+          widths: '375, 550, 750, 1100, 1500',
+          sizes: '100vw'
+        }}
+      {%- endif -%}
+    {%- else -%}
+      <div style="width:100%;height:100%;background:linear-gradient(135deg, #2A2420 0%, #3d3530 50%, #1a1a1a 100%);"></div>
+    {%- endif -%}
+  </div>
+
+  {%- comment -%} ── Overlay ── {%- endcomment -%}
+  {%- if section.settings.overlay_opacity > 0 -%}
+    <div
+      class="trade-hero__overlay"
+      style="opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"
+    ></div>
+  {%- endif -%}
+
+  {%- comment -%} ── Content Grid ── {%- endcomment -%}
+  <div class="trade-hero__grid trade-hero__grid--v-{{ section.settings.content_vertical_position }} trade-hero__grid--h-{{ section.settings.content_horizontal_position }}">
+
+    {%- comment -%} ── LEFT COLUMN: Subheading + Heading ── {%- endcomment -%}
+    <div class="trade-hero__col trade-hero__col--left trade-hero__col--align-{{ section.settings.left_text_align }} trade-hero__col--v-{{ section.settings.left_vertical_align }}">
+      {%- if section.settings.subheading != blank -%}
+        <p class="trade-hero__subheading trade-hero__animate">
+          {{ section.settings.subheading | escape }}
+        </p>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <h1 class="trade-hero__heading trade-hero__animate">
+          {{ section.settings.heading }}
+        </h1>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} ── RIGHT COLUMN: Description + Buttons ── {%- endcomment -%}
+    <div class="trade-hero__col trade-hero__col--right trade-hero__col--align-{{ section.settings.right_text_align }} trade-hero__col--v-{{ section.settings.right_vertical_align }}">
+      {%- if section.settings.description != blank -%}
+        <div class="trade-hero__description trade-hero__animate">
+          {{ section.settings.description }}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.button1_text != blank or section.settings.button2_text != blank -%}
+        <div class="trade-hero__buttons trade-hero__animate trade-hero__buttons--{{ section.settings.buttons_alignment }}">
+          {%- if section.settings.button1_text != blank -%}
+            <a
+              href="{{ section.settings.button1_link }}"
+              class="button-new button--{{ section.settings.button1_style }} focus-visible-outline"
+              aria-label="{{ section.settings.button1_text | escape }}"
+            >
+              {{ section.settings.button1_text | escape }}
+            </a>
+          {%- endif -%}
+
+          {%- if section.settings.button2_text != blank -%}
+            <a
+              href="{{ section.settings.button2_link }}"
+              class="button-new button--{{ section.settings.button2_style }} focus-visible-outline"
+              aria-label="{{ section.settings.button2_text | escape }}"
+            >
+              {{ section.settings.button2_text | escape }}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+  </div>
+  </div>{%- comment -%} /.trade-hero__inner {%- endcomment -%}
+</section>
+
+{%- comment -%} Spacer: occupies hero height in flow so content below scrolls naturally {%- endcomment -%}
+<div class="trade-hero__spacer" id="TradeHeroSpacer-{{ section.id }}"></div>
+{%- comment -%} ── GSAP + ScrollTrigger ── {%- endcomment -%}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script>
+  (function () {
+    const sectionId = '{{ section.id }}';
+
+    function initTradeHeroAnimation() {
+      if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+        setTimeout(initTradeHeroAnimation, 100);
+        return;
+      }
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      const heroContent = document.querySelector(`#TradeHeroContent-${sectionId}`);
+      const spacer = document.querySelector(`#TradeHeroSpacer-${sectionId}`);
+      if (!heroContent || !spacer) return;
+
+      const elements = heroContent.querySelectorAll('.trade-hero__animate');
+
+      // ── Entrance stagger animation ──
+      gsap.set(elements, { clearProps: 'transform,opacity' });
+      gsap.fromTo(
+        elements,
+        { y: 40, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          stagger: 0.15,
+          ease: 'power3.out',
+          delay: 0.3,
+        }
+      );
+
+      // ── Scroll-over parallax: blur + scale + fade ──
+      ScrollTrigger.getAll().forEach(function (st) {
+        if (st.vars && st.vars.trigger === spacer) st.kill();
+      });
+
+      // Start slightly oversized (1.03) so blur fringing is outside the
+      // parent's overflow:hidden boundary — prevents dark edge marks.
+      gsap.set(heroContent, { scale: 1.03 });
+      gsap.fromTo(heroContent,
+        { scale: 1.03 },
+        {
+          scale: 0.9,
+          filter: 'blur(12px)',
+          opacity: 0.3,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: spacer,
+            start: 'top top',
+            end: 'bottom top',
+            scrub: true,
+          },
+        }
+      );
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initTradeHeroAnimation);
+    } else {
+      initTradeHeroAnimation();
+    }
+
+    // Shopify Editor reload support
+    document.addEventListener('shopify:section:load', function (e) {
+      if (e.detail.sectionId === sectionId) {
+        ScrollTrigger.refresh();
+        initTradeHeroAnimation();
+      }
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Trade Hero",
+  "tag": "section",
+  "class": "trade-hero-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Background Media"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image (Desktop)"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image_mobile",
+      "label": "Background Image (Mobile)",
+      "info": "Optional. Uses desktop image on mobile if not set."
+    },
+    {
+      "type": "video",
+      "id": "bg_video",
+      "label": "Background Video",
+      "info": "Video takes priority over images. Upload via Shopify Files."
+    },
+    {
+      "type": "color",
+      "id": "bg_fallback_color",
+      "label": "Fallback Background Color",
+      "default": "#1a1a1a",
+      "info": "Visible while media loads or if none is set."
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "unit": "%",
+      "label": "Overlay Darkness",
+      "default": 35,
+      "info": "Darkens background for text readability."
+    },
+
+    {
+      "type": "header",
+      "content": "── Left Column ──"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "CRAFTED WITH HERITAGE"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Timeless Furniture for Modern Living"
+    },
+    {
+      "type": "select",
+      "id": "left_text_align",
+      "label": "Text Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "left_vertical_align",
+      "label": "Vertical Alignment",
+      "options": [
+        { "value": "top", "label": "Top" },
+        { "value": "center", "label": "Center" },
+        { "value": "bottom", "label": "Bottom" }
+      ],
+      "default": "top",
+      "info": "Align content within the left column."
+    },
+
+    {
+      "type": "header",
+      "content": "── Right Column ──"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Handcrafted furniture made by skilled artisans, blending traditional Indian craftsmanship with contemporary design for spaces that inspire.</p>"
+    },
+    {
+      "type": "select",
+      "id": "right_text_align",
+      "label": "Text Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "right_vertical_align",
+      "label": "Vertical Alignment",
+      "options": [
+        { "value": "top", "label": "Top" },
+        { "value": "center", "label": "Center" },
+        { "value": "bottom", "label": "Bottom" }
+      ],
+      "default": "top",
+      "info": "Align content within the right column."
+    },
+    {
+      "type": "range",
+      "id": "description_max_width",
+      "min": 200,
+      "max": 800,
+      "step": 10,
+      "unit": "px",
+      "label": "Description Max Width",
+      "default": 540,
+      "info": "Limits the width of the description text."
+    },
+
+    {
+      "type": "header",
+      "content": "Primary Button"
+    },
+    {
+      "type": "text",
+      "id": "button1_text",
+      "label": "Button Text",
+      "default": "SHOP NOW"
+    },
+    {
+      "type": "url",
+      "id": "button1_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "select",
+      "id": "button1_style",
+      "label": "Button Style",
+      "options": [
+        { "value": "primary", "label": "Primary" },
+        { "value": "secondary", "label": "Secondary" }
+      ],
+      "default": "primary"
+    },
+    {
+      "type": "header",
+      "content": "Secondary Button"
+    },
+    {
+      "type": "text",
+      "id": "button2_text",
+      "label": "Button Text",
+      "default": "EXPLORE COLLECTIONS"
+    },
+    {
+      "type": "url",
+      "id": "button2_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "select",
+      "id": "button2_style",
+      "label": "Button Style",
+      "options": [
+        { "value": "primary", "label": "Primary" },
+        { "value": "secondary", "label": "Secondary" }
+      ],
+      "default": "secondary"
+    },
+    {
+      "type": "select",
+      "id": "buttons_alignment",
+      "label": "Buttons Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "left"
+    },
+
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "min": 28,
+      "max": 90,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size (Desktop)",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "min": 20,
+      "max": 56,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size (Mobile)",
+      "default": 34
+    },
+    {
+      "type": "range",
+      "id": "subheading_size_desktop",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Subheading Size (Desktop)",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "subheading_size_mobile",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Subheading Size (Mobile)",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "description_size_desktop",
+      "min": 13,
+      "max": 22,
+      "step": 1,
+      "unit": "px",
+      "label": "Description Size (Desktop)",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "description_size_mobile",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Description Size (Mobile)",
+      "default": 14
+    },
+
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading Color",
+      "default": "#cccccc"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description Color",
+      "default": "#bbbbbb"
+    },
+
+    {
+      "type": "header",
+      "content": "Section Height"
+    },
+    {
+      "type": "select",
+      "id": "section_height",
+      "label": "Desktop Height",
+      "options": [
+        { "value": "full", "label": "Full Screen" },
+        { "value": "large", "label": "Large (85vh)" },
+        { "value": "medium", "label": "Medium (70vh)" }
+      ],
+      "default": "full"
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "label": "Mobile Height",
+      "default": 100,
+      "info": "Percentage of viewport height on mobile."
+    },
+
+    {
+      "type": "header",
+      "content": "Content Position"
+    },
+    {
+      "type": "select",
+      "id": "content_vertical_position",
+      "label": "Vertical Position",
+      "options": [
+        { "value": "top", "label": "Top" },
+        { "value": "center", "label": "Center" },
+        { "value": "bottom", "label": "Bottom" },
+        { "value": "stretch", "label": "Stretch (fill height)" }
+      ],
+      "default": "bottom",
+      "info": "Where the entire content grid sits vertically."
+    },
+    {
+      "type": "select",
+      "id": "content_horizontal_position",
+      "label": "Horizontal Position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" },
+        { "value": "stretch", "label": "Stretch (full width)" }
+      ],
+      "default": "stretch",
+      "info": "Horizontal positioning of the content grid."
+    },
+
+    {
+      "type": "header",
+      "content": "Column Widths"
+    },
+    {
+      "type": "range",
+      "id": "left_column_width",
+      "min": 20,
+      "max": 70,
+      "step": 5,
+      "unit": "%",
+      "label": "Left Column Width",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "right_column_width",
+      "min": 20,
+      "max": 70,
+      "step": 5,
+      "unit": "%",
+      "label": "Right Column Width",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "columns_gap",
+      "min": 0,
+      "max": 300,
+      "step": 4,
+      "unit": "px",
+      "label": "Gap Between Columns (Desktop)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "columns_gap_mobile",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "label": "Gap Between Columns (Mobile)",
+      "default": 24
+    },
+
+    {
+      "type": "header",
+      "content": "Padding (Desktop)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Top",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_left_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Left",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_right_desktop",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": "Right",
+      "default": 60
+    },
+
+    {
+      "type": "header",
+      "content": "Padding (Mobile)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_left_mobile",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "label": "Left",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_right_mobile",
+      "min": 0,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "label": "Right",
+      "default": 24
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trade Hero",
+      "settings": {
+        "subheading": "CRAFTED WITH HERITAGE",
+        "heading": "Timeless Furniture for Modern Living",
+        "description": "<p>Handcrafted furniture made by skilled artisans, blending traditional Indian craftsmanship with contemporary design for spaces that inspire.</p>",
+        "button1_text": "SHOP NOW",
+        "button2_text": "EXPLORE COLLECTIONS",
+        "section_height": "full",
+        "overlay_opacity": 35,
+        "content_vertical_position": "bottom",
+        "content_horizontal_position": "stretch",
+        "left_text_align": "left",
+        "left_vertical_align": "bottom",
+        "right_text_align": "left",
+        "right_vertical_align": "bottom"
+      }
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,750 @@
+{%- comment -%}
+  ============================================
+  Trade Product Catalogue
+  ============================================
+  Professional B2B product grid.
+  Each product card is a BLOCK with its own:
+  - Product picker
+  - Material details
+  - Per-card pricing tier overrides
+  - CTA button
+  ============================================
+{%- endcomment -%}
+
+{{ 'trade-catalogue.css' | asset_url | stylesheet_tag }}
+
+{% style %}
+  #TradeCatalogue-{{ section.id }} {
+    /* Background & Spacing */
+    --tc-bg: {{ section.settings.background_color }};
+    --tc-pad-top: {{ section.settings.padding_top }}px;
+    --tc-pad-bottom: {{ section.settings.padding_bottom }}px;
+    --tc-pad-x: {{ section.settings.padding_x }}px;
+    --tc-pad-top-m: {{ section.settings.padding_top_mobile }}px;
+    --tc-pad-bottom-m: {{ section.settings.padding_bottom_mobile }}px;
+    --tc-pad-x-m: {{ section.settings.padding_x_mobile }}px;
+
+    /* Grid */
+    --tc-columns: {{ section.settings.columns }};
+    --tc-gap: {{ section.settings.grid_gap }}px;
+
+    /* Typography */
+    --tc-heading-size: {{ section.settings.heading_size }}px;
+    --tc-heading-size-m: {{ section.settings.heading_size_mobile }}px;
+    --tc-subheading-size: {{ section.settings.subheading_size }}px;
+    --tc-desc-size: {{ section.settings.description_size }}px;
+
+    /* Colors */
+    --tc-heading-color: {{ section.settings.heading_color }};
+    --tc-subheading-color: {{ section.settings.subheading_color }};
+    --tc-desc-color: {{ section.settings.description_color }};
+    --tc-card-bg: {{ section.settings.card_bg }};
+    --tc-card-border: {{ section.settings.card_border_color }};
+    --tc-card-radius: {{ section.settings.card_radius }}px;
+    --tc-table-header-bg: {{ section.settings.table_header_bg }};
+    --tc-accent: {{ section.settings.accent_color }};
+  }
+{% endstyle %}
+
+<section
+  id="TradeCatalogue-{{ section.id }}"
+  class="trade-catalogue"
+  data-section-id="{{ section.id }}"
+>
+  <div class="trade-catalogue__container">
+
+    {%- comment -%} ── Section Header ── {%- endcomment -%}
+    <div class="trade-catalogue__header">
+      {%- if section.settings.subheading != blank -%}
+        <p class="trade-catalogue__subheading trade-catalogue__animate">
+          <span class="trade-catalogue__label-icon"></span>
+          {{ section.settings.subheading | escape }}
+        </p>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <h2 class="trade-catalogue__heading trade-catalogue__animate">
+          {{ section.settings.heading }}
+        </h2>
+      {%- endif -%}
+
+      {%- if section.settings.description != blank -%}
+        <div class="trade-catalogue__description trade-catalogue__animate">
+          {{ section.settings.description }}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} ── Product Grid (from Blocks) ── {%- endcomment -%}
+    {%- if section.blocks.size > 0 -%}
+      <div class="trade-catalogue__grid">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'product_card' -%}
+
+            {%- assign product = block.settings.product -%}
+
+            {%- comment -%} Material: block override → product tag → product type {%- endcomment -%}
+            {%- assign material_text = block.settings.material -%}
+            {%- if material_text == blank and product != blank -%}
+              {%- for tag in product.tags -%}
+                {%- if tag contains 'material__' -%}
+                  {%- assign material_text = tag | remove: 'material__' -%}
+                  {%- break -%}
+                {%- endif -%}
+              {%- endfor -%}
+              {%- if material_text == blank and product.type != blank -%}
+                {%- assign material_text = product.type -%}
+              {%- endif -%}
+            {%- endif -%}
+
+            {%- comment -%} Pricing {%- endcomment -%}
+            {%- if product != blank -%}
+              {%- assign variant = product.selected_or_first_available_variant -%}
+              {%- assign product_price = variant.price -%}
+            {%- else -%}
+              {%- assign product_price = 0 -%}
+            {%- endif -%}
+
+            {%- comment -%} Tier settings: per-block if set, else section defaults {%- endcomment -%}
+            {%- assign t1_label = block.settings.tier1_label | default: section.settings.tier1_label -%}
+            {%- assign t2_label = block.settings.tier2_label | default: section.settings.tier2_label -%}
+            {%- assign t3_label = block.settings.tier3_label | default: section.settings.tier3_label -%}
+            {%- assign t4_label = block.settings.tier4_label | default: section.settings.tier4_label -%}
+            {%- assign t4_text  = block.settings.tier4_text  | default: section.settings.tier4_text -%}
+
+            {%- assign t2_pct = block.settings.tier2_discount | default: section.settings.tier2_discount -%}
+            {%- assign t3_pct = block.settings.tier3_discount | default: section.settings.tier3_discount -%}
+
+            {%- assign t2_mult = 100 | minus: t2_pct -%}
+            {%- assign t2_price = product_price | times: t2_mult | divided_by: 100 -%}
+            {%- assign t3_mult = 100 | minus: t3_pct -%}
+            {%- assign t3_price = product_price | times: t3_mult | divided_by: 100 -%}
+
+            {%- comment -%} CTA settings: per-block if set, else section defaults {%- endcomment -%}
+            {%- assign cta_text = block.settings.cta_text | default: section.settings.cta_text -%}
+            {%- assign cta_type = section.settings.cta_type -%}
+            {%- assign btn_style = block.settings.button_style | default: section.settings.button_style -%}
+            {%- assign wa_number = section.settings.whatsapp_number | remove: '+' | remove: ' ' | remove: '-' -%}
+
+            {%- if product != blank -%}
+              {%- assign wa_msg = 'Hi, I am interested in *' | append: product.title | append: '* (SKU: ' | append: product.variants.first.sku | append: '). Please share trade pricing.' -%}
+            {%- else -%}
+              {%- assign wa_msg = 'Hi, I am interested in trade pricing.' -%}
+            {%- endif -%}
+
+            <div class="trade-card trade-catalogue__animate" {{ block.shopify_attributes }}>
+
+              {%- comment -%} ── Image ── {%- endcomment -%}
+              <div class="trade-card__image-wrapper">
+                {%- if product != blank -%}
+                  <a href="{{ product.url }}" aria-label="{{ product.title | escape }}">
+                    {%- if block.settings.custom_image != blank -%}
+                      {{ block.settings.custom_image | image_url: width: 800 | image_tag:
+                        loading: 'lazy',
+                        class: 'trade-card__image',
+                        widths: '300, 400, 600, 800',
+                        sizes: '(max-width: 749px) 100vw, (max-width: 991px) 50vw, 33vw'
+                      }}
+                    {%- elsif product.featured_image != blank -%}
+                      {{ product.featured_image | image_url: width: 800 | image_tag:
+                        loading: 'lazy',
+                        class: 'trade-card__image',
+                        widths: '300, 400, 600, 800',
+                        sizes: '(max-width: 749px) 100vw, (max-width: 991px) 50vw, 33vw'
+                      }}
+                    {%- else -%}
+                      {{ 'product-apparel-1' | placeholder_svg_tag: 'trade-card__image' }}
+                    {%- endif -%}
+                  </a>
+                {%- else -%}
+                  <div style="aspect-ratio:1/1;background:#eee;"></div>
+                {%- endif -%}
+
+                {%- if product != blank and product.variants.first.sku != blank -%}
+                  <span class="trade-card__sku-badge">SKU: {{ product.variants.first.sku }}</span>
+                {%- endif -%}
+              </div>
+
+              {%- comment -%} ── Product Info ── {%- endcomment -%}
+              <div class="trade-card__info">
+
+                {%- if material_text != blank -%}
+                  <p class="trade-card__type">{{ material_text }}</p>
+                {%- endif -%}
+
+                <h3 class="trade-card__title">
+                  {%- if product != blank -%}
+                    <a href="{{ product.url }}">{{ product.title }}</a>
+                  {%- else -%}
+                    Select a product
+                  {%- endif -%}
+                </h3>
+
+                {%- comment -%} MRP {%- endcomment -%}
+                {%- if product != blank -%}
+                  <div class="trade-card__mrp">
+                    <span class="trade-card__mrp-label">MRP</span>
+                    <span class="trade-card__mrp-price">{{ product_price | money }}</span>
+                    {%- if variant.compare_at_price > product_price -%}
+                      <span class="trade-card__mrp-compare">{{ variant.compare_at_price | money }}</span>
+                    {%- endif -%}
+                  </div>
+                {%- endif -%}
+
+                {%- comment -%} Quantity Pricing Table {%- endcomment -%}
+                <table class="trade-card__pricing-table">
+                  <thead>
+                    <tr>
+                      <th>Qty</th>
+                      <th>Price / Unit</th>
+                      <th>Discount</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>{{ t1_label }}</td>
+                      <td>{{ product_price | money }}</td>
+                      <td><span style="color:#999;">MRP</span></td>
+                    </tr>
+                    <tr>
+                      <td>{{ t2_label }}</td>
+                      <td>{{ t2_price | money }}</td>
+                      <td><span class="trade-card__discount">{{ t2_pct }}% OFF</span></td>
+                    </tr>
+                    <tr>
+                      <td>{{ t3_label }}</td>
+                      <td>{{ t3_price | money }}</td>
+                      <td><span class="trade-card__discount">{{ t3_pct }}% OFF</span></td>
+                    </tr>
+                    <tr>
+                      <td>{{ t4_label }}</td>
+                      <td colspan="2"><span class="trade-card__contact">{{ t4_text }}</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+
+              </div>
+
+              {%- comment -%} ── CTA Button ── {%- endcomment -%}
+              <div class="trade-card__cta">
+                {%- if cta_type == 'whatsapp' and wa_number != blank -%}
+                  <a
+                    href="https://wa.me/{{ wa_number }}?text={{ wa_msg | url_encode }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="button-new button--{{ btn_style }} focus-visible-outline"
+                  >
+                    {{ cta_text | escape }}
+                  </a>
+                {%- elsif section.settings.cta_link != blank -%}
+                  <a
+                    href="{{ section.settings.cta_link }}"
+                    class="button-new button--{{ btn_style }} focus-visible-outline"
+                  >
+                    {{ cta_text | escape }}
+                  </a>
+                {%- else -%}
+                  <a
+                    href="mailto:{{ shop.email }}?subject=Trade%20Quote%20-%20{{ product.title | default: 'Product' | url_encode }}"
+                    class="button-new button--{{ btn_style }} focus-visible-outline"
+                  >
+                    {{ cta_text | escape }}
+                  </a>
+                {%- endif -%}
+              </div>
+
+            </div>
+
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      <p style="text-align:center;opacity:0.5;padding:40px 0;">Add product blocks using the Theme Editor.</p>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{%- comment -%} ── GSAP Scroll Animation ── {%- endcomment -%}
+<script>
+  (function () {
+    const sectionId = '{{ section.id }}';
+
+    function initTradeCatalogueAnimation() {
+      if (typeof gsap === 'undefined') {
+        setTimeout(initTradeCatalogueAnimation, 100);
+        return;
+      }
+
+      if (typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+      }
+
+      const section = document.querySelector(`#TradeCatalogue-${sectionId}`);
+      if (!section) return;
+
+      const headerEls = section.querySelectorAll('.trade-catalogue__header .trade-catalogue__animate');
+      const cards = section.querySelectorAll('.trade-card.trade-catalogue__animate');
+
+      gsap.fromTo(
+        headerEls,
+        { y: 25, opacity: 0 },
+        {
+          y: 0, opacity: 1,
+          duration: 0.8, stagger: 0.1, ease: 'power3.out',
+          scrollTrigger: { trigger: section, start: 'top 85%' }
+        }
+      );
+
+      gsap.fromTo(
+        cards,
+        { y: 30, opacity: 0 },
+        {
+          y: 0, opacity: 1,
+          duration: 0.7, stagger: 0.08, ease: 'power3.out',
+          scrollTrigger: {
+            trigger: section.querySelector('.trade-catalogue__grid'),
+            start: 'top 90%'
+          }
+        }
+      );
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initTradeCatalogueAnimation);
+    } else {
+      initTradeCatalogueAnimation();
+    }
+
+    document.addEventListener('shopify:section:load', function (e) {
+      if (e.detail.sectionId === sectionId) initTradeCatalogueAnimation();
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Trade Catalogue",
+  "tag": "section",
+  "class": "trade-catalogue-section",
+  "max_blocks": 50,
+  "settings": [
+    {
+      "type": "header",
+      "content": "── Section Header ──"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Trade Catalogue"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Wholesale Product Range"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Browse our full range of handcrafted furniture. Volume discounts available for trade buyers.</p>"
+    },
+
+    {
+      "type": "header",
+      "content": "── Default Pricing Tiers ──",
+      "info": "These apply to all cards unless overridden per-block."
+    },
+    {
+      "type": "text",
+      "id": "tier1_label",
+      "label": "Tier 1 — Qty Label",
+      "default": "1–2 pcs"
+    },
+    {
+      "type": "text",
+      "id": "tier2_label",
+      "label": "Tier 2 — Qty Label",
+      "default": "3–5 pcs"
+    },
+    {
+      "type": "range",
+      "id": "tier2_discount",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "%",
+      "label": "Tier 2 — Discount %",
+      "default": 15
+    },
+    {
+      "type": "text",
+      "id": "tier3_label",
+      "label": "Tier 3 — Qty Label",
+      "default": "6–10 pcs"
+    },
+    {
+      "type": "range",
+      "id": "tier3_discount",
+      "min": 0,
+      "max": 60,
+      "step": 1,
+      "unit": "%",
+      "label": "Tier 3 — Discount %",
+      "default": 22
+    },
+    {
+      "type": "text",
+      "id": "tier4_label",
+      "label": "Tier 4 — Qty Label",
+      "default": "10+ pcs"
+    },
+    {
+      "type": "text",
+      "id": "tier4_text",
+      "label": "Tier 4 — Text",
+      "default": "Contact us for best price"
+    },
+
+    {
+      "type": "header",
+      "content": "── Default CTA ──",
+      "info": "Applied to all cards. Button text can be overridden per-block."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Button Text",
+      "default": "Request a Quote"
+    },
+    {
+      "type": "select",
+      "id": "cta_type",
+      "label": "Button Action",
+      "options": [
+        { "value": "whatsapp", "label": "WhatsApp Message" },
+        { "value": "link", "label": "Custom Link" },
+        { "value": "email", "label": "Email" }
+      ],
+      "default": "whatsapp"
+    },
+    {
+      "type": "text",
+      "id": "whatsapp_number",
+      "label": "WhatsApp Number",
+      "default": "+917821013706",
+      "info": "With country code. Used when CTA type is WhatsApp."
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Custom Link",
+      "info": "Used when CTA type is 'Custom Link'."
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button Style",
+      "options": [
+        { "value": "primary", "label": "Primary" },
+        { "value": "secondary", "label": "Secondary" }
+      ],
+      "default": "secondary"
+    },
+
+    {
+      "type": "header",
+      "content": "── Grid Layout ──"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "label": "Columns (Desktop)",
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "grid_gap",
+      "min": 8,
+      "max": 60,
+      "step": 4,
+      "unit": "px",
+      "label": "Grid Gap",
+      "default": 32
+    },
+
+    {
+      "type": "header",
+      "content": "── Typography ──"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size (Desktop)",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "min": 18,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size (Mobile)",
+      "default": 26
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "min": 10,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Subheading Size",
+      "default": 13
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Description Size",
+      "default": 15
+    },
+
+    {
+      "type": "header",
+      "content": "── Colors ──"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading Color",
+      "default": "#888888"
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description Color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Card Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Card Border",
+      "default": "#e5e5e5"
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Card Border Radius",
+      "default": 4
+    },
+    {
+      "type": "color",
+      "id": "table_header_bg",
+      "label": "Table Header Background",
+      "default": "#f8f8f8"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color",
+      "default": "#ec4855"
+    },
+
+    {
+      "type": "header",
+      "content": "── Padding (Desktop) ──"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0, "max": 160, "step": 4, "unit": "px",
+      "label": "Top", "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0, "max": 160, "step": 4, "unit": "px",
+      "label": "Bottom", "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_x",
+      "min": 0, "max": 120, "step": 4, "unit": "px",
+      "label": "Horizontal", "default": 60
+    },
+
+    {
+      "type": "header",
+      "content": "── Padding (Mobile) ──"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0, "max": 100, "step": 4, "unit": "px",
+      "label": "Top", "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0, "max": 100, "step": 4, "unit": "px",
+      "label": "Bottom", "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_x_mobile",
+      "min": 0, "max": 40, "step": 4, "unit": "px",
+      "label": "Horizontal", "default": 16
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product_card",
+      "name": "Product Card",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Product"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_image",
+          "label": "Custom Image",
+          "info": "Overrides the product image."
+        },
+        {
+          "type": "text",
+          "id": "material",
+          "label": "Material",
+          "info": "Overrides auto-detected material from tags."
+        },
+
+        {
+          "type": "header",
+          "content": "Pricing Overrides",
+          "info": "Leave blank to use section defaults."
+        },
+        {
+          "type": "text",
+          "id": "tier1_label",
+          "label": "Tier 1 — Qty Label"
+        },
+        {
+          "type": "text",
+          "id": "tier2_label",
+          "label": "Tier 2 — Qty Label"
+        },
+        {
+          "type": "range",
+          "id": "tier2_discount",
+          "min": 0, "max": 50, "step": 1, "unit": "%",
+          "label": "Tier 2 — Discount %",
+          "default": 0,
+          "info": "Set to 0 to use section default."
+        },
+        {
+          "type": "text",
+          "id": "tier3_label",
+          "label": "Tier 3 — Qty Label"
+        },
+        {
+          "type": "range",
+          "id": "tier3_discount",
+          "min": 0, "max": 60, "step": 1, "unit": "%",
+          "label": "Tier 3 — Discount %",
+          "default": 0,
+          "info": "Set to 0 to use section default."
+        },
+        {
+          "type": "text",
+          "id": "tier4_label",
+          "label": "Tier 4 — Qty Label"
+        },
+        {
+          "type": "text",
+          "id": "tier4_text",
+          "label": "Tier 4 — Text"
+        },
+
+        {
+          "type": "header",
+          "content": "Button Override"
+        },
+        {
+          "type": "text",
+          "id": "cta_text",
+          "label": "Button Text",
+          "info": "Leave blank to use section default."
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button Style",
+          "options": [
+            { "value": "primary", "label": "Primary" },
+            { "value": "secondary", "label": "Secondary" }
+          ],
+          "default": "secondary"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Trade Catalogue",
+      "settings": {
+        "subheading": "Trade Catalogue",
+        "heading": "Wholesale Product Range",
+        "cta_text": "Request a Quote",
+        "cta_type": "whatsapp",
+        "button_style": "secondary"
+      },
+      "blocks": [
+        { "type": "product_card" },
+        { "type": "product_card" },
+        { "type": "product_card" }
+      ]
+    }
+  ]
+}
+{% endschema %}
