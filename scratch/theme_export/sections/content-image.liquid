@@ -1,0 +1,174 @@
+{{ 'section-content-image.css' | asset_url | stylesheet_tag }}
+
+{%- assign bg_color = section.settings.background_color | default: '#f0ebe5' -%}
+{%- assign text_color = section.settings.text_color | default: '#333333' -%}
+{%- assign heading_color = section.settings.heading_color | default: '#1a1a1a' -%}
+{%- assign btn_color = section.settings.button_color | default: '#c8651b' -%}
+{%- assign btn_text_color = section.settings.button_text_color | default: '#ffffff' -%}
+{%- assign image_position = section.settings.image_position | default: 'right' -%}
+
+<section
+  class="content-image-section"
+  style="--ci-bg: {{ bg_color }}; --ci-text: {{ text_color }}; --ci-heading: {{ heading_color }}; --ci-btn: {{ btn_color }}; --ci-btn-text: {{ btn_text_color }};"
+>
+  <div class="content-image__container{% if image_position == 'left' %} content-image__container--reversed{% endif %}">
+    <div class="content-image__text">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="content-image__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'text' -%}
+            {%- if block.settings.text != blank -%}
+              <div class="content-image__paragraph">{{ block.settings.text }}</div>
+            {%- endif -%}
+          {%- when 'button' -%}
+            {%- if block.settings.button_label != blank -%}
+              <a
+                href="{{ block.settings.button_link | default: '#' }}"
+                class="button-new button--primary"
+              >
+                {{ block.settings.button_label }}
+              </a>
+            {%- endif -%}
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="content-image__media">
+      {%- if section.settings.image != blank -%}
+        <img
+          src="{{ section.settings.image | image_url: width: 1200 }}"
+          alt="{{ section.settings.image_alt | default: section.settings.heading | escape }}"
+          loading="lazy"
+          width="{{ section.settings.image.width }}"
+          height="{{ section.settings.image.height }}"
+        >
+      {%- else -%}
+        {{ 'lifestyle-2' | placeholder_svg_tag: 'content-image__placeholder' }}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Content with Image",
+  "tag": "section",
+  "class": "content-image-wrapper",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Heading"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Image alt text"
+    },
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position",
+      "options": [
+        { "value": "right", "label": "Right" },
+        { "value": "left", "label": "Left" }
+      ],
+      "default": "right"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#f0ebe5"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Button color",
+      "default": "#c8651b"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text color",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "Text paragraph",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Add your text content here.</p>"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "limit": 2,
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Browse Full Collection"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button style",
+          "options": [
+            { "value": "filled", "label": "Filled" },
+            { "value": "outline", "label": "Outline" }
+          ],
+          "default": "outline"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Content with Image",
+      "blocks": [
+        { "type": "text" },
+        { "type": "button" }
+      ]
+    }
+  ]
+}
+{% endschema %}

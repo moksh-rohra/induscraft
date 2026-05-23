@@ -1,0 +1,321 @@
+{%- comment -%}
+------------------------------------------------------------------------------
+  Section: Page Content
+  Displays the page content with customization options
+------------------------------------------------------------------------------
+{%- endcomment -%}
+
+{%- assign content = page.content -%}
+{%- assign text_color = section.settings.text_color -%}
+{%- assign bg_color = section.settings.bg_color -%}
+{%- assign text_align = section.settings.text_align -%}
+{%- assign font_size = section.settings.font_size | default: 16 -%}
+{%- assign font_size_mobile = section.settings.font_size_mobile | default: 14 -%}
+{%- assign line_height = section.settings.line_height | default: 1.7 -%}
+{%- assign max_width = section.settings.max_width -%}
+{%- assign heading_color = section.settings.heading_color -%}
+{%- assign link_color = section.settings.link_color -%}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: {{ bg_color }};
+  }
+
+  @media screen and (min-width: 768px) {
+    #shopify-section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .page-content-section-{{ section.id }} .page-content__wrapper {
+    {% if max_width != 'full' %}
+      max-width: {{ max_width }}px;
+      margin-left: auto;
+      margin-right: auto;
+    {% endif %}
+  }
+
+  .page-content-section-{{ section.id }} .page-content__body {
+    color: {{ text_color }};
+    text-align: {{ text_align }};
+    font-size: {{ font_size_mobile }}px;
+    line-height: {{ line_height }};
+  }
+
+  @media screen and (min-width: 768px) {
+    .page-content-section-{{ section.id }} .page-content__body {
+      font-size: {{ font_size }}px;
+    }
+  }
+
+  /* Heading styles within content */
+  .page-content-section-{{ section.id }} .page-content__body h1,
+  .page-content-section-{{ section.id }} .page-content__body h2,
+  .page-content-section-{{ section.id }} .page-content__body h3,
+  .page-content-section-{{ section.id }} .page-content__body h4,
+  .page-content-section-{{ section.id }} .page-content__body h5,
+  .page-content-section-{{ section.id }} .page-content__body h6 {
+    color: {{ heading_color }};
+    margin-top: 1.5em;
+    margin-bottom: 0.75em;
+  }
+
+  .page-content-section-{{ section.id }} .page-content__body h1:first-child,
+  .page-content-section-{{ section.id }} .page-content__body h2:first-child,
+  .page-content-section-{{ section.id }} .page-content__body h3:first-child {
+    margin-top: 0;
+  }
+
+  /* Paragraph spacing */
+  .page-content-section-{{ section.id }} .page-content__body p {
+    margin-bottom: 1em;
+  }
+
+  .page-content-section-{{ section.id }} .page-content__body p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Link styles */
+  .page-content-section-{{ section.id }} .page-content__body a {
+    color: {{ link_color }};
+    text-decoration: underline;
+    transition: opacity 0.2s ease;
+  }
+
+  .page-content-section-{{ section.id }} .page-content__body a:hover {
+    opacity: 0.7;
+  }
+
+  /* List styles */
+  .page-content-section-{{ section.id }} .page-content__body ul,
+  .page-content-section-{{ section.id }} .page-content__body ol {
+    padding-left: 1.5em;
+    margin-bottom: 1em;
+  }
+
+  .page-content-section-{{ section.id }} .page-content__body li {
+    margin-bottom: 0.5em;
+  }
+
+  /* Table styles */
+  .page-content-section-{{ section.id }} .page-content__body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5em;
+  }
+
+  .page-content-section-{{ section.id }} .page-content__body th,
+  .page-content-section-{{ section.id }} .page-content__body td {
+    padding: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    text-align: left;
+  }
+
+  .page-content-section-{{ section.id }} .page-content__body th {
+    background-color: {{ heading_color | color_modify: 'alpha', 0.1 }};
+    font-weight: 600;
+  }
+
+  /* Blockquote styles */
+  .page-content-section-{{ section.id }} .page-content__body blockquote {
+    border-left: 4px solid {{ link_color }};
+    margin: 1.5em 0;
+    padding: 1em 1.5em;
+    background-color: {{ heading_color | color_modify: 'alpha', 0.05 }};
+    font-style: italic;
+  }
+
+  /* Image styles */
+  .page-content-section-{{ section.id }} .page-content__body img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 1em 0;
+  }
+{%- endstyle -%}
+
+<section class="page-content-section page-content-section-{{ section.id }}">
+  <div class="page-width">
+    <div class="page-content__wrapper">
+      {%- if content != blank -%}
+        <div class="page-content__body rte">
+          {{- content -}}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Page Content",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Font Size (Desktop)",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "font_size_mobile",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Font Size (Mobile)",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "line_height",
+      "min": 1.2,
+      "max": 2.2,
+      "step": 0.1,
+      "label": "Line Height",
+      "default": 1.7
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Text Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "justify",
+          "label": "Justify"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "max_width",
+      "label": "Content Width",
+      "options": [
+        {
+          "value": "600",
+          "label": "Narrow (600px)"
+        },
+        {
+          "value": "800",
+          "label": "Medium (800px)"
+        },
+        {
+          "value": "1000",
+          "label": "Wide (1000px)"
+        },
+        {
+          "value": "full",
+          "label": "Full Width"
+        }
+      ],
+      "default": "800"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#555555"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#2C2A28"
+    },
+    {
+      "type": "color",
+      "id": "link_color",
+      "label": "Link Color",
+      "default": "#8B7355"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding (Desktop)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding (Desktop)",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding (Mobile)",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding (Mobile)",
+      "default": 40
+    }
+  ],
+  "presets": [
+    {
+      "name": "Page Content"
+    }
+  ],
+  "templates": ["page"]
+}
+{% endschema %}

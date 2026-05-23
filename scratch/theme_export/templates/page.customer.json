@@ -1,0 +1,97 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "reviews_JrkBTP": {
+      "type": "customer-reviews",
+      "blocks": {
+        "review_6DFyxX": {
+          "type": "review",
+          "settings": {
+            "reviewer_name": "Barsha Baruah",
+            "review_title": "",
+            "rating": 5,
+            "review_text": "Induscraft has been an amazing experience for us, from the time we met Ghanshyam till we received furniture. It had been a seemless journey. Also, always offered us great chai at his store and handled our unnecessary frustrations gracefully. I'm forever grateful to team Induscraft and especially Ghanshyam.",
+            "image-1": "shopify://shop_images/2024-08-17_2.jpg",
+            "image-2": "shopify://shop_images/2024-08-17.jpg",
+            "image-3": "shopify://shop_images/2024-08-17_1.jpg",
+            "image-4": "shopify://shop_images/2024-08-17_3.jpg"
+          }
+        },
+        "review_Kc9xzK": {
+          "type": "review",
+          "settings": {
+            "reviewer_name": "Akash Gupta",
+            "review_title": "",
+            "rating": 5,
+            "review_text": "Amazing experience. We ordered for a Dining Set and Coffee Table on the very first visit. Ghanshyam and team as promised delivered it the very next day. The products are sturday and looks elegant. Thank you to the entire team of Furniture Cafe by Indus Craft for the amazing collection and prompt response to all the queries. Also Bhupendra from the team ensured the delivery and assembly of the product was smooth.",
+            "image-1": "shopify://shop_images/2024-09-03_1.jpg",
+            "image-2": "shopify://shop_images/2024-09-03_2.jpg"
+          }
+        },
+        "review_9NMLAQ": {
+          "type": "review",
+          "settings": {
+            "reviewer_name": "Prashanth Kumar",
+            "review_title": "",
+            "rating": 5,
+            "review_text": "I recently placed an order for a customized 8-seater dining set with Induscraft, and I must say, I am extremely satisfied with both the quality and price of the product. The craftsmanship is excellent, and it perfectly fits our requirements..!!\n\nThe delivery process was smooth and hassle-free, with proper packaging and installation. Everything was handled professionally.\n\nI highly recommend Induscraft for anyone looking for high-quality furniture at a reasonable price. Great experience overall...!!",
+            "image-1": "shopify://shop_images/Table1_eafef4fe-4d1d-4c3c-84cb-4ecfa88290f0.jpg",
+            "image-2": "shopify://shop_images/Table2.jpg"
+          }
+        },
+        "review_bJqLKh": {
+          "type": "review",
+          "settings": {
+            "reviewer_name": "Gnanesh Malyam",
+            "review_title": "",
+            "rating": 5,
+            "review_text": "Absolutely thrilled with my new dining table set from Indus Craft.  The craftsmanship is awesome and it fits perfectly in my space. . Couldn't be happier with this purchase. Gansyam helped us well. The delivery happened within the promised timeline.",
+            "image-1": "shopify://shop_images/2024-04-06_1.jpg",
+            "image-2": "shopify://shop_images/2024-04-06.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "review_6DFyxX",
+        "review_Kc9xzK",
+        "review_9NMLAQ",
+        "review_bJqLKh"
+      ],
+      "settings": {
+        "Section-heading": "Customer Stories",
+        "heading_font_size_desktop": 54,
+        "heading_font_size_mobile": 28,
+        "heading_bottom_spacing": 80,
+        "section_title": "Overall rating for",
+        "product_title": "Induscraft Products",
+        "image-1": "shopify://shop_images/Ebay.webp",
+        "url-1": "",
+        "image-2": "shopify://shop_images/google1.webp",
+        "url-2": "",
+        "image-3": "shopify://shop_images/youtube1.webp",
+        "url-3": "",
+        "image-4": "shopify://shop_images/amazon1.webp",
+        "url-4": "",
+        "max_height": 700,
+        "rateing": 5,
+        "total-review": "381 Reviews",
+        "top-Selling": "Hot Selling Products Of The Week",
+        "collection": "shopify://collections/sofa-set",
+        "image-collection": "shopify://shop_images/desktop-420-x-498-3.jpg",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    }
+  },
+  "order": [
+    "reviews_JrkBTP"
+  ]
+}

@@ -1,0 +1,238 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "blog": {
+      "type": "blog-template",
+      "disabled": true,
+      "settings": {
+        "label": "Decor",
+        "paginate_by": 9,
+        "pagination_type": "pagination",
+        "lazy_load_button_type": "secondary",
+        "show_filter_by_tag": true,
+        "featured_post": "",
+        "featured_post_bg": "",
+        "featured_post_border_color": "#e6e6e6",
+        "featured_post_text_color": "#000000",
+        "featured_post_date_color": "#757575",
+        "featured_show_border": true,
+        "enable_lazy_load": false,
+        "featured_blog_button_type": "primary",
+        "btn_text_aria_label": "",
+        "full_width": true,
+        "offset_top_desktop": 60,
+        "offset_bottom_desktop": 60,
+        "offset_top_mobile": 30,
+        "offset_bottom_mobile": 30
+      }
+    },
+    "newsletter_section_ztQiti": {
+      "type": "newsletter-section",
+      "name": "Newsletter Section",
+      "settings": {
+        "badge": "Stay in the loop",
+        "heading": "Get exclusive offers & updates",
+        "subtext": "Subscribe to our newsletter and be the first to know about new arrivals and promotions.",
+        "placeholder": "Enter your email",
+        "btn_label": "Subscribe",
+        "success_message": "Thanks for subscribing!",
+        "privacy_note": "No spam, unsubscribe anytime.",
+        "bg_color": "#1a1a1a",
+        "accent_color": "#ec4855",
+        "heading_color": "#ffffff",
+        "subtext_color": "#aaaaaa",
+        "input_bg": "#2a2a2a",
+        "input_border": "#3a3a3a",
+        "input_text": "#ffffff",
+        "btn_bg": "#ec4855",
+        "btn_text": "#1a1a1a",
+        "padding_top_desktop": 80,
+        "padding_bottom_desktop": 80,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48
+      }
+    },
+    "blog_cards_jRXY67": {
+      "type": "blog-cards",
+      "name": "Blog Cards",
+      "settings": {
+        "heading_text": "",
+        "blog": "news",
+        "cards_per_page": 8,
+        "grid_gap": 20,
+        "heading_alignment": "center",
+        "text_alignment": "left",
+        "background_color": "#f9f9f9",
+        "card_background": "#ffffff",
+        "card_border_radius": 20,
+        "card_shadow_intensity": 1,
+        "hover_animation": false,
+        "heading_color": "#3b3b3b",
+        "heading_size": 28,
+        "heading_gap": 24,
+        "title_color": "#3b3b3b",
+        "card_title_size": 18,
+        "excerpt_color": "#878787",
+        "excerpt_size": 14,
+        "button_color": "#000000",
+        "button_text_color": "#ffffff",
+        "button_text": "Read More",
+        "show_price": false,
+        "price_color": "#111827",
+        "background": "#ffffff",
+        "section_padding_top": 40,
+        "section_padding_bottom": 40
+      }
+    },
+    "product_recommendations_66cGmb": {
+      "type": "product-recommendations",
+      "name": "Product recommendations",
+      "settings": {
+        "subheading": "",
+        "button_label": "",
+        "button_link": "",
+        "button_style": "primary",
+        "show_recommendations": false,
+        "enable_shopify_recommendations": true,
+        "collection": "",
+        "heading": "Recommendations",
+        "products_to_show": 4,
+        "show_recently_viewed": true,
+        "recently_viewed_label": "Recently viewed",
+        "recently_viewed_limit": 4,
+        "layout": "alternative",
+        "enable_cards_indent": false,
+        "full_width": true,
+        "offset_top_desktop": 50,
+        "offset_bottom_desktop": 0,
+        "offset_top_mobile": 25,
+        "offset_bottom_mobile": 30
+      }
+    },
+    "shop_the_look_4TQK96": {
+      "type": "shop-the-look",
+      "blocks": {
+        "product_YxF9Tm": {
+          "type": "product",
+          "settings": {
+            "product": "aarav-carved-round-coffee-table-blue-distressed-finish",
+            "point_position_top": 35,
+            "point_position_left": 30
+          }
+        },
+        "product_DjJ47y": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "point_position_top": 60,
+            "point_position_left": 35
+          }
+        },
+        "product_9DVaXp": {
+          "type": "product",
+          "settings": {
+            "product": "",
+            "point_position_top": 50,
+            "point_position_left": 70
+          }
+        }
+      },
+      "block_order": [
+        "product_YxF9Tm",
+        "product_DjJ47y",
+        "product_9DVaXp"
+      ],
+      "disabled": true,
+      "name": "Shop the look",
+      "settings": {
+        "title": "",
+        "label": "",
+        "image_crop": "center",
+        "image_position": "left",
+        "is_lazy": true,
+        "is_point_animated": true,
+        "point_color": "#2c2a28",
+        "point_bg_color": "#f9f5f0",
+        "image_background": "#c4c4c4",
+        "image_border_color": "#e6e6e6",
+        "offset_top_desktop": 0,
+        "offset_bottom_desktop": 100,
+        "offset_top_mobile": 0,
+        "offset_bottom_mobile": 54
+      }
+    },
+    "product_tabs_9A9DwY": {
+      "type": "product-tabs",
+      "blocks": {
+        "tab_KLbLee": {
+          "type": "tab",
+          "settings": {
+            "heading": "Best sellers",
+            "product_list": [
+              "aarav-carved-round-coffee-table-blue-distressed-finish",
+              "yeshua-rectangular-sheesham-wood-coffee-table-with-pedestal-base-copy",
+              "yuki-contemporary-tv-cabinet-with-curved-edges",
+              "karui-two-door-almirah-with-japanese-wall-art-panels-and-drawer-storage"
+            ]
+          }
+        },
+        "tab_96Xa4i": {
+          "type": "tab",
+          "settings": {
+            "heading": "New Arrivals",
+            "product_list": [
+              "meher-display-cabinet-in-old-mix-wood",
+              "meher-bookshelf-cabinet-in-old-mix-wood-by-induscraft",
+              "meher-bed-in-old-mix-wood-by-induscraft",
+              "meher-heritage-hand-carved-teak-wood-full-length-mirror"
+            ]
+          }
+        },
+        "tab_qdRYd6": {
+          "type": "tab",
+          "settings": {
+            "heading": "Signature Products",
+            "product_list": [
+              "yuki-luxury-upholstered-bed-with-padded-headboard",
+              "karui-luxury-upholstered-bed-with-stilted-headboard",
+              "karui-contemporary-tv-cabinet-with-stilted-door",
+              "meher-bed-in-old-mix-wood-by-induscraft"
+            ]
+          }
+        }
+      },
+      "block_order": [
+        "tab_KLbLee",
+        "tab_96Xa4i",
+        "tab_qdRYd6"
+      ],
+      "name": "Product tabs",
+      "settings": {
+        "label": "",
+        "heading": "SHOP FROM US",
+        "enable_cards_indent": false,
+        "full_width": true,
+        "offset_top_desktop": 50,
+        "offset_bottom_desktop": 50,
+        "offset_top_mobile": 30,
+        "offset_bottom_mobile": 30
+      }
+    }
+  },
+  "order": [
+    "blog",
+    "newsletter_section_ztQiti",
+    "blog_cards_jRXY67",
+    "product_recommendations_66cGmb",
+    "shop_the_look_4TQK96",
+    "product_tabs_9A9DwY"
+  ]
+}

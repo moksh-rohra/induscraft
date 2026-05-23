@@ -1,0 +1,192 @@
+{{ 'b2b-stats.css' | asset_url | stylesheet_tag }}
+
+<section 
+  id="b2b-stats-{{ section.id }}" 
+  class="b2b-stats" 
+  data-section-id="{{ section.id }}"
+  style="
+    --bg-color: {{ section.settings.bg_color }};
+    --bg-text-color: {{ section.settings.bg_text_color }};
+    --number-color: {{ section.settings.number_color }};
+    --desc-color: {{ section.settings.desc_color }};
+    --prefix-color: {{ section.settings.prefix_color }};
+    --bg-text-size: {{ section.settings.bg_text_size }}px;
+    --bg-text-weight: {% if section.settings.bg_text_bold %}bold{% else %}normal{% endif %};
+
+    --min-height: {{ section.settings.min_height }}px;
+
+    --pt-d: {{ section.settings.padding_top_d }}px;
+    --pb-d: {{ section.settings.padding_bottom_d }}px;
+    --pl-d: {{ section.settings.padding_left_d }}px;
+    --pr-d: {{ section.settings.padding_right_d }}px;
+    --mt-d: {{ section.settings.margin_top_d }}px;
+    --mb-d: {{ section.settings.margin_bottom_d }}px;
+    --ml-d: {{ section.settings.margin_left_d }}px;
+    --mr-d: {{ section.settings.margin_right_d }}px;
+
+    --pt-m: {{ section.settings.padding_top_m }}px;
+    --pb-m: {{ section.settings.padding_bottom_m }}px;
+    --pl-m: {{ section.settings.padding_left_m }}px;
+    --pr-m: {{ section.settings.padding_right_m }}px;
+    --mt-m: {{ section.settings.margin_top_m }}px;
+    --mb-m: {{ section.settings.margin_bottom_m }}px;
+    --ml-m: {{ section.settings.margin_left_m }}px;
+    --mr-m: {{ section.settings.margin_right_m }}px;
+  "
+>
+  <div class="b2b-stats__bg-text">
+    {{ section.settings.background_text }}
+  </div>
+
+  <div class="b2b-stats__container">
+    {%- for block in section.blocks -%}
+      <div class="b2b-stats__item" {{ block.shopify_attributes }}>
+        <div class="b2b-stats__number">{{ block.settings.number }}</div>
+        <div class="b2b-stats__desc">
+          {%- if block.settings.prefix_text != blank -%}
+            <span class="b2b-stats__prefix">{{ block.settings.prefix_text }}</span>
+          {% endif %}
+          {{ block.settings.description }}
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "B2B Stats",
+  "settings": [
+    {
+      "type": "text",
+      "id": "background_text",
+      "label": "Background Big Text",
+      "default": "INDUSCRAFT"
+    },
+    {
+      "type": "range",
+      "id": "bg_text_size",
+      "min": 100,
+      "max": 800,
+      "step": 10,
+      "unit": "px",
+      "label": "Big Text Size",
+      "default": 400
+    },
+    {
+      "type": "checkbox",
+      "id": "bg_text_bold",
+      "label": "Bold Big Text",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "min_height",
+      "min": 0,
+      "max": 1000,
+      "step": 10,
+      "unit": "px",
+      "label": "Minimum Height",
+      "default": 400
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#1A1A1A"
+    },
+    {
+      "type": "color",
+      "id": "bg_text_color",
+      "label": "Big Text Color",
+      "default": "#242424"
+    },
+    {
+      "type": "color",
+      "id": "number_color",
+      "label": "Number Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "prefix_color",
+      "label": "Prefix Text Color (Highlight)",
+      "default": "#C19A6B"
+    },
+    {
+      "type": "color",
+      "id": "desc_color",
+      "label": "Description Color",
+      "default": "#EFEFEF"
+    },
+    {
+      "type": "header",
+      "content": "Spacing (Desktop)"
+    },
+    { "type": "range", "id": "margin_top_d", "min": 0, "max": 200, "step": 5, "unit": "px", "label": "Margin Top", "default": 0 },
+    { "type": "range", "id": "margin_bottom_d", "min": 0, "max": 200, "step": 5, "unit": "px", "label": "Margin Bottom", "default": 0 },
+    { "type": "range", "id": "margin_left_d", "min": 0, "max": 200, "step": 5, "unit": "px", "label": "Margin Left", "default": 0 },
+    { "type": "range", "id": "margin_right_d", "min": 0, "max": 200, "step": 5, "unit": "px", "label": "Margin Right", "default": 0 },
+    { "type": "range", "id": "padding_top_d", "min": 0, "max": 200, "step": 5, "unit": "px", "label": "Padding Top", "default": 100 },
+    { "type": "range", "id": "padding_bottom_d", "min": 0, "max": 200, "step": 5, "unit": "px", "label": "Padding Bottom", "default": 100 },
+    { "type": "range", "id": "padding_left_d", "min": 0, "max": 200, "step": 5, "unit": "px", "label": "Padding Left", "default": 20 },
+    { "type": "range", "id": "padding_right_d", "min": 0, "max": 200, "step": 5, "unit": "px", "label": "Padding Right", "default": 20 },
+    {
+      "type": "header",
+      "content": "Spacing (Mobile)"
+    },
+    { "type": "range", "id": "margin_top_m", "min": 0, "max": 200, "step": 5, "unit": "px", "label": "Margin Top", "default": 0 },
+    { "type": "range", "id": "margin_bottom_m", "min": 0, "max": 200, "step": 5, "unit": "px", "label": "Margin Bottom", "default": 0 },
+    { "type": "range", "id": "margin_left_m", "min": 0, "max": 200, "step": 5, "unit": "px", "label": "Margin Left", "default": 0 },
+    { "type": "range", "id": "margin_right_m", "min": 0, "max": 200, "step": 5, "unit": "px", "label": "Margin Right", "default": 0 },
+    { "type": "range", "id": "padding_top_m", "min": 0, "max": 200, "step": 5, "unit": "px", "label": "Padding Top", "default": 60 },
+    { "type": "range", "id": "padding_bottom_m", "min": 0, "max": 200, "step": 5, "unit": "px", "label": "Padding Bottom", "default": 60 },
+    { "type": "range", "id": "padding_left_m", "min": 0, "max": 200, "step": 5, "unit": "px", "label": "Padding Left", "default": 20 },
+    { "type": "range", "id": "padding_right_m", "min": 0, "max": 200, "step": 5, "unit": "px", "label": "Padding Right", "default": 20 }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "600+"
+        },
+        {
+          "type": "text",
+          "id": "prefix_text",
+          "label": "Prefix Highlight Text",
+          "default": "Spaces Transformed,"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "from intimate interiors to large-scale developments..."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "B2B Stats",
+      "blocks": [
+        { "type": "stat", "settings": { "number": "600+", "prefix_text": "Spaces Transformed," } },
+        { "type": "stat", "settings": { "number": "12+", "prefix_text": "Years Shaping Environments," } },
+        { "type": "stat", "settings": { "number": "95%", "prefix_text": "Designs Built as Planned," } }
+      ]
+    }
+  ]
+}
+{% endschema %}

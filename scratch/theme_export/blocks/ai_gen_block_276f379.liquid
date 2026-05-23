@@ -1,0 +1,1189 @@
+{% doc %}
+  @prompt
+    Create a section with heading, sub-heading and text and a compration table  4-6 columns and 10-12 rows. Section with should be adjustable in pixels, in table there should be an option to heading, font-size, bold, not bold and all other advanced option like text allign etc. I also want a option to remove or add rows and columns
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-comparison-table-{{ ai_gen_id }} {
+    width: 100%;
+    max-width: {{ block.settings.section_width }}px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+
+  .ai-comparison-table__header-{{ ai_gen_id }} {
+    text-align: {{ block.settings.header_alignment }};
+    margin-bottom: 30px;
+  }
+
+  .ai-comparison-table__heading-{{ ai_gen_id }} {
+    font-family: {{ block.settings.heading_font.family }}, {{ block.settings.heading_font.fallback_families }};
+    font-weight: {{ block.settings.heading_font.weight }};
+    font-size: {{ block.settings.heading_size }}px;
+    color: {{ block.settings.heading_color }};
+    margin: 0 0 10px 0;
+    {% if block.settings.heading_bold %}
+      font-weight: 700;
+    {% else %}
+      font-weight: 400;
+    {% endif %}
+  }
+
+  .ai-comparison-table__subheading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subheading_size }}px;
+    color: {{ block.settings.subheading_color }};
+    margin: 0 0 10px 0;
+    {% if block.settings.subheading_bold %}
+      font-weight: 700;
+    {% else %}
+      font-weight: 400;
+    {% endif %}
+  }
+
+  .ai-comparison-table__text-{{ ai_gen_id }} {
+    font-size: {{ block.settings.text_size }}px;
+    color: {{ block.settings.text_color }};
+    margin: 0;
+    {% if block.settings.text_bold %}
+      font-weight: 700;
+    {% else %}
+      font-weight: 400;
+    {% endif %}
+  }
+
+  .ai-comparison-table__wrapper-{{ ai_gen_id }} {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .ai-comparison-table__table-{{ ai_gen_id }} {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: {{ block.settings.table_background }};
+  }
+
+  .ai-comparison-table__table-{{ ai_gen_id }} th,
+  .ai-comparison-table__table-{{ ai_gen_id }} td {
+    padding: {{ block.settings.cell_padding }}px;
+    border: {{ block.settings.border_width }}px solid {{ block.settings.border_color }};
+    text-align: {{ block.settings.cell_alignment }};
+    vertical-align: middle;
+  }
+
+  .ai-comparison-table__table-{{ ai_gen_id }} th {
+    background-color: {{ block.settings.header_background }};
+    color: {{ block.settings.header_text_color }};
+    font-size: {{ block.settings.header_font_size }}px;
+    {% if block.settings.header_bold %}
+      font-weight: 700;
+    {% else %}
+      font-weight: 400;
+    {% endif %}
+  }
+
+  .ai-comparison-table__table-{{ ai_gen_id }} td {
+    background-color: {{ block.settings.cell_background }};
+    color: {{ block.settings.cell_text_color }};
+    font-size: {{ block.settings.cell_font_size }}px;
+    {% if block.settings.cell_bold %}
+      font-weight: 700;
+    {% else %}
+      font-weight: 400;
+    {% endif %}
+  }
+
+  .ai-comparison-table__table-{{ ai_gen_id }} tr:nth-child(even) td {
+    {% if block.settings.enable_striped_rows %}
+      background-color: {{ block.settings.striped_row_background }};
+    {% endif %}
+  }
+
+  .ai-comparison-table__table-{{ ai_gen_id }} tr:hover td {
+    {% if block.settings.enable_row_hover %}
+      background-color: {{ block.settings.row_hover_background }};
+    {% endif %}
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-comparison-table-{{ ai_gen_id }} {
+      padding: 20px 10px;
+    }
+
+    .ai-comparison-table__heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_size | times: 0.8 }}px;
+    }
+
+    .ai-comparison-table__subheading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.subheading_size | times: 0.8 }}px;
+    }
+
+    .ai-comparison-table__text-{{ ai_gen_id }} {
+      font-size: {{ block.settings.text_size | times: 0.8 }}px;
+    }
+
+    .ai-comparison-table__table-{{ ai_gen_id }} th,
+    .ai-comparison-table__table-{{ ai_gen_id }} td {
+      padding: {{ block.settings.cell_padding | times: 0.7 }}px;
+      font-size: {{ block.settings.cell_font_size | times: 0.8 }}px;
+    }
+
+    .ai-comparison-table__table-{{ ai_gen_id }} th {
+      font-size: {{ block.settings.header_font_size | times: 0.8 }}px;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-comparison-table-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  {% if block.settings.heading != blank or block.settings.subheading != blank or block.settings.description != blank %}
+    <div class="ai-comparison-table__header-{{ ai_gen_id }}">
+      {% if block.settings.heading != blank %}
+        <h2 class="ai-comparison-table__heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+      {% endif %}
+      {% if block.settings.subheading != blank %}
+        <div class="ai-comparison-table__subheading-{{ ai_gen_id }}">{{ block.settings.subheading }}</div>
+      {% endif %}
+      {% if block.settings.description != blank %}
+        <div class="ai-comparison-table__text-{{ ai_gen_id }}">{{ block.settings.description }}</div>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <div class="ai-comparison-table__wrapper-{{ ai_gen_id }}">
+    <table class="ai-comparison-table__table-{{ ai_gen_id }}">
+      <thead>
+        <tr>
+          {% if block.settings.show_column_1 %}
+            <th>{{ block.settings.column_1_header }}</th>
+          {% endif %}
+          {% if block.settings.show_column_2 %}
+            <th>{{ block.settings.column_2_header }}</th>
+          {% endif %}
+          {% if block.settings.show_column_3 %}
+            <th>{{ block.settings.column_3_header }}</th>
+          {% endif %}
+          {% if block.settings.show_column_4 %}
+            <th>{{ block.settings.column_4_header }}</th>
+          {% endif %}
+          {% if block.settings.show_column_5 %}
+            <th>{{ block.settings.column_5_header }}</th>
+          {% endif %}
+          {% if block.settings.show_column_6 %}
+            <th>{{ block.settings.column_6_header }}</th>
+          {% endif %}
+        </tr>
+      </thead>
+      <tbody>
+        {% if block.settings.show_row_1 %}
+          <tr>
+            {% if block.settings.show_column_1 %}<td>{{ block.settings.row_1_col_1 }}</td>{% endif %}
+            {% if block.settings.show_column_2 %}<td>{{ block.settings.row_1_col_2 }}</td>{% endif %}
+            {% if block.settings.show_column_3 %}<td>{{ block.settings.row_1_col_3 }}</td>{% endif %}
+            {% if block.settings.show_column_4 %}<td>{{ block.settings.row_1_col_4 }}</td>{% endif %}
+            {% if block.settings.show_column_5 %}<td>{{ block.settings.row_1_col_5 }}</td>{% endif %}
+            {% if block.settings.show_column_6 %}<td>{{ block.settings.row_1_col_6 }}</td>{% endif %}
+          </tr>
+        {% endif %}
+        {% if block.settings.show_row_2 %}
+          <tr>
+            {% if block.settings.show_column_1 %}<td>{{ block.settings.row_2_col_1 }}</td>{% endif %}
+            {% if block.settings.show_column_2 %}<td>{{ block.settings.row_2_col_2 }}</td>{% endif %}
+            {% if block.settings.show_column_3 %}<td>{{ block.settings.row_2_col_3 }}</td>{% endif %}
+            {% if block.settings.show_column_4 %}<td>{{ block.settings.row_2_col_4 }}</td>{% endif %}
+            {% if block.settings.show_column_5 %}<td>{{ block.settings.row_2_col_5 }}</td>{% endif %}
+            {% if block.settings.show_column_6 %}<td>{{ block.settings.row_2_col_6 }}</td>{% endif %}
+          </tr>
+        {% endif %}
+        {% if block.settings.show_row_3 %}
+          <tr>
+            {% if block.settings.show_column_1 %}<td>{{ block.settings.row_3_col_1 }}</td>{% endif %}
+            {% if block.settings.show_column_2 %}<td>{{ block.settings.row_3_col_2 }}</td>{% endif %}
+            {% if block.settings.show_column_3 %}<td>{{ block.settings.row_3_col_3 }}</td>{% endif %}
+            {% if block.settings.show_column_4 %}<td>{{ block.settings.row_3_col_4 }}</td>{% endif %}
+            {% if block.settings.show_column_5 %}<td>{{ block.settings.row_3_col_5 }}</td>{% endif %}
+            {% if block.settings.show_column_6 %}<td>{{ block.settings.row_3_col_6 }}</td>{% endif %}
+          </tr>
+        {% endif %}
+        {% if block.settings.show_row_4 %}
+          <tr>
+            {% if block.settings.show_column_1 %}<td>{{ block.settings.row_4_col_1 }}</td>{% endif %}
+            {% if block.settings.show_column_2 %}<td>{{ block.settings.row_4_col_2 }}</td>{% endif %}
+            {% if block.settings.show_column_3 %}<td>{{ block.settings.row_4_col_3 }}</td>{% endif %}
+            {% if block.settings.show_column_4 %}<td>{{ block.settings.row_4_col_4 }}</td>{% endif %}
+            {% if block.settings.show_column_5 %}<td>{{ block.settings.row_4_col_5 }}</td>{% endif %}
+            {% if block.settings.show_column_6 %}<td>{{ block.settings.row_4_col_6 }}</td>{% endif %}
+          </tr>
+        {% endif %}
+        {% if block.settings.show_row_5 %}
+          <tr>
+            {% if block.settings.show_column_1 %}<td>{{ block.settings.row_5_col_1 }}</td>{% endif %}
+            {% if block.settings.show_column_2 %}<td>{{ block.settings.row_5_col_2 }}</td>{% endif %}
+            {% if block.settings.show_column_3 %}<td>{{ block.settings.row_5_col_3 }}</td>{% endif %}
+            {% if block.settings.show_column_4 %}<td>{{ block.settings.row_5_col_4 }}</td>{% endif %}
+            {% if block.settings.show_column_5 %}<td>{{ block.settings.row_5_col_5 }}</td>{% endif %}
+            {% if block.settings.show_column_6 %}<td>{{ block.settings.row_5_col_6 }}</td>{% endif %}
+          </tr>
+        {% endif %}
+        {% if block.settings.show_row_6 %}
+          <tr>
+            {% if block.settings.show_column_1 %}<td>{{ block.settings.row_6_col_1 }}</td>{% endif %}
+            {% if block.settings.show_column_2 %}<td>{{ block.settings.row_6_col_2 }}</td>{% endif %}
+            {% if block.settings.show_column_3 %}<td>{{ block.settings.row_6_col_3 }}</td>{% endif %}
+            {% if block.settings.show_column_4 %}<td>{{ block.settings.row_6_col_4 }}</td>{% endif %}
+            {% if block.settings.show_column_5 %}<td>{{ block.settings.row_6_col_5 }}</td>{% endif %}
+            {% if block.settings.show_column_6 %}<td>{{ block.settings.row_6_col_6 }}</td>{% endif %}
+          </tr>
+        {% endif %}
+        {% if block.settings.show_row_7 %}
+          <tr>
+            {% if block.settings.show_column_1 %}<td>{{ block.settings.row_7_col_1 }}</td>{% endif %}
+            {% if block.settings.show_column_2 %}<td>{{ block.settings.row_7_col_2 }}</td>{% endif %}
+            {% if block.settings.show_column_3 %}<td>{{ block.settings.row_7_col_3 }}</td>{% endif %}
+            {% if block.settings.show_column_4 %}<td>{{ block.settings.row_7_col_4 }}</td>{% endif %}
+            {% if block.settings.show_column_5 %}<td>{{ block.settings.row_7_col_5 }}</td>{% endif %}
+            {% if block.settings.show_column_6 %}<td>{{ block.settings.row_7_col_6 }}</td>{% endif %}
+          </tr>
+        {% endif %}
+        {% if block.settings.show_row_8 %}
+          <tr>
+            {% if block.settings.show_column_1 %}<td>{{ block.settings.row_8_col_1 }}</td>{% endif %}
+            {% if block.settings.show_column_2 %}<td>{{ block.settings.row_8_col_2 }}</td>{% endif %}
+            {% if block.settings.show_column_3 %}<td>{{ block.settings.row_8_col_3 }}</td>{% endif %}
+            {% if block.settings.show_column_4 %}<td>{{ block.settings.row_8_col_4 }}</td>{% endif %}
+            {% if block.settings.show_column_5 %}<td>{{ block.settings.row_8_col_5 }}</td>{% endif %}
+            {% if block.settings.show_column_6 %}<td>{{ block.settings.row_8_col_6 }}</td>{% endif %}
+          </tr>
+        {% endif %}
+        {% if block.settings.show_row_9 %}
+          <tr>
+            {% if block.settings.show_column_1 %}<td>{{ block.settings.row_9_col_1 }}</td>{% endif %}
+            {% if block.settings.show_column_2 %}<td>{{ block.settings.row_9_col_2 }}</td>{% endif %}
+            {% if block.settings.show_column_3 %}<td>{{ block.settings.row_9_col_3 }}</td>{% endif %}
+            {% if block.settings.show_column_4 %}<td>{{ block.settings.row_9_col_4 }}</td>{% endif %}
+            {% if block.settings.show_column_5 %}<td>{{ block.settings.row_9_col_5 }}</td>{% endif %}
+            {% if block.settings.show_column_6 %}<td>{{ block.settings.row_9_col_6 }}</td>{% endif %}
+          </tr>
+        {% endif %}
+        {% if block.settings.show_row_10 %}
+          <tr>
+            {% if block.settings.show_column_1 %}<td>{{ block.settings.row_10_col_1 }}</td>{% endif %}
+            {% if block.settings.show_column_2 %}<td>{{ block.settings.row_10_col_2 }}</td>{% endif %}
+            {% if block.settings.show_column_3 %}<td>{{ block.settings.row_10_col_3 }}</td>{% endif %}
+            {% if block.settings.show_column_4 %}<td>{{ block.settings.row_10_col_4 }}</td>{% endif %}
+            {% if block.settings.show_column_5 %}<td>{{ block.settings.row_10_col_5 }}</td>{% endif %}
+            {% if block.settings.show_column_6 %}<td>{{ block.settings.row_10_col_6 }}</td>{% endif %}
+          </tr>
+        {% endif %}
+        {% if block.settings.show_row_11 %}
+          <tr>
+            {% if block.settings.show_column_1 %}<td>{{ block.settings.row_11_col_1 }}</td>{% endif %}
+            {% if block.settings.show_column_2 %}<td>{{ block.settings.row_11_col_2 }}</td>{% endif %}
+            {% if block.settings.show_column_3 %}<td>{{ block.settings.row_11_col_3 }}</td>{% endif %}
+            {% if block.settings.show_column_4 %}<td>{{ block.settings.row_11_col_4 }}</td>{% endif %}
+            {% if block.settings.show_column_5 %}<td>{{ block.settings.row_11_col_5 }}</td>{% endif %}
+            {% if block.settings.show_column_6 %}<td>{{ block.settings.row_11_col_6 }}</td>{% endif %}
+          </tr>
+        {% endif %}
+        {% if block.settings.show_row_12 %}
+          <tr>
+            {% if block.settings.show_column_1 %}<td>{{ block.settings.row_12_col_1 }}</td>{% endif %}
+            {% if block.settings.show_column_2 %}<td>{{ block.settings.row_12_col_2 }}</td>{% endif %}
+            {% if block.settings.show_column_3 %}<td>{{ block.settings.row_12_col_3 }}</td>{% endif %}
+            {% if block.settings.show_column_4 %}<td>{{ block.settings.row_12_col_4 }}</td>{% endif %}
+            {% if block.settings.show_column_5 %}<td>{{ block.settings.row_12_col_5 }}</td>{% endif %}
+            {% if block.settings.show_column_6 %}<td>{{ block.settings.row_12_col_6 }}</td>{% endif %}
+          </tr>
+        {% endif %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Comparison table",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section settings"
+    },
+    {
+      "type": "range",
+      "id": "section_width",
+      "label": "Section width",
+      "min": 600,
+      "max": 1920,
+      "step": 20,
+      "unit": "px",
+      "default": 1200
+    },
+    {
+      "type": "header",
+      "content": "Header content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Product comparison"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Compare features and specifications"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Find the perfect product for your needs"
+    },
+    {
+      "type": "select",
+      "id": "header_alignment",
+      "label": "Header alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Heading style"
+    },
+    {
+      "type": "font_picker",
+      "id": "heading_font",
+      "label": "Heading font",
+      "default": "newsreader_n4"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "label": "Heading size",
+      "min": 16,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "checkbox",
+      "id": "heading_bold",
+      "label": "Heading bold",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#181210"
+    },
+    {
+      "type": "header",
+      "content": "Subheading style"
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "label": "Subheading size",
+      "min": 12,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "checkbox",
+      "id": "subheading_bold",
+      "label": "Subheading bold",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading color",
+      "default": "#3b3b3b"
+    },
+    {
+      "type": "header",
+      "content": "Description style"
+    },
+    {
+      "type": "range",
+      "id": "text_size",
+      "label": "Text size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "checkbox",
+      "id": "text_bold",
+      "label": "Text bold",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Table header style"
+    },
+    {
+      "type": "range",
+      "id": "header_font_size",
+      "label": "Header font size",
+      "min": 12,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "checkbox",
+      "id": "header_bold",
+      "label": "Header bold",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "header_background",
+      "label": "Header background",
+      "default": "#181210"
+    },
+    {
+      "type": "color",
+      "id": "header_text_color",
+      "label": "Header text color",
+      "default": "#fdf0d5"
+    },
+    {
+      "type": "header",
+      "content": "Table cell style"
+    },
+    {
+      "type": "range",
+      "id": "cell_font_size",
+      "label": "Cell font size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "checkbox",
+      "id": "cell_bold",
+      "label": "Cell bold",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "cell_alignment",
+      "label": "Cell alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "cell_padding",
+      "label": "Cell padding",
+      "min": 5,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "color",
+      "id": "cell_background",
+      "label": "Cell background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "cell_text_color",
+      "label": "Cell text color",
+      "default": "#181210"
+    },
+    {
+      "type": "header",
+      "content": "Table colors"
+    },
+    {
+      "type": "color",
+      "id": "table_background",
+      "label": "Table background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#E6E6E6"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "label": "Border width",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "header",
+      "content": "Row effects"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_striped_rows",
+      "label": "Enable striped rows",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "striped_row_background",
+      "label": "Striped row background",
+      "default": "#f9f9f9"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_row_hover",
+      "label": "Enable row hover",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "row_hover_background",
+      "label": "Row hover background",
+      "default": "#fdf0d5"
+    },
+    {
+      "type": "header",
+      "content": "Column visibility"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_column_1",
+      "label": "Show column 1",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "column_1_header",
+      "label": "Column 1 header",
+      "default": "Feature"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_column_2",
+      "label": "Show column 2",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "column_2_header",
+      "label": "Column 2 header",
+      "default": "Product A"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_column_3",
+      "label": "Show column 3",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "column_3_header",
+      "label": "Column 3 header",
+      "default": "Product B"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_column_4",
+      "label": "Show column 4",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "column_4_header",
+      "label": "Column 4 header",
+      "default": "Product C"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_column_5",
+      "label": "Show column 5",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "column_5_header",
+      "label": "Column 5 header",
+      "default": "Product D"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_column_6",
+      "label": "Show column 6",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "column_6_header",
+      "label": "Column 6 header",
+      "default": "Product E"
+    },
+    {
+      "type": "header",
+      "content": "Row 1"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_row_1",
+      "label": "Show row 1",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "row_1_col_1",
+      "label": "Column 1",
+      "default": "Material"
+    },
+    {
+      "type": "text",
+      "id": "row_1_col_2",
+      "label": "Column 2",
+      "default": "Sheesham wood"
+    },
+    {
+      "type": "text",
+      "id": "row_1_col_3",
+      "label": "Column 3",
+      "default": "Teak wood"
+    },
+    {
+      "type": "text",
+      "id": "row_1_col_4",
+      "label": "Column 4",
+      "default": "Mango wood"
+    },
+    {
+      "type": "text",
+      "id": "row_1_col_5",
+      "label": "Column 5"
+    },
+    {
+      "type": "text",
+      "id": "row_1_col_6",
+      "label": "Column 6"
+    },
+    {
+      "type": "header",
+      "content": "Row 2"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_row_2",
+      "label": "Show row 2",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "row_2_col_1",
+      "label": "Column 1",
+      "default": "Dimensions"
+    },
+    {
+      "type": "text",
+      "id": "row_2_col_2",
+      "label": "Column 2",
+      "default": "78 x 72 x 36"
+    },
+    {
+      "type": "text",
+      "id": "row_2_col_3",
+      "label": "Column 3",
+      "default": "80 x 74 x 38"
+    },
+    {
+      "type": "text",
+      "id": "row_2_col_4",
+      "label": "Column 4",
+      "default": "76 x 70 x 34"
+    },
+    {
+      "type": "text",
+      "id": "row_2_col_5",
+      "label": "Column 5"
+    },
+    {
+      "type": "text",
+      "id": "row_2_col_6",
+      "label": "Column 6"
+    },
+    {
+      "type": "header",
+      "content": "Row 3"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_row_3",
+      "label": "Show row 3",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "row_3_col_1",
+      "label": "Column 1",
+      "default": "Storage"
+    },
+    {
+      "type": "text",
+      "id": "row_3_col_2",
+      "label": "Column 2",
+      "default": "Yes"
+    },
+    {
+      "type": "text",
+      "id": "row_3_col_3",
+      "label": "Column 3",
+      "default": "No"
+    },
+    {
+      "type": "text",
+      "id": "row_3_col_4",
+      "label": "Column 4",
+      "default": "Yes"
+    },
+    {
+      "type": "text",
+      "id": "row_3_col_5",
+      "label": "Column 5"
+    },
+    {
+      "type": "text",
+      "id": "row_3_col_6",
+      "label": "Column 6"
+    },
+    {
+      "type": "header",
+      "content": "Row 4"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_row_4",
+      "label": "Show row 4",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "row_4_col_1",
+      "label": "Column 1",
+      "default": "Finish"
+    },
+    {
+      "type": "text",
+      "id": "row_4_col_2",
+      "label": "Column 2",
+      "default": "Natural"
+    },
+    {
+      "type": "text",
+      "id": "row_4_col_3",
+      "label": "Column 3",
+      "default": "Walnut"
+    },
+    {
+      "type": "text",
+      "id": "row_4_col_4",
+      "label": "Column 4",
+      "default": "Honey"
+    },
+    {
+      "type": "text",
+      "id": "row_4_col_5",
+      "label": "Column 5"
+    },
+    {
+      "type": "text",
+      "id": "row_4_col_6",
+      "label": "Column 6"
+    },
+    {
+      "type": "header",
+      "content": "Row 5"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_row_5",
+      "label": "Show row 5",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "row_5_col_1",
+      "label": "Column 1",
+      "default": "Warranty"
+    },
+    {
+      "type": "text",
+      "id": "row_5_col_2",
+      "label": "Column 2",
+      "default": "1 year"
+    },
+    {
+      "type": "text",
+      "id": "row_5_col_3",
+      "label": "Column 3",
+      "default": "2 years"
+    },
+    {
+      "type": "text",
+      "id": "row_5_col_4",
+      "label": "Column 4",
+      "default": "1 year"
+    },
+    {
+      "type": "text",
+      "id": "row_5_col_5",
+      "label": "Column 5"
+    },
+    {
+      "type": "text",
+      "id": "row_5_col_6",
+      "label": "Column 6"
+    },
+    {
+      "type": "header",
+      "content": "Row 6"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_row_6",
+      "label": "Show row 6",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "row_6_col_1",
+      "label": "Column 1",
+      "default": "Assembly"
+    },
+    {
+      "type": "text",
+      "id": "row_6_col_2",
+      "label": "Column 2",
+      "default": "Required"
+    },
+    {
+      "type": "text",
+      "id": "row_6_col_3",
+      "label": "Column 3",
+      "default": "Not required"
+    },
+    {
+      "type": "text",
+      "id": "row_6_col_4",
+      "label": "Column 4",
+      "default": "Required"
+    },
+    {
+      "type": "text",
+      "id": "row_6_col_5",
+      "label": "Column 5"
+    },
+    {
+      "type": "text",
+      "id": "row_6_col_6",
+      "label": "Column 6"
+    },
+    {
+      "type": "header",
+      "content": "Row 7"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_row_7",
+      "label": "Show row 7",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "row_7_col_1",
+      "label": "Column 1",
+      "default": "Weight capacity"
+    },
+    {
+      "type": "text",
+      "id": "row_7_col_2",
+      "label": "Column 2",
+      "default": "250 kg"
+    },
+    {
+      "type": "text",
+      "id": "row_7_col_3",
+      "label": "Column 3",
+      "default": "300 kg"
+    },
+    {
+      "type": "text",
+      "id": "row_7_col_4",
+      "label": "Column 4",
+      "default": "200 kg"
+    },
+    {
+      "type": "text",
+      "id": "row_7_col_5",
+      "label": "Column 5"
+    },
+    {
+      "type": "text",
+      "id": "row_7_col_6",
+      "label": "Column 6"
+    },
+    {
+      "type": "header",
+      "content": "Row 8"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_row_8",
+      "label": "Show row 8",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "row_8_col_1",
+      "label": "Column 1",
+      "default": "Price"
+    },
+    {
+      "type": "text",
+      "id": "row_8_col_2",
+      "label": "Column 2",
+      "default": "₹25,000"
+    },
+    {
+      "type": "text",
+      "id": "row_8_col_3",
+      "label": "Column 3",
+      "default": "₹35,000"
+    },
+    {
+      "type": "text",
+      "id": "row_8_col_4",
+      "label": "Column 4",
+      "default": "₹22,000"
+    },
+    {
+      "type": "text",
+      "id": "row_8_col_5",
+      "label": "Column 5"
+    },
+    {
+      "type": "text",
+      "id": "row_8_col_6",
+      "label": "Column 6"
+    },
+    {
+      "type": "header",
+      "content": "Row 9"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_row_9",
+      "label": "Show row 9",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "row_9_col_1",
+      "label": "Column 1"
+    },
+    {
+      "type": "text",
+      "id": "row_9_col_2",
+      "label": "Column 2"
+    },
+    {
+      "type": "text",
+      "id": "row_9_col_3",
+      "label": "Column 3"
+    },
+    {
+      "type": "text",
+      "id": "row_9_col_4",
+      "label": "Column 4"
+    },
+    {
+      "type": "text",
+      "id": "row_9_col_5",
+      "label": "Column 5"
+    },
+    {
+      "type": "text",
+      "id": "row_9_col_6",
+      "label": "Column 6"
+    },
+    {
+      "type": "header",
+      "content": "Row 10"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_row_10",
+      "label": "Show row 10",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "row_10_col_1",
+      "label": "Column 1"
+    },
+    {
+      "type": "text",
+      "id": "row_10_col_2",
+      "label": "Column 2"
+    },
+    {
+      "type": "text",
+      "id": "row_10_col_3",
+      "label": "Column 3"
+    },
+    {
+      "type": "text",
+      "id": "row_10_col_4",
+      "label": "Column 4"
+    },
+    {
+      "type": "text",
+      "id": "row_10_col_5",
+      "label": "Column 5"
+    },
+    {
+      "type": "text",
+      "id": "row_10_col_6",
+      "label": "Column 6"
+    },
+    {
+      "type": "header",
+      "content": "Row 11"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_row_11",
+      "label": "Show row 11",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "row_11_col_1",
+      "label": "Column 1"
+    },
+    {
+      "type": "text",
+      "id": "row_11_col_2",
+      "label": "Column 2"
+    },
+    {
+      "type": "text",
+      "id": "row_11_col_3",
+      "label": "Column 3"
+    },
+    {
+      "type": "text",
+      "id": "row_11_col_4",
+      "label": "Column 4"
+    },
+    {
+      "type": "text",
+      "id": "row_11_col_5",
+      "label": "Column 5"
+    },
+    {
+      "type": "text",
+      "id": "row_11_col_6",
+      "label": "Column 6"
+    },
+    {
+      "type": "header",
+      "content": "Row 12"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_row_12",
+      "label": "Show row 12",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "row_12_col_1",
+      "label": "Column 1"
+    },
+    {
+      "type": "text",
+      "id": "row_12_col_2",
+      "label": "Column 2"
+    },
+    {
+      "type": "text",
+      "id": "row_12_col_3",
+      "label": "Column 3"
+    },
+    {
+      "type": "text",
+      "id": "row_12_col_4",
+      "label": "Column 4"
+    },
+    {
+      "type": "text",
+      "id": "row_12_col_5",
+      "label": "Column 5"
+    },
+    {
+      "type": "text",
+      "id": "row_12_col_6",
+      "label": "Column 6"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Comparison table"
+    }
+  ]
+}
+{% endschema %}

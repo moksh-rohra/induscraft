@@ -1,0 +1,287 @@
+.hero-slideshow {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    display: block;
+}
+
+/* Swiper Core Styles */
+.hero-slideshow.swiper {
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    overflow: hidden;
+    list-style: none;
+    padding: 0;
+    z-index: 1;
+}
+
+.hero-slideshow .swiper-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: flex;
+    transition-property: transform;
+    box-sizing: content-box;
+}
+
+.hero-slideshow .swiper-slide {
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition-property: transform;
+    min-height: var(--min-height, 60vh);
+    overflow: hidden;
+}
+
+.hero-slideshow__bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.hero-slideshow__bg img,
+.hero-slideshow__bg video,
+.hero-slideshow__bg iframe {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+}
+
+.hero-slideshow__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, var(--overlay-opacity, 0.3));
+    z-index: 2;
+    pointer-events: none;
+}
+
+.hero-slideshow__content-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 3;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+
+/* Horizontal Content Alignment (positions the content box) */
+.hero-slideshow__content-wrapper--left {
+    justify-content: flex-start;
+}
+
+.hero-slideshow__content-wrapper--center {
+    justify-content: center;
+}
+
+.hero-slideshow__content-wrapper--right {
+    justify-content: flex-end;
+}
+
+/* Vertical Content Alignment */
+.hero-slideshow__content-wrapper--v-top {
+    align-content: flex-start;
+}
+
+.hero-slideshow__content-wrapper--v-center {
+    align-content: center;
+}
+
+.hero-slideshow__content-wrapper--v-bottom {
+    align-content: flex-end;
+}
+
+.hero-slideshow__content {
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+/* Text Alignment (aligns text within the content box) */
+.hero-slideshow__content--center {
+    text-align: center;
+    align-items: center;
+}
+
+.hero-slideshow__content--left {
+    text-align: left;
+    align-items: flex-start;
+}
+
+.hero-slideshow__content--right {
+    text-align: right;
+    align-items: flex-end;
+}
+
+.hero-slideshow__subheading {
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.hero-slideshow__heading {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+    .hero-slideshow__heading {
+        font-size: 2rem;
+    }
+}
+
+.hero-slideshow__description {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.hero-slideshow__buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.hero-slideshow__content--center .hero-slideshow__buttons {
+    justify-content: center;
+}
+
+.hero-slideshow__content--right .hero-slideshow__buttons {
+    justify-content: flex-end;
+}
+
+/* Primary Button Styles - Override theme button colors */
+.hero-slideshow__btn-primary.button-new.button--primary {
+    background-color: var(--btn-1-bg, #000) !important;
+    color: var(--btn-1-text, #fff) !important;
+    border-color: var(--btn-1-border, #000) !important;
+}
+
+.hero-slideshow__btn-primary.button-new.button--primary::before {
+    background-color: var(--btn-1-bg-hover, #333) !important;
+}
+
+.hero-slideshow__btn-primary.button-new.button--primary::after {
+    border-color: var(--btn-1-border, #000) !important;
+}
+
+@media (-moz-touch-enabled: 0),
+(hover: hover),
+(pointer: fine) {
+    .hero-slideshow__btn-primary.button-new.button--primary:hover {
+        color: var(--btn-1-text-hover, #fff) !important;
+        border-color: var(--btn-1-border-hover, #333) !important;
+    }
+
+    .hero-slideshow__btn-primary.button-new.button--primary:hover::after {
+        border-color: var(--btn-1-border-hover, #333) !important;
+    }
+}
+
+/* Secondary Button Styles - Override theme button colors */
+.hero-slideshow__btn-secondary.button-new.button--secondary {
+    background-color: var(--btn-2-bg, transparent) !important;
+    color: var(--btn-2-text, #fff) !important;
+    border-color: var(--btn-2-border, #fff) !important;
+}
+
+.hero-slideshow__btn-secondary.button-new.button--secondary::before {
+    background-color: var(--btn-2-bg-hover, #fff) !important;
+}
+
+.hero-slideshow__btn-secondary.button-new.button--secondary::after {
+    border-color: var(--btn-2-border, #fff) !important;
+}
+
+@media (-moz-touch-enabled: 0),
+(hover: hover),
+(pointer: fine) {
+    .hero-slideshow__btn-secondary.button-new.button--secondary:hover {
+        color: var(--btn-2-text-hover, #000) !important;
+        border-color: var(--btn-2-border-hover, #fff) !important;
+    }
+
+    .hero-slideshow__btn-secondary.button-new.button--secondary:hover::after {
+        border-color: var(--btn-2-border-hover, #fff) !important;
+    }
+}
+
+/* Link style button overrides */
+.hero-slideshow__btn-primary.button-link-new {
+    color: var(--btn-1-text, #fff) !important;
+}
+
+.hero-slideshow__btn-secondary.button-link-new {
+    color: var(--btn-2-text, #fff) !important;
+}
+
+/* Navigation & Pagination Overrides */
+.hero-slideshow .swiper-button-prev,
+.hero-slideshow .swiper-button-next {
+    color: var(--arrows-color, #fff);
+    z-index: 4;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: 27px;
+    height: 44px;
+    margin-top: -22px;
+    z-index: 10;
+}
+
+.hero-slideshow .swiper-button-prev {
+    left: 10px;
+}
+
+.hero-slideshow .swiper-button-next {
+    right: 10px;
+}
+
+.hero-slideshow .swiper-pagination {
+    bottom: 2rem;
+    z-index: 4;
+    position: absolute;
+    text-align: center;
+    transition: 300ms opacity;
+    transform: translate3d(0, 0, 0);
+    margin-bottom: 20px;
+    z-index: 10;
+    width: 100%;
+}
+
+.hero-slideshow .swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    display: inline-block;
+    border-radius: 100%;
+    background: #000;
+    opacity: 0.2;
+    margin: 0 4px;
+    cursor: pointer;
+}
+
+.hero-slideshow .swiper-pagination-bullet-active {
+    background: var(--pagination-color, #fff);
+    opacity: 1;
+}

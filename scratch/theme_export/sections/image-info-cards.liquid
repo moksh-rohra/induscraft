@@ -1,0 +1,143 @@
+{{ 'section-image-info-cards.css' | asset_url | stylesheet_tag }}
+
+{%- assign bg_color = section.settings.background_color | default: '#f0f4f8' -%}
+{%- assign text_color = section.settings.text_color | default: '#555555' -%}
+{%- assign heading_color = section.settings.heading_color | default: '#1a1a1a' -%}
+{%- assign cols = section.settings.columns_per_row | default: 3 -%}
+
+<section class="image-info-cards" style="--iic-bg: {{ bg_color }}; --iic-text: {{ text_color }}; --iic-heading: {{ heading_color }}; --iic-cols: {{ cols }};">
+  <div class="image-info-cards__inner">
+    {%- if section.settings.section_heading != blank -%}
+      <h2 class="image-info-cards__title">{{ section.settings.section_heading }}</h2>
+    {%- endif -%}
+    {%- if section.settings.section_description != blank -%}
+      <div class="image-info-cards__description">{{ section.settings.section_description }}</div>
+    {%- endif -%}
+
+    <div class="image-info-cards__grid">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'card' -%}
+          {%- assign card_bg = block.settings.card_background | default: '#ffffff' -%}
+          <div class="image-info-cards__card" style="--card-bg: {{ card_bg }};" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              <div class="image-info-cards__image">
+                <img
+                  src="{{ block.settings.image | image_url: width: 800 }}"
+                  alt="{{ block.settings.heading | escape }}"
+                  loading="lazy"
+                  width="{{ block.settings.image.width }}"
+                  height="{{ block.settings.image.height }}"
+                >
+              </div>
+            {%- else -%}
+              <div class="image-info-cards__image image-info-cards__placeholder">
+                {{ 'product-1' | placeholder_svg_tag: 'image-info-cards__placeholder-svg' }}
+              </div>
+            {%- endif -%}
+            <div class="image-info-cards__content">
+              {%- if block.settings.heading != blank -%}
+                <h3 class="image-info-cards__card-heading">{{ block.settings.heading }}</h3>
+              {%- endif -%}
+              {%- if block.settings.text != blank -%}
+                <div class="image-info-cards__card-text">{{ block.settings.text }}</div>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Image Info Cards",
+  "tag": "section",
+  "class": "image-info-cards-wrapper",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_heading",
+      "label": "Heading",
+      "default": "Size & Space Planning for King-Size Beds"
+    },
+    {
+      "type": "richtext",
+      "id": "section_description",
+      "label": "Description"
+    },
+    {
+      "type": "range",
+      "id": "columns_per_row",
+      "label": "Cards per row",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Section background",
+      "default": "#f0f4f8"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#555555"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Card heading"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Add your card description here.</p>"
+        },
+        {
+          "type": "color",
+          "id": "card_background",
+          "label": "Card background",
+          "default": "#ffffff"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Image Info Cards",
+      "blocks": [
+        { "type": "card", "settings": { "heading": "For box storage beds" } },
+        { "type": "card", "settings": { "heading": "For drawer storage beds" } },
+        { "type": "card", "settings": { "heading": "For hydraulic storage beds" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

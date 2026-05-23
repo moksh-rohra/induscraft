@@ -1,0 +1,1143 @@
+{% doc %}
+  @prompt
+    Create a section with heading, sub-heading and text and a compration table  4-6 columns and 10-12 rows. Section with should be adjustable in pixels, in table there should be an option to heading, font-size, bold, not bold and all other advanced option like text allign etc
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-comparison-table-{{ ai_gen_id }} {
+    width: 100%;
+    display: block;
+  }
+
+  .ai-comparison-table-container-{{ ai_gen_id }} {
+    width: {{ block.settings.section_width }}px;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: {{ block.settings.section_padding }}px;
+  }
+
+  .ai-comparison-table-header-{{ ai_gen_id }} {
+    text-align: {{ block.settings.header_text_align }};
+    margin-bottom: {{ block.settings.header_spacing }}px;
+  }
+
+  .ai-comparison-table-heading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.heading_font_size }}px;
+    font-weight: {% if block.settings.heading_bold %}700{% else %}400{% endif %};
+    color: {{ block.settings.heading_color }};
+    margin: 0 0 {{ block.settings.heading_margin_bottom }}px 0;
+  }
+
+  .ai-comparison-table-subheading-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subheading_font_size }}px;
+    font-weight: {% if block.settings.subheading_bold %}700{% else %}400{% endif %};
+    color: {{ block.settings.subheading_color }};
+    margin: 0 0 {{ block.settings.subheading_margin_bottom }}px 0;
+  }
+
+  .ai-comparison-table-text-{{ ai_gen_id }} {
+    font-size: {{ block.settings.text_font_size }}px;
+    font-weight: {% if block.settings.text_bold %}700{% else %}400{% endif %};
+    color: {{ block.settings.text_color }};
+    margin: 0;
+  }
+
+  .ai-comparison-table-wrapper-{{ ai_gen_id }} {
+    overflow-x: auto;
+    margin-top: {{ block.settings.table_margin_top }}px;
+  }
+
+  .ai-comparison-table-table-{{ ai_gen_id }} {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: {{ block.settings.table_background_color }};
+  }
+
+  .ai-comparison-table-table-{{ ai_gen_id }} th,
+  .ai-comparison-table-table-{{ ai_gen_id }} td {
+    padding: {{ block.settings.cell_padding }}px;
+    border: {{ block.settings.border_width }}px solid {{ block.settings.border_color }};
+    text-align: {{ block.settings.cell_text_align }};
+    vertical-align: {{ block.settings.cell_vertical_align }};
+  }
+
+  .ai-comparison-table-table-{{ ai_gen_id }} th {
+    background-color: {{ block.settings.header_row_bg_color }};
+    color: {{ block.settings.header_row_text_color }};
+    font-size: {{ block.settings.header_row_font_size }}px;
+    font-weight: {% if block.settings.header_row_bold %}700{% else %}400{% endif %};
+  }
+
+  .ai-comparison-table-table-{{ ai_gen_id }} td {
+    background-color: {{ block.settings.cell_bg_color }};
+    color: {{ block.settings.cell_text_color }};
+    font-size: {{ block.settings.cell_font_size }}px;
+    font-weight: {% if block.settings.cell_bold %}700{% else %}400{% endif %};
+  }
+
+  .ai-comparison-table-table-{{ ai_gen_id }} tbody tr:nth-child(even) td {
+    background-color: {{ block.settings.alternate_row_bg_color }};
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-comparison-table-container-{{ ai_gen_id }} {
+      padding: {{ block.settings.section_padding | times: 0.5 }}px;
+    }
+
+    .ai-comparison-table-heading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.heading_font_size | times: 0.8 }}px;
+    }
+
+    .ai-comparison-table-subheading-{{ ai_gen_id }} {
+      font-size: {{ block.settings.subheading_font_size | times: 0.8 }}px;
+    }
+
+    .ai-comparison-table-text-{{ ai_gen_id }} {
+      font-size: {{ block.settings.text_font_size | times: 0.8 }}px;
+    }
+  }
+{% endstyle %}
+
+<div class="ai-comparison-table-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <div class="ai-comparison-table-container-{{ ai_gen_id }}">
+    <div class="ai-comparison-table-header-{{ ai_gen_id }}">
+      {% if block.settings.heading != blank %}
+        <h2 class="ai-comparison-table-heading-{{ ai_gen_id }}">{{ block.settings.heading }}</h2>
+      {% endif %}
+
+      {% if block.settings.subheading != blank %}
+        <h3 class="ai-comparison-table-subheading-{{ ai_gen_id }}">{{ block.settings.subheading }}</h3>
+      {% endif %}
+
+      {% if block.settings.text != blank %}
+        <div class="ai-comparison-table-text-{{ ai_gen_id }}">{{ block.settings.text }}</div>
+      {% endif %}
+    </div>
+
+    <div class="ai-comparison-table-wrapper-{{ ai_gen_id }}">
+      <table class="ai-comparison-table-table-{{ ai_gen_id }}">
+        <thead>
+          <tr>
+            <th>{{ block.settings.col_1_header }}</th>
+            <th>{{ block.settings.col_2_header }}</th>
+            <th>{{ block.settings.col_3_header }}</th>
+            <th>{{ block.settings.col_4_header }}</th>
+            {% if block.settings.show_col_5 %}
+              <th>{{ block.settings.col_5_header }}</th>
+            {% endif %}
+            {% if block.settings.show_col_6 %}
+              <th>{{ block.settings.col_6_header }}</th>
+            {% endif %}
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ block.settings.row_1_col_1 }}</td>
+            <td>{{ block.settings.row_1_col_2 }}</td>
+            <td>{{ block.settings.row_1_col_3 }}</td>
+            <td>{{ block.settings.row_1_col_4 }}</td>
+            {% if block.settings.show_col_5 %}
+              <td>{{ block.settings.row_1_col_5 }}</td>
+            {% endif %}
+            {% if block.settings.show_col_6 %}
+              <td>{{ block.settings.row_1_col_6 }}</td>
+            {% endif %}
+          </tr>
+          <tr>
+            <td>{{ block.settings.row_2_col_1 }}</td>
+            <td>{{ block.settings.row_2_col_2 }}</td>
+            <td>{{ block.settings.row_2_col_3 }}</td>
+            <td>{{ block.settings.row_2_col_4 }}</td>
+            {% if block.settings.show_col_5 %}
+              <td>{{ block.settings.row_2_col_5 }}</td>
+            {% endif %}
+            {% if block.settings.show_col_6 %}
+              <td>{{ block.settings.row_2_col_6 }}</td>
+            {% endif %}
+          </tr>
+          <tr>
+            <td>{{ block.settings.row_3_col_1 }}</td>
+            <td>{{ block.settings.row_3_col_2 }}</td>
+            <td>{{ block.settings.row_3_col_3 }}</td>
+            <td>{{ block.settings.row_3_col_4 }}</td>
+            {% if block.settings.show_col_5 %}
+              <td>{{ block.settings.row_3_col_5 }}</td>
+            {% endif %}
+            {% if block.settings.show_col_6 %}
+              <td>{{ block.settings.row_3_col_6 }}</td>
+            {% endif %}
+          </tr>
+          <tr>
+            <td>{{ block.settings.row_4_col_1 }}</td>
+            <td>{{ block.settings.row_4_col_2 }}</td>
+            <td>{{ block.settings.row_4_col_3 }}</td>
+            <td>{{ block.settings.row_4_col_4 }}</td>
+            {% if block.settings.show_col_5 %}
+              <td>{{ block.settings.row_4_col_5 }}</td>
+            {% endif %}
+            {% if block.settings.show_col_6 %}
+              <td>{{ block.settings.row_4_col_6 }}</td>
+            {% endif %}
+          </tr>
+          <tr>
+            <td>{{ block.settings.row_5_col_1 }}</td>
+            <td>{{ block.settings.row_5_col_2 }}</td>
+            <td>{{ block.settings.row_5_col_3 }}</td>
+            <td>{{ block.settings.row_5_col_4 }}</td>
+            {% if block.settings.show_col_5 %}
+              <td>{{ block.settings.row_5_col_5 }}</td>
+            {% endif %}
+            {% if block.settings.show_col_6 %}
+              <td>{{ block.settings.row_5_col_6 }}</td>
+            {% endif %}
+          </tr>
+          <tr>
+            <td>{{ block.settings.row_6_col_1 }}</td>
+            <td>{{ block.settings.row_6_col_2 }}</td>
+            <td>{{ block.settings.row_6_col_3 }}</td>
+            <td>{{ block.settings.row_6_col_4 }}</td>
+            {% if block.settings.show_col_5 %}
+              <td>{{ block.settings.row_6_col_5 }}</td>
+            {% endif %}
+            {% if block.settings.show_col_6 %}
+              <td>{{ block.settings.row_6_col_6 }}</td>
+            {% endif %}
+          </tr>
+          <tr>
+            <td>{{ block.settings.row_7_col_1 }}</td>
+            <td>{{ block.settings.row_7_col_2 }}</td>
+            <td>{{ block.settings.row_7_col_3 }}</td>
+            <td>{{ block.settings.row_7_col_4 }}</td>
+            {% if block.settings.show_col_5 %}
+              <td>{{ block.settings.row_7_col_5 }}</td>
+            {% endif %}
+            {% if block.settings.show_col_6 %}
+              <td>{{ block.settings.row_7_col_6 }}</td>
+            {% endif %}
+          </tr>
+          <tr>
+            <td>{{ block.settings.row_8_col_1 }}</td>
+            <td>{{ block.settings.row_8_col_2 }}</td>
+            <td>{{ block.settings.row_8_col_3 }}</td>
+            <td>{{ block.settings.row_8_col_4 }}</td>
+            {% if block.settings.show_col_5 %}
+              <td>{{ block.settings.row_8_col_5 }}</td>
+            {% endif %}
+            {% if block.settings.show_col_6 %}
+              <td>{{ block.settings.row_8_col_6 }}</td>
+            {% endif %}
+          </tr>
+          <tr>
+            <td>{{ block.settings.row_9_col_1 }}</td>
+            <td>{{ block.settings.row_9_col_2 }}</td>
+            <td>{{ block.settings.row_9_col_3 }}</td>
+            <td>{{ block.settings.row_9_col_4 }}</td>
+            {% if block.settings.show_col_5 %}
+              <td>{{ block.settings.row_9_col_5 }}</td>
+            {% endif %}
+            {% if block.settings.show_col_6 %}
+              <td>{{ block.settings.row_9_col_6 }}</td>
+            {% endif %}
+          </tr>
+          <tr>
+            <td>{{ block.settings.row_10_col_1 }}</td>
+            <td>{{ block.settings.row_10_col_2 }}</td>
+            <td>{{ block.settings.row_10_col_3 }}</td>
+            <td>{{ block.settings.row_10_col_4 }}</td>
+            {% if block.settings.show_col_5 %}
+              <td>{{ block.settings.row_10_col_5 }}</td>
+            {% endif %}
+            {% if block.settings.show_col_6 %}
+              <td>{{ block.settings.row_10_col_6 }}</td>
+            {% endif %}
+          </tr>
+          {% if block.settings.show_row_11 %}
+            <tr>
+              <td>{{ block.settings.row_11_col_1 }}</td>
+              <td>{{ block.settings.row_11_col_2 }}</td>
+              <td>{{ block.settings.row_11_col_3 }}</td>
+              <td>{{ block.settings.row_11_col_4 }}</td>
+              {% if block.settings.show_col_5 %}
+                <td>{{ block.settings.row_11_col_5 }}</td>
+              {% endif %}
+              {% if block.settings.show_col_6 %}
+                <td>{{ block.settings.row_11_col_6 }}</td>
+              {% endif %}
+            </tr>
+          {% endif %}
+          {% if block.settings.show_row_12 %}
+            <tr>
+              <td>{{ block.settings.row_12_col_1 }}</td>
+              <td>{{ block.settings.row_12_col_2 }}</td>
+              <td>{{ block.settings.row_12_col_3 }}</td>
+              <td>{{ block.settings.row_12_col_4 }}</td>
+              {% if block.settings.show_col_5 %}
+                <td>{{ block.settings.row_12_col_5 }}</td>
+              {% endif %}
+              {% if block.settings.show_col_6 %}
+                <td>{{ block.settings.row_12_col_6 }}</td>
+              {% endif %}
+            </tr>
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Comparison table",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section layout"
+    },
+    {
+      "type": "range",
+      "id": "section_width",
+      "label": "Width",
+      "min": 600,
+      "max": 1920,
+      "step": 20,
+      "unit": "px",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "label": "Padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Product Comparison"
+    },
+    {
+      "type": "range",
+      "id": "heading_font_size",
+      "label": "Font size",
+      "min": 16,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "default": 36
+    },
+    {
+      "type": "checkbox",
+      "id": "heading_bold",
+      "label": "Bold",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Color",
+      "default": "#181210"
+    },
+    {
+      "type": "range",
+      "id": "heading_margin_bottom",
+      "label": "Margin bottom",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Subheading"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Compare features and specifications"
+    },
+    {
+      "type": "range",
+      "id": "subheading_font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "checkbox",
+      "id": "subheading_bold",
+      "label": "Bold",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Color",
+      "default": "#3b3b3b"
+    },
+    {
+      "type": "range",
+      "id": "subheading_margin_bottom",
+      "label": "Margin bottom",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "Text"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Find the perfect product for your needs by comparing key features side by side."
+    },
+    {
+      "type": "range",
+      "id": "text_font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "checkbox",
+      "id": "text_bold",
+      "label": "Bold",
+      "default": false
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Header alignment"
+    },
+    {
+      "type": "select",
+      "id": "header_text_align",
+      "label": "Text align",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "range",
+      "id": "header_spacing",
+      "label": "Spacing below header",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Table layout"
+    },
+    {
+      "type": "range",
+      "id": "table_margin_top",
+      "label": "Margin top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "color",
+      "id": "table_background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "label": "Border width",
+      "min": 0,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#E6E6E6"
+    },
+    {
+      "type": "range",
+      "id": "cell_padding",
+      "label": "Cell padding",
+      "min": 5,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Table header row"
+    },
+    {
+      "type": "color",
+      "id": "header_row_bg_color",
+      "label": "Background color",
+      "default": "#181210"
+    },
+    {
+      "type": "color",
+      "id": "header_row_text_color",
+      "label": "Text color",
+      "default": "#fdf0d5"
+    },
+    {
+      "type": "range",
+      "id": "header_row_font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "checkbox",
+      "id": "header_row_bold",
+      "label": "Bold",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Table cells"
+    },
+    {
+      "type": "color",
+      "id": "cell_bg_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "alternate_row_bg_color",
+      "label": "Alternate row background",
+      "default": "#f9f9f9"
+    },
+    {
+      "type": "color",
+      "id": "cell_text_color",
+      "label": "Text color",
+      "default": "#181210"
+    },
+    {
+      "type": "range",
+      "id": "cell_font_size",
+      "label": "Font size",
+      "min": 12,
+      "max": 28,
+      "step": 2,
+      "unit": "px",
+      "default": 14
+    },
+    {
+      "type": "checkbox",
+      "id": "cell_bold",
+      "label": "Bold",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "cell_text_align",
+      "label": "Text align",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "select",
+      "id": "cell_vertical_align",
+      "label": "Vertical align",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "middle",
+          "label": "Middle"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ],
+      "default": "middle"
+    },
+    {
+      "type": "header",
+      "content": "Columns"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_col_5",
+      "label": "Show column 5",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_col_6",
+      "label": "Show column 6",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Rows"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_row_11",
+      "label": "Show row 11",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_row_12",
+      "label": "Show row 12",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "Column 1"
+    },
+    {
+      "type": "text",
+      "id": "col_1_header",
+      "label": "Header",
+      "default": "Feature"
+    },
+    {
+      "type": "text",
+      "id": "row_1_col_1",
+      "label": "Row 1",
+      "default": "Material"
+    },
+    {
+      "type": "text",
+      "id": "row_2_col_1",
+      "label": "Row 2",
+      "default": "Dimensions"
+    },
+    {
+      "type": "text",
+      "id": "row_3_col_1",
+      "label": "Row 3",
+      "default": "Weight"
+    },
+    {
+      "type": "text",
+      "id": "row_4_col_1",
+      "label": "Row 4",
+      "default": "Color"
+    },
+    {
+      "type": "text",
+      "id": "row_5_col_1",
+      "label": "Row 5",
+      "default": "Warranty"
+    },
+    {
+      "type": "text",
+      "id": "row_6_col_1",
+      "label": "Row 6",
+      "default": "Price"
+    },
+    {
+      "type": "text",
+      "id": "row_7_col_1",
+      "label": "Row 7",
+      "default": "Availability"
+    },
+    {
+      "type": "text",
+      "id": "row_8_col_1",
+      "label": "Row 8",
+      "default": "Rating"
+    },
+    {
+      "type": "text",
+      "id": "row_9_col_1",
+      "label": "Row 9",
+      "default": "Shipping"
+    },
+    {
+      "type": "text",
+      "id": "row_10_col_1",
+      "label": "Row 10",
+      "default": "Return Policy"
+    },
+    {
+      "type": "text",
+      "id": "row_11_col_1",
+      "label": "Row 11"
+    },
+    {
+      "type": "text",
+      "id": "row_12_col_1",
+      "label": "Row 12"
+    },
+    {
+      "type": "header",
+      "content": "Column 2"
+    },
+    {
+      "type": "text",
+      "id": "col_2_header",
+      "label": "Header",
+      "default": "Product A"
+    },
+    {
+      "type": "text",
+      "id": "row_1_col_2",
+      "label": "Row 1",
+      "default": "Wood"
+    },
+    {
+      "type": "text",
+      "id": "row_2_col_2",
+      "label": "Row 2",
+      "default": "200x100x75 cm"
+    },
+    {
+      "type": "text",
+      "id": "row_3_col_2",
+      "label": "Row 3",
+      "default": "50 kg"
+    },
+    {
+      "type": "text",
+      "id": "row_4_col_2",
+      "label": "Row 4",
+      "default": "Brown"
+    },
+    {
+      "type": "text",
+      "id": "row_5_col_2",
+      "label": "Row 5",
+      "default": "2 years"
+    },
+    {
+      "type": "text",
+      "id": "row_6_col_2",
+      "label": "Row 6",
+      "default": "₹25,000"
+    },
+    {
+      "type": "text",
+      "id": "row_7_col_2",
+      "label": "Row 7",
+      "default": "In Stock"
+    },
+    {
+      "type": "text",
+      "id": "row_8_col_2",
+      "label": "Row 8",
+      "default": "4.5/5"
+    },
+    {
+      "type": "text",
+      "id": "row_9_col_2",
+      "label": "Row 9",
+      "default": "Free"
+    },
+    {
+      "type": "text",
+      "id": "row_10_col_2",
+      "label": "Row 10",
+      "default": "30 days"
+    },
+    {
+      "type": "text",
+      "id": "row_11_col_2",
+      "label": "Row 11"
+    },
+    {
+      "type": "text",
+      "id": "row_12_col_2",
+      "label": "Row 12"
+    },
+    {
+      "type": "header",
+      "content": "Column 3"
+    },
+    {
+      "type": "text",
+      "id": "col_3_header",
+      "label": "Header",
+      "default": "Product B"
+    },
+    {
+      "type": "text",
+      "id": "row_1_col_3",
+      "label": "Row 1",
+      "default": "Metal"
+    },
+    {
+      "type": "text",
+      "id": "row_2_col_3",
+      "label": "Row 2",
+      "default": "180x90x70 cm"
+    },
+    {
+      "type": "text",
+      "id": "row_3_col_3",
+      "label": "Row 3",
+      "default": "40 kg"
+    },
+    {
+      "type": "text",
+      "id": "row_4_col_3",
+      "label": "Row 4",
+      "default": "Black"
+    },
+    {
+      "type": "text",
+      "id": "row_5_col_3",
+      "label": "Row 5",
+      "default": "1 year"
+    },
+    {
+      "type": "text",
+      "id": "row_6_col_3",
+      "label": "Row 6",
+      "default": "₹20,000"
+    },
+    {
+      "type": "text",
+      "id": "row_7_col_3",
+      "label": "Row 7",
+      "default": "In Stock"
+    },
+    {
+      "type": "text",
+      "id": "row_8_col_3",
+      "label": "Row 8",
+      "default": "4.0/5"
+    },
+    {
+      "type": "text",
+      "id": "row_9_col_3",
+      "label": "Row 9",
+      "default": "₹500"
+    },
+    {
+      "type": "text",
+      "id": "row_10_col_3",
+      "label": "Row 10",
+      "default": "15 days"
+    },
+    {
+      "type": "text",
+      "id": "row_11_col_3",
+      "label": "Row 11"
+    },
+    {
+      "type": "text",
+      "id": "row_12_col_3",
+      "label": "Row 12"
+    },
+    {
+      "type": "header",
+      "content": "Column 4"
+    },
+    {
+      "type": "text",
+      "id": "col_4_header",
+      "label": "Header",
+      "default": "Product C"
+    },
+    {
+      "type": "text",
+      "id": "row_1_col_4",
+      "label": "Row 1",
+      "default": "Plastic"
+    },
+    {
+      "type": "text",
+      "id": "row_2_col_4",
+      "label": "Row 2",
+      "default": "150x80x65 cm"
+    },
+    {
+      "type": "text",
+      "id": "row_3_col_4",
+      "label": "Row 3",
+      "default": "30 kg"
+    },
+    {
+      "type": "text",
+      "id": "row_4_col_4",
+      "label": "Row 4",
+      "default": "White"
+    },
+    {
+      "type": "text",
+      "id": "row_5_col_4",
+      "label": "Row 5",
+      "default": "6 months"
+    },
+    {
+      "type": "text",
+      "id": "row_6_col_4",
+      "label": "Row 6",
+      "default": "₹15,000"
+    },
+    {
+      "type": "text",
+      "id": "row_7_col_4",
+      "label": "Row 7",
+      "default": "Out of Stock"
+    },
+    {
+      "type": "text",
+      "id": "row_8_col_4",
+      "label": "Row 8",
+      "default": "3.5/5"
+    },
+    {
+      "type": "text",
+      "id": "row_9_col_4",
+      "label": "Row 9",
+      "default": "₹300"
+    },
+    {
+      "type": "text",
+      "id": "row_10_col_4",
+      "label": "Row 10",
+      "default": "7 days"
+    },
+    {
+      "type": "text",
+      "id": "row_11_col_4",
+      "label": "Row 11"
+    },
+    {
+      "type": "text",
+      "id": "row_12_col_4",
+      "label": "Row 12"
+    },
+    {
+      "type": "header",
+      "content": "Column 5"
+    },
+    {
+      "type": "text",
+      "id": "col_5_header",
+      "label": "Header",
+      "default": "Product D"
+    },
+    {
+      "type": "text",
+      "id": "row_1_col_5",
+      "label": "Row 1",
+      "default": "Glass"
+    },
+    {
+      "type": "text",
+      "id": "row_2_col_5",
+      "label": "Row 2",
+      "default": "160x85x68 cm"
+    },
+    {
+      "type": "text",
+      "id": "row_3_col_5",
+      "label": "Row 3",
+      "default": "35 kg"
+    },
+    {
+      "type": "text",
+      "id": "row_4_col_5",
+      "label": "Row 4",
+      "default": "Clear"
+    },
+    {
+      "type": "text",
+      "id": "row_5_col_5",
+      "label": "Row 5",
+      "default": "1 year"
+    },
+    {
+      "type": "text",
+      "id": "row_6_col_5",
+      "label": "Row 6",
+      "default": "₹18,000"
+    },
+    {
+      "type": "text",
+      "id": "row_7_col_5",
+      "label": "Row 7",
+      "default": "In Stock"
+    },
+    {
+      "type": "text",
+      "id": "row_8_col_5",
+      "label": "Row 8",
+      "default": "4.2/5"
+    },
+    {
+      "type": "text",
+      "id": "row_9_col_5",
+      "label": "Row 9",
+      "default": "₹400"
+    },
+    {
+      "type": "text",
+      "id": "row_10_col_5",
+      "label": "Row 10",
+      "default": "20 days"
+    },
+    {
+      "type": "text",
+      "id": "row_11_col_5",
+      "label": "Row 11"
+    },
+    {
+      "type": "text",
+      "id": "row_12_col_5",
+      "label": "Row 12"
+    },
+    {
+      "type": "header",
+      "content": "Column 6"
+    },
+    {
+      "type": "text",
+      "id": "col_6_header",
+      "label": "Header",
+      "default": "Product E"
+    },
+    {
+      "type": "text",
+      "id": "row_1_col_6",
+      "label": "Row 1",
+      "default": "Bamboo"
+    },
+    {
+      "type": "text",
+      "id": "row_2_col_6",
+      "label": "Row 2",
+      "default": "190x95x72 cm"
+    },
+    {
+      "type": "text",
+      "id": "row_3_col_6",
+      "label": "Row 3",
+      "default": "45 kg"
+    },
+    {
+      "type": "text",
+      "id": "row_4_col_6",
+      "label": "Row 4",
+      "default": "Natural"
+    },
+    {
+      "type": "text",
+      "id": "row_5_col_6",
+      "label": "Row 5",
+      "default": "3 years"
+    },
+    {
+      "type": "text",
+      "id": "row_6_col_6",
+      "label": "Row 6",
+      "default": "₹22,000"
+    },
+    {
+      "type": "text",
+      "id": "row_7_col_6",
+      "label": "Row 7",
+      "default": "In Stock"
+    },
+    {
+      "type": "text",
+      "id": "row_8_col_6",
+      "label": "Row 8",
+      "default": "4.7/5"
+    },
+    {
+      "type": "text",
+      "id": "row_9_col_6",
+      "label": "Row 9",
+      "default": "Free"
+    },
+    {
+      "type": "text",
+      "id": "row_10_col_6",
+      "label": "Row 10",
+      "default": "45 days"
+    },
+    {
+      "type": "text",
+      "id": "row_11_col_6",
+      "label": "Row 11"
+    },
+    {
+      "type": "text",
+      "id": "row_12_col_6",
+      "label": "Row 12"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Comparison table"
+    }
+  ]
+}
+{% endschema %}

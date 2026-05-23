@@ -1,0 +1,495 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "default-page": {
+      "type": "default-page-template",
+      "disabled": true,
+      "settings": {
+        "offset_top_desktop": 60,
+        "offset_bottom_desktop": 60,
+        "offset_top_mobile": 30,
+        "offset_bottom_mobile": 30
+      }
+    },
+    "trade_hero_dHHyrJ": {
+      "type": "trade-hero",
+      "name": "Trade Hero",
+      "settings": {
+        "bg_image": "shopify://shop_images/spacejoy.jpg",
+        "bg_fallback_color": "#1a1a1a",
+        "overlay_opacity": 55,
+        "subheading": "",
+        "heading": "Timeless Furniture for Modern Living",
+        "left_text_align": "left",
+        "left_vertical_align": "top",
+        "description": "<p>Handcrafted furniture made by skilled artisans, blending traditional Indian craftsmanship with contemporary design for spaces that inspire.</p>",
+        "right_text_align": "left",
+        "right_vertical_align": "top",
+        "description_max_width": 460,
+        "button1_text": "Explore Catalogue",
+        "button1_link": "",
+        "button1_style": "secondary",
+        "button2_text": "",
+        "button2_link": "",
+        "button2_style": "secondary",
+        "buttons_alignment": "left",
+        "heading_size_desktop": 54,
+        "heading_size_mobile": 20,
+        "subheading_size_desktop": 14,
+        "subheading_size_mobile": 12,
+        "description_size_desktop": 15,
+        "description_size_mobile": 14,
+        "heading_color": "#ffffff",
+        "subheading_color": "#cccccc",
+        "description_color": "#ffffff",
+        "section_height": "full",
+        "mobile_height": 100,
+        "content_vertical_position": "bottom",
+        "content_horizontal_position": "stretch",
+        "left_column_width": 55,
+        "right_column_width": 45,
+        "columns_gap": 200,
+        "columns_gap_mobile": 24,
+        "padding_top_desktop": 120,
+        "padding_bottom_desktop": 60,
+        "padding_left_desktop": 60,
+        "padding_right_desktop": 60,
+        "padding_top_mobile": 80,
+        "padding_bottom_mobile": 40,
+        "padding_left_mobile": 24,
+        "padding_right_mobile": 24
+      }
+    },
+    "about_trade_iz7MkB": {
+      "type": "about-trade",
+      "blocks": {
+        "tag_e46JJD": {
+          "type": "tag",
+          "settings": {
+            "label": "INTERIORDESIGN"
+          }
+        },
+        "tag_GKbGfh": {
+          "type": "tag",
+          "settings": {
+            "label": "ARCHITECTURE"
+          }
+        },
+        "tag_QgXQfj": {
+          "type": "tag",
+          "settings": {
+            "label": "MODERNLIVING"
+          }
+        },
+        "tag_ReGcHT": {
+          "type": "tag",
+          "settings": {
+            "label": "COMFORT"
+          }
+        },
+        "tag_m7Yh8e": {
+          "type": "tag",
+          "settings": {
+            "label": "CREATIVEVISION"
+          }
+        },
+        "tag_E9VNaX": {
+          "type": "tag",
+          "settings": {
+            "label": "SPACEDESIGN"
+          }
+        },
+        "tag_3dQ8p7": {
+          "type": "tag",
+          "settings": {
+            "label": "HOMESTYLE"
+          }
+        },
+        "tag_bwKhnT": {
+          "type": "tag",
+          "settings": {
+            "label": "INTERIORINSPIRATION"
+          }
+        }
+      },
+      "block_order": [
+        "tag_e46JJD",
+        "tag_GKbGfh",
+        "tag_QgXQfj",
+        "tag_ReGcHT",
+        "tag_m7Yh8e",
+        "tag_E9VNaX",
+        "tag_3dQ8p7",
+        "tag_bwKhnT"
+      ],
+      "name": "About Trade",
+      "settings": {
+        "subheading": "About Induscraft",
+        "heading": "We craft aesthetic and functional spaces that reflect your style and elevate everyday comfort.",
+        "heading_max_width": 800,
+        "video": "shopify://files/videos/Induscraft-b2b.mp4",
+        "image_border_radius": 0,
+        "button_text": "Explore our work",
+        "button_link": "",
+        "button_style": "secondary",
+        "heading_size_desktop": 30,
+        "heading_size_mobile": 20,
+        "subheading_size": 14,
+        "background_color": "#ffffff",
+        "heading_color": "#1a1a1a",
+        "subheading_color": "#888888",
+        "tag_text_color": "#555555",
+        "tag_border_color": "#d4d4d4",
+        "left_column_width": 55,
+        "columns_gap": 60,
+        "columns_gap_mobile": 32,
+        "padding_top": 112,
+        "padding_bottom": 60,
+        "padding_x": 60,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48,
+        "padding_x_mobile": 24
+      }
+    },
+    "trade_catalogue_jXP4NJ": {
+      "type": "trade-catalogue",
+      "blocks": {
+        "product_card_DtGHzz": {
+          "type": "product_card",
+          "settings": {
+            "product": "brahmika-solid-wood-sofa-3-seater",
+            "material": "",
+            "tier1_label": "",
+            "tier2_label": "",
+            "tier2_discount": 15,
+            "tier3_label": "",
+            "tier3_discount": 25,
+            "tier4_label": "",
+            "tier4_text": "",
+            "cta_text": "",
+            "button_style": "secondary"
+          }
+        },
+        "product_card_PRfzRL": {
+          "type": "product_card",
+          "settings": {
+            "product": "carnell-solid-wood-cane-lounge-chair",
+            "material": "",
+            "tier1_label": "",
+            "tier2_label": "",
+            "tier2_discount": 15,
+            "tier3_label": "",
+            "tier3_discount": 25,
+            "tier4_label": "",
+            "tier4_text": "",
+            "cta_text": "",
+            "button_style": "secondary"
+          }
+        },
+        "product_card_itMHXC": {
+          "type": "product_card",
+          "settings": {
+            "product": "sirea-solid-wood-upholstered-l-shape-sofa-by-induscraft",
+            "material": "",
+            "tier1_label": "",
+            "tier2_label": "",
+            "tier2_discount": 15,
+            "tier3_label": "",
+            "tier3_discount": 25,
+            "tier4_label": "",
+            "tier4_text": "",
+            "cta_text": "",
+            "button_style": "secondary"
+          }
+        },
+        "product_card_bEmU7L": {
+          "type": "product_card",
+          "settings": {
+            "product": "solid-wood-storage-bed-with-natural-grain-headboard",
+            "material": "",
+            "tier1_label": "",
+            "tier2_label": "",
+            "tier2_discount": 15,
+            "tier3_label": "",
+            "tier3_discount": 25,
+            "tier4_label": "",
+            "tier4_text": "",
+            "cta_text": "",
+            "button_style": "secondary"
+          }
+        },
+        "product_card_rYEa6L": {
+          "type": "product_card",
+          "settings": {
+            "product": "karui-luxury-chaise-lounge-for-comfortable-seating",
+            "material": "",
+            "tier1_label": "",
+            "tier2_label": "",
+            "tier2_discount": 15,
+            "tier3_label": "",
+            "tier3_discount": 25,
+            "tier4_label": "",
+            "tier4_text": "",
+            "cta_text": "",
+            "button_style": "secondary"
+          }
+        },
+        "product_card_aHhUBT": {
+          "type": "product_card",
+          "settings": {
+            "product": "acacia-wood-oval-dining-set-option-2",
+            "material": "",
+            "tier1_label": "",
+            "tier2_label": "",
+            "tier2_discount": 15,
+            "tier3_label": "",
+            "tier3_discount": 25,
+            "tier4_label": "",
+            "tier4_text": "",
+            "cta_text": "",
+            "button_style": "secondary"
+          }
+        }
+      },
+      "block_order": [
+        "product_card_DtGHzz",
+        "product_card_PRfzRL",
+        "product_card_itMHXC",
+        "product_card_bEmU7L",
+        "product_card_rYEa6L",
+        "product_card_aHhUBT"
+      ],
+      "name": "Trade Catalogue",
+      "settings": {
+        "subheading": "Trade Catalogue",
+        "heading": "Wholesale Product Range",
+        "description": "<p>Browse our full range of handcrafted furniture. Volume discounts available for trade buyers.</p>",
+        "tier1_label": "1–2 pcs",
+        "tier2_label": "3–5 pcs",
+        "tier2_discount": 15,
+        "tier3_label": "10-15 pcs",
+        "tier3_discount": 25,
+        "tier4_label": "15+ pcs",
+        "tier4_text": "Reach Us",
+        "cta_text": "Request a Quote",
+        "cta_type": "whatsapp",
+        "whatsapp_number": "+917821013706",
+        "cta_link": "",
+        "button_style": "secondary",
+        "columns": 3,
+        "grid_gap": 32,
+        "heading_size": 36,
+        "heading_size_mobile": 26,
+        "subheading_size": 12,
+        "description_size": 15,
+        "background_color": "#ffffff",
+        "heading_color": "#1a1a1a",
+        "subheading_color": "#888888",
+        "description_color": "#666666",
+        "card_bg": "#ffffff",
+        "card_border_color": "#e5e5e5",
+        "card_radius": 0,
+        "table_header_bg": "#f8f8f8",
+        "accent_color": "#ec4855",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_x": 60,
+        "padding_top_mobile": 40,
+        "padding_bottom_mobile": 40,
+        "padding_x_mobile": 16
+      }
+    },
+    "trade_gallery_PmwJzi": {
+      "type": "trade-gallery",
+      "blocks": {
+        "slide_Y36R4V": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/11_d56250bb-27fd-4301-8dec-4247f733669c.webp",
+            "title": "Sheesham Dining Collection",
+            "year": "2026",
+            "category": "Solid Wood",
+            "link": "",
+            "link_text": "Explore Collection"
+          }
+        },
+        "slide_d7cVBV": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/jodhpur-solid-wood-furniture-handcrafted-india.png",
+            "title": "Hotel Lobby Furniture",
+            "year": "2026",
+            "category": "Hospitality",
+            "link": "",
+            "link_text": "Explore Collection"
+          }
+        },
+        "slide_mFmEHt": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/11_3ca694ef-3ca9-4aaf-b7a2-c1eebbc4f38e.webp",
+            "title": "Retro Bed Collection",
+            "year": "2025",
+            "category": "Bedroom",
+            "link": "",
+            "link_text": "Explore Collection"
+          }
+        }
+      },
+      "block_order": [
+        "slide_Y36R4V",
+        "slide_d7cVBV",
+        "slide_mFmEHt"
+      ],
+      "name": "Trade Gallery",
+      "settings": {
+        "heading_line_1": "CRAFTED FOR",
+        "heading_line_2": "TRADE PARTNERS",
+        "header_image": "shopify://shop_images/WhatsApp_Image_2026-05-01_at_11.55.50_AM.jpg",
+        "description": "<p>Handcrafted solid wood furniture designed for hotels, restaurants, and commercial spaces. Explore our curated trade collections.</p>",
+        "slide_height": 95,
+        "slide_height_tablet": 55,
+        "slide_height_mobile": 60,
+        "heading_size": 72,
+        "heading_size_tablet": 48,
+        "heading_size_mobile": 32,
+        "background_color": "#ffffff",
+        "heading_color": "#1a1a1a",
+        "description_color": "#555555",
+        "card_bg": "#ffffff",
+        "padding_top": 80,
+        "padding_bottom": 60,
+        "padding_x": 60
+      }
+    },
+    "trade_work_3YhKng": {
+      "type": "trade-work",
+      "blocks": {
+        "step_XGjh4T": {
+          "type": "step",
+          "settings": {
+            "image": "shopify://shop_images/f06a9c61-780c-440a-a7a8-adbff96c28ce.png",
+            "title": "Share Your Requirements",
+            "description": "<p>Tell us about your project — the spaces, styles, and quantities you need. We take the time to listen, understand your goals, and identify the right product lines for your vision. We offer early insight, identify opportunities, and set the tone for the collaboration ahead.</p>",
+            "custom_number": ""
+          }
+        },
+        "step_7pUJcM": {
+          "type": "step",
+          "settings": {
+            "image": "shopify://shop_images/10_4d3ad1b1-635e-4433-af86-56e0503e0554.webp",
+            "title": "Get B2B Pricing",
+            "description": "<p>For projects above ₹5 lakh, unlock exclusive trade pricing with volume discounts. We offer tiered pricing slabs based on quantity, project scope, and partnership level — giving you the margin you need to grow your business.</p>",
+            "custom_number": ""
+          }
+        },
+        "step_XGzCfG": {
+          "type": "step",
+          "settings": {
+            "image": "shopify://shop_images/1_3_e650d58a-c7be-43c5-8bf5-af59d59b3a60.webp",
+            "title": "Design & Customisation",
+            "description": "<p>Your vision becomes tangible form. Our team works with you on material selection, finishes, and dimensions. We refine layout, flow, and relationships — forming a clear framework for every future decision.</p>",
+            "custom_number": ""
+          }
+        },
+        "step_frxgJX": {
+          "type": "step",
+          "settings": {
+            "image": "shopify://shop_images/retro_n1.jpg",
+            "title": "Production & Delivery",
+            "description": "<p>The design takes form through detailed production. Furniture, lighting, built-ins, and finishes are handcrafted by our artisans in Jodhpur. Quality-checked and delivered to your site with full logistics support across India — both technically and with care.</p>",
+            "custom_number": ""
+          }
+        }
+      },
+      "block_order": [
+        "step_XGjh4T",
+        "step_7pUJcM",
+        "step_XGzCfG",
+        "step_frxgJX"
+      ],
+      "name": "Trade Work",
+      "settings": {
+        "subheading": "(03)",
+        "section_label": "Our Process",
+        "left_description": "<p>A clear and collaborative approach — from vision to execution.</p>",
+        "label_size": 18,
+        "subheading_size": 13,
+        "step_title_size": 32,
+        "step_title_size_mobile": 24,
+        "body_size": 15,
+        "background_color": "#ffffff",
+        "heading_color": "#1a1a1a",
+        "subheading_color": "#888888",
+        "description_color": "#666666",
+        "border_color": "#0000001a",
+        "left_column_width": 40,
+        "columns_gap": 80,
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_x": 60,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48,
+        "padding_x_mobile": 20
+      }
+    },
+    "trade_contact_ULEAfK": {
+      "type": "trade-contact",
+      "name": "Trade Contact",
+      "settings": {
+        "subheading": "Get In Touch",
+        "heading": "Let's Work Together",
+        "description": "<p>Interested in trade pricing, bulk orders, or a custom project? Share your requirements and our team will get back to you within 24 hours.</p>",
+        "name_label": "Your Name",
+        "name_placeholder": "Full name",
+        "firm_label": "Firm Name",
+        "firm_placeholder": "Company / Studio name",
+        "phone_label": "Phone",
+        "phone_placeholder": "+91 XXXXX XXXXX",
+        "city_label": "City",
+        "city_options": "Bangalore, Pune, Mumbai, Delhi NCR, Hyderabad, Chennai, Other",
+        "message_label": "Project Brief",
+        "message_placeholder": "Tell us about your project — spaces, quantities, timelines…",
+        "button_text": "Submit Enquiry",
+        "button_style": "secondary",
+        "success_message": "Thank you for your enquiry! Our trade team will reach out within 24 hours.",
+        "heading_size": 48,
+        "heading_size_mobile": 32,
+        "subheading_size": 13,
+        "description_size": 15,
+        "background_color": "#ffffff",
+        "heading_color": "#1a1a1a",
+        "subheading_color": "#888888",
+        "description_color": "#666666",
+        "label_color": "#888888",
+        "border_color": "#0000001a",
+        "accent_color": "#ec4855",
+        "left_column_width": 40,
+        "columns_gap": 80,
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "padding_x": 60,
+        "padding_top_mobile": 48,
+        "padding_bottom_mobile": 48,
+        "padding_x_mobile": 20
+      }
+    }
+  },
+  "order": [
+    "default-page",
+    "trade_hero_dHHyrJ",
+    "about_trade_iz7MkB",
+    "trade_catalogue_jXP4NJ",
+    "trade_gallery_PmwJzi",
+    "trade_work_3YhKng",
+    "trade_contact_ULEAfK"
+  ]
+}

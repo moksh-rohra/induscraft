@@ -1,0 +1,302 @@
+/* Video Reviews Section */
+.video-reviews-section {
+  padding: 40px 0;
+  overflow: hidden;
+  position: relative;
+  background-color: #ffffff;
+}
+
+.video-reviews-header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 0 20px;
+}
+
+.video-reviews-title {
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* Marquee Container */
+.vr-marquee-wrapper {
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  gap: 20px;
+  padding: 0 0 20px 0;
+  cursor: grab;
+}
+
+.vr-marquee-wrapper.dragging {
+  cursor: grabbing;
+}
+
+.vr-marquee-content {
+  flex-shrink: 0;
+  display: flex;
+  gap: 20px;
+  min-width: 100%;
+  animation: scroll 40s linear infinite;
+  will-change: transform;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Video Card */
+.vr-card {
+  width: 300px;
+  height: 450px;
+  border-radius: 16px;
+  background-color: #1a1a1a;
+  overflow: hidden;
+  flex-shrink: 0;
+  position: relative;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.vr-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.vr-video-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+}
+
+.vr-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.vr-video-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Placeholder when no video */
+.vr-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+  color: #666;
+}
+
+.vr-placeholder svg {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 12px;
+  opacity: 0.5;
+}
+
+.vr-placeholder span {
+  font-size: 14px;
+}
+
+/* Play/Pause Button (Center) */
+.vr-play-pause-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.vr-play-pause-btn:hover {
+  background: #ffffff;
+  transform: translate(-50%, -50%) scale(1.1);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.vr-play-pause-btn svg {
+  width: 28px;
+  height: 28px;
+  color: #1a1a1a;
+}
+
+/* Show play icon by default, pause when playing */
+/* Show play icon by default, pause when playing */
+.vr-play-pause-btn .vr-icon-pause {
+  display: none;
+}
+
+.vr-card.is-playing .vr-play-pause-btn .vr-icon-play {
+  display: none;
+}
+
+.vr-card.is-playing .vr-play-pause-btn .vr-icon-pause {
+  display: block;
+}
+
+/* Hide button when playing, show on hover */
+.vr-card.is-playing .vr-play-pause-btn {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Mute/Unmute Button*/
+.vr-mute-btn {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
+  z-index: 10;
+}
+
+.vr-mute-btn:hover {
+  background: rgba(0, 0, 0, 0.5);
+  transform: scale(1.1);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.vr-mute-btn svg {
+  width: 16px;
+  height: 16px;
+  color: #ffffff;
+}
+
+/* Show muted icon by default, unmuted when not muted */
+.vr-mute-btn .vr-icon-unmuted {
+  display: none;
+}
+
+.vr-card.is-muted .vr-mute-btn .vr-icon-muted {
+  display: block;
+}
+
+.vr-card.is-muted .vr-mute-btn .vr-icon-unmuted {
+  display: none;
+}
+
+.vr-card:not(.is-muted) .vr-mute-btn .vr-icon-muted {
+  display: none;
+}
+
+.vr-card:not(.is-muted) .vr-mute-btn .vr-icon-unmuted {
+  display: block;
+}
+
+/* Reviewer Info */
+.vr-reviewer-info {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  right: 70px;
+  z-index: 5;
+}
+
+.vr-reviewer-name {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 500;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Gradient overlay for text readability */
+.vr-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .vr-marquee-wrapper {
+    gap: 16px;
+  }
+
+  .vr-marquee-content {
+    gap: 16px;
+  }
+
+  .vr-card {
+    width: 220px;
+    height: 350px;
+  }
+
+  .vr-play-pause-btn {
+    width: 52px;
+    height: 52px;
+  }
+
+  .vr-play-pause-btn svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .vr-mute-btn {
+    width: 32px;
+    height: 32px;
+    bottom: 12px;
+    right: 12px;
+  }
+
+  .vr-mute-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .vr-reviewer-info {
+    bottom: 12px;
+    left: 12px;
+    right: 60px;
+  }
+
+  .vr-reviewer-name {
+    font-size: 13px;
+  }
+}
+
+/* Disable pointer events on video during drag to prevent unwanted interactions */
+.vr-marquee-wrapper.dragging .vr-video,
+.vr-marquee-wrapper.dragging .vr-video-iframe {
+  pointer-events: none;
+}

@@ -1,0 +1,657 @@
+{%- comment -%}
+  Parallax Video Section
+  ======================
+  A versatile hero section supporting:
+  - Background Video (Shopify hosted) or Image
+  - Parallax Effects: Mixed (GSAP Scrub), Fixed (CSS), or None
+  - Overlay Content: Tagline, Heading, Description, Button
+{%- endcomment -%}
+
+{{ 'parallax-video.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  #parallax-video-{{ section.id }} {
+    --overlay-color: {{ section.settings.overlay_color }};
+    --overlay-opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+    --margin-top-mobile: {{ section.settings.margin_top_mobile }}px;
+    --margin-bottom-mobile: {{ section.settings.margin_bottom_mobile }}px;
+    --tagline-size-mobile: {{ section.settings.tagline_size_mobile }}px;
+    --heading-size-mobile: {{ section.settings.heading_size_mobile }}px;
+    --description-size-mobile: {{ section.settings.description_size_mobile }}px;
+    height: {{ section.settings.height_mobile }}px;
+  }
+  @media screen and (min-width: 768px) {
+    #parallax-video-{{ section.id }} {
+      height: {{ section.settings.height_desktop }}px;
+      --margin-top-desktop: {{ section.settings.margin_top }}px;
+      --margin-bottom-desktop: {{ section.settings.margin_bottom }}px;
+      --tagline-size-desktop: {{ section.settings.tagline_size }}px;
+      --heading-size-desktop: {{ section.settings.heading_size }}px;
+      --description-size-desktop: {{ section.settings.description_size }}px;
+    }
+  }
+  #parallax-video-{{ section.id }} .parallax-video__content-wrapper {
+    --content-alignment-vertical: {{ section.settings.content_position_vertical }};
+    --content-alignment-horizontal: {{ section.settings.content_position_horizontal }};
+    --text-alignment: {{ section.settings.text_alignment }};
+    --content-bg-color-rgb: {{ section.settings.content_bg_color.red }}, {{ section.settings.content_bg_color.green }}, {{ section.settings.content_bg_color.blue }};
+    --content-bg-opacity: {{ section.settings.content_bg_opacity | divided_by: 100.0 }};
+    --content-border-radius: {{ section.settings.content_border_radius }}px;
+    --content-padding: {{ section.settings.content_padding_mobile }}px;
+    --content-max-width: {{ section.settings.content_max_width }}px;
+    --glass-blur: {{ section.settings.glass_blur }}px;
+    --glass-border-opacity: {{ section.settings.glass_border_opacity | divided_by: 100.0 }};
+    --glass-shadow-opacity: {{ section.settings.glass_shadow_opacity | divided_by: 100.0 }};
+    --btn-bg: {{ section.settings.btn_bg_color }};
+    --btn-bg-hover: {{ section.settings.btn_bg_color_hover }};
+    --btn-text: {{ section.settings.btn_text_color }};
+    --btn-text-hover: {{ section.settings.btn_text_color_hover }};
+    --btn-border: {{ section.settings.btn_border_color }};
+    --btn-border-hover: {{ section.settings.btn_border_color_hover }};
+    --icon-size-desktop: {{ section.settings.icon_size_desktop }}px;
+    --btn-border-hover: {{ section.settings.btn_border_color_hover }};
+    --icon-size-desktop: {{ section.settings.icon_size_desktop }}px;
+    --icon-size-mobile: {{ section.settings.icon_size_mobile }}px;
+    {%- case section.settings.icon_color_filter -%}
+      {%- when 'white' -%}
+        --icon-filter: brightness(0) invert(1);
+      {%- when 'black' -%}
+        --icon-filter: brightness(0);
+      {%- else -%}
+        --icon-filter: none;
+    {%- endcase -%}
+  }
+  @media screen and (min-width: 768px) {
+    #parallax-video-{{ section.id }} .parallax-video__content-wrapper {
+      --content-padding: {{ section.settings.content_padding }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section 
+  id="parallax-video-{{ section.id }}" 
+  class="parallax-video-section parallax--{{ section.settings.parallax_style }}"
+  data-section-id="{{ section.id }}"
+  data-parallax-style="{{ section.settings.parallax_style }}"
+>
+  <!-- Background Container -->
+  <div class="parallax-video__bg-container">
+    {%- if section.settings.video != blank -%}
+      {{ section.settings.video | video_tag:
+        image_size: '2000x',
+        autoplay: true,
+        loop: true,
+        muted: true,
+        controls: false,
+        playsinline: true,
+        class: 'parallax-video__bg-media'
+      }}
+    {%- elsif section.settings.image != blank -%}
+      {{ section.settings.image | image_url: width: 2000 | image_tag:
+        class: 'parallax-video__bg-media',
+        loading: 'lazy',
+        widths: '600, 800, 1000, 1200, 1600, 2000'
+      }}
+    {%- else -%}
+      {{ 'lifestyle-2' | placeholder_svg_tag: 'parallax-video__bg-media' }}
+    {%- endif -%}
+  </div>
+
+  <!-- Overlay -->
+  <div class="parallax-video__overlay" style="background-color: var(--overlay-color); opacity: var(--overlay-opacity);"></div>
+
+  <!-- Content -->
+  <div class="parallax-video__content-wrapper">
+    <div class="parallax-video__content {% if section.settings.enable_glass_effect %}glass-effect{% endif %}" data-align="{{ section.settings.text_alignment }}">
+      {%- if section.settings.icon != blank -%}
+        <div class="parallax-video__icon">
+            {{ section.settings.icon | image_url: width: 200 | image_tag: loading: 'lazy' }}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.tagline != blank -%}
+        <span class="parallax-video__tagline">{{ section.settings.tagline }}</span>
+      {%- endif -%}
+
+      {%- if section.settings.heading != blank -%}
+        <h2 class="parallax-video__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.description != blank -%}
+        <div class="parallax-video__description">{{ section.settings.description }}</div>
+      {%- endif -%}
+
+      {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+        <div class="parallax-video__btn-wrapper">
+          {%- if section.settings.button_style == 'circle' -%}
+            <a href="{{ section.settings.button_link }}" class="button-circle parallax-video__btn" aria-label="{{ section.settings.button_label }}">
+              <span class="button__text">{{ section.settings.button_label }}</span>
+              <span class="button-new__icon-container">
+                <span class="button-new__icon-wrapper">
+                  {% render 'icons-new', icon: 'arrow-right' %}
+                </span>
+              </span>
+            </a>
+          {%- else -%}
+            <a href="{{ section.settings.button_link }}" class="button-new button--{{ section.settings.button_style }} parallax-video__btn">
+              {{ section.settings.button_label }}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.secondary_text != blank or section.settings.secondary_link_text != blank -%}
+        <div class="parallax-video__secondary-link">
+            {%- if section.settings.secondary_text != blank -%}
+                {{ section.settings.secondary_text }}
+            {%- endif -%}
+            {%- if section.settings.secondary_link_text != blank and section.settings.secondary_link != blank -%}
+                <a href="{{ section.settings.secondary_link }}">{{ section.settings.secondary_link_text }} ›</a>
+            {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+<!-- GSAP Script for Advanced Parallax -->
+<script>
+  (function() {
+    const sectionId = '{{ section.id }}';
+    const style = '{{ section.settings.parallax_style }}';
+
+    function initParallax() {
+      if (style !== 'advanced') return;
+      if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+      const section = document.querySelector(`#parallax-video-${sectionId}`);
+      if (!section) return;
+
+      const bgMedia = section.querySelector('.parallax-video__bg-media');
+      
+      // Animate background movement
+      gsap.fromTo(bgMedia, 
+        { yPercent: -50 },
+        {
+          yPercent: 50,
+          ease: "none",
+          scrollTrigger: {
+            trigger: section,
+            start: "top bottom", 
+            end: "bottom top",
+            scrub: true
+          }
+        }
+      );
+    }
+
+    // Init
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initParallax);
+    } else {
+      initParallax();
+    }
+    
+    document.addEventListener('shopify:section:load', (e) => {
+      if(e.detail.sectionId === sectionId) initParallax();
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Parallax Video Section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Alignment"
+    },
+    {
+      "type": "select",
+      "id": "content_position_vertical",
+      "label": "Vertical Position",
+      "options": [
+        { "value": "flex-start", "label": "Top" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Bottom" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "content_position_horizontal",
+      "label": "Horizontal Position",
+      "options": [
+        { "value": "flex-start", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "text_alignment",
+      "label": "Text Alignment",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon",
+      "label": "Icon Image"
+    },
+    {
+      "type": "select",
+      "id": "icon_color_filter",
+      "label": "Icon Color",
+      "options": [
+        { "value": "none", "label": "Original" },
+        { "value": "white", "label": "White" },
+        { "value": "black", "label": "Black" }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "range",
+      "id": "icon_size_desktop",
+      "min": 20,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Icon Size (Desktop)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "icon_size_mobile",
+      "min": 20,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Icon Size (Mobile)",
+      "default": 32
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Experience The Art"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Experience The Art Of Sustainable Living."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Crafted with care, designed for life."
+    },
+    {
+      "type": "header",
+      "content": "Content Box Styling"
+    },
+    {
+      "type": "color",
+      "id": "content_bg_color",
+      "label": "Content Background Color",
+      "default": "transparent"
+    },
+    {
+      "type": "range",
+      "id": "content_bg_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Content Background Opacity",
+      "default": 100
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_glass_effect",
+      "label": "Enable Liquid Glass Effect",
+      "default": false
+    },
+    {
+      "type": "range",
+      "id": "glass_blur",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Glass Blur Amount",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "glass_border_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Glass Border Opacity",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "glass_shadow_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Glass Shadow Opacity",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "content_border_radius",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Content Border Radius",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "content_padding",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Content Padding (Desktop)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "content_padding_mobile",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Content Padding (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "content_max_width",
+      "min": 400,
+      "max": 1200,
+      "step": 50,
+      "unit": "px",
+      "label": "Content Max Width",
+      "default": 800
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 24,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size (Desktop)",
+      "default": 64
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size (Mobile)",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "tagline_size",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Tagline Size (Desktop)",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "tagline_size_mobile",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Tagline Size (Mobile)",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "min": 12,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Description Size (Desktop)",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "description_size_mobile",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Description Size (Mobile)",
+      "default": 16
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+        "type": "text",
+        "id": "secondary_text",
+        "label": "Secondary Text",
+        "default": "Quick Question?"
+    },
+    {
+        "type": "text",
+        "id": "secondary_link_text",
+        "label": "Secondary Link Text",
+        "default": "Let's Chat"
+    },
+    {
+        "type": "url",
+        "id": "secondary_link",
+        "label": "Secondary Link"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Contact Us"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button Style",
+      "options": [
+        { "value": "primary", "label": "Primary" },
+        { "value": "secondary", "label": "Secondary" },
+        { "value": "circle", "label": "Circle" }
+      ],
+      "default": "primary"
+    },
+    {
+      "type": "color",
+      "id": "btn_bg_color",
+      "label": "Button Background Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "btn_bg_color_hover",
+      "label": "Button Background Color (Hover)",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "btn_text_color",
+      "label": "Button Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "btn_text_color_hover",
+      "label": "Button Text Color (Hover)",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "btn_border_color",
+      "label": "Button Border Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "btn_border_color_hover",
+      "label": "Button Border Color (Hover)",
+      "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Background Video",
+      "info": "Overrides image. Autoplays and loops."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background Image",
+      "info": "Fallback if no video selected"
+    },
+    {
+      "type": "header",
+      "content": "Settings"
+    },
+    {
+      "type": "select",
+      "id": "parallax_style",
+      "label": "Parallax Effect",
+      "options": [
+        { "value": "none", "label": "None" },
+        { "value": "fixed", "label": "Fixed Background (CSS)" },
+        { "value": "advanced", "label": "Advanced (GSAP)" }
+      ],
+      "default": "advanced"
+    },
+    {
+      "type": "range",
+      "id": "height_desktop",
+      "min": 400,
+      "max": 1000,
+      "step": 50,
+      "unit": "px",
+      "label": "Section Height (Desktop)",
+      "default": 700
+    },
+    {
+      "type": "range",
+      "id": "height_mobile",
+      "min": 300,
+      "max": 800,
+      "step": 50,
+      "unit": "px",
+      "label": "Section Height (Mobile)",
+      "default": 500
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay Color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Overlay Opacity",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Margin Top (Desktop)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Margin Bottom (Desktop)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Margin Top (Mobile)",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Margin Bottom (Mobile)",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Parallax Video Section"
+    }
+  ]
+}
+{% endschema %}

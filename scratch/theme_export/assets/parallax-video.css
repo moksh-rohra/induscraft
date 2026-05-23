@@ -1,0 +1,237 @@
+/* ==========================================================================
+   Parallax Video Section - CSS
+   ========================================================================== */
+
+.parallax-video-section {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    /* Default heights, overridden by settings */
+    height: 600px;
+    background-color: #000;
+    /* Margins set via Liquid */
+    margin-top: var(--margin-top-desktop, 0px);
+    margin-bottom: var(--margin-bottom-desktop, 0px);
+}
+
+/* Base Wrapper for Background */
+.parallax-video__bg-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.parallax-video__bg-media {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* CSS Fixed Parallax Mode - Modern "Clip Path" Approach */
+.parallax-video-section.parallax--fixed {
+    /* Create a fixed viewing window */
+    clip-path: inset(0);
+}
+
+.parallax-video-section.parallax--fixed .parallax-video__bg-container {
+    /* Fix the container to the viewport */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    /* Ensure it doesn't break out of the clipped area visually if z-index is messed up */
+    will-change: transform;
+}
+
+/* No changes needed for media inside, it just fills the fixed container */
+
+/* Overlay */
+.parallax-video__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* Content */
+.parallax-video__content-wrapper {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: var(--content-alignment-horizontal, center);
+    justify-content: var(--content-alignment-vertical, center);
+    padding: 60px;
+}
+
+.parallax-video__content {
+    max-width: var(--content-max-width, 800px);
+    padding: var(--content-padding, 0px);
+    background-color: rgba(var(--content-bg-color-rgb), var(--content-bg-opacity, 0));
+    border-radius: var(--content-border-radius, 0px);
+    text-align: var(--text-alignment, center);
+    color: #FFFFFF;
+    transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+/* Liquid Glass Effect - Glassmorphism */
+.glass-effect {
+    backdrop-filter: blur(var(--glass-blur, 12px));
+    -webkit-backdrop-filter: blur(var(--glass-blur, 12px));
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, var(--glass-shadow-opacity, 0.15));
+    border: 1px solid rgba(255, 255, 255, var(--glass-border-opacity, 0.2));
+}
+
+.parallax-video__heading {
+    font-size: var(--heading-size-desktop, 64px) !important;
+    font-weight: 400;
+    /* As requested "thin" aesthetic usually means lighter weight */
+    line-height: 1.1;
+    margin-bottom: 16px;
+    color: currentColor;
+}
+
+.parallax-video__tagline {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    margin-bottom: 12px;
+}
+
+.parallax-video__icon {
+    display: block;
+    margin-bottom: 16px;
+}
+
+.parallax-video__icon img,
+.parallax-video__icon svg {
+    width: var(--icon-size-desktop, 40px);
+    height: auto;
+    object-fit: contain;
+    filter: var(--icon-filter, none);
+}
+
+.parallax-video__secondary-link {
+    font-size: 14px;
+    margin-top: 20px;
+    color: inherit;
+}
+
+.parallax-video__secondary-link a {
+    color: inherit;
+    text-decoration: underline;
+    font-weight: 500;
+    transition: opacity 0.2s ease;
+    margin-left: 5px;
+}
+
+.parallax-video__secondary-link a:hover {
+    opacity: 0.7;
+}
+
+.parallax-video__description {
+    font-size: var(--description-size-desktop, 18px) !important;
+    line-height: 1.6;
+    margin-bottom: 32px;
+    opacity: 0.9;
+    max-width: 600px;
+    text-align: inherit;
+}
+
+/* Description alignment based on data-align attribute */
+.parallax-video__content[data-align="left"] .parallax-video__description {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.parallax-video__content[data-align="center"] .parallax-video__description {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.parallax-video__content[data-align="right"] .parallax-video__description {
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.parallax-video__btn-wrapper {
+    margin-top: 24px;
+}
+
+/* Mobile Adjustments */
+@media screen and (max-width: 768px) {
+    .parallax-video-section {
+        height: auto;
+        min-height: 300px;
+        margin-top: var(--margin-top-mobile, 0px);
+        margin-bottom: var(--margin-bottom-mobile, 0px);
+    }
+
+    .parallax-video__content-wrapper {
+        padding: 20px;
+    }
+
+    .parallax-video__tagline {
+        font-size: 12px !important;
+        letter-spacing: 2px;
+    }
+
+    .parallax-video__icon img,
+    .parallax-video__icon svg {
+        width: var(--icon-size-mobile, 32px);
+    }
+
+    .parallax-video__heading {
+        font-size: var(--heading-size-mobile, 32px) !important;
+        margin-bottom: 6px;
+    }
+
+    .parallax-video__description {
+        font-size: var(--description-size-mobile, 16px) !important;
+        margin-bottom: 6px;
+    }
+}
+
+/* Button Color Overrides */
+.parallax-video__btn.button-new {
+    background-color: var(--btn-bg, #000) !important;
+    color: var(--btn-text, #fff) !important;
+    border-color: var(--btn-border, #000) !important;
+}
+
+.parallax-video__btn.button-new::before {
+    background-color: var(--btn-bg-hover, #333) !important;
+}
+
+.parallax-video__btn.button-new::after {
+    border-color: var(--btn-border, #000) !important;
+}
+
+@media (-moz-touch-enabled: 0),
+(hover: hover),
+(pointer: fine) {
+    .parallax-video__btn.button-new:hover {
+        color: var(--btn-text-hover, #fff) !important;
+        border-color: var(--btn-border-hover, #333) !important;
+    }
+
+    .parallax-video__btn.button-new:hover::after {
+        border-color: var(--btn-border-hover, #333) !important;
+    }
+}

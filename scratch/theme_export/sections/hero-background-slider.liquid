@@ -1,0 +1,318 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    #HeroSlider-{{ section.id }} .hero-slider__title {
+      font-size: {{ section.settings.heading_size_mobile }}px !important;
+    }
+    #HeroSlider-{{ section.id }} .hero-slider__text {
+      font-size: {{ section.settings.subheading_size_mobile }}px !important;
+    }
+  }
+
+  #HeroSlider-{{ section.id }} .hero-slider__overlay {
+    background-color: {{ section.settings.overlay_color }};
+    opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+  }
+
+  #HeroSlider-{{ section.id }} .hero-slider__content {
+    color: {{ section.settings.text_color }};
+  }
+  
+  #HeroSlider-{{ section.id }} .hero-slider__title {
+    color: {{ section.settings.text_color }};
+    font-size: {{ section.settings.heading_size }}px;
+  }
+  
+  #HeroSlider-{{ section.id }} .hero-slider__text {
+    color: {{ section.settings.text_color }};
+  }
+{%- endstyle -%}
+
+<div id="HeroSlider-{{ section.id }}" class="hero-background-slider section-{{ section.id }}-padding" data-slide-duration="{{ section.settings.slide_duration | times: 1000 }}">
+  <div class="hero-slider__container {% if section.settings.section_height == 'full' %}hero-slider--full-height{% endif %}">
+    
+    <div class="hero-slider__backgrounds">
+      {%- if section.settings.image_1 != blank -%}
+        <div class="hero-slider__bg-item active">
+          {{ section.settings.image_1 | image_url: width: 3840 | image_tag:
+            loading: 'eager',
+            widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840',
+            sizes: '100vw',
+            class: 'hero-slider__image'
+          }}
+        </div>
+      {%- endif -%}
+      {%- if section.settings.image_2 != blank -%}
+        <div class="hero-slider__bg-item">
+          {{ section.settings.image_2 | image_url: width: 3840 | image_tag:
+            loading: 'lazy',
+            widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840',
+            sizes: '100vw',
+            class: 'hero-slider__image'
+          }}
+        </div>
+      {%- endif -%}
+      {%- if section.settings.image_3 != blank -%}
+        <div class="hero-slider__bg-item">
+          {{ section.settings.image_3 | image_url: width: 3840 | image_tag:
+            loading: 'lazy',
+            widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840',
+            sizes: '100vw',
+            class: 'hero-slider__image'
+          }}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="hero-slider__overlay"></div>
+
+    <div class="hero-slider__content-wrapper page-width">
+      <div class="hero-slider__content">
+        {%- if section.settings.heading != blank -%}
+          <h2 class="hero-slider__title">{{ section.settings.heading | escape }}</h2>
+        {%- endif -%}
+        {%- if section.settings.subheading != blank -%}
+          <div class="hero-slider__text {{ section.settings.text_style }}">
+            {{ section.settings.subheading }}
+          </div>
+        {%- endif -%}
+        {%- if section.settings.button_label != blank -%}
+          <a href="{{ section.settings.button_link }}" class="hero-slider__button image-with-text__button button-new button--{{ section.settings.button_style }} {% if section.settings.button_style == 'circle' %}button-circle{% endif %}">
+            <span class="button__text">{{ section.settings.button_label | escape }}</span>
+            {%- if section.settings.button_style == 'circle' -%}
+                <span class="button-new__icon-container">
+                    <span class="button-new__icon-wrapper">
+                        {% render 'icons-new', icon: 'wave' %}
+                    </span>
+                </span>
+            {%- endif -%}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- if section.settings.image_1 == blank and section.settings.image_2 == blank and section.settings.image_3 == blank -%}
+        <div class="hero-slider__bg-item active placeholder">
+            {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+        </div>
+    {%- endif -%}
+
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const section = document.querySelector('#HeroSlider-{{ section.id }}');
+    const slides = section.querySelectorAll('.hero-slider__bg-item');
+    const duration = parseInt(section.dataset.slideDuration) || 5000;
+    
+    if (slides.length > 1) {
+      let currentSlide = 0;
+      
+      setInterval(() => {
+        slides[currentSlide].classList.remove('active');
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add('active');
+      }, duration);
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Hero Background Slider",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Full Bedroom Range",
+      "label": "Heading"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 24,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading size (Desktop)",
+      "default": 48
+    },
+    {
+      "type": "inline_richtext",
+      "id": "subheading",
+      "default": "Design your perfect retreat, effortlessly.",
+      "label": "Subheading"
+    },
+    {
+      "type": "select",
+      "id": "text_style",
+      "options": [
+        { "value": "body", "label": "Body" },
+        { "value": "subtitle", "label": "Subtitle" }
+      ],
+      "default": "body",
+      "label": "Text style"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "min": 10,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Mobile Heading Font Size",
+      "default": 32
+    },
+    {
+      "type": "range",
+      "id": "subheading_size_mobile",
+      "min": 10,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "label": "Mobile Subheading Font Size",
+      "default": 16
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "default": "Explore",
+      "label": "Button label"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+        "type": "select",
+        "id": "button_style",
+        "label": "Button style",
+        "options": [
+            { "value": "primary", "label": "Primary" },
+            { "value": "secondary", "label": "Secondary" },
+            { "value": "circle", "label": "Circle" }
+        ],
+        "default": "primary"
+    },
+    {
+      "type": "header",
+      "content": "Background Images"
+    },
+    {
+      "type": "paragraph",
+      "content": "Upload up to 3 images to auto-rotate."
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "First Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Second Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_3",
+      "label": "Third Image"
+    },
+    {
+      "type": "range",
+      "id": "slide_duration",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "label": "Slide duration",
+      "default": 5
+    },
+    {
+      "type": "header",
+      "content": "Design"
+    },
+    {
+      "type": "select",
+      "id": "section_height",
+      "options": [
+        { "value": "small", "label": "Small" },
+        { "value": "medium", "label": "Medium" },
+        { "value": "large", "label": "Large" },
+        { "value": "full", "label": "Full Screen" }
+      ],
+      "default": "medium",
+      "label": "Section height"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "label": "Overlay opacity",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Background Slider"
+    }
+  ]
+}
+{% endschema %}

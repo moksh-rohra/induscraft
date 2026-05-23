@@ -1,0 +1,273 @@
+/* ============================================
+   Trade Contact — Two-Column Contact Section
+   ============================================
+   Left:  Heading + subheading + description
+   Right: Trade enquiry form with city dropdown
+   ============================================ */
+
+/* --- Section Container --- */
+.trade-contact {
+    position: relative;
+    z-index: 1;
+    background-color: var(--tc-bg, #ffffff);
+}
+
+.trade-contact__container {
+    max-width: var(--global-container-width, 1440px);
+    margin: 0 auto;
+    padding: var(--tc-pad-top, 80px) var(--tc-pad-x, 60px) var(--tc-pad-bottom, 80px);
+}
+
+/* ============================================
+   Two-Column Grid
+   ============================================ */
+.trade-contact__grid {
+    display: grid;
+    grid-template-columns: var(--tc-left-width, 45%) 1fr;
+    gap: var(--tc-gap, 80px);
+    align-items: start;
+}
+
+/* ============================================
+   Left Column — Content
+   ============================================ */
+.trade-contact__left {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: sticky;
+    top: 100px;
+}
+
+.trade-contact__subheading {
+    font-family: var(--base-font-family);
+    font-size: var(--tc-subheading-size, 13px);
+    font-weight: 400;
+    color: var(--tc-subheading-color, #888888);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0 0 16px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.trade-contact__subheading-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--tc-heading-color, #1a1a1a);
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+.trade-contact__heading {
+    font-family: 'Bristone', var(--heading-font-family);
+    font-size: var(--tc-heading-size, 48px);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--tc-heading-color, #1a1a1a);
+    margin: 0 0 24px 0;
+}
+
+.trade-contact__description {
+    font-family: var(--base-font-family);
+    font-size: var(--tc-desc-size, 15px);
+    line-height: 1.7;
+    color: var(--tc-desc-color, #666666);
+    margin: 0;
+    max-width: 440px;
+}
+
+.trade-contact__description p {
+    margin: 0;
+}
+
+/* ============================================
+   Right Column — Form
+   ============================================ */
+.trade-contact__form {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.trade-contact__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 var(--tc-gap, 32px);
+}
+
+/* --- Field --- */
+.trade-contact__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--tc-border-color, rgba(0, 0, 0, 0.1));
+}
+
+.trade-contact__label {
+    font-family: var(--base-font-family);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--tc-label-color, #888888);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 8px;
+}
+
+.trade-contact__label .required {
+    color: var(--tc-accent-color, #EC4855);
+    margin-left: 2px;
+}
+
+.trade-contact__input,
+.trade-contact__select,
+.trade-contact__textarea {
+    width: 100%;
+    padding: 8px 0;
+    font-family: var(--base-font-family);
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--tc-heading-color, #1a1a1a);
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    outline: none !important;
+    transition: border-color 0.3s ease;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.trade-contact__input::placeholder,
+.trade-contact__textarea::placeholder {
+    color: var(--tc-placeholder-color, #bbb);
+}
+
+/* Select dropdown styling */
+.trade-contact__select-wrapper {
+    position: relative;
+}
+
+.trade-contact__select {
+    padding-right: 28px;
+    cursor: pointer;
+}
+
+.trade-contact__select-wrapper::after {
+    content: '';
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid var(--tc-heading-color, #1a1a1a);
+    pointer-events: none;
+}
+
+/* Focus states */
+.trade-contact__field:focus-within {
+    border-bottom-color: var(--tc-heading-color, #1a1a1a);
+}
+
+/* Textarea */
+.trade-contact__textarea {
+    min-height: 80px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+/* --- Submit Button --- */
+.trade-contact__submit-wrapper {
+    padding-top: 40px;
+}
+
+/* --- Success Message --- */
+.trade-contact__success {
+    background-color: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    color: #166534;
+    padding: 16px 20px;
+    border-radius: 4px;
+    font-size: 15px;
+    line-height: 1.5;
+    margin-bottom: 24px;
+}
+
+/* --- Error Messages --- */
+.trade-contact__errors {
+    background-color: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #991b1b;
+    padding: 16px 20px;
+    border-radius: 4px;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 24px;
+}
+
+.trade-contact__errors ul {
+    margin: 0;
+    padding: 0 0 0 18px;
+}
+
+/* ============================================
+   GSAP Animation States
+   ============================================ */
+.trade-contact__animate {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+/* ============================================
+   Responsive: Tablet (≤991px)
+   ============================================ */
+@media (max-width: 991px) {
+    .trade-contact__container {
+        padding: var(--tc-pad-top-m, 48px) 32px var(--tc-pad-bottom-m, 48px);
+    }
+
+    .trade-contact__grid {
+        grid-template-columns: 40% 1fr;
+        gap: 48px;
+    }
+
+    .trade-contact__heading {
+        font-size: calc(var(--tc-heading-size, 48px) * 0.75);
+    }
+}
+
+/* ============================================
+   Responsive: Mobile (≤749px)
+   ============================================ */
+@media (max-width: 749px) {
+    .trade-contact__container {
+        padding: var(--tc-pad-top-m, 48px) var(--tc-pad-x-m, 20px) var(--tc-pad-bottom-m, 48px);
+    }
+
+    .trade-contact__grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .trade-contact__left {
+        position: relative;
+        top: 0;
+    }
+
+    .trade-contact__heading {
+        font-size: var(--tc-heading-size-m, 32px);
+    }
+
+    .trade-contact__row {
+        grid-template-columns: 1fr;
+    }
+
+    .trade-contact__submit-wrapper {
+        padding-top: 32px;
+    }
+}

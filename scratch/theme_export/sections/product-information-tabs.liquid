@@ -1,0 +1,517 @@
+{%- comment -%}
+------------------------------------------------------------------------------
+  Section: Product Information Tabs
+  Displays product information in a horizontal tab layout.
+  Tab titles and content support dynamic sources (product metafields).
+------------------------------------------------------------------------------
+{%- endcomment -%}
+
+{%- assign blocks = section.blocks -%}
+{%- assign tab_style = section.settings.tab_style | default: 'primary' -%}
+{%- assign has_tab = false -%}
+
+{%- for block in blocks -%}
+  {%- if block.settings.title != blank and block.settings.content != blank -%}
+    {%- assign has_tab = true -%}
+    {%- break -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- if has_tab -%}
+  {%- style -%}
+    #shopify-section-{{ section.id }} {
+      padding-top: {{ section.settings.offset_top_mobile }}px;
+      padding-bottom: {{ section.settings.offset_bottom_mobile }}px;
+    }
+    @media screen and (min-width: 768px) {
+      #shopify-section-{{ section.id }} {
+        padding-top: {{ section.settings.offset_top_desktop }}px;
+        padding-bottom: {{ section.settings.offset_bottom_desktop }}px;
+      }
+    }
+
+    .pi-tabs-{{ section.id }} {
+      max-width: {% if section.settings.full_width %}100%{% else %}var(--global-container-width, 1200px){% endif %};
+      margin: 0 auto;
+      padding: 0 20px;
+      font-family: var(--font-body-family, inherit);
+    }
+
+    /* ── Heading ── */
+    .pi-tabs-{{ section.id }} .pi-tabs__heading {
+      font-size: {{ section.settings.heading_size_desktop }}px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: {{ section.settings.heading_color }};
+      margin: 0 0 24px;
+      line-height: 1.3;
+    }
+
+    /* ── Tab Bar ── */
+    .pi-tabs-{{ section.id }} .pi-tabs__bar {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding-bottom: 4px;
+      margin-bottom: 0;
+    }
+    .pi-tabs-{{ section.id }} .pi-tabs__bar::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* ── Tab Button (base) ── */
+    .pi-tabs-{{ section.id }} .pi-tabs__btn {
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+      flex-shrink: 0;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      padding: 12px 32px;
+      font-family: var(--heading-font-family);
+      font-size: calc(var(--body-font-size) * 0.875);
+      line-height: 1.5;
+      font-weight: 500;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 40px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: color var(--timing-short, 0.3s), border var(--timing-short, 0.3s), background-color var(--timing-short, 0.3s);
+    }
+
+    /* Hover sweep pseudo */
+    .pi-tabs-{{ section.id }} .pi-tabs__btn::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      border-radius: 50%;
+      width: 150%;
+      height: 200%;
+      transform: translate3d(0, 90%, 0);
+      transition-property: transform;
+      transition-duration: var(--animate-time, 0.6s);
+    }
+
+    /* Inner border (double-border effect) */
+    .pi-tabs-{{ section.id }} .pi-tabs__btn::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: calc(100% - 12px);
+      height: calc(100% - 12px);
+      border-radius: 40px;
+      border: 1px solid transparent;
+      transform: translate(-50%, -50%);
+      transition: border var(--timing-short, 0.3s);
+    }
+
+    /* ── Primary Style ── */
+    .pi-tabs-{{ section.id }}.pi-tabs--primary .pi-tabs__btn {
+      border: 1px solid var(--button-outer-border-color-primary);
+      background-color: transparent;
+      color: var(--button-text-color-primary);
+    }
+    .pi-tabs-{{ section.id }}.pi-tabs--primary .pi-tabs__btn::before {
+      background-color: var(--button-background-color-primary-hover);
+    }
+    .pi-tabs-{{ section.id }}.pi-tabs--primary .pi-tabs__btn::after {
+      border-color: var(--button-border-color-primary);
+    }
+    .pi-tabs-{{ section.id }}.pi-tabs--primary .pi-tabs__btn.is-active {
+      background-color: var(--button-background-color-primary-hover);
+      border-color: var(--button-outer-border-color-primary-hover);
+      color: var(--button-text-color-primary-hover);
+    }
+    .pi-tabs-{{ section.id }}.pi-tabs--primary .pi-tabs__btn.is-active::after {
+      border-color: var(--button-border-color-primary-hover);
+    }
+
+    /* ── Secondary Style ── */
+    .pi-tabs-{{ section.id }}.pi-tabs--secondary .pi-tabs__btn {
+      border: 1px solid var(--button-outer-border-color-secondary);
+      background-color: transparent;
+      color: var(--button-text-color-secondary);
+    }
+    .pi-tabs-{{ section.id }}.pi-tabs--secondary .pi-tabs__btn::before {
+      background-color: var(--button-background-color-secondary-hover);
+    }
+    .pi-tabs-{{ section.id }}.pi-tabs--secondary .pi-tabs__btn::after {
+      border-color: var(--button-border-color-secondary);
+    }
+    .pi-tabs-{{ section.id }}.pi-tabs--secondary .pi-tabs__btn.is-active {
+      background-color: var(--button-background-color-secondary-hover);
+      border-color: var(--button-outer-border-color-secondary-hover);
+      color: var(--button-text-color-secondary-hover);
+    }
+    .pi-tabs-{{ section.id }}.pi-tabs--secondary .pi-tabs__btn.is-active::after {
+      border-color: var(--button-border-color-secondary-hover);
+    }
+
+    /* ── Hover states ── */
+    @media (-moz-touch-enabled: 0), (hover: hover), (pointer: fine) {
+      .pi-tabs-{{ section.id }}.pi-tabs--primary .pi-tabs__btn:hover {
+        border-color: var(--button-outer-border-color-primary-hover);
+        color: var(--button-text-color-primary-hover);
+      }
+      .pi-tabs-{{ section.id }}.pi-tabs--primary .pi-tabs__btn:hover::before {
+        transform: translate3d(0, 0%, 0);
+      }
+      .pi-tabs-{{ section.id }}.pi-tabs--primary .pi-tabs__btn:hover::after {
+        border-color: var(--button-border-color-primary-hover);
+      }
+
+      .pi-tabs-{{ section.id }}.pi-tabs--secondary .pi-tabs__btn:hover {
+        border-color: var(--button-outer-border-color-secondary-hover);
+        color: var(--button-text-color-secondary-hover);
+      }
+      .pi-tabs-{{ section.id }}.pi-tabs--secondary .pi-tabs__btn:hover::before {
+        transform: translate3d(0, 0%, 0);
+      }
+      .pi-tabs-{{ section.id }}.pi-tabs--secondary .pi-tabs__btn:hover::after {
+        border-color: var(--button-border-color-secondary-hover);
+      }
+    }
+
+    /* ── Content Panel ── */
+    .pi-tabs-{{ section.id }} .pi-tabs__panels {
+      padding: 28px 0;
+    }
+    .pi-tabs-{{ section.id }} .pi-tabs__panel {
+      display: none;
+      animation: piTabFadeIn 0.3s ease;
+    }
+    .pi-tabs-{{ section.id }} .pi-tabs__panel.is-active {
+      display: block;
+    }
+
+    .pi-tabs-{{ section.id }} .pi-tabs__panel-content {
+      font-size: 15px;
+      line-height: 1.8;
+      color: #444;
+    }
+    .pi-tabs-{{ section.id }} .pi-tabs__panel-content h1,
+    .pi-tabs-{{ section.id }} .pi-tabs__panel-content h2,
+    .pi-tabs-{{ section.id }} .pi-tabs__panel-content h3,
+    .pi-tabs-{{ section.id }} .pi-tabs__panel-content h4,
+    .pi-tabs-{{ section.id }} .pi-tabs__panel-content h5,
+    .pi-tabs-{{ section.id }} .pi-tabs__panel-content h6 {
+      color: #1a1a1a;
+      margin: 20px 0 8px;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+    .pi-tabs-{{ section.id }} .pi-tabs__panel-content p {
+      margin: 0 0 16px;
+    }
+    .pi-tabs-{{ section.id }} .pi-tabs__panel-content ul,
+    .pi-tabs-{{ section.id }} .pi-tabs__panel-content ol {
+      padding-left: 20px;
+      margin: 0 0 16px;
+    }
+    .pi-tabs-{{ section.id }} .pi-tabs__panel-content li {
+      margin-bottom: 6px;
+    }
+    .pi-tabs-{{ section.id }} .pi-tabs__panel-content a {
+      color: var(--color-text-primary);
+      text-decoration: underline;
+    }
+    .pi-tabs-{{ section.id }} .pi-tabs__panel-content img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 6px;
+    }
+    .pi-tabs-{{ section.id }} .pi-tabs__panel-content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+    }
+    .pi-tabs-{{ section.id }} .pi-tabs__panel-content th,
+    .pi-tabs-{{ section.id }} .pi-tabs__panel-content td {
+      padding: 10px 14px;
+      border: 1px solid #e5e5e5;
+      text-align: left;
+    }
+    .pi-tabs-{{ section.id }} .pi-tabs__panel-content th {
+      background-color: #f8f8f8;
+      font-weight: 600;
+    }
+
+    @keyframes piTabFadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── Desktop font size ── */
+    @media (min-width: 768px) {
+      .pi-tabs-{{ section.id }} .pi-tabs__btn {
+        font-size: var(--body-font-size);
+      }
+    }
+
+    /* ── Mobile ── */
+    @media screen and (max-width: 767px) {
+      .pi-tabs-{{ section.id }} .pi-tabs__heading {
+        font-size: {{ section.settings.heading_size_mobile }}px;
+        margin-bottom: 16px;
+      }
+      .pi-tabs-{{ section.id }} .pi-tabs__btn {
+        font-size: 13px;
+        padding: 10px 20px;
+      }
+      .pi-tabs-{{ section.id }} .pi-tabs__panels {
+        padding: 20px 0;
+      }
+      .pi-tabs-{{ section.id }} .pi-tabs__panel-content {
+        font-size: 14px;
+        line-height: 1.7;
+      }
+    }
+  {%- endstyle -%}
+
+  <section class="pi-tabs-{{ section.id }} pi-tabs--{{ tab_style }}">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="pi-tabs__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    {%- comment -%} Tab Buttons {%- endcomment -%}
+    <div class="pi-tabs__bar" role="tablist" id="pi-tabs-bar-{{ section.id }}">
+      {%- assign tab_index = 0 -%}
+      {%- for block in blocks -%}
+        {%- if block.settings.title != blank and block.settings.content != blank -%}
+          {%- assign tab_index = tab_index | plus: 1 -%}
+          <button
+            class="pi-tabs__btn{% if tab_index == 1 %} is-active{% endif %}"
+            role="tab"
+            aria-selected="{% if tab_index == 1 %}true{% else %}false{% endif %}"
+            aria-controls="pi-panel-{{ section.id }}-{{ block.id }}"
+            id="pi-tab-{{ section.id }}-{{ block.id }}"
+            data-tab-index="{{ tab_index }}"
+            {{ block.shopify_attributes }}
+          >
+            {{ block.settings.title }}
+          </button>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    {%- comment -%} Tab Content Panels {%- endcomment -%}
+    <div class="pi-tabs__panels">
+      {%- assign tab_index = 0 -%}
+      {%- for block in blocks -%}
+        {%- if block.settings.title != blank and block.settings.content != blank -%}
+          {%- assign tab_index = tab_index | plus: 1 -%}
+          <div
+            class="pi-tabs__panel{% if tab_index == 1 %} is-active{% endif %}"
+            role="tabpanel"
+            id="pi-panel-{{ section.id }}-{{ block.id }}"
+            aria-labelledby="pi-tab-{{ section.id }}-{{ block.id }}"
+          >
+            <div class="pi-tabs__panel-content">
+              {{ block.settings.content }}
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </section>
+
+  <script>
+    (function() {
+      var sectionId = '{{ section.id }}';
+      var bar = document.getElementById('pi-tabs-bar-' + sectionId);
+      if (!bar) return;
+
+      bar.addEventListener('click', function(e) {
+        var btn = e.target.closest('.pi-tabs__btn');
+        if (!btn) return;
+
+        /* Deactivate all */
+        bar.querySelectorAll('.pi-tabs__btn').forEach(function(b) {
+          b.classList.remove('is-active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        var container = bar.closest('.pi-tabs-' + sectionId);
+        container.querySelectorAll('.pi-tabs__panel').forEach(function(p) {
+          p.classList.remove('is-active');
+        });
+
+        /* Activate clicked */
+        btn.classList.add('is-active');
+        btn.setAttribute('aria-selected', 'true');
+        var panelId = btn.getAttribute('aria-controls');
+        var panel = document.getElementById(panelId);
+        if (panel) panel.classList.add('is-active');
+
+        /* Scroll button into view */
+        btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      });
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Product Information Tab",
+  "tag": "section",
+  "class": "product-information-tabs-section",
+  "disabled_on": {
+    "groups": ["header", "footer"],
+    "templates": ["password"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "PRODUCT INFORMATION"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "min": 16,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading font size (Desktop)",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "min": 14,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Heading font size (Mobile)",
+      "default": 18
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "select",
+      "id": "tab_style",
+      "label": "Tab style",
+      "options": [
+        {
+          "value": "primary",
+          "label": "Primary"
+        },
+        {
+          "value": "secondary",
+          "label": "Secondary"
+        }
+      ],
+      "default": "primary",
+      "info": "Matches theme button style (double border, rounded)"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Make full width",
+      "default": false,
+      "info": "If unchecked, container width is based on theme settings."
+    },
+    {
+      "type": "range",
+      "id": "offset_top_desktop",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop padding top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "offset_bottom_desktop",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Desktop padding bottom",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "offset_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile padding top",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "offset_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Mobile padding bottom",
+      "default": 24
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Tab",
+      "limit": 10,
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "title",
+          "label": "Tab title",
+          "default": "Tab",
+          "info": "Connect to a dynamic source for product-specific tab titles"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Tab content",
+          "info": "Connect to a dynamic source (product metafield) for product-specific content"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Information Tab",
+      "blocks": [
+        {
+          "type": "tab",
+          "settings": {
+            "title": "Specifications"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "title": "Product Overview"
+          }
+        },
+        {
+          "type": "tab",
+          "settings": {
+            "title": "Care Instructions"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,90 @@
+.b2b-stats {
+    /* Default Mobile Spacing */
+    padding: var(--pt-m) var(--pr-m) var(--pb-m) var(--pl-m);
+    margin: var(--mt-m) var(--mr-m) var(--mb-m) var(--ml-m);
+
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Automatic height: depend on padding and content. */
+    /* min-height: 400px; - Removed as per request for automatic height */
+    min-height: var(--min-height);
+}
+
+@media (min-width: 768px) {
+    .b2b-stats {
+        /* Desktop Spacing */
+        padding: var(--pt-d) var(--pr-d) var(--pb-d) var(--pl-d);
+        margin: var(--mt-d) var(--mr-d) var(--mb-d) var(--ml-d);
+    }
+}
+
+.b2b-stats__bg-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Bristone', sans-serif;
+    font-size: var(--bg-text-size);
+    font-weight: var(--bg-text-weight);
+    color: var(--bg-text-color);
+    white-space: nowrap;
+    opacity: 1;
+    pointer-events: none;
+    z-index: 1;
+    line-height: 0.8;
+    width: 100%;
+    text-align: center;
+    margin: 0px;
+}
+
+.b2b-stats__container {
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+    /* Above bg text */
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+}
+
+@media (min-width: 768px) {
+    .b2b-stats__container {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 60px;
+    }
+}
+
+.b2b-stats__item {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.b2b-stats__number {
+    font-family: var(--font-body-family);
+    /* Or specific font from design */
+    font-size: clamp(40px, 5vw, 80px);
+    font-weight: 400;
+    line-height: 1;
+    color: var(--number-color);
+}
+
+.b2b-stats__desc {
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--desc-color);
+    max-width: 350px;
+}
+
+.b2b-stats__prefix {
+    color: var(--prefix-color);
+    font-weight: 500;
+    display: inline;
+}

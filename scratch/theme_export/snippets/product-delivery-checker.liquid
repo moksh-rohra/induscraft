@@ -1,0 +1,133 @@
+{%- comment -%}
+  Snippet: Product Delivery Checker
+  Displays a PIN code input + check button. On submit, shows delivery time from metafield.
+{%- endcomment -%}
+
+{%- assign delivery_text = block.settings.delivery_metafield -%}
+{%- assign heading_text = block.settings.heading_text | default: 'Check Delivery Availability' -%}
+{%- assign placeholder_text = block.settings.placeholder_text | default: 'Enter PIN Code' -%}
+{%- assign button_text = block.settings.button_text | default: 'Check' -%}
+{%- assign accent_color = block.settings.accent_color | default: '#eb442a' -%}
+{%- assign text_color = block.settings.text_color | default: '#333333' -%}
+
+<div
+  class="delivery-checker"
+  style="--dc-accent: {{ accent_color }}; --dc-text: {{ text_color }};"
+  {{ block.shopify_attributes }}
+  data-delivery-text="{{ delivery_text | escape }}"
+>
+  {%- if heading_text != blank -%}
+    <p class="delivery-checker__heading">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="1" y="3" width="15" height="13" rx="2" ry="2"></rect>
+        <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+        <circle cx="5.5" cy="18.5" r="2.5"></circle>
+        <circle cx="18.5" cy="18.5" r="2.5"></circle>
+      </svg>
+      <span>{{ heading_text }}</span>
+    </p>
+  {%- endif -%}
+
+  <div class="delivery-checker__input-row">
+    <input
+      type="text"
+      class="delivery-checker__input"
+      placeholder="{{ placeholder_text }}"
+      maxlength="6"
+      inputmode="numeric"
+      pattern="[0-9]*"
+      aria-label="{{ placeholder_text }}"
+    >
+    <button type="button" class="delivery-checker__btn">
+      {{ button_text }}
+    </button>
+  </div>
+
+  <div class="delivery-checker__result" style="display:none;">
+    <div class="delivery-checker__result-success" style="display:none;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" class="delivery-checker__icon-check">
+        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" fill="#16a34a"/>
+      </svg>
+      <span class="delivery-checker__result-text"></span>
+    </div>
+    <div class="delivery-checker__result-pin" style="display:none;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" class="delivery-checker__icon-pin">
+        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z" fill="#6b7280"/>
+      </svg>
+      <span class="delivery-checker__result-pincode"></span>
+    </div>
+    <div class="delivery-checker__result-unavailable" style="display:none;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="12" y1="8" x2="12" y2="12"></line>
+        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+      </svg>
+      <span>Delivery information not available for this product</span>
+    </div>
+  </div>
+
+  <div class="delivery-checker__error" style="display:none;">
+    Please enter a valid 6-digit PIN code
+  </div>
+</div>
+
+<script>
+(function() {
+  var containers = document.querySelectorAll('.delivery-checker');
+  containers.forEach(function(container) {
+    if (container.dataset.dcInit) return;
+    container.dataset.dcInit = 'true';
+
+    var input = container.querySelector('.delivery-checker__input');
+    var btn = container.querySelector('.delivery-checker__btn');
+    var resultWrap = container.querySelector('.delivery-checker__result');
+    var successEl = container.querySelector('.delivery-checker__result-success');
+    var resultText = container.querySelector('.delivery-checker__result-text');
+    var pinEl = container.querySelector('.delivery-checker__result-pin');
+    var pinText = container.querySelector('.delivery-checker__result-pincode');
+    var unavailableEl = container.querySelector('.delivery-checker__result-unavailable');
+    var errorEl = container.querySelector('.delivery-checker__error');
+    var deliveryValue = (container.dataset.deliveryText || '').trim();
+
+    // Only allow digits in the input
+    input.addEventListener('input', function() {
+      this.value = this.value.replace(/\D/g, '').slice(0, 6);
+    });
+
+    function check() {
+      var pin = input.value.trim();
+
+      // Reset
+      resultWrap.style.display = 'none';
+      successEl.style.display = 'none';
+      pinEl.style.display = 'none';
+      unavailableEl.style.display = 'none';
+      errorEl.style.display = 'none';
+
+      if (pin.length !== 6) {
+        errorEl.style.display = 'block';
+        return;
+      }
+
+      resultWrap.style.display = 'block';
+
+      if (deliveryValue && deliveryValue.length > 0) {
+        resultText.textContent = deliveryValue;
+        successEl.style.display = 'flex';
+        pinText.textContent = 'Delivering to: ' + pin;
+        pinEl.style.display = 'flex';
+      } else {
+        unavailableEl.style.display = 'flex';
+      }
+    }
+
+    btn.addEventListener('click', check);
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        check();
+      }
+    });
+  });
+})();
+</script>

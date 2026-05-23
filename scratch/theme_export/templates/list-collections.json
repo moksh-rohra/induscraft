@@ -1,0 +1,38 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "list-collections-template": {
+      "type": "list-collections-template",
+      "settings": {
+        "label": "",
+        "heading": "All collections",
+        "heading_size": 48,
+        "heading_size_mobile": 26,
+        "use_bristone_font": true,
+        "text": "",
+        "text_position": "under_the_image",
+        "paginate_by": 12,
+        "show_products_count": false,
+        "color_overlay": "rgba(44, 42, 40, 0.75)",
+        "inside_the_image_text": "#f7f2ec",
+        "inside_the_image_text_hover": "#000000",
+        "full_width": true,
+        "offset_top_desktop": 60,
+        "offset_bottom_desktop": 60,
+        "offset_top_mobile": 30,
+        "offset_bottom_mobile": 60
+      }
+    }
+  },
+  "order": [
+    "list-collections-template"
+  ]
+}

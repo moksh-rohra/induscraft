@@ -1,0 +1,250 @@
+/* Stats Counter Section */
+.stats-counter-section {
+    width: 100%;
+    padding: 0 20px;
+}
+
+.sc-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Header Layout */
+.sc-header {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin-bottom: 48px;
+}
+
+@media screen and (min-width: 990px) {
+
+    .stats-counter-section {
+        padding: 0 60px;
+    }
+
+    .sc-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 60px;
+        margin-bottom: 60px;
+    }
+}
+
+/* Left Column - Label */
+.sc-header-left {
+    display: flex;
+    align-items: flex-start;
+    flex-shrink: 0;
+}
+
+.sc-label-wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.sc-label-icon {
+    width: 0.8em;
+    height: 0.8em;
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin-top: 0.35em;
+}
+
+.sc-label {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Right Column - Heading & Description */
+.sc-header-right {
+    max-width: 700px;
+    text-align: left;
+}
+
+.sc-heading {
+    font-size: 44px;
+    font-weight: 400;
+    line-height: 1.2;
+    margin: 0 0 20px 0;
+    font-family: var(--font-heading-family, serif);
+}
+
+.sc-description {
+    font-size: 15px;
+    line-height: 1.7;
+    margin: 0;
+    max-width: 600px;
+}
+
+/* Stats Cards Grid */
+.sc-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+@media screen and (min-width: 576px) {
+    .sc-cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (min-width: 990px) {
+    .sc-cards {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+    }
+}
+
+/* Individual Card */
+.sc-card {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 200px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+@media screen and (min-width: 768px) {
+    .sc-card {
+        padding: 32px;
+        min-height: 250px;
+    }
+}
+
+/* Card Header */
+.sc-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sc-card-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+.sc-card-label {
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+}
+
+/* Card Value */
+.sc-card-value {
+    display: flex;
+    align-items: baseline;
+    justify-content: end;
+    gap: 8px;
+    margin-top: auto;
+}
+
+.sc-card-number {
+    font-size: 72px;
+    font-weight: 400;
+    line-height: 1;
+    font-family: var(--font-heading-family, serif);
+    letter-spacing: -0.02em;
+}
+
+/* Rotating Counter Styles */
+.sc-slot-container {
+    display: inline-flex;
+    align-items: baseline;
+}
+
+.sc-digit-slot {
+    display: inline-block;
+    height: 1em;
+    line-height: 1;
+    overflow: hidden;
+    position: relative;
+    vertical-align: bottom;
+}
+
+.sc-static-char {
+    display: inline-block;
+    height: auto;
+    overflow: visible;
+}
+
+.sc-digit-track {
+    display: flex;
+    flex-direction: column;
+    will-change: transform;
+}
+
+.sc-digit {
+    display: block;
+    height: 1em;
+    line-height: 1;
+    text-align: center;
+}
+
+.sc-card-suffix {
+    font-size: 16px;
+    font-weight: 400;
+    align-self: flex-end;
+    padding-bottom: 8px;
+}
+
+/* Card Description */
+.sc-card-description {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.4;
+    margin: 8px 0 0 0;
+    color: inherit;
+    opacity: 0.8;
+    text-align: right;
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 989px) {
+    .sc-header-left {
+        margin-bottom: 8px;
+    }
+
+    .sc-label {
+        max-width: 200px;
+    }
+
+    .sc-heading {
+        font-size: 32px;
+        margin-bottom: 16px;
+    }
+
+    .sc-description {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .sc-card {
+        min-height: 200px;
+    }
+
+    .sc-card-number {
+        font-size: 48px;
+    }
+
+    .sc-card-suffix {
+        font-size: 14px;
+        padding-bottom: 4px;
+    }
+
+    .sc-card-label {
+        font-size: 12px;
+    }
+}

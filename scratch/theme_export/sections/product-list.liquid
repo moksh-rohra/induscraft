@@ -1,0 +1,488 @@
+{%- comment -%}
+------------------------------------------------------------------------------
+  Section: Product List
+  A two-row section with heading + button on top, product slider below
+------------------------------------------------------------------------------
+{%- endcomment -%}
+
+{{- 'carousel.build.css' | asset_url | stylesheet_tag -}}
+
+{%- style -%}
+    /* Section Padding */
+    #shopify-section-{{ section.id }} {
+        padding-top: {{ section.settings.padding_top_mobile }}px;
+        padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+
+    @media screen and (min-width: 768px) {
+        #shopify-section-{{ section.id }} {
+            padding-top: {{ section.settings.padding_top_desktop }}px;
+            padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+        }
+    }
+
+    /* Main Container */
+    #shopify-section-{{ section.id }} .product-list {
+        width: 100%;
+        max-width: {{ section.settings.max_width }}px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    @media (min-width: 768px) {
+        #shopify-section-{{ section.id }} .product-list {
+            padding: 0 50px;
+        }
+    }
+
+    /* Header Row - Heading & Button */
+    #shopify-section-{{ section.id }} .product-list__header {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        margin-bottom: 24px;
+    }
+
+    @media (min-width: 768px) {
+        #shopify-section-{{ section.id }} .product-list__header {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+    }
+
+    #shopify-section-{{ section.id }} .product-list__heading {
+        margin: 0;
+        font-size: {{ section.settings.heading_font_size_mobile }}px;
+        line-height: 1.2;
+        color: {{ section.settings.heading_color }};
+    }
+
+    @media (min-width: 768px) {
+        #shopify-section-{{ section.id }} .product-list__heading {
+            font-size: {{ section.settings.heading_font_size_desktop }}px;
+        }
+    }
+
+    /* Slider Container */
+    #shopify-section-{{ section.id }} .product-list__slider-container {
+        position: relative;
+    }
+
+    #shopify-section-{{ section.id }} .product-list__slider {
+        overflow: hidden;
+    }
+
+    #shopify-section-{{ section.id }} .product-list__slider-wrapper {
+        display: flex;
+        transition: transform 0.3s ease;
+    }
+
+    #shopify-section-{{ section.id }} .product-list__slide {
+        flex: 0 0 calc(50% - 8px);
+        margin-right: 16px;
+        box-sizing: border-box;
+    }
+
+    @media (min-width: 768px) {
+        #shopify-section-{{ section.id }} .product-list__slide {
+            flex: 0 0 calc(33.333% - 16px);
+            margin-right: 24px;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        #shopify-section-{{ section.id }} .product-list__slide {
+            flex: 0 0 calc(25% - 18px);
+        }
+    }
+
+    /* Navigation Arrows */
+    #shopify-section-{{ section.id }} .product-list__nav {
+        display: none;
+    }
+
+    @media (min-width: 768px) {
+        #shopify-section-{{ section.id }} .product-list__nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background-color: {{ section.settings.arrow_bg_color }};
+            color: {{ section.settings.arrow_color }};
+            border: none;
+            cursor: pointer;
+            z-index: 10;
+            transition: background-color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        #shopify-section-{{ section.id }} .product-list__nav:hover {
+            background-color: {{ section.settings.arrow_hover_bg_color }};
+            transform: translateY(-50%) scale(1.08);
+        }
+
+        #shopify-section-{{ section.id }} .product-list__nav:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        #shopify-section-{{ section.id }} .product-list__nav--prev {
+            left: -40px;
+        }
+
+        #shopify-section-{{ section.id }} .product-list__nav--next {
+            right: -40px;
+        }
+
+        #shopify-section-{{ section.id }} .product-list__nav svg {
+            width: 24px;
+            height: 24px;
+            stroke: currentColor;
+            stroke-width: 2;
+            fill: none;
+        }
+    }
+
+    /* Swiper Overrides */
+    #shopify-section-{{ section.id }} .swiper {
+        overflow: hidden;
+    }
+
+    #shopify-section-{{ section.id }} .swiper-wrapper {
+        display: flex;
+    }
+
+    #shopify-section-{{ section.id }} .swiper-slide {
+        height: auto;
+    }
+{%- endstyle -%}
+
+{%- assign heading = section.settings.heading -%}
+{%- assign button_text = section.settings.button_text -%}
+{%- assign button_link = section.settings.button_link -%}
+{%- assign button_style = section.settings.button_style -%}
+{%- assign product_list = section.settings.product_list -%}
+{%- assign card_design = section.settings.card_design -%}
+
+<section class="product-list">
+    <!-- Header Row: Heading + Button -->
+    <div class="product-list__header">
+        {%- if heading != blank -%}
+            <h2 class="product-list__heading">{{ heading }}</h2>
+        {%- endif -%}
+
+        {%- if button_text != blank and button_link != blank -%}
+            <a
+                href="{{ button_link }}"
+                class="focus-visible-outline {% if button_style == 'circle' %}button-circle{% else %}button-new button--{{ button_style }}{% endif %} product-list__button"
+                aria-label="{{ section.settings.button_aria_label | default: button_text | escape }}"
+            >
+                {{ button_text }}
+            </a>
+        {%- endif -%}
+    </div>
+
+    <!-- Products Slider -->
+    <div class="product-list__slider-container">
+        <!-- Previous Arrow -->
+        <button class="product-list__nav product-list__nav--prev js-product-list-prev" aria-label="Previous products">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        </button>
+
+        <!-- Slider -->
+        <div class="product-list__slider swiper js-product-list-slider">
+            <div class="product-list__slider-wrapper swiper-wrapper">
+                {%- if product_list != blank and product_list.count > 0 -%}
+                    {%- for product in product_list limit: 8 -%}
+                        {%- assign is_lazy = true -%}
+                        {%- if forloop.index < 5 -%}
+                            {%- assign is_lazy = false -%}
+                        {%- endif -%}
+
+                        <div class="product-list__slide swiper-slide">
+                            {%- if card_design == 'alternate' -%}
+                                {%- render 'product-card-new',
+                                    product: product,
+                                    size: 400,
+                                    tablet_size: 350,
+                                    mobile_size: 200,
+                                    is_lazy: is_lazy
+                                -%}
+                            {%- else -%}
+                                {%- render 'product-card',
+                                    product: product,
+                                    size: 400,
+                                    tablet_size: 350,
+                                    mobile_size: 200,
+                                    is_lazy: is_lazy
+                                -%}
+                            {%- endif -%}
+                        </div>
+                    {%- endfor -%}
+                {%- else -%}
+                    {%- for i in (1..4) -%}
+                        <div class="product-list__slide swiper-slide">
+                            {%- if card_design == 'alternate' -%}
+                                {%- render 'product-card-new', product: nil -%}
+                            {%- else -%}
+                                {%- render 'product-card', product: nil -%}
+                            {%- endif -%}
+                        </div>
+                    {%- endfor -%}
+                {%- endif -%}
+            </div>
+        </div>
+
+        <!-- Next Arrow -->
+        <button class="product-list__nav product-list__nav--next js-product-list-next" aria-label="Next products">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        </button>
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const section = document.querySelector('#shopify-section-{{ section.id }}');
+        if (!section) return;
+
+        const slider = section.querySelector('.js-product-list-slider');
+        const prevBtn = section.querySelector('.js-product-list-prev');
+        const nextBtn = section.querySelector('.js-product-list-next');
+
+        if (!slider || !prevBtn || !nextBtn) return;
+
+        // Initialize Swiper
+        const swiper = new Swiper(slider, {
+            slidesPerView: 2,
+            spaceBetween: 16,
+            grabCursor: true,
+            loop: false,
+            navigation: {
+                prevEl: prevBtn,
+                nextEl: nextBtn
+            },
+            breakpoints: {
+                768: {
+                    slidesPerView: 3,
+                    spaceBetween: 24
+                },
+                1024: {
+                    slidesPerView: 4,
+                    spaceBetween: 24
+                }
+            }
+        });
+    });
+</script>
+
+{% schema %}
+{
+    "name": "Product List",
+    "disabled_on": {
+        "groups": ["header", "footer"],
+        "templates": ["password"]
+    },
+    "settings": [
+        {
+            "type": "header",
+            "content": "Header"
+        },
+        {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading",
+            "default": "Featured Products"
+        },
+        {
+            "type": "range",
+            "id": "heading_font_size_desktop",
+            "min": 20,
+            "max": 60,
+            "step": 2,
+            "unit": "px",
+            "label": "Heading Font Size (Desktop)",
+            "default": 32
+        },
+        {
+            "type": "range",
+            "id": "heading_font_size_mobile",
+            "min": 18,
+            "max": 40,
+            "step": 2,
+            "unit": "px",
+            "label": "Heading Font Size (Mobile)",
+            "default": 24
+        },
+        {
+            "type": "color",
+            "id": "heading_color",
+            "label": "Heading Color",
+            "default": "#000000"
+        },
+        {
+            "type": "header",
+            "content": "Button"
+        },
+        {
+            "type": "text",
+            "id": "button_text",
+            "label": "Button Text",
+            "default": "View All"
+        },
+        {
+            "type": "url",
+            "id": "button_link",
+            "label": "Button Link"
+        },
+        {
+            "type": "text",
+            "id": "button_aria_label",
+            "label": "Button Aria Label",
+            "info": "For accessibility, e.g. 'View all products'"
+        },
+        {
+            "type": "select",
+            "id": "button_style",
+            "label": "Button Style",
+            "options": [
+                {
+                    "value": "primary",
+                    "label": "Primary"
+                },
+                {
+                    "value": "secondary",
+                    "label": "Secondary"
+                },
+                {
+                    "value": "circle",
+                    "label": "Circle"
+                }
+            ],
+            "default": "primary"
+        },
+        {
+            "type": "header",
+            "content": "Products"
+        },
+        {
+            "type": "product_list",
+            "id": "product_list",
+            "label": "Select Products",
+            "limit": 8
+        },
+        {
+            "type": "select",
+            "id": "card_design",
+            "label": "Product Card Design",
+            "options": [
+                {
+                    "value": "standard",
+                    "label": "Standard"
+                },
+                {
+                    "value": "alternate",
+                    "label": "Alternate"
+                }
+            ],
+            "default": "standard"
+        },
+        {
+            "type": "header",
+            "content": "Slider Arrows"
+        },
+        {
+            "type": "color",
+            "id": "arrow_bg_color",
+            "label": "Arrow Background Color",
+            "default": "#ffffff"
+        },
+        {
+            "type": "color",
+            "id": "arrow_hover_bg_color",
+            "label": "Arrow Hover Background Color",
+            "default": "#f0f0f0"
+        },
+        {
+            "type": "color",
+            "id": "arrow_color",
+            "label": "Arrow Icon Color",
+            "default": "#000000"
+        },
+        {
+            "type": "header",
+            "content": "Layout"
+        },
+        {
+            "type": "range",
+            "id": "max_width",
+            "min": 800,
+            "max": 1600,
+            "step": 50,
+            "unit": "px",
+            "label": "Max Section Width",
+            "default": 1400
+        },
+        {
+            "type": "range",
+            "id": "padding_top_desktop",
+            "min": 0,
+            "max": 100,
+            "step": 4,
+            "unit": "px",
+            "label": "Padding Top (Desktop)",
+            "default": 40
+        },
+        {
+            "type": "range",
+            "id": "padding_bottom_desktop",
+            "min": 0,
+            "max": 100,
+            "step": 4,
+            "unit": "px",
+            "label": "Padding Bottom (Desktop)",
+            "default": 40
+        },
+        {
+            "type": "range",
+            "id": "padding_top_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 4,
+            "unit": "px",
+            "label": "Padding Top (Mobile)",
+            "default": 24
+        },
+        {
+            "type": "range",
+            "id": "padding_bottom_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 4,
+            "unit": "px",
+            "label": "Padding Bottom (Mobile)",
+            "default": 24
+        }
+    ],
+    "presets": [
+        {
+            "name": "Product List",
+            "settings": {
+                "heading": "Featured Products",
+                "button_text": "View All"
+            }
+        }
+    ]
+}
+{% endschema %}

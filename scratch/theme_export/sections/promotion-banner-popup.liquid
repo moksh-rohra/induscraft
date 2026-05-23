@@ -1,0 +1,762 @@
+{%- comment -%}
+------------------------------------------------------------------------------
+  Section: Promotion Banner Popup Modal
+  A premium popup modal with background image and liquid glass gradient effect
+------------------------------------------------------------------------------
+{%- endcomment -%}
+
+{%- if section.settings.enable_popup -%}
+  {{- 'section-promotion-banner-popup.css' | asset_url | stylesheet_tag -}}
+
+  {%- comment -%} Extract settings {%- endcomment -%}
+  {%- assign image_desktop = section.settings.image_desktop -%}
+  {%- assign image_mobile = section.settings.image_mobile | default: image_desktop -%}
+  
+  {%- assign label = section.settings.label -%}
+  {%- assign heading = section.settings.heading -%}
+  {%- assign description = section.settings.description -%}
+  {%- assign button_text = section.settings.button_text -%}
+  {%- assign button_link = section.settings.button_link -%}
+  
+  {%- assign show_badge = section.settings.show_badge -%}
+  {%- assign badge_text = section.settings.badge_text -%}
+
+  {%- comment -%} Convert hex color to RGB for glass effect {%- endcomment -%}
+  {%- assign glass_color = section.settings.glass_color -%}
+  
+  {%- comment -%} Default to white if glass_color is empty/transparent {%- endcomment -%}
+  {%- if glass_color == blank or glass_color == '' or glass_color == 'transparent' or glass_color.size < 7 -%}
+    {%- assign glass_color_rgb = '255, 255, 255' -%}
+  {%- else -%}
+    {%- assign glass_color_r = glass_color | slice: 1, 2 | downcase -%}
+    {%- assign glass_color_g = glass_color | slice: 3, 2 | downcase -%}
+    {%- assign glass_color_b = glass_color | slice: 5, 2 | downcase -%}
+    
+    {%- comment -%} Hex to decimal conversion for RGB {%- endcomment -%}
+    {%- assign hex_chars = "0123456789abcdef" | split: "" -%}
+    
+    {%- assign r1_char = glass_color_r | slice: 0, 1 -%}
+    {%- assign r2_char = glass_color_r | slice: 1, 1 -%}
+    {%- assign g1_char = glass_color_g | slice: 0, 1 -%}
+    {%- assign g2_char = glass_color_g | slice: 1, 1 -%}
+    {%- assign b1_char = glass_color_b | slice: 0, 1 -%}
+    {%- assign b2_char = glass_color_b | slice: 1, 1 -%}
+    
+    {%- assign r1 = 0 -%}
+    {%- assign r2 = 0 -%}
+    {%- assign g1 = 0 -%}
+    {%- assign g2 = 0 -%}
+    {%- assign b1 = 0 -%}
+    {%- assign b2 = 0 -%}
+    
+    {%- for i in (0..15) -%}
+      {%- if hex_chars[i] == r1_char -%}{%- assign r1 = i -%}{%- endif -%}
+      {%- if hex_chars[i] == r2_char -%}{%- assign r2 = i -%}{%- endif -%}
+      {%- if hex_chars[i] == g1_char -%}{%- assign g1 = i -%}{%- endif -%}
+      {%- if hex_chars[i] == g2_char -%}{%- assign g2 = i -%}{%- endif -%}
+      {%- if hex_chars[i] == b1_char -%}{%- assign b1 = i -%}{%- endif -%}
+      {%- if hex_chars[i] == b2_char -%}{%- assign b2 = i -%}{%- endif -%}
+    {%- endfor -%}
+    
+    {%- assign red = r1 | times: 16 | plus: r2 -%}
+    {%- assign green = g1 | times: 16 | plus: g2 -%}
+    {%- assign blue = b1 | times: 16 | plus: b2 -%}
+    {%- assign glass_color_rgb = red | append: ', ' | append: green | append: ', ' | append: blue -%}
+  {%- endif -%}
+
+  {%- style -%}
+    #promo-popup-{{ section.id }} {
+      /* Overlay */
+      --promo-overlay-bg: {{ section.settings.overlay_color }};
+      
+      /* Modal dimensions */
+      --promo-max-width: {{ section.settings.modal_max_width }}px;
+      --promo-height-desktop: {{ section.settings.modal_height_desktop }}px;
+      --promo-height-mobile: {{ section.settings.modal_height_mobile }}px;
+      --promo-border-radius: {{ section.settings.border_radius }}px;
+      
+      /* Glass effect */
+      --promo-glass-blur: {{ section.settings.glass_blur }}px;
+      --promo-glass-opacity: {{ section.settings.glass_opacity }};
+      --promo-glass-color-rgb: {{ glass_color_rgb }};
+      --promo-glass-width: {{ section.settings.glass_width }}%;
+      --promo-glass-height-mobile: {{ section.settings.glass_height_mobile }}%;
+      
+      /* Content */
+      --promo-content-width: {{ section.settings.content_width }}%;
+      --promo-content-padding-desktop: {{ section.settings.content_padding_desktop }}px;
+      --promo-content-padding-mobile: {{ section.settings.content_padding_mobile }}px;
+      
+      /* Image position */
+      --promo-img-position: {{ image_desktop.presentation.focal_point | default: 'center' }};
+      
+      /* Typography */
+      --promo-heading-size-desktop: {{ section.settings.heading_size_desktop }}px;
+      --promo-heading-size-mobile: {{ section.settings.heading_size_mobile }}px;
+      --promo-heading-weight: {{ section.settings.heading_weight }};
+      --promo-desc-size-desktop: {{ section.settings.description_size_desktop }}px;
+      --promo-desc-size-mobile: {{ section.settings.description_size_mobile }}px;
+      
+      /* Colors */
+      --promo-heading-color: {{ section.settings.heading_color }};
+      --promo-label-color: {{ section.settings.label_color }};
+      --promo-text-color: {{ section.settings.text_color }};
+      
+      /* Button */
+      --promo-btn-text: {{ section.settings.button_text_color }};
+      --promo-btn-bg: {{ section.settings.button_bg_color }};
+      --promo-btn-border: {{ section.settings.button_border_color }};
+      --promo-btn-text-hover: {{ section.settings.button_text_hover }};
+      --promo-btn-bg-hover: {{ section.settings.button_bg_hover }};
+      --promo-btn-border-hover: {{ section.settings.button_border_hover }};
+      --promo-btn-radius: {{ section.settings.button_radius }}px;
+      
+      /* Close button */
+      --promo-close-bg: {{ section.settings.close_bg_color }};
+      --promo-close-color: {{ section.settings.close_icon_color }};
+      --promo-close-bg-hover: {{ section.settings.close_bg_hover }};
+      
+      /* Badge */
+      --promo-badge-text: {{ section.settings.badge_text_color }};
+      --promo-badge-bg: {{ section.settings.badge_bg_color }};
+    }
+  {%- endstyle -%}
+
+  <div 
+    id="promo-popup-{{ section.id }}"
+    class="promo-popup-overlay js-promo-popup"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="promo-popup-heading-{{ section.id }}"
+    data-popup-delay="{{ section.settings.popup_delay }}"
+    data-cookie-days="{{ section.settings.cookie_days }}"
+    data-trigger-type="{{ section.settings.trigger_type }}"
+    data-scroll-percent="{{ section.settings.scroll_trigger_percent }}"
+    data-test-mode="{{ section.settings.test_mode }}"
+  >
+    <div class="promo-popup">
+      {%- comment -%} Background Image {%- endcomment -%}
+      <div class="promo-popup__bg">
+        {%- if image_desktop != blank -%}
+          <picture>
+            {%- if image_mobile != blank -%}
+              <source
+                media="(max-width: 767px)"
+                srcset="{{ image_mobile | image_url: width: 400 }} 400w,
+                        {{ image_mobile | image_url: width: 600 }} 600w,
+                        {{ image_mobile | image_url: width: 800 }} 800w"
+                sizes="100vw"
+              >
+            {%- endif -%}
+            <img
+              class="promo-popup__bg-image promo-popup__bg-image--desktop"
+              src="{{ image_desktop | image_url: width: 800 }}"
+              srcset="{{ image_desktop | image_url: width: 600 }} 600w,
+                      {{ image_desktop | image_url: width: 800 }} 800w,
+                      {{ image_desktop | image_url: width: 1000 }} 1000w,
+                      {{ image_desktop | image_url: width: 1200 }} 1200w"
+              sizes="(min-width: 768px) 780px, 100vw"
+              alt="{{ image_desktop.alt | escape | default: heading }}"
+              loading="lazy"
+              width="{{ image_desktop.width }}"
+              height="{{ image_desktop.height }}"
+            >
+          </picture>
+        {%- else -%}
+          <div class="promo-popup__bg-placeholder" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} Liquid Glass Effect Overlay {%- endcomment -%}
+      <div class="promo-popup__glass"></div>
+
+      {%- comment -%} Content {%- endcomment -%}
+      <div class="promo-popup__content">
+        {%- if show_badge and badge_text != blank -%}
+          <span class="promo-popup__badge">{{ badge_text }}</span>
+        {%- endif -%}
+
+        {%- if label != blank -%}
+          <span class="promo-popup__label">{{ label }}</span>
+        {%- endif -%}
+
+        {%- if heading != blank -%}
+          <h2 class="promo-popup__heading" id="promo-popup-heading-{{ section.id }}">
+            {{ heading }}
+          </h2>
+        {%- endif -%}
+
+        {%- if description != blank -%}
+          <p class="promo-popup__description">{{ description }}</p>
+        {%- endif -%}
+
+        {%- if button_text != blank and button_link != blank -%}
+          <a 
+            href="{{ button_link }}"
+            class="button-new button--{{ section.settings.button_style }} promo-popup__button"
+            aria-label="{{ button_text | escape }}"
+          >
+            {{ button_text }}
+          </a>
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} Close Button {%- endcomment -%}
+      <button 
+        type="button" 
+        class="promo-popup__close js-promo-popup-close"
+        aria-label="{{ 'general.accessibility.close_modal' | t | default: 'Close popup' }}"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const popup = document.getElementById('promo-popup-{{ section.id }}');
+      if (!popup) return;
+
+      const closeBtn = popup.querySelector('.js-promo-popup-close');
+      const delay = parseInt(popup.dataset.popupDelay) || 3000;
+      const cookieDays = parseInt(popup.dataset.cookieDays) || 7;
+      const triggerType = popup.dataset.triggerType || 'delay';
+      const scrollPercent = parseInt(popup.dataset.scrollPercent) || 50;
+      const testMode = popup.dataset.testMode === 'true';
+      const isThemeEditor = window.Shopify && window.Shopify.designMode;
+      const cookieName = 'promo_popup_{{ section.id }}_dismissed';
+
+      // Check if already dismissed via cookie
+      function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(';').shift();
+        return null;
+      }
+
+      function setCookie(name, value, days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        document.cookie = `${name}=${value};expires=${date.toUTCString()};path=/;SameSite=Lax`;
+      }
+
+      // Show popup
+      function showPopup() {
+        popup.classList.add('is-active');
+        if (!isThemeEditor) {
+          document.body.style.overflow = 'hidden';
+        }
+      }
+
+      // Hide popup
+      function hidePopup() {
+        popup.classList.remove('is-active');
+        document.body.style.overflow = '';
+        if (!testMode && !isThemeEditor) {
+          setCookie(cookieName, 'true', cookieDays);
+        }
+      }
+
+      // Close handlers - always attach these
+      if (closeBtn) {
+        closeBtn.addEventListener('click', hidePopup);
+      }
+      
+      popup.addEventListener('click', function(e) {
+        if (e.target === popup) hidePopup();
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && popup.classList.contains('is-active')) {
+          hidePopup();
+        }
+      });
+
+      // In test mode or theme editor, show immediately
+      if (testMode || isThemeEditor) {
+        popup.classList.add('is-active');
+        return;
+      }
+
+      // Skip if already dismissed (for normal mode)
+      if (getCookie(cookieName)) return;
+
+      // Trigger based on type
+      if (triggerType === 'delay') {
+        setTimeout(showPopup, delay);
+      } else if (triggerType === 'scroll') {
+        let triggered = false;
+        window.addEventListener('scroll', function checkScroll() {
+          if (triggered) return;
+          const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+          if (scrolled >= scrollPercent) {
+            triggered = true;
+            showPopup();
+            window.removeEventListener('scroll', checkScroll);
+          }
+        });
+      } else if (triggerType === 'exit_intent') {
+        let triggered = false;
+        document.addEventListener('mouseleave', function(e) {
+          if (triggered) return;
+          if (e.clientY < 10) {
+            triggered = true;
+            showPopup();
+          }
+        });
+      }
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Promo Popup Modal",
+  "tag": "section",
+  "class": "promo-popup-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "General Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_popup",
+      "label": "Enable popup",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "test_mode",
+      "label": "Test mode",
+      "default": false,
+      "info": "Shows popup immediately, ignores cookies. Also auto-shows in theme editor."
+    },
+    {
+      "type": "select",
+      "id": "trigger_type",
+      "label": "Trigger type",
+      "options": [
+        { "value": "delay", "label": "Time delay" },
+        { "value": "scroll", "label": "Scroll percentage" },
+        { "value": "exit_intent", "label": "Exit intent" }
+      ],
+      "default": "delay"
+    },
+    {
+      "type": "range",
+      "id": "popup_delay",
+      "label": "Popup delay (ms)",
+      "min": 0,
+      "max": 9500,
+      "step": 500,
+      "default": 3000,
+      "unit": "ms",
+      "info": "Time delay before showing popup"
+    },
+    {
+      "type": "range",
+      "id": "scroll_trigger_percent",
+      "label": "Scroll trigger (%)",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "default": 50,
+      "unit": "%",
+      "info": "Show popup when user scrolls this percentage of the page"
+    },
+    {
+      "type": "range",
+      "id": "cookie_days",
+      "label": "Don't show again (days)",
+      "min": 1,
+      "max": 30,
+      "step": 1,
+      "default": 7,
+      "unit": "d",
+      "info": "After dismissing, popup won't show for this many days"
+    },
+    {
+      "type": "header",
+      "content": "Background Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_desktop",
+      "label": "Desktop image",
+      "info": "Recommended: 1200 x 600px or larger"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Mobile image",
+      "info": "Optional. Falls back to desktop image if not set"
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge",
+      "label": "Show badge",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge text",
+      "default": "LIMITED OFFER"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label / Pre-heading",
+      "default": "HOLD ON"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The fall season is here"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Check out <b>new hoodies</b> that will keep you warm."
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "label": "Button style",
+      "options": [
+        { "value": "primary", "label": "Primary" },
+        { "value": "secondary", "label": "Secondary" }
+      ],
+      "default": "primary"
+    },
+    {
+      "type": "header",
+      "content": "Glass Effect Settings"
+    },
+    {
+      "type": "range",
+      "id": "glass_blur",
+      "label": "Glass blur intensity",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "glass_opacity",
+      "label": "Glass opacity",
+      "min": 0.1,
+      "max": 1,
+      "step": 0.1,
+      "default": 0.8
+    },
+    {
+      "type": "color",
+      "id": "glass_color",
+      "label": "Glass tint color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "glass_width",
+      "label": "Glass overlay width (%)",
+      "min": 40,
+      "max": 80,
+      "step": 5,
+      "default": 60,
+      "unit": "%",
+      "info": "Width of the glass effect from left side (Desktop)"
+    },
+    {
+      "type": "range",
+      "id": "glass_height_mobile",
+      "label": "Glass overlay height (%) - Mobile",
+      "min": 40,
+      "max": 100,
+      "step": 5,
+      "default": 70,
+      "unit": "%",
+      "info": "Height of the glass effect from top (Mobile only)"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_desktop",
+      "label": "Heading size (Desktop)",
+      "min": 24,
+      "max": 60,
+      "step": 2,
+      "default": 36,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "label": "Heading size (Mobile)",
+      "min": 18,
+      "max": 40,
+      "step": 2,
+      "default": 28,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "heading_weight",
+      "label": "Heading weight",
+      "min": 400,
+      "max": 900,
+      "step": 100,
+      "default": 800
+    },
+    {
+      "type": "range",
+      "id": "description_size_desktop",
+      "label": "Description size (Desktop)",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "default": 15,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "description_size_mobile",
+      "label": "Description size (Mobile)",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "default": 14,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color_background",
+      "id": "overlay_color",
+      "label": "Overlay background",
+      "default": "linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.7) 100%)"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Label color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#444444"
+    },
+    {
+      "type": "header",
+      "content": "Badge Colors"
+    },
+    {
+      "type": "color",
+      "id": "badge_text_color",
+      "label": "Badge text color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color_background",
+      "id": "badge_bg_color",
+      "label": "Badge background",
+      "default": "linear-gradient(135deg, #ff6b6b, #ee5a24)"
+    },
+    {
+      "type": "header",
+      "content": "Button Colors"
+    },
+    {
+      "type": "color",
+      "id": "button_text_color",
+      "label": "Button text",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_color",
+      "label": "Button background",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_border_color",
+      "label": "Button border",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_text_hover",
+      "label": "Button text (hover)",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "button_bg_hover",
+      "label": "Button background (hover)",
+      "default": "transparent"
+    },
+    {
+      "type": "color",
+      "id": "button_border_hover",
+      "label": "Button border (hover)",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "button_radius",
+      "label": "Button border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "default": 4,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "Close Button"
+    },
+    {
+      "type": "color",
+      "id": "close_bg_color",
+      "label": "Close button background",
+      "default": "rgba(255, 255, 255, 0.9)"
+    },
+    {
+      "type": "color",
+      "id": "close_icon_color",
+      "label": "Close button icon",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "close_bg_hover",
+      "label": "Close button background (hover)",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "modal_max_width",
+      "label": "Modal max width",
+      "min": 500,
+      "max": 900,
+      "step": 20,
+      "default": 720,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "modal_height_desktop",
+      "label": "Modal height (Desktop)",
+      "min": 300,
+      "max": 600,
+      "step": 20,
+      "default": 420,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "modal_height_mobile",
+      "label": "Modal height (Mobile)",
+      "min": 280,
+      "max": 500,
+      "step": 20,
+      "default": 400,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "label": "Border radius",
+      "min": 0,
+      "max": 30,
+      "step": 2,
+      "default": 16,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "content_width",
+      "label": "Content width (%)",
+      "min": 40,
+      "max": 70,
+      "step": 5,
+      "default": 55,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "content_padding_desktop",
+      "label": "Content padding (Desktop)",
+      "min": 20,
+      "max": 80,
+      "step": 5,
+      "default": 50,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "content_padding_mobile",
+      "label": "Content padding (Mobile)",
+      "min": 15,
+      "max": 50,
+      "step": 5,
+      "default": 30,
+      "unit": "px"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Promo Popup Modal",
+      "settings": {
+        "enable_popup": true,
+        "trigger_type": "delay",
+        "popup_delay": 3000,
+        "label": "HOLD ON",
+        "heading": "The fall season is here",
+        "description": "Check out <b>new hoodies</b> that will keep you warm.",
+        "button_text": "See the category"
+      }
+    }
+  ]
+}
+{% endschema %}

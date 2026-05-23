@@ -1,0 +1,272 @@
+{{ 'section-newsletter-section.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+  @media screen and (min-width: 768px) {
+    #shopify-section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top_desktop }}px;
+      padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+    }
+  }
+{%- endstyle -%}
+
+{%- assign bg_color        = section.settings.bg_color -%}
+{%- assign accent_color    = section.settings.accent_color -%}
+{%- assign heading_color   = section.settings.heading_color -%}
+{%- assign subtext_color   = section.settings.subtext_color -%}
+{%- assign input_bg        = section.settings.input_bg -%}
+{%- assign input_border    = section.settings.input_border -%}
+{%- assign input_text      = section.settings.input_text -%}
+{%- assign btn_bg          = section.settings.btn_bg -%}
+{%- assign btn_text        = section.settings.btn_text -%}
+
+<div
+  class="newsletter-section"
+  style="
+    --ns-bg: {{ bg_color }};
+    --ns-accent: {{ accent_color }};
+    --ns-heading: {{ heading_color }};
+    --ns-subtext: {{ subtext_color }};
+    --ns-input-bg: {{ input_bg }};
+    --ns-input-border: {{ input_border }};
+    --ns-input-text: {{ input_text }};
+    --ns-btn-bg: {{ btn_bg }};
+    --ns-btn-text: {{ btn_text }};
+  "
+>
+  <div class="newsletter-section__inner page-width">
+
+    {%- if section.settings.badge != blank -%}
+      <span class="newsletter-section__badge">{{ section.settings.badge }}</span>
+    {%- endif -%}
+
+    {%- if section.settings.heading != blank -%}
+      <h2 class="newsletter-section__heading">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.subtext != blank -%}
+      <p class="newsletter-section__subtext">{{ section.settings.subtext }}</p>
+    {%- endif -%}
+
+    {%- assign default_placeholder = 'newsletter.label' | t -%}
+    {%- assign default_success     = 'newsletter.success' | t -%}
+    {%- assign form_id             = 'NewsletterSection--' | append: section.id -%}
+
+    {%- form 'customer', class: 'newsletter-section__form', id: form_id -%}
+      <input type="hidden" name="contact[tags]" value="newsletter" />
+
+      {%- if form.posted_successfully? -%}
+        <p class="newsletter-section__success" tabindex="-1">
+          {% render 'icons-small', icon: 'check' %}
+          {{ section.settings.success_message | default: default_success }}
+        </p>
+      {%- else -%}
+        <div class="newsletter-section__field-wrap">
+          <input
+            id="{{ form_id }}-email"
+            type="email"
+            name="contact[email]"
+            class="newsletter-section__input"
+            placeholder="{{ section.settings.placeholder | default: default_placeholder }}"
+            aria-label="{{ section.settings.placeholder | default: default_placeholder }}"
+            autocomplete="email"
+            required
+            {% if form.errors %}aria-invalid="true"{% endif %}
+          />
+          <button type="submit" class="button-new button--primary newsletter-section__btn" name="commit">
+            <span class="button__text">{{ section.settings.btn_label | default: 'Subscribe' }}</span>
+          </button>
+        </div>
+
+        {%- if form.errors -%}
+          <p class="newsletter-section__error">
+            {{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}
+          </p>
+        {%- endif -%}
+      {%- endif -%}
+    {%- endform -%}
+
+    {%- if section.settings.privacy_note != blank -%}
+      <p class="newsletter-section__privacy">{{ section.settings.privacy_note }}</p>
+    {%- endif -%}
+
+  </div>
+
+  <div class="newsletter-section__deco" aria-hidden="true">
+    <span class="newsletter-section__deco-ring newsletter-section__deco-ring--1"></span>
+    <span class="newsletter-section__deco-ring newsletter-section__deco-ring--2"></span>
+    <span class="newsletter-section__deco-dot newsletter-section__deco-dot--1"></span>
+    <span class="newsletter-section__deco-dot newsletter-section__deco-dot--2"></span>
+    <span class="newsletter-section__deco-dot newsletter-section__deco-dot--3"></span>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Newsletter Section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    {
+      "type": "text",
+      "id": "badge",
+      "label": "Badge label",
+      "default": "Stay in the loop"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Get exclusive offers & updates"
+    },
+    {
+      "type": "text",
+      "id": "subtext",
+      "label": "Subtext",
+      "default": "Subscribe to our newsletter and be the first to know about new arrivals and promotions."
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Email placeholder",
+      "default": "Enter your email"
+    },
+    {
+      "type": "text",
+      "id": "btn_label",
+      "label": "Button label",
+      "default": "Subscribe"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Thanks for subscribing!"
+    },
+    {
+      "type": "text",
+      "id": "privacy_note",
+      "label": "Privacy note",
+      "default": "No spam, unsubscribe anytime."
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent (badge, rings)",
+      "default": "#c8a97e"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "subtext_color",
+      "label": "Subtext & privacy",
+      "default": "#aaaaaa"
+    },
+    {
+      "type": "color",
+      "id": "input_bg",
+      "label": "Input background",
+      "default": "#2a2a2a"
+    },
+    {
+      "type": "color",
+      "id": "input_border",
+      "label": "Input border",
+      "default": "#3a3a3a"
+    },
+    {
+      "type": "color",
+      "id": "input_text",
+      "label": "Input text",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "btn_bg",
+      "label": "Button background",
+      "default": "#c8a97e"
+    },
+    {
+      "type": "color",
+      "id": "btn_text",
+      "label": "Button text",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "label": "Desktop padding top",
+      "min": 0,
+      "max": 150,
+      "step": 2,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "label": "Desktop padding bottom",
+      "min": 0,
+      "max": 150,
+      "step": 2,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "label": "Mobile padding top",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "label": "Mobile padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "default": 48
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter Section",
+      "settings": {
+        "badge": "Stay in the loop",
+        "heading": "Get exclusive offers & updates",
+        "subtext": "Subscribe to our newsletter and be the first to know about new arrivals and promotions.",
+        "placeholder": "Enter your email",
+        "btn_label": "Subscribe",
+        "success_message": "Thanks for subscribing!",
+        "privacy_note": "No spam, unsubscribe anytime."
+      }
+    }
+  ]
+}
+{% endschema %}

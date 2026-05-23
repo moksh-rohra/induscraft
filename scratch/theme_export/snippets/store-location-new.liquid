@@ -1,0 +1,553 @@
+{%- comment -%}
+------------------------------------------------------------------------------
+	Section: Store location (Only for settings.design == 'alternate')
+------------------------------------------------------------------------------
+{%- endcomment -%}
+
+{{- "store-location-new.build.css" | asset_url | stylesheet_tag -}}
+
+{%- style -%}
+	#shopify-section-{{- section.id -}} {
+		padding-top: {{- section.settings.offset_top_mobile -}}px;
+		padding-bottom: {{- section.settings.offset_bottom_mobile -}}px;
+	}
+
+	@media screen and (min-width: 768px) {
+		#shopify-section-{{- section.id -}} {
+			padding-top: {{- section.settings.offset_top_desktop -}}px;
+			padding-bottom: {{- section.settings.offset_bottom_desktop -}}px;
+		}
+	}
+{%- endstyle -%}
+
+{% assign reverse_content 		= section.settings.reverse_content %}
+{% assign title 				= section.settings.title %}
+{% assign subtitle 				= section.settings.subtitle %}
+{% assign address_title 		= section.settings.address_title %}
+{% assign address_text 			= section.settings.address_text %}
+{% assign schedule_title 		= section.settings.schedule_title %}
+{% assign schedule_text 		= section.settings.schedule_text %}
+{% assign phone_title 			= section.settings.phone_title %}
+{% assign phone_text 			= section.settings.phone_text %}
+{% assign email_title 			= section.settings.email_title %}
+{% assign email_text 			= section.settings.email_text %}
+{% assign text_alignment 		= section.settings.text_alignment %}
+{% assign first_button_text 	= section.settings.first_button_text %}
+{% assign first_button_link 	= section.settings.first_button_link %}
+{% assign first_button_style 	= section.settings.first_button_style %}
+{% assign second_button_text 	= section.settings.second_button_text %}
+{% assign second_button_link 	= section.settings.second_button_link %}
+{% assign second_button_style 	= section.settings.second_button_style %}
+{% assign store_image 			= section.settings.store_image %}
+{% assign google_map_api_key 	= section.settings.google_map_api_key %}
+{% assign map_query 			= section.settings.map_query %}
+{% assign map_embed_url 		= section.settings.map_embed_url %}
+{% assign full_width 			= section.settings.full_width %}
+{% assign second_button_popup 	= section.settings.second_button_popup %}
+{% assign popup_heading 		= section.settings.popup_heading %}
+{% assign popup_description 	= section.settings.popup_description %}
+{% assign popup_submit_label 	= section.settings.popup_submit_label %}
+
+<section class="store-location-new"
+		 style="--text-alignment: {{ text_alignment }};"
+>
+	<div class="store-location-new__container {% if full_width == false %}store-location-new__container--max-width{% endif %} {% if reverse_content %}store-location-new__container--reverse{% endif %} js-animate{% if request.visual_preview_mode or section.index == 1 %} animated{% endif %}">
+		<div class="store-location-new__header store-location-new__desktop-hidden">
+			{% if subtitle != blank %}
+				<p class="store-location-new__subtitle need-animate subheading">{{ subtitle }}</p>
+			{% endif %}
+
+			{% if title != blank %}
+				<h2 class="store-location-new__title need-animate h2">{{ title }}</h2>
+			{% endif %}
+		</div>
+
+		<div class="store-location-new__media">
+			{%- capture img_focal -%}
+				--img-desktop-pos: {{ store_image.presentation.focal_point }};
+			{%- endcapture -%}
+
+			<div class="store-location-new__media-wrapper">
+				{%- if map_embed_url != blank -%}
+					{%- comment -%} Extract src URL if user pasted full iframe code {%- endcomment -%}
+					{%- assign clean_map_url = map_embed_url -%}
+					{%- if map_embed_url contains 'src="' -%}
+						{%- assign url_parts = map_embed_url | split: 'src="' -%}
+						{%- assign url_end = url_parts[1] | split: '"' -%}
+						{%- assign clean_map_url = url_end[0] -%}
+					{%- endif -%}
+					<iframe
+						class="store-location-new__map"
+						width="100%"
+						height="100%"
+						frameborder="0" style="border:0"
+						referrerpolicy="no-referrer-when-downgrade"
+						src="{{ clean_map_url }}"
+						allowfullscreen
+						loading="lazy">
+					</iframe>
+				{%- elsif google_map_api_key != blank and map_query != blank -%}
+					<iframe
+						class="store-location-new__map"
+						width="100%"
+						height="100%"
+						frameborder="0" style="border:0"
+						referrerpolicy="no-referrer-when-downgrade"
+						src="https://www.google.com/maps/embed/v1/place?key={{- google_map_api_key -}}&q={{- map_query -}}"
+						allowfullscreen>
+					</iframe>
+				{%- elsif store_image != blank -%}
+					<picture class="lazy">
+						<source data-srcset="{{ store_image | image_url: width: 368, height: 258 }} 1x,
+											{{ store_image | image_url: width: 736, height: 516 }} 2x"
+						        srcset="{{ store_image | image_url: width: 10 }} 1x"
+						        media="(max-width: 400px)">
+
+						<source data-srcset="{{ store_image | image_url: width: 735, height: 515 }} 1x,
+											{{ store_image | image_url: width: 1470, height: 1030 }} 2x"
+						        srcset="{{ store_image | image_url: width: 10 }} 1x"
+						        media="(max-width: 767px)">
+
+						<source data-srcset="{{ store_image | image_url: width: 927, height: 649 }} 1x,
+											{{ store_image | image_url: width: 1854, height: 1298 }} 2x"
+						        srcset="{{ store_image | image_url: width: 10 }} 1x"
+						        media="(max-width: 991px)">
+
+						<source data-srcset="{{ store_image | image_url: width: 1071, height: 750 }} 1x,
+											{{ store_image | image_url: width: 2142, height: 1500 }} 2x"
+						        srcset="{{ store_image | image_url: width: 10 }} 1x"
+						        media="(max-width: 1199px)">
+
+						<source data-srcset="{{ store_image | image_url: width: 630, height: 450 }} 1x,
+											{{ store_image | image_url: width: 1260, height: 900 }} 2x"
+						        srcset="{{ store_image | image_url: width: 10 }} 1x"
+						        media="(max-width: 1500px)">
+
+						<img class="store-location-new__image need-animate"
+						     src="{{ store_image | image_url: width: 10 }}"
+						     data-src="{{ store_image | image_url: width: 840, height: 600 }}"
+						     data-srcset="{{ store_image | image_url: width: 840, height: 600 }} 1x, {{ store_image | image_url: width: 1680, height: 1200 }} 2x"
+						     alt="{{ store_image.alt | escape }}"
+						     style="{{ img_focal }}"
+						>
+					</picture>
+				{%- else -%}
+					{{- 'lifestyle-1' | placeholder_svg_tag: 'store-location-new__image need-animate' -}}
+				{%- endif -%}
+			</div>
+		</div>
+
+		<div class="store-location-new__content">
+			{% if subtitle != blank %}
+				<p class="store-location-new__subtitle need-animate subheading store-location-new__mobile-hidden">{{ subtitle }}</p>
+			{% endif %}
+
+			{% if title != blank %}
+				<h2 class="store-location-new__title need-animate h2 store-location-new__mobile-hidden">{{ title }}</h2>
+			{% endif %}
+
+			{% if address_title != blank or address_text != blank %}
+				<div class="store-location-new__item need-animate">
+					{% if address_title != blank %}
+						<h3 class="store-location-new__content-title">{{ address_title }}</h3>
+					{% endif %}
+
+					{% if address_text != blank %}
+						<div class="section-rte store-location-new__content-rte">{{ address_text }}</div>
+					{% endif %}
+				</div>
+			{% endif %}
+
+			{% if schedule_title != blank or schedule_text != blank %}
+				<div class="store-location-new__item need-animate">
+					{% if schedule_title != blank %}
+						<h3 class="store-location-new__content-title">{{ schedule_title }}</h3>
+					{% endif %}
+
+					{% if schedule_text != blank %}
+						<div class="section-rte store-location-new__content-rte">{{ schedule_text }}</div>
+					{% endif %}
+				</div>
+			{% endif %}
+
+			{% if phone_title != blank or phone_text != blank %}
+				<div class="store-location-new__item need-animate">
+					{% if phone_title != blank %}
+						<h3 class="store-location-new__content-title">{{ phone_title }}</h3>
+					{% endif %}
+
+					{% if phone_text != blank %}
+						<div class="section-rte store-location-new__content-rte">{{ phone_text }}</div>
+					{% endif %}
+				</div>
+			{% endif %}
+
+			{% if email_title != blank or email_text != blank %}
+				<div class="store-location-new__item need-animate">
+					{% if email_title != blank %}
+						<h3 class="store-location-new__content-title">{{ email_title }}</h3>
+					{% endif %}
+
+					{% if email_text != blank %}
+						<div class="section-rte store-location-new__content-rte">{{ email_text }}</div>
+					{% endif %}
+				</div>
+			{% endif %}
+
+			{% if first_button_text != blank and first_button_link != blank or second_button_text != blank and second_button_link != blank %}
+				<div class="store-location-new__buttons need-animate">
+					{% if first_button_text != blank and first_button_link != blank %}
+						<a href="{{ first_button_link }}" class="store-location-new__button button-new button--{{ first_button_style }}">
+							{{- first_button_text -}}
+						</a>
+					{% endif %}
+
+					{% if second_button_text != blank %}
+						{% if second_button_popup %}
+							<button type="button" class="store-location-new__button button-new button--{{ second_button_style }} js-store-popup-trigger">
+								{{- second_button_text -}}
+							</button>
+						{% elsif second_button_link != blank %}
+							<a href="{{ second_button_link }}" class="store-location-new__button button-new button--{{ second_button_style }}">
+								{{- second_button_text -}}
+							</a>
+						{% endif %}
+					{% endif %}
+				</div>
+			{% endif %}
+		</div>
+	</div>
+</section>
+
+{%- if second_button_popup -%}
+<style>
+	/* Callback Popup Modal Styles */
+	.store-callback-popup-overlay {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.6);
+		z-index: 9999;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		opacity: 0;
+		visibility: hidden;
+		transition: opacity 0.3s ease, visibility 0.3s ease;
+		padding: 20px;
+	}
+
+	.store-callback-popup-overlay.is-open {
+		opacity: 1;
+		visibility: visible;
+	}
+
+	.store-callback-popup {
+		background: #ffffff;
+		border-radius: 16px;
+		max-width: 480px;
+		width: 100%;
+		padding: 40px 30px;
+		position: relative;
+		transform: translateY(20px);
+		transition: transform 0.3s ease;
+		box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+	}
+
+	.store-callback-popup-overlay.is-open .store-callback-popup {
+		transform: translateY(0);
+	}
+
+	.store-callback-popup__close {
+		position: absolute;
+		top: 16px;
+		right: 16px;
+		width: 40px;
+		height: 40px;
+		border: none;
+		background: #f5f5f5;
+		border-radius: 50%;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: background 0.2s ease;
+	}
+
+	.store-callback-popup__close:hover {
+		background: #eaeaea;
+	}
+
+	.store-callback-popup__close svg {
+		width: 18px;
+		height: 18px;
+		stroke: #333;
+	}
+
+	.store-callback-popup__heading {
+		font-family: var(--heading-font-family);
+		font-size: 24px;
+		font-weight: 600;
+		margin: 0 0 8px 0;
+		color: #2C2A28;
+	}
+
+	.store-callback-popup__description {
+		font-size: 15px;
+		color: #666;
+		margin: 0 0 24px 0;
+		line-height: 1.5;
+	}
+
+	.store-callback-form__group {
+		margin-bottom: 16px;
+	}
+
+	.store-callback-form__label {
+		display: block;
+		font-size: 14px;
+		font-weight: 500;
+		color: #333;
+		margin-bottom: 6px;
+	}
+
+	.store-callback-form__input {
+		width: 100%;
+		padding: 14px 16px;
+		border: 1px solid #ddd;
+		border-radius: 8px;
+		font-size: 15px;
+		transition: border-color 0.2s ease, box-shadow 0.2s ease;
+		background: #fafafa;
+		box-sizing: border-box;
+	}
+
+	.store-callback-form__input:focus {
+		outline: none;
+		border-color: var(--color-primary, #8B7355);
+		box-shadow: 0 0 0 3px rgba(139, 115, 85, 0.1);
+		background: #fff;
+	}
+
+	.store-callback-form__row {
+		display: flex;
+		gap: 16px;
+	}
+
+	.store-callback-form__row .store-callback-form__group {
+		flex: 1;
+	}
+
+	.store-callback-form__submit {
+		width: 100%;
+		padding: 16px 24px;
+		background: var(--color-primary, #8B7355);
+		color: #fff;
+		border: none;
+		border-radius: 8px;
+		font-size: 16px;
+		font-weight: 600;
+		cursor: pointer;
+		transition: background 0.2s ease;
+		margin-top: 8px;
+	}
+
+	.store-callback-form__submit:hover {
+		background: var(--color-primary-hover, #7a6349);
+	}
+
+	.store-callback-form__success {
+		text-align: center;
+		padding: 20px;
+	}
+
+	.store-callback-form__success-icon {
+		width: 60px;
+		height: 60px;
+		background: #e8f5e9;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0 auto 16px;
+	}
+
+	.store-callback-form__success-icon svg {
+		width: 30px;
+		height: 30px;
+		stroke: #4caf50;
+	}
+
+	.store-callback-form__success-heading {
+		font-size: 20px;
+		font-weight: 600;
+		color: #2C2A28;
+		margin: 0 0 8px 0;
+	}
+
+	.store-callback-form__success-text {
+		font-size: 15px;
+		color: #666;
+		margin: 0;
+	}
+
+	@media (max-width: 480px) {
+		.store-callback-form__row {
+			flex-direction: column;
+			gap: 0;
+		}
+
+		.store-callback-popup {
+			padding: 30px 20px;
+		}
+	}
+</style>
+
+<!-- Callback Request Popup Modal -->
+<div class="store-callback-popup-overlay js-store-popup-overlay" id="store-popup-{{ section.id }}">
+	<div class="store-callback-popup">
+		<button type="button" class="store-callback-popup__close js-store-popup-close" aria-label="Close popup">
+			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+				<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+			</svg>
+		</button>
+
+		<div class="store-callback-popup__content js-store-form-content">
+			{%- if popup_heading != blank -%}
+				<h3 class="store-callback-popup__heading">{{ popup_heading }}</h3>
+			{%- endif -%}
+			
+			{%- if popup_description != blank -%}
+				<p class="store-callback-popup__description">{{ popup_description }}</p>
+			{%- endif -%}
+
+			{%- form 'contact', class: 'store-callback-form' -%}
+				<input type="hidden" name="contact[tags]" value="store-callback-request">
+				
+				<div class="store-callback-form__row">
+					<div class="store-callback-form__group">
+						<label class="store-callback-form__label" for="store-first-name-{{ section.id }}">First Name *</label>
+						<input 
+							type="text" 
+							id="store-first-name-{{ section.id }}"
+							name="contact[first_name]" 
+							class="store-callback-form__input" 
+							placeholder="Enter your first name"
+							required
+						>
+					</div>
+					<div class="store-callback-form__group">
+						<label class="store-callback-form__label" for="store-last-name-{{ section.id }}">Last Name *</label>
+						<input 
+							type="text" 
+							id="store-last-name-{{ section.id }}"
+							name="contact[last_name]" 
+							class="store-callback-form__input" 
+							placeholder="Enter your last name"
+							required
+						>
+					</div>
+				</div>
+
+				<div class="store-callback-form__row">
+					<div class="store-callback-form__group">
+						<label class="store-callback-form__label" for="store-email-{{ section.id }}">Email *</label>
+						<input 
+							type="email" 
+							id="store-email-{{ section.id }}"
+							name="contact[email]" 
+							class="store-callback-form__input" 
+							placeholder="Enter your email"
+							required
+						>
+					</div>
+
+					<div class="store-callback-form__group">
+						<label class="store-callback-form__label" for="store-phone-{{ section.id }}">Phone Number *</label>
+						<input 
+							type="tel" 
+							id="store-phone-{{ section.id }}"
+							name="contact[phone]" 
+							class="store-callback-form__input" 
+							placeholder="Enter your phone"
+							required
+						>
+					</div>
+				</div>
+
+				<button type="submit" class="store-callback-form__submit">
+					{{ popup_submit_label | default: 'Submit Request' }}
+				</button>
+			{%- endform -%}
+		</div>
+
+		<!-- Success Message -->
+		<div class="store-callback-form__success js-store-success" style="display: none;">
+			<div class="store-callback-form__success-icon">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+					<path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+				</svg>
+			</div>
+			<h4 class="store-callback-form__success-heading">Thank You!</h4>
+			<p class="store-callback-form__success-text">We've received your request and will call you back soon.</p>
+		</div>
+	</div>
+</div>
+
+<script>
+	(function() {
+		const section = document.querySelector('.store-location-new');
+		const trigger = section.querySelector('.js-store-popup-trigger');
+		const overlay = document.getElementById('store-popup-{{ section.id }}');
+		const closeBtn = overlay.querySelector('.js-store-popup-close');
+		const formContent = overlay.querySelector('.js-store-form-content');
+		const successMessage = overlay.querySelector('.js-store-success');
+
+		function openPopup() {
+			overlay.classList.add('is-open');
+			document.body.style.overflow = 'hidden';
+		}
+
+		function closePopup() {
+			overlay.classList.remove('is-open');
+			document.body.style.overflow = '';
+		}
+
+		if (trigger) {
+			trigger.addEventListener('click', openPopup);
+		}
+
+		if (closeBtn) {
+			closeBtn.addEventListener('click', closePopup);
+		}
+
+		overlay.addEventListener('click', function(e) {
+			if (e.target === overlay) {
+				closePopup();
+			}
+		});
+
+		document.addEventListener('keydown', function(e) {
+			if (e.key === 'Escape' && overlay.classList.contains('is-open')) {
+				closePopup();
+			}
+		});
+
+		// Check if form was submitted successfully
+		if (window.location.hash === '#contact_form' || window.location.search.includes('form_type=contact')) {
+			openPopup();
+			if (formContent) formContent.style.display = 'none';
+			if (successMessage) successMessage.style.display = 'block';
+			
+			setTimeout(function() {
+				closePopup();
+				if (formContent) formContent.style.display = 'block';
+				if (successMessage) successMessage.style.display = 'none';
+				history.replaceState(null, '', window.location.pathname);
+			}, 4000);
+		}
+	})();
+</script>
+{%- endif -%}

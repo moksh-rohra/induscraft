@@ -1,0 +1,71 @@
+/* Spaces Gallery Styles */
+.spaces-gallery {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.spaces-gallery__wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 1920px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+}
+
+.spaces-gallery__slides {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spaces-gallery__slide {
+    position: absolute;
+    overflow: hidden;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease;
+    will-change: transform, left, width, height;
+}
+
+.spaces-gallery__slide:hover {
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+}
+
+.spaces-gallery__slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Active slide (center) */
+.spaces-gallery__slide--active {
+    z-index: 3;
+    cursor: default;
+}
+
+/* Prev/Next slides */
+.spaces-gallery__slide--prev,
+.spaces-gallery__slide--next {
+    z-index: 2;
+}
+
+/* Far slides */
+.spaces-gallery__slide--far-prev,
+.spaces-gallery__slide--far-next {
+    z-index: 1;
+}
+
+/* Hidden slides */
+.spaces-gallery__slide--hidden {
+    opacity: 0;
+    pointer-events: none;
+}

@@ -1,0 +1,313 @@
+{{ 'b2b-steps.css' | asset_url | stylesheet_tag }}
+
+<section 
+  id="b2b-steps-{{ section.id }}" 
+  class="b2b-steps"
+  style="
+    --bg-color: {{ section.settings.bg_color }};
+    --subheading-color: {{ section.settings.subheading_color }};
+    --subheading-size-d: {{ section.settings.subheading_size_d }}px;
+    --subheading-size-m: {{ section.settings.subheading_size_m }}px;
+    --heading-color: {{ section.settings.heading_color }};
+    --heading-size-d: {{ section.settings.heading_size_d }}px;
+    --heading-size-m: {{ section.settings.heading_size_m }}px;
+  ">
+  <div class="b2b-steps__container">
+    <!-- Header -->
+    <div class="b2b-steps__header">
+      <div class="b2b-steps__subheading-wrapper">
+        <div class="b2b-steps__icon"></div>
+        <span class="b2b-steps__subheading">{{ section.settings.subheading }}</span>
+      </div>
+      <h2 class="b2b-steps__heading">{{ section.settings.heading }}</h2>
+    </div>
+
+    <!-- Cards Wrapper (for pinning) -->
+    <div class="b2b-steps__cards-wrapper">
+      <div class="b2b-steps__cards">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'step' -%}
+            <div class="b2b-steps__card" {{ block.shopify_attributes }} data-index="{{ forloop.index0 }}">
+              <span class="b2b-steps__step-number">{{ forloop.index | prepend: '0' | slice: -2, 2 }}.</span>
+              <div class="b2b-steps__card-icon">
+                {%- if block.settings.icon != blank -%}
+                  {{ block.settings.icon | image_url: width: 100 | image_tag }}
+                {%- else -%}
+                  <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <rect x="8" y="8" width="32" height="32" rx="4"/>
+                  </svg>
+                {%- endif -%}
+              </div>
+              <h3 class="b2b-steps__card-title">{{ block.settings.title }}</h3>
+              <p class="b2b-steps__card-desc">{{ block.settings.description }}</p>
+            </div>
+          {%- elsif block.type == 'cta' -%}
+            <div class="b2b-steps__card b2b-steps__card--cta" {{ block.shopify_attributes }} data-index="{{ forloop.index0 }}" style="--cta-bg: {{ block.settings.bg_color }};">
+              <div class="b2b-steps__cta-content">
+                <h2 class="b2b-steps__cta-heading">{{ block.settings.heading }}</h2>
+                <p class="b2b-steps__cta-desc">{{ block.settings.description }}</p>
+                {%- if block.settings.button_text != blank -%}
+                  <a href="{{ block.settings.button_link }}" class="button-new button--{{ block.settings.button_style }}">
+                    {{ block.settings.button_text }}
+                  </a>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GSAP Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+<script>
+(function() {
+  function initB2BSteps() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+      setTimeout(initB2BSteps, 50);
+      return;
+    }
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const sectionId = '{{ section.id }}';
+    const section = document.getElementById(`b2b-steps-${sectionId}`);
+    if (!section) return;
+    
+    // Prevent double init
+    if (section.dataset.init === 'true') return;
+    section.dataset.init = 'true';
+
+    // Only run animation on desktop
+    if (window.innerWidth < 768) return;
+
+    const cardsWrapper = section.querySelector('.b2b-steps__cards-wrapper');
+    const cards = section.querySelectorAll('.b2b-steps__card');
+    const cardCount = cards.length;
+
+    if (cardCount < 2) return;
+
+    // Calculate how much each card should move
+    // Cards start side by side, then stack with 25% visible of previous card
+    const cardWidth = cards[0].offsetWidth;
+    const overlapAmount = cardWidth * 0.55; // How much to overlap (75% covered, 25% visible)
+
+    // Set initial positions - cards are already in flex layout
+    // We'll animate them to stack on top of first card
+
+    // Create timeline with ScrollTrigger
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section, 
+        start: "top top",
+        end: `+=${cardCount * 200}`, // Scroll distance for animation
+        scrub: 1,
+        pin: true,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+      }
+    });
+
+    
+    const slideAmount = overlapAmount; // How much each card slides individually
+    
+    // For each sliding action (there are cardCount - 1 slides)
+    for (let slideIndex = 1; slideIndex < cardCount; slideIndex++) {
+      const startTime = (slideIndex - 1) / (cardCount - 1);
+      const endTime = slideIndex / (cardCount - 1);
+      
+      // Move all cards from slideIndex onwards
+      for (let cardIndex = slideIndex; cardIndex < cardCount; cardIndex++) {
+        tl.to(cards[cardIndex], {
+          x: `-=${slideAmount}`, // Move left by slideAmount (cumulative)
+          ease: "none",
+          duration: endTime - startTime
+        }, startTime);
+      }
+    }
+  }
+
+  // Initialize
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initB2BSteps);
+  } else {
+    initB2BSteps();
+  }
+
+  // Reinitialize on resize
+  let resizeTimeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 200);
+  });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "B2B Steps",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#f5f5f0"
+    },
+    { "type": "header", "content": "Subheading" },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading Text",
+      "default": "WORKING PROCESS"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading Color",
+      "default": "#141414"
+    },
+    {
+      "type": "range",
+      "id": "subheading_size_d",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Subheading Size (Desktop)",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "subheading_size_m",
+      "min": 10,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Subheading Size (Mobile)",
+      "default": 11
+    },
+    { "type": "header", "content": "Heading" },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Heading Text",
+      "default": "Here's a clear, step-by-step look at how we bring interior vision to the life."
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#141414"
+    },
+    {
+      "type": "range",
+      "id": "heading_size_d",
+      "min": 24,
+      "max": 80,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size (Desktop)",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "heading_size_m",
+      "min": 20,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size (Mobile)",
+      "default": 28
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Get a Quote"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Start by telling us about your space and design needs. We'll provide a customized quote that reflects the scope."
+        }
+      ]
+    },
+    {
+      "type": "cta",
+      "name": "CTA Card",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "color",
+          "id": "bg_color",
+          "label": "Background Color",
+          "default": "#ffffff"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Let's Collab"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Now it's time for collaborate and fill the brief, sure we include all details"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Get A Quote"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button Link"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "label": "Button Style",
+          "options": [
+            { "value": "primary", "label": "Primary (Double Border)" },
+            { "value": "secondary", "label": "Secondary (Solid Rounded)" }
+          ],
+          "default": "primary"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "B2B Steps",
+      "blocks": [
+        { "type": "step", "settings": { "title": "Get a Quote", "description": "Start by telling us about your space and design needs. We'll provide a customized quote that reflects the scope." } },
+        { "type": "step", "settings": { "title": "Schedule a Consultation", "description": "Book a dedicated time to meet with our interior design experts. We'll dive deep into your goals, inspirations." } },
+        { "type": "step", "settings": { "title": "Interior Process", "description": "From space planning to selecting furniture and finishes, we handle every aspect of the design journey." } },
+        { "type": "step", "settings": { "title": "Final Walkthrough", "description": "We guide you through the finished space to ensure everything aligns perfectly with your expectations." } },
+        { "type": "cta", "settings": { "heading": "Let's Collab", "description": "Now it's time for collaborate and fill the brief, sure we include all details", "button_text": "Get A Quote" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

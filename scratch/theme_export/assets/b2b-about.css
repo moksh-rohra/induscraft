@@ -1,0 +1,156 @@
+.b2b-about {
+    /* Default Mobile Spacing */
+    padding: var(--pt-m) var(--pr-m) var(--pb-m) var(--pl-m);
+    margin: var(--mt-m) var(--mr-m) var(--mb-m) var(--ml-m);
+
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    overflow: hidden;
+    /* For animations */
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+}
+
+@media (min-width: 768px) {
+    .b2b-about {
+        /* Desktop Spacing */
+        padding: var(--pt-d) var(--pr-d) var(--pb-d) var(--pl-d);
+        margin: var(--mt-d) var(--mr-d) var(--mb-d) var(--ml-d);
+    }
+}
+
+.b2b-about__container {
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+@media (min-width: 768px) {
+    .b2b-about__container {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
+
+/* Left Subheading */
+.b2b-about__left {
+    flex: 0 0 auto;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .b2b-about__left {
+        width: 25%;
+        position: sticky;
+        top: 100px;
+    }
+}
+
+.b2b-about__subheading-wrapper {
+    display: flex;
+    align-items: center;
+    /* Align icon vertically with text */
+    gap: 12px;
+}
+
+.b2b-about__icon-box {
+    width: 10px;
+    height: 10px;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.b2b-about__icon {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 2px;
+}
+
+.b2b-about__icon--base {
+    background-color: var(--subheading-color-washed);
+}
+
+.b2b-about__icon--reveal {
+    background-color: var(--subheading-color-reveal);
+    clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+    /* Hidden initially */
+}
+
+.b2b-about__subheading {
+    font-family: var(--font-body-family);
+    font-size: var(--subheading-size-m);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 400;
+    margin: 0;
+    position: relative;
+    display: inline-block;
+    line-height: 1.5;
+    /* Initial washed out state handled by base color, reveal handled by overlay */
+    color: var(--subheading-color-washed);
+}
+
+/* Right Heading */
+.b2b-about__right {
+    flex: 1;
+}
+
+.b2b-about__heading {
+    /* font-family: 'Bristone', serif; */
+    font-size: var(--heading-size-m);
+    line-height: 1.2;
+    font-weight: 400;
+    margin: 0;
+}
+
+.b2b-about__heading p {
+    margin: 0;
+}
+
+/* Animation Helpers */
+.b2b-line-wrapper {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    /* Ensure reveal doesn't spill */
+}
+
+.b2b-line-inner {
+    position: relative;
+    display: inline-block;
+    /* Color set via inline style in JS using var() */
+    white-space: nowrap;
+    /* Keep lines intact */
+}
+
+/* The Reveal Layer - absolutely positioned on top */
+.b2b-reveal-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Color set via inline style in JS using var() */
+    clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+    /* Start hidden (left) */
+    pointer-events: none;
+    z-index: 2;
+    white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+    .b2b-about__subheading {
+        font-size: var(--subheading-size);
+    }
+
+    .b2b-about__heading {
+        font-size: var(--heading-size);
+    }
+}

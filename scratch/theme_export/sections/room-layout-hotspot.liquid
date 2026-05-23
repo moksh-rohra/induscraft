@@ -1,0 +1,906 @@
+{{ 'carousel.build.css' | asset_url | stylesheet_tag }}
+
+{% style %}
+    #shopify-section-{{- section.id -}} {
+        padding-top: {{- section.settings.offset_top_mobile -}}px;
+        padding-bottom: {{- section.settings.offset_bottom_mobile -}}px;
+    }
+
+    @media screen and (min-width: 768px) {
+        #shopify-section-{{- section.id -}} {
+            padding-top: {{- section.settings.offset_top_desktop -}}px;
+            padding-bottom: {{- section.settings.offset_bottom_desktop -}}px;
+            overflow: hidden;
+        }
+    }
+
+    /* Force overrides for Swiper and Layout */
+    #shopify-section-{{- section.id -}} .swiper,
+    #shopify-section-{{- section.id -}} .swiper-wrapper,
+    #shopify-section-{{- section.id -}} .swiper-slide {
+        overflow: visible !important;
+    }
+
+    /* Main Section Layout */
+    .room-layout-hotspot {
+        width: 100%;
+        position: relative;
+    }
+
+    .room-layout__slider {
+        width: 100%;
+        height: 100%;
+    }
+
+    .room-layout__image-wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        min-height: {{ section.settings.mobile_height }}px;
+        overflow: visible !important;
+    }
+
+    @media screen and (min-width: 768px) {
+        .room-layout__image-wrapper {
+            {%- if section.settings.full_height -%}
+                min-height: 100vh;
+            {%- else -%}
+                min-height: {{ section.settings.desktop_height }}vh;
+            {%- endif -%}
+        }
+    }
+    
+    .room-layout__image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* --- Custom Hotspot Styles (Rewritten) --- */
+    
+    .room-hotspot__container {
+        position: absolute;
+        top: var(--y-pos-mobile);
+        left: var(--x-pos-mobile);
+        transform: translate(-50%, -50%);
+        z-index: 50;
+        pointer-events: auto;
+    }
+
+    @media screen and (min-width: 768px) {
+        .room-hotspot__container {
+            top: var(--y-pos);
+            left: var(--x-pos);
+        }
+    }
+
+    /* The Button */
+    .room-hotspot__btn {
+        width: {{ section.settings.hotspot_size_mobile }}px;
+        height: {{ section.settings.hotspot_size_mobile }}px;
+        border-radius: 50%;
+        background: {{ section.settings.hotspot_background }};
+        color: {{ section.settings.hotspot_color }};
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        transition: transform 0.2s ease, background 0.2s ease;
+        position: relative;
+        z-index: 51;
+    }
+
+    .room-hotspot__btn:hover {
+        transform: scale(1.1);
+    }
+
+    .room-hotspot__btn.is-active {
+        background: #fff;
+        color: #000;
+        transform: scale(1.0);
+    }
+
+    /* The Plus Icon (Pure CSS) */
+    .room-hotspot__icon {
+        position: relative;
+        width: 12px;
+        height: 12px;
+        display: block;
+        pointer-events: none;
+    }
+
+    .room-hotspot__icon::before,
+    .room-hotspot__icon::after {
+        content: '';
+        position: absolute;
+        background-color: currentColor;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        transition: transform 0.3s ease;
+    }
+
+    .room-hotspot__icon::before { width: 100%; height: 1px; } /* Horizontal - thinner on mobile */
+    .room-hotspot__icon::after { width: 1px; height: 100%; } /* Vertical - thinner on mobile */
+
+    @media screen and (min-width: 768px) {
+        .room-hotspot__btn {
+            width: {{ section.settings.hotspot_size_desktop }}px;
+            height: {{ section.settings.hotspot_size_desktop }}px;
+        }
+        
+        .room-hotspot__icon {
+            width: 14px;
+            height: 14px;
+        }
+        
+        .room-hotspot__icon::before { height: 2px; } /* Horizontal - slightly thicker on desktop */
+        .room-hotspot__icon::after { width: 2px; } /* Vertical - slightly thicker on desktop */
+    }
+
+    /* Rotate to X when active */
+    .room-hotspot__btn.is-active .room-hotspot__icon::before { transform: translate(-50%, -50%) rotate(45deg); }
+    .room-hotspot__btn.is-active .room-hotspot__icon::after { transform: translate(-50%, -50%) rotate(45deg); }
+
+    /* The Product Card Popup */
+    .room-hotspot__card {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%) translateY(-10px);
+        overflow: hidden;
+        z-index: 1;
+        display: flex;
+        visibility: hidden;
+        opacity: 0;
+        width: auto;
+        background-color: #fff;
+        border-radius: 0;
+        border-start-end-radius: 30px;
+        border-end-start-radius: 30px;
+        transition-property: opacity, visibility, transform;
+        transition-duration: 0.3s;
+        word-break: break-word;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    .room-hotspot__card.room-hotspot__card--top {
+        bottom: calc(100% + 15px);
+        border-radius: 0;
+        border-start-start-radius: 30px;
+        border-end-end-radius: 30px;
+    }
+
+    .room-hotspot__card.room-hotspot__card--bottom {
+        top: calc(100% + 15px);
+    }
+
+    .room-hotspot__card.is-active {
+        z-index: 2;
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) translateY(0);
+        pointer-events: auto;
+    }
+
+    .room-hotspot__content {
+        display: flex;
+        width: 100%;
+    }
+
+    .room-hotspot__img-wrapper {
+        flex-shrink: 0;
+    }
+
+    .room-hotspot__img {
+        display: block;
+        width: 102px;
+        height: 100%;
+        vertical-align: middle;
+        object-fit: cover;
+    }
+
+    .room-hotspot__info {
+        padding: 15px;
+        flex-grow: 1;
+        flex-basis: 0;
+    }
+
+    .room-hotspot__title {
+        line-height: 1.5;
+        color: #666;
+        text-decoration-color: transparent;
+        transition-property: text-decoration-color;
+        transition-duration: 0.3s;
+        display: block;
+    }
+
+    @media (-moz-touch-enabled: 0), (hover: hover), (pointer: fine) {
+        .room-hotspot__title:hover {
+            text-decoration-color: #333;
+        }
+    }
+
+    .room-hotspot__price {
+        font-size: 13px;
+        color: #666;
+        margin-top: 10px;
+    }
+
+    .room-hotspot__cart-btn {
+        margin-top: 15px;
+        padding: 0;
+        color: #666;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        transition-property: opacity;
+        transition-duration: 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .room-hotspot__cart-btn svg {
+        width: 18px;
+        height: 20px;
+    }
+
+    .room-hotspot__cart-btn[disabled] {
+        opacity: 0.6;
+        color: currentColor;
+        cursor: default;
+    }
+
+    @media (-moz-touch-enabled: 0), (hover: hover), (pointer: fine) {
+        .room-hotspot__cart-btn:hover:not([disabled]) {
+            opacity: 0.6;
+        }
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 767.98px) {
+        /* Hide the inline cards on mobile - we use the mobile modal instead */
+        .room-hotspot__card {
+            display: none !important;
+        }
+        
+        .room-hotspot__title {
+            font-size: calc(14px * 0.875);
+        }
+    }
+
+    /* Mobile Modal - Outside Swiper */
+    .room-layout-mobile-modal {
+        display: none;
+    }
+
+    @media (max-width: 767.98px) {
+        .room-layout-mobile-modal {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            width: calc(100% - 40px);
+            max-width: 320px;
+            background-color: #fff;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+            z-index: 200;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .room-layout-mobile-modal.is-active {
+            display: block;
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .room-layout-mobile-modal .room-hotspot__content {
+            display: flex;
+            width: 100%;
+        }
+
+        .room-layout-mobile-modal .room-hotspot__img-wrapper {
+            flex-shrink: 0;
+        }
+
+        .room-layout-mobile-modal .room-hotspot__img {
+            display: block;
+            width: 100px;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .room-layout-mobile-modal .room-hotspot__info {
+            padding: 15px;
+            flex-grow: 1;
+        }
+
+        .room-layout-mobile-modal .room-hotspot__title {
+            margin: 0 0 8px 0;
+            font-size: 14px;
+            line-height: 1.3;
+        }
+
+        .room-layout-mobile-modal .room-hotspot__price {
+            margin-bottom: 10px;
+        }
+
+        .room-layout-mobile-modal .room-hotspot__cart-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: {{ section.settings.hotspot_background }};
+            color: {{ section.settings.hotspot_color }};
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .room-layout-mobile-overlay {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.3);
+            z-index: 199;
+        }
+
+        .room-layout-mobile-overlay.is-active {
+            display: block;
+        }
+    }
+
+    @media (max-width: 767.98px) {
+        .room-hotspot__title {
+            font-size: calc(14px * 0.875);
+        }
+    }
+
+    @media (min-width: 768px) {
+        .room-hotspot__card {
+            width: 325px;
+        }
+        
+        .room-hotspot__img {
+            width: 94px;
+        }
+        
+        .room-hotspot__info {
+            padding: 20px 20px 20px 20px;
+            padding-inline-start: 46px;
+        }
+    }
+
+    /* Navigation */
+    .room-layout-prev, .room-layout-next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 40;
+        width: 56px;
+        height: 56px;
+        background: rgba(255,255,255,0.9);
+        border-radius: 50%;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        color: #B5B5B5;
+        transition: opacity 0.2s;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+    }
+    .room-layout-prev:hover, .room-layout-next:hover { opacity: 0.8; }
+    .room-layout-prev { left: 24px; }
+    .room-layout-next { right: 24px; }
+    .room-layout-prev.swiper-button-disabled, .room-layout-next.swiper-button-disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+    .room-layout-prev svg, .room-layout-next svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    /* Show arrows only on desktop */
+    @media screen and (min-width: 768px) {
+        .room-layout-prev, .room-layout-next {
+            display: flex;
+        }
+        .room-layout-pagination {
+            display: none;
+        }
+    }
+
+    /* Pagination - Mobile Only */
+    .room-layout-pagination {
+        position: absolute;
+        bottom: 20px;
+        left: 0;
+        right: 0;
+        z-index: 10;
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .room-layout-pagination .swiper-pagination-bullet {
+        width: 4px;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.5);
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .room-layout-pagination .swiper-pagination-bullet-active {
+        background: #ffffff;
+        transform: scale(1.2);
+    }
+
+{% endstyle %}
+
+<div class="room-layout-hotspot" id="room-layout-{{ section.id }}">
+    <div class="swiper room-layout__slider js-room-layout-slider">
+        <div class="swiper-wrapper">
+            {%- for block in section.blocks -%}
+                <div class="swiper-slide room-layout__slide">
+                    {%- assign image = block.settings.image -%}
+                    <div class="room-layout__image-wrapper">
+                        {%- if image != blank -%}
+                            {{ image | image_url: width: 3000 | image_tag: 
+                                class: 'room-layout__image', 
+                                widths: '550, 750, 1100, 1500, 2000, 3000',
+                                sizes: '100vw'
+                            }}
+                        {%- else -%}
+                            {{ 'lifestyle-1' | placeholder_svg_tag: 'room-layout__image placeholder-svg' }}
+                        {%- endif -%}
+
+                        {%- comment -%} Custom Hotspot Logic (Clean Implementation) {%- endcomment -%}
+                        {% for i in (1..10) %}
+                            {% assign product_key = "product_" | append: i %}
+                            {% assign product_image_key = "product_image_" | append: i %}
+                            {% assign horizontal_spot_key = "horizontal_position_" | append: i %}
+                            {% assign vertical_spot_key = "vertical_position_" | append: i %}
+
+                            {% assign horizontal_mobile_key = "horizontal_position_mobile_" | append: i %}
+                            {% assign vertical_mobile_key = "vertical_position_mobile_" | append: i %}
+
+                            {% assign product = block.settings[product_key] %}
+                            {% assign product_image = block.settings[product_image_key] | default: product.featured_image %}
+                            {% assign y_pos = block.settings[vertical_spot_key] %}
+                            {% assign x_pos = block.settings[horizontal_spot_key] %}
+                            {% assign y_pos_mobile = block.settings[vertical_mobile_key] | default: y_pos %}
+                            {% assign x_pos_mobile = block.settings[horizontal_mobile_key] | default: x_pos %}
+
+                            {% assign use_placeholder = false %}
+                            {% if block.settings.product_1 == blank and block.settings.product_2 == blank and block.settings.product_3 == blank and block.settings.product_4 == blank and block.settings.product_5 == blank and block.settings.product_6 == blank and block.settings.product_7 == blank and block.settings.product_8 == blank and block.settings.product_9 == blank and block.settings.product_10 == blank %}
+                                {% assign use_placeholder = true %}
+                            {% endif %}
+
+                            {%- capture popup_position_class -%}
+                                {%- if y_pos >= 50 -%}
+                                    room-hotspot__card--top
+                                {%- else -%}
+                                    room-hotspot__card--bottom
+                                {%- endif -%}
+                            {%- endcapture -%}
+
+                            {% if product != blank or use_placeholder %}
+                                <div class="room-hotspot__container swiper-no-swiping" style="--y-pos: {{ y_pos }}%; --x-pos: {{ x_pos }}%; --y-pos-mobile: {{ y_pos_mobile }}%; --x-pos-mobile: {{ x_pos_mobile }}%;">
+                                    <button class="room-hotspot__btn js-hotspot-btn" type="button" aria-label="View Product">
+                                        <span class="room-hotspot__icon"></span>
+                                    </button>
+                                    
+                                    <div class="room-hotspot__card {{ popup_position_class }}">
+                                        {% if product != blank %}
+                                            <div class="room-hotspot__content">
+                                                {% if product_image %}
+                                                    <a href="{{ product.url }}" class="room-hotspot__img-wrapper focus-visible-outline">
+                                                        {{ product_image | image_url: width: 120 | image_tag: class: 'room-hotspot__img' }}
+                                                    </a>
+                                                {% endif %}
+                                                <div class="room-hotspot__info">
+                                                    <a href="{{ product.url }}" class="room-hotspot__title focus-visible-outline">
+                                                        {{ product.title }}
+                                                    </a>
+                                                    <div class="room-hotspot__price">
+                                                        {% render 'price', product: product %}
+                                                    </div>
+                                                    <button
+                                                        class="room-hotspot__cart-btn focus-visible-outline js-add-to-cart"
+                                                        type="button"
+                                                        data-product-handle="{{ product.handle }}"
+                                                        data-min-quantity="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                                                        {% if product.template_suffix == 'pre-order' %}data-preorder{% endif %}
+                                                        {% if product.has_only_default_variant or product.variants.size == 1 %}
+                                                            data-variant-id="{{ product.variants[0].id }}"
+                                                        {% endif %}
+                                                        {% unless product.available %}
+                                                            disabled
+                                                        {% endunless %}
+                                                    >
+                                                        {% render 'icons-new', icon: 'cart-3' %}
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        {% else %}
+                                            <div class="room-hotspot__content">
+                                                <div class="room-hotspot__img-wrapper">
+                                                    {{ 'product-1' | placeholder_svg_tag: 'room-hotspot__img' }}
+                                                </div>
+                                                <div class="room-hotspot__info">
+                                                    <p class="room-hotspot__title">Example Product</p>
+                                                    <div class="room-hotspot__price">
+                                                        {% render 'price', product: product %}
+                                                    </div>
+                                                    <button
+                                                        class="room-hotspot__cart-btn focus-visible-outline js-add-to-cart"
+                                                        type="button"
+                                                        disabled
+                                                    >
+                                                        {% render 'icons-new', icon: 'cart-3' %}
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {%- endfor -%}
+        </div>
+        
+        <div class="room-layout-next">{% render 'icons-small', icon: 'arrow-right' %}</div>
+        <div class="room-layout-prev">{% render 'icons-small', icon: 'arrow-left' %}</div>
+        <div class="room-layout-pagination"></div>
+    </div>
+    
+    <!-- Mobile Modal (Outside Swiper) -->
+    <div class="room-layout-mobile-overlay js-mobile-overlay"></div>
+    <div class="room-layout-mobile-modal js-mobile-modal"></div>
+</div>
+
+<script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+    (function() {
+        const initSection = (container) => {
+            if (!container) return;
+            const sliderElement = container.querySelector('.js-room-layout-slider');
+
+            // 1. Initialize Swiper
+            if (sliderElement && typeof Swiper !== 'undefined') {
+                // Destroy existing if any to prevent dupes (e.g. in editor)
+                if (sliderElement.swiper) sliderElement.swiper.destroy();
+
+                new Swiper(sliderElement, {
+                    slidesPerView: 1,
+                    spaceBetween: 0,
+                    loop: false,
+                    effect: 'slide',
+                    preventClicks: false,
+                    preventClicksPropagation: false,
+                    touchStartPreventDefault: false,
+                    navigation: {
+                        nextEl: container.querySelector('.room-layout-next'),
+                        prevEl: container.querySelector('.room-layout-prev'),
+                    },
+                    pagination: {
+                        el: container.querySelector('.room-layout-pagination'),
+                        clickable: true,
+                    }
+                });
+            }
+
+            // 2. Click Handling (Explicit Binding)
+            const isMobile = () => window.innerWidth < 768;
+            const mobileModal = container.querySelector('.js-mobile-modal');
+            const mobileOverlay = container.querySelector('.js-mobile-overlay');
+
+            const closeMobileModal = () => {
+                if (mobileModal) mobileModal.classList.remove('is-active');
+                if (mobileOverlay) mobileOverlay.classList.remove('is-active');
+                container.querySelectorAll('.js-hotspot-btn.is-active').forEach(el => el.classList.remove('is-active'));
+            };
+
+            const handleHotspotClick = (e) => {
+                const btn = e.target.closest('.js-hotspot-btn');
+                
+                if (btn) {
+                    e.preventDefault();
+                    e.stopPropagation(); 
+                    console.log('Hotspot Clicked!');
+
+                    const isActive = btn.classList.contains('is-active');
+                    
+                    // Close all active hotspots in this container
+                    container.querySelectorAll('.is-active').forEach(el => el.classList.remove('is-active'));
+                    closeMobileModal();
+
+                    // If it wasn't active, open it
+                    if (!isActive) {
+                        btn.classList.add('is-active');
+                        const card = btn.nextElementSibling;
+                        
+                        if (isMobile() && mobileModal && card) {
+                            // Clone card content into mobile modal
+                            mobileModal.innerHTML = card.innerHTML;
+                            mobileModal.classList.add('is-active');
+                            if (mobileOverlay) mobileOverlay.classList.add('is-active');
+                            
+                            // Re-bind add to cart button in modal
+                            const cartBtn = mobileModal.querySelector('.js-add-to-cart');
+                            if (cartBtn) {
+                                cartBtn.addEventListener('click', (ev) => {
+                                    ev.preventDefault();
+                                    ev.stopPropagation();
+                                    // Trigger the original button's click
+                                    const originalBtn = card.querySelector('.js-add-to-cart');
+                                    if (originalBtn) originalBtn.click();
+                                });
+                            }
+                        } else if (card && card.classList.contains('room-hotspot__card')) {
+                            card.classList.add('is-active');
+                        }
+                    }
+                } else if (e.target.closest('.js-mobile-overlay')) {
+                    // Click on overlay -> close modal
+                    closeMobileModal();
+                } else if (!e.target.closest('.room-hotspot__card') && !e.target.closest('.js-mobile-modal')) {
+                     // Click outside -> Close all
+                     container.querySelectorAll('.is-active').forEach(el => el.classList.remove('is-active'));
+                     closeMobileModal();
+                }
+            };
+
+            container.removeEventListener('click', handleHotspotClick); 
+            container.addEventListener('click', handleHotspotClick);
+        };
+
+        const deferInit = () => {
+            if (typeof Swiper === 'undefined') {
+                console.warn('Waiting for Swiper CDN...');
+                setTimeout(deferInit, 100);
+                return;
+            }
+            document.querySelectorAll('.room-layout-hotspot').forEach(initSection);
+        };
+
+        // Init on Load
+        document.addEventListener('DOMContentLoaded', deferInit);
+
+        // Init on Editor
+        document.addEventListener('shopify:section:load', (e) => {
+            const container = e.target.querySelector('.room-layout-hotspot');
+            if (container) {
+                 // Safety wait for editor reloads
+                 const wait = () => {
+                    if (typeof Swiper === 'undefined') { setTimeout(wait, 100); return; }
+                    initSection(container);
+                 };
+                 wait();
+            }
+        });
+    })();
+</script>
+{% schema %}
+{
+    "name": "Room Layout Hotspot",
+    "settings": [
+        {
+            "type": "checkbox",
+            "id": "full_height",
+            "label": "Full Screen Height",
+            "default": true,
+            "info": "Only affects desktop. Mobile uses its own height setting."
+        },
+        {
+            "type": "range",
+            "id": "desktop_height",
+            "min": 40,
+            "max": 100,
+            "step": 5,
+            "unit": "vh",
+            "label": "Desktop Height",
+            "default": 80,
+            "info": "Used when Full Screen Height is disabled"
+        },
+        {
+            "type": "range",
+            "id": "mobile_height",
+            "min": 200,
+            "max": 800,
+            "step": 10,
+            "unit": "px",
+            "label": "Mobile Height",
+            "default": 400
+        },
+        {
+			"type": "color",
+			"id": "hotspot_background",
+			"label": "Hotspot background",
+			"default": "#ffffff"
+		},
+		{
+			"type": "color",
+			"id": "hotspot_color",
+			"label": "Hotspot color",
+			"default": "#000000"
+		},
+        {
+            "type": "range",
+            "id": "hotspot_size_desktop",
+            "min": 24,
+            "max": 60,
+            "step": 2,
+            "unit": "px",
+            "label": "Hotspot Size (Desktop)",
+            "default": 36
+        },
+        {
+            "type": "range",
+            "id": "hotspot_size_mobile",
+            "min": 24,
+            "max": 50,
+            "step": 2,
+            "unit": "px",
+            "label": "Hotspot Size (Mobile)",
+            "default": 32
+        },
+        {
+            "type": "header",
+            "content": "Padding"
+        },
+        {
+            "type": "range",
+            "id": "offset_top_desktop",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Desktop offset top",
+            "default": 0
+        },
+        {
+            "type": "range",
+            "id": "offset_bottom_desktop",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Desktop offset bottom",
+            "default": 0
+        },
+        {
+            "type": "range",
+            "id": "offset_top_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Mobile offset top",
+            "default": 0
+        },
+        {
+            "type": "range",
+            "id": "offset_bottom_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Mobile offset bottom",
+            "default": 0
+        }
+    ],
+    "blocks": [
+        {
+            "type": "product",
+            "name": "Room Image",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Full Room Image"
+                },
+                { "type": "header", "content": "Hotspot 1" },
+                { "type": "product", "id": "product_1", "label": "Product" },
+                { "type": "image_picker", "id": "product_image_1", "label": "Custom Product Image" },
+                { "type": "range", "id": "horizontal_position_1", "min": 0, "max": 100, "step": 1, "default": 20, "label": "Horizontal Position % (Desktop)" },
+                { "type": "range", "id": "vertical_position_1", "min": 0, "max": 100, "step": 1, "default": 20, "label": "Vertical Position % (Desktop)" },
+                { "type": "range", "id": "horizontal_position_mobile_1", "min": 0, "max": 100, "step": 1, "default": 20, "label": "Horizontal Position % (Mobile)" },
+                { "type": "range", "id": "vertical_position_mobile_1", "min": 0, "max": 100, "step": 1, "default": 20, "label": "Vertical Position % (Mobile)" },
+                { "type": "header", "content": "Hotspot 2" },
+                { "type": "product", "id": "product_2", "label": "Product" },
+                { "type": "image_picker", "id": "product_image_2", "label": "Custom Product Image" },
+                { "type": "range", "id": "horizontal_position_2", "min": 0, "max": 100, "step": 1, "default": 50, "label": "Horizontal Position % (Desktop)" },
+                { "type": "range", "id": "vertical_position_2", "min": 0, "max": 100, "step": 1, "default": 50, "label": "Vertical Position % (Desktop)" },
+                { "type": "range", "id": "horizontal_position_mobile_2", "min": 0, "max": 100, "step": 1, "default": 50, "label": "Horizontal Position % (Mobile)" },
+                { "type": "range", "id": "vertical_position_mobile_2", "min": 0, "max": 100, "step": 1, "default": 50, "label": "Vertical Position % (Mobile)" },
+                { "type": "header", "content": "Hotspot 3" },
+                { "type": "product", "id": "product_3", "label": "Product" },
+                { "type": "image_picker", "id": "product_image_3", "label": "Custom Product Image" },
+                { "type": "range", "id": "horizontal_position_3", "min": 0, "max": 100, "step": 1, "default": 80, "label": "Horizontal Position % (Desktop)" },
+                { "type": "range", "id": "vertical_position_3", "min": 0, "max": 100, "step": 1, "default": 80, "label": "Vertical Position % (Desktop)" },
+                { "type": "range", "id": "horizontal_position_mobile_3", "min": 0, "max": 100, "step": 1, "default": 80, "label": "Horizontal Position % (Mobile)" },
+                { "type": "range", "id": "vertical_position_mobile_3", "min": 0, "max": 100, "step": 1, "default": 80, "label": "Vertical Position % (Mobile)" },
+                { "type": "header", "content": "Hotspot 4" },
+                { "type": "product", "id": "product_4", "label": "Product" },
+                { "type": "image_picker", "id": "product_image_4", "label": "Custom Product Image" },
+                { "type": "range", "id": "horizontal_position_4", "min": 0, "max": 100, "step": 1, "default": 30, "label": "Horizontal Position % (Desktop)" },
+                { "type": "range", "id": "vertical_position_4", "min": 0, "max": 100, "step": 1, "default": 40, "label": "Vertical Position % (Desktop)" },
+                { "type": "range", "id": "horizontal_position_mobile_4", "min": 0, "max": 100, "step": 1, "default": 30, "label": "Horizontal Position % (Mobile)" },
+                { "type": "range", "id": "vertical_position_mobile_4", "min": 0, "max": 100, "step": 1, "default": 40, "label": "Vertical Position % (Mobile)" },
+                { "type": "header", "content": "Hotspot 5" },
+                { "type": "product", "id": "product_5", "label": "Product" },
+                { "type": "image_picker", "id": "product_image_5", "label": "Custom Product Image" },
+                { "type": "range", "id": "horizontal_position_5", "min": 0, "max": 100, "step": 1, "default": 60, "label": "Horizontal Position % (Desktop)" },
+                { "type": "range", "id": "vertical_position_5", "min": 0, "max": 100, "step": 1, "default": 60, "label": "Vertical Position % (Desktop)" },
+                { "type": "range", "id": "horizontal_position_mobile_5", "min": 0, "max": 100, "step": 1, "default": 60, "label": "Horizontal Position % (Mobile)" },
+                { "type": "range", "id": "vertical_position_mobile_5", "min": 0, "max": 100, "step": 1, "default": 60, "label": "Vertical Position % (Mobile)" },
+                { "type": "header", "content": "Hotspot 6" },
+                { "type": "product", "id": "product_6", "label": "Product" },
+                { "type": "image_picker", "id": "product_image_6", "label": "Custom Product Image" },
+                { "type": "range", "id": "horizontal_position_6", "min": 0, "max": 100, "step": 1, "default": 70, "label": "Horizontal Position % (Desktop)" },
+                { "type": "range", "id": "vertical_position_6", "min": 0, "max": 100, "step": 1, "default": 30, "label": "Vertical Position % (Desktop)" },
+                { "type": "range", "id": "horizontal_position_mobile_6", "min": 0, "max": 100, "step": 1, "default": 70, "label": "Horizontal Position % (Mobile)" },
+                { "type": "range", "id": "vertical_position_mobile_6", "min": 0, "max": 100, "step": 1, "default": 30, "label": "Vertical Position % (Mobile)" },
+                { "type": "header", "content": "Hotspot 7" },
+                { "type": "product", "id": "product_7", "label": "Product" },
+                { "type": "image_picker", "id": "product_image_7", "label": "Custom Product Image" },
+                { "type": "range", "id": "horizontal_position_7", "min": 0, "max": 100, "step": 1, "default": 40, "label": "Horizontal Position % (Desktop)" },
+                { "type": "range", "id": "vertical_position_7", "min": 0, "max": 100, "step": 1, "default": 70, "label": "Vertical Position % (Desktop)" },
+                { "type": "range", "id": "horizontal_position_mobile_7", "min": 0, "max": 100, "step": 1, "default": 40, "label": "Horizontal Position % (Mobile)" },
+                { "type": "range", "id": "vertical_position_mobile_7", "min": 0, "max": 100, "step": 1, "default": 70, "label": "Vertical Position % (Mobile)" },
+                { "type": "header", "content": "Hotspot 8" },
+                { "type": "product", "id": "product_8", "label": "Product" },
+                { "type": "image_picker", "id": "product_image_8", "label": "Custom Product Image" },
+                { "type": "range", "id": "horizontal_position_8", "min": 0, "max": 100, "step": 1, "default": 25, "label": "Horizontal Position % (Desktop)" },
+                { "type": "range", "id": "vertical_position_8", "min": 0, "max": 100, "step": 1, "default": 55, "label": "Vertical Position % (Desktop)" },
+                { "type": "range", "id": "horizontal_position_mobile_8", "min": 0, "max": 100, "step": 1, "default": 25, "label": "Horizontal Position % (Mobile)" },
+                { "type": "range", "id": "vertical_position_mobile_8", "min": 0, "max": 100, "step": 1, "default": 55, "label": "Vertical Position % (Mobile)" },
+                { "type": "header", "content": "Hotspot 9" },
+                { "type": "product", "id": "product_9", "label": "Product" },
+                { "type": "image_picker", "id": "product_image_9", "label": "Custom Product Image" },
+                { "type": "range", "id": "horizontal_position_9", "min": 0, "max": 100, "step": 1, "default": 65, "label": "Horizontal Position % (Desktop)" },
+                { "type": "range", "id": "vertical_position_9", "min": 0, "max": 100, "step": 1, "default": 45, "label": "Vertical Position % (Desktop)" },
+                { "type": "range", "id": "horizontal_position_mobile_9", "min": 0, "max": 100, "step": 1, "default": 65, "label": "Horizontal Position % (Mobile)" },
+                { "type": "range", "id": "vertical_position_mobile_9", "min": 0, "max": 100, "step": 1, "default": 45, "label": "Vertical Position % (Mobile)" },
+                { "type": "header", "content": "Hotspot 10" },
+                { "type": "product", "id": "product_10", "label": "Product" },
+                { "type": "image_picker", "id": "product_image_10", "label": "Custom Product Image" },
+                { "type": "range", "id": "horizontal_position_10", "min": 0, "max": 100, "step": 1, "default": 85, "label": "Horizontal Position % (Desktop)" },
+                { "type": "range", "id": "vertical_position_10", "min": 0, "max": 100, "step": 1, "default": 65, "label": "Vertical Position % (Desktop)" },
+                { "type": "range", "id": "horizontal_position_mobile_10", "min": 0, "max": 100, "step": 1, "default": 85, "label": "Horizontal Position % (Mobile)" },
+                { "type": "range", "id": "vertical_position_mobile_10", "min": 0, "max": 100, "step": 1, "default": 65, "label": "Vertical Position % (Mobile)" }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Room Layout Hotspot",
+            "blocks": [
+                { "type": "product" },
+                { "type": "product" }
+            ]
+        }
+    ]
+}
+{% endschema %}

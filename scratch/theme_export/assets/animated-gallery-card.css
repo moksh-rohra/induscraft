@@ -1,0 +1,184 @@
+/* ==========================================================================
+   Animated Gallery Card - CSS
+   ========================================================================== */
+
+.gallery-card-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background-color: var(--bg-color, #111111);
+    color: var(--text-color, #FFFFFF);
+}
+
+.gallery-card__wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+/* ==========================================================================
+   Images Container
+   ========================================================================== */
+
+.gallery-card__images {
+    position: relative;
+    display: flex;
+    gap: 0;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery-card__image-card {
+    position: relative;
+    flex: 1;
+    height: 100%;
+    aspect-ratio: 2/3;
+    border-radius: 0;
+    overflow: hidden;
+    will-change: transform;
+}
+
+.gallery-card__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ==========================================================================
+   Content Container (Hidden Initially)
+   ========================================================================== */
+
+.gallery-card__content {
+    position: absolute;
+    left: 80px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40%;
+    max-width: 500px;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 10;
+}
+
+.gallery-card__heading {
+    font-size: clamp(32px, 4vw, 56px);
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: 24px;
+    color: currentColor;
+}
+
+.gallery-card__text {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 32px;
+    opacity: 0.8;
+}
+
+/* Button styles are handled by theme classes (btn, btn--primary, etc.) */
+.gallery-card__btn-override {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.gallery-card__btn-override:hover {
+    transform: translateY(-2px);
+}
+
+/* Fallback/Custom Circle Style if not in theme */
+.btn--circle {
+    border-radius: 50px;
+    padding-left: 32px;
+    padding-right: 32px;
+}
+
+/* ==========================================================================
+   Mobile Styles
+   ========================================================================== */
+
+@media screen and (max-width: 768px) {
+    .gallery-card-section {
+        height: auto;
+        padding: 60px 20px;
+        background-color: var(--scrolled-bg-color, #FFFFFF);
+        color: #111111;
+    }
+
+    .gallery-card__wrapper {
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+    }
+
+    /* Content comes first on mobile */
+    .gallery-card__content {
+        position: relative;
+        left: auto;
+        top: auto;
+        transform: none;
+        width: 100%;
+        max-width: none;
+        opacity: 1;
+        visibility: visible;
+        display: flex;
+        flex-direction: column;
+        order: 1;
+        margin-bottom: 40px;
+    }
+
+    /* Reorder content children: heading (1), button (2), text (3) */
+    .gallery-card__heading {
+        order: 1;
+        margin-bottom: 20px;
+    }
+
+    .gallery-card__content .button-new,
+    .gallery-card__content .button-circle {
+        order: 2;
+        align-self: flex-start;
+        margin-bottom: 20px;
+    }
+
+    .gallery-card__text {
+        order: 3;
+        margin-bottom: 0;
+    }
+
+    /* Images come after content */
+    .gallery-card__images {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        height: auto;
+        order: 2;
+    }
+
+    .gallery-card__image-card {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 1/1;
+        border-radius: 20px;
+    }
+
+    /* First two images side by side */
+    .gallery-card__image-card.card-1,
+    .gallery-card__image-card.card-2 {
+        grid-column: span 1;
+    }
+
+    /* Third image full width */
+    .gallery-card__image-card.card-3 {
+        grid-column: span 2;
+        aspect-ratio: 16/9;
+    }
+}

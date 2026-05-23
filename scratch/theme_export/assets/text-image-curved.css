@@ -1,0 +1,171 @@
+/* ==========================================================================
+   Curved Text Image Section - CSS
+   ========================================================================== */
+
+.text-image-curved {
+    position: relative;
+    width: 100%;
+    /* Margins */
+    margin-top: var(--margin-top-desktop, 0px);
+    margin-bottom: var(--margin-bottom-desktop, 0px);
+    background-color: var(--section-bg-color, transparent);
+    color: var(--section-text-color, inherit);
+    overflow: hidden;
+}
+
+.text-image-curved__wrapper {
+    display: flex;
+    flex-direction: row;
+    /* Default desktop */
+    align-items: var(--vertical-alignment, center);
+    justify-content: space-between;
+    gap: 40px;
+    max-width: 100%;
+    /* Or use theme constant */
+    margin: 0 auto;
+    padding: var(--padding-vertical-desktop, 60px) var(--text-horizontal-padding, 40px);
+    width: 100%;
+}
+
+.text-image-curved__wrapper.layout--image-left {
+    flex-direction: row-reverse;
+}
+
+/* Content Column */
+.text-image-curved__content {
+    flex: 0 0 var(--content-width, 50%);
+    max-width: var(--content-width, 50%);
+    min-width: 0;
+    /* Prevent flex overflow */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.text-image-curved__heading {
+    font-size: var(--heading-size-desktop, 64px) !important;
+    line-height: 1.1;
+    font-weight: 400;
+    /* Base weight */
+    margin-bottom: 24px;
+}
+
+/* Rich Text Styling Support inside Heading */
+.text-image-curved__heading em,
+.text-image-curved__heading i {
+    font-family: var(--font-heading-serif, serif);
+    /* Use theme serif font if available */
+    font-style: italic;
+    font-weight: 400;
+}
+
+.text-image-curved__heading strong,
+.text-image-curved__heading b {
+    font-weight: 700;
+}
+
+.text-image-curved__text {
+    font-size: var(--text-size-desktop, 16px) !important;
+    line-height: 1.6;
+    margin-bottom: 24px;
+}
+
+/* Image Column */
+.text-image-curved__image-container {
+    flex: 0 0 var(--image-column-width, 50%);
+    max-width: var(--image-column-width, 50%);
+    position: relative;
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: flex-end;
+    /* Default (Image Right) -> Align End */
+}
+
+.text-image-curved__wrapper.layout--image-left .text-image-curved__image-container {
+    justify-content: flex-start;
+    /* Image Left -> Align Start */
+}
+
+.text-image-curved__image {
+    width: var(--image-width, 100%);
+    height: auto;
+    object-fit: cover;
+    display: block;
+    max-height: 700px;
+
+    /* Curve Logic - Defaults */
+    border-radius: 0;
+}
+
+/* Curve Styles */
+.curve--bottom-left {
+    border-bottom-left-radius: var(--curve-radius, 200px);
+}
+
+.curve--bottom-right {
+    border-bottom-right-radius: var(--curve-radius, 200px);
+}
+
+.curve--top-left {
+    border-top-left-radius: var(--curve-radius, 200px);
+}
+
+.curve--top-right {
+    border-top-right-radius: var(--curve-radius, 200px);
+}
+
+.curve--all {
+    border-radius: var(--curve-radius, 200px);
+}
+
+/* Mobile */
+@media screen and (max-width: 768px) {
+    .text-image-curved {
+        margin-top: var(--margin-top-mobile, 0px);
+        margin-bottom: var(--margin-bottom-mobile, 0px);
+    }
+
+    .text-image-curved__wrapper {
+        flex-direction: column !important;
+        align-items: center;
+        /* Reset vertical alignment for mobile stack */
+        /* Always stack on mobile */
+        padding: var(--padding-vertical-mobile, 40px) var(--text-horizontal-padding-mobile, 20px) !important;
+        gap: 30px;
+    }
+
+    .text-image-curved__heading {
+        font-size: var(--heading-size-mobile, 36px) !important;
+        order: 1;
+        margin-bottom: 24px;
+    }
+
+    .text-image-curved__btn-wrapper {
+        order: 2;
+        margin-top: 0;
+        margin-bottom: 24px;
+    }
+
+    .text-image-curved__text {
+        font-size: var(--text-size-mobile, 16px) !important;
+        order: 3;
+        margin-bottom: 0;
+    }
+
+    /* Mobile Image adjustments */
+    .text-image-curved__image {
+        max-height: 400px;
+    }
+
+    /* Reset flex width for mobile */
+    .text-image-curved__content,
+    .text-image-curved__image-container {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    .text-image-curved__wrapper.layout--image-right {
+        gap: 0px;
+    }
+}

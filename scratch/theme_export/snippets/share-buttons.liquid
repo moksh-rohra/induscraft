@@ -1,0 +1,65 @@
+{% comment %}
+------------------------------------------------------------------------------
+  Snippet: Share buttons
+  ----------------------
+  Used on PDP
+------------------------------------------------------------------------------
+{% endcomment %}
+<div class="{% if design == 'alternate' %}product-share-buttons-new{% else %}product-share-buttons{% endif %}">
+	<span class="product-share-buttons__label {% if design == 'standard' %}text{% endif %}">
+		{{- 'products.product.share_label' | t -}}
+	</span>
+
+	<input id="share-input-{{ section.id }}" class="is-hidden" type="text" value="{{ shop.url | append: product.url }}">
+
+	{% comment %}Share Button{% endcomment %}
+	{%- if section.settings.share_show_share_icon -%}
+	<a href="#"
+	   class="button-social js-social-share"
+	   data-share-title="{{ product.title | escape }}"
+	   data-share-url="{{ shop.url | append: product.url }}"
+	   data-input-fallback="share-input-{{ section.id }}"
+	   aria-label="{{ 'general.social.share_button' | t }}"
+	>
+		<span class="tooltip js-share-tooltip">{{ 'general.social.share_success' | t }}</span>
+		{% render 'icons-social', icon: "share" %}
+	</a>
+	{%- endif -%}
+
+	{% comment %}Facebook{% endcomment %}
+	{%- if section.settings.share_show_facebook -%}
+		{% render 'share-button', social: "facebook", product: product %}
+	{%- endif -%}
+
+	{% comment %}Twitter{% endcomment %}
+	{%- if section.settings.share_show_twitter -%}
+		{% render 'share-button', social: "twitter", product: product %}
+	{%- endif -%}
+
+	{% comment %}Instagram - Uses Web Share API{% endcomment %}
+	{%- if section.settings.share_show_instagram -%}
+	<a href="#"
+	   class="button-social js-social-share"
+	   data-share-title="{{ product.title | escape }}"
+	   data-share-url="{{ shop.url | append: product.url }}"
+	   data-input-fallback="share-input-{{ section.id }}"
+	   aria-label="Share on Instagram"
+	>
+		{% render 'icons-social', icon: "instagram" %}
+	</a>
+	{%- endif -%}
+
+	{%- if section.settings.share_show_whatsapp -%}
+	{%- assign whatsapp_product_url = shop.url | append: product.url | url_encode -%}
+    {%- assign whatsapp_url = 'https://api.whatsapp.com/send?text=' | append: whatsapp_product_url -%}
+	<a href="{{ whatsapp_url }}" 
+	   class="button-social" 
+	   target="_blank" 
+	   rel="noopener" 
+	   aria-label="WhatsApp"
+	>
+		{% render 'icons-social', icon: "whatsapp" %}
+	</a>
+	{%- endif -%}
+</div>
+

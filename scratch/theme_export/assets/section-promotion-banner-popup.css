@@ -1,0 +1,410 @@
+/* =============================================================================
+   Promotion Banner Popup Modal
+   Premium popup with liquid glass gradient effect
+   ============================================================================= */
+
+/* Overlay Backdrop */
+.promo-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: var(--layer-pop-out, 999);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: var(--promo-overlay-bg, rgba(0, 0, 0, 0.6));
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.promo-popup-overlay.is-active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Modal Container */
+.promo-popup {
+    position: relative;
+    display: flex;
+    width: 100%;
+    max-width: var(--promo-max-width, 680px);
+    min-height: var(--promo-height-mobile, 400px);
+    border-radius: var(--promo-border-radius, 16px);
+    overflow: hidden;
+    background-color: var(--promo-bg-color, #f5f5f5);
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.25), 0 10px 30px rgba(0, 0, 0, 0.15);
+    transform: translateY(30px) scale(0.95);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.promo-popup-overlay.is-active .promo-popup {
+    transform: translateY(0) scale(1);
+}
+
+/* Background Image Container */
+.promo-popup__bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+}
+
+.promo-popup__bg picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+.promo-popup__bg-placeholder {
+    width: 100%;
+    height: 100%;
+}
+
+.promo-popup__bg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--promo-img-position, center);
+}
+
+.promo-popup__bg-image--mobile {
+    display: block;
+}
+
+.promo-popup__bg-image--desktop {
+    display: block;
+}
+
+/* Liquid Glass Gradient Overlay - Matches Parallax Video Section pattern */
+.promo-popup__glass {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: var(--promo-glass-width, 65%);
+    z-index: 2;
+
+    /* Glassmorphism effect */
+    backdrop-filter: blur(var(--promo-glass-blur, 16px));
+    -webkit-backdrop-filter: blur(var(--promo-glass-blur, 16px));
+
+    /* Gradient background - solid on left, fading to transparent on right */
+    background: linear-gradient(to right,
+            rgba(var(--promo-glass-color-rgb, 255, 255, 255), var(--promo-glass-opacity, 0.8)) 0%,
+            rgba(var(--promo-glass-color-rgb, 255, 255, 255), calc(var(--promo-glass-opacity, 0.8) * 0.7)) 30%,
+            rgba(var(--promo-glass-color-rgb, 255, 255, 255), calc(var(--promo-glass-opacity, 0.8) * 0.4)) 60%,
+            rgba(var(--promo-glass-color-rgb, 255, 255, 255), 0) 100%);
+
+    /* Subtle inner glow for premium feel */
+    box-shadow: inset 0 0 60px rgba(var(--promo-glass-color-rgb, 255, 255, 255), 0.1);
+
+    /* Subtle border for definition */
+    border-right: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Content Area */
+.promo-popup__content {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: var(--promo-content-width, 60%);
+    padding: var(--promo-content-padding-mobile, 30px 25px);
+    color: var(--promo-text-color, #1a1a1a);
+}
+
+/* Pre-heading / Label */
+.promo-popup__label {
+    margin-bottom: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--promo-label-color, #666);
+}
+
+/* Main Heading */
+.promo-popup__heading {
+    margin: 0 0 12px 0;
+    font-family: var(--heading-font-family, inherit);
+    font-size: var(--promo-heading-size-mobile, 28px);
+    font-weight: var(--promo-heading-weight, 800);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--promo-heading-color, #000);
+}
+
+/* Subheading / Description */
+.promo-popup__description {
+    margin: 0 0 20px 0;
+    font-size: var(--promo-desc-size-mobile, 14px);
+    line-height: 1.6;
+    color: var(--promo-text-color, #444);
+}
+
+/* Highlight text within description */
+.promo-popup__description strong,
+.promo-popup__description b {
+    font-weight: 700;
+    color: var(--promo-heading-color, #000);
+}
+
+/* CTA Button - Uses theme's button-new styles */
+.promo-popup__button {
+    margin-top: 8px;
+}
+
+/* Close Button */
+.promo-popup__close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background-color: var(--promo-close-bg, rgba(255, 255, 255, 0.9));
+    color: var(--promo-close-color, #333);
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.promo-popup__close:hover {
+    background-color: var(--promo-close-bg-hover, #fff);
+    transform: rotate(90deg) scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.promo-popup__close:focus-visible {
+    outline: 2px solid var(--promo-close-color, #333);
+    outline-offset: 2px;
+}
+
+.promo-popup__close svg {
+    width: 14px;
+    height: 14px;
+    stroke-width: 2.5;
+}
+
+/* Discount Badge (optional) */
+.promo-popup__badge {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 16px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--promo-badge-text, #fff);
+    background: var(--promo-badge-bg, linear-gradient(135deg, #ff6b6b, #ee5a24));
+}
+
+/* =========================================================================
+   Desktop Styles (min-width: 768px)
+   ========================================================================= */
+@media (min-width: 768px) {
+    .promo-popup {
+        min-height: var(--promo-height-desktop, 420px);
+        max-width: var(--promo-max-width, 720px);
+    }
+
+    .promo-popup__bg-image--mobile {
+        display: none;
+    }
+
+    .promo-popup__bg-image--desktop {
+        display: block;
+    }
+
+    .promo-popup__glass {
+        width: var(--promo-glass-width, 60%);
+    }
+
+    .promo-popup__content {
+        padding: var(--promo-content-padding-desktop, 50px 45px);
+        width: var(--promo-content-width, 55%);
+    }
+
+    .promo-popup__label {
+        font-size: 12px;
+        margin-bottom: 10px;
+    }
+
+    .promo-popup__heading {
+        font-size: var(--promo-heading-size-desktop, 36px);
+        margin-bottom: 14px;
+    }
+
+    .promo-popup__description {
+        font-size: var(--promo-desc-size-desktop, 15px);
+        margin-bottom: 24px;
+    }
+
+    .promo-popup__close {
+        top: 16px;
+        right: 16px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .promo-popup__close svg {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+/* =========================================================================
+   Large Desktop Styles (min-width: 1200px)
+   ========================================================================= */
+@media (min-width: 1200px) {
+    .promo-popup {
+        max-width: var(--promo-max-width, 780px);
+        min-height: var(--promo-height-desktop, 450px);
+    }
+
+    .promo-popup__content {
+        padding: var(--promo-content-padding-desktop, 55px 50px);
+    }
+
+    .promo-popup__heading {
+        font-size: var(--promo-heading-size-desktop, 42px);
+    }
+
+    .promo-popup__description {
+        font-size: var(--promo-desc-size-desktop, 16px);
+    }
+}
+
+/* =========================================================================
+   Mobile Styles (max-width: 480px)
+   ========================================================================= */
+@media (max-width: 480px) {
+    .promo-popup-overlay {
+        padding: 15px;
+    }
+
+    .promo-popup {
+        min-height: var(--promo-height-mobile, 380px);
+        border-radius: 12px;
+        flex-direction: column;
+    }
+
+    /* Glass effect from top to bottom on mobile */
+    .promo-popup__glass {
+        width: 100%;
+        height: var(--promo-glass-height-mobile, 70%);
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: auto;
+
+        /* Gradient from top to bottom */
+        background: linear-gradient(to bottom,
+                rgba(var(--promo-glass-color-rgb, 255, 255, 255), var(--promo-glass-opacity, 0.8)) 0%,
+                rgba(var(--promo-glass-color-rgb, 255, 255, 255), calc(var(--promo-glass-opacity, 0.8) * 0.7)) 40%,
+                rgba(var(--promo-glass-color-rgb, 255, 255, 255), calc(var(--promo-glass-opacity, 0.8) * 0.3)) 70%,
+                rgba(var(--promo-glass-color-rgb, 255, 255, 255), 0) 100%);
+
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .promo-popup__content {
+        width: 100%;
+        padding: 25px 20px;
+        justify-content: flex-start;
+        padding-top: 40px;
+    }
+
+    .promo-popup__heading {
+        font-size: var(--promo-heading-size-mobile, 24px);
+    }
+
+    .promo-popup__description {
+        font-size: 13px;
+    }
+
+    .promo-popup__button {
+        padding: 12px 24px;
+        font-size: 12px;
+        min-width: 140px;
+    }
+
+    .promo-popup__close {
+        top: 10px;
+        right: 10px;
+        width: 32px;
+        height: 32px;
+    }
+}
+
+/* =========================================================================
+   Animation Keyframes
+   ========================================================================= */
+@keyframes promoPopupFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes promoPopupPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 25px 80px rgba(0, 0, 0, 0.25), 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    50% {
+        box-shadow: 0 30px 90px rgba(0, 0, 0, 0.3), 0 15px 40px rgba(0, 0, 0, 0.2);
+    }
+}
+
+/* =========================================================================
+   Accessibility: Reduced Motion
+   ========================================================================= */
+@media (prefers-reduced-motion: reduce) {
+
+    .promo-popup-overlay,
+    .promo-popup,
+    .promo-popup__button,
+    .promo-popup__close {
+        transition: none;
+    }
+
+    .promo-popup__close:hover {
+        transform: none;
+    }
+
+    .promo-popup__button:hover {
+        transform: none;
+    }
+}
+
+/* =========================================================================
+   Print Styles
+   ========================================================================= */
+@media print {
+    .promo-popup-overlay {
+        display: none !important;
+    }
+}

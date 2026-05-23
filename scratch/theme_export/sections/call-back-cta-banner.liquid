@@ -1,0 +1,759 @@
+{%- comment -%}
+------------------------------------------------------------------------------
+	Section: Call-Back CTA Banner
+	A customizable CTA banner with gradient background and dual buttons
+	Includes a callback request popup form
+------------------------------------------------------------------------------
+{%- endcomment -%}
+
+{%- assign heading = section.settings.heading -%}
+{%- assign description = section.settings.description -%}
+{%- assign background = section.settings.background -%}
+{%- assign background_image = section.settings.background_image -%}
+{%- assign overlay_color = section.settings.overlay_color -%}
+{%- assign overlay_opacity = section.settings.overlay_opacity -%}
+{%- assign text_color = section.settings.text_color -%}
+{%- assign border_radius = section.settings.border_radius -%}
+{%- assign full_width = section.settings.full_width -%}
+{%- assign enable_popup = section.settings.enable_popup -%}
+
+{%- assign button_1_label = section.settings.button_1_label -%}
+{%- assign button_1_link = section.settings.button_1_link -%}
+{%- assign button_1_style = section.settings.button_1_style -%}
+
+{%- assign button_2_label = section.settings.button_2_label -%}
+{%- assign button_2_link = section.settings.button_2_link -%}
+{%- assign button_2_style = section.settings.button_2_style -%}
+
+{%- assign popup_heading = section.settings.popup_heading -%}
+{%- assign popup_description = section.settings.popup_description -%}
+{%- assign popup_submit_label = section.settings.popup_submit_label -%}
+
+<style>
+	#call-back-cta-{{ section.id }} {
+		padding: {{ section.settings.offset_top_mobile }}px 20px {{ section.settings.offset_bottom_mobile }}px;
+	}
+
+	@media (min-width: 768px) {
+		#call-back-cta-{{ section.id }} {
+			padding: {{ section.settings.offset_top_desktop }}px 60px {{ section.settings.offset_bottom_desktop }}px;
+		}
+	}
+
+	.cta-banner {
+		position: relative;
+		overflow: hidden;
+		{%- if background_image != blank -%}
+			background-image: url({{ background_image | image_url: width: 2000 }});
+			background-size: cover;
+			background-position: center;
+			background-repeat: no-repeat;
+		{%- else -%}
+			background: {{ background }};
+		{%- endif -%}
+		border-radius: {{ border_radius }}px;
+		padding: 40px 30px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 30px;
+		flex-wrap: wrap;
+		{% unless full_width %}
+		max-width: var(--global-container-width, 1440px);
+		margin: 0 auto;
+		{% endunless %}
+	}
+
+	{%- if background_image != blank and overlay_opacity > 0 -%}
+	.cta-banner::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: {{ overlay_color }};
+		opacity: {{ overlay_opacity | divided_by: 100.0 }};
+		z-index: 1;
+		pointer-events: none;
+	}
+	{%- endif -%}
+
+	@media (min-width: 768px) {
+		.cta-banner {
+			padding: 50px 60px;
+			flex-wrap: nowrap;
+		}
+	}
+
+	.cta-banner__content {
+		position: relative;
+		z-index: 2;
+		flex: 1;
+		color: {{ text_color }};
+	}
+
+
+	.cta-banner__heading {
+		font-family: var(--heading-font-family);
+		font-size: 28px;
+		font-weight: var(--heading-font-weight, 600);
+		line-height: 1.2;
+		margin: 0 0 10px 0;
+		color: {{ text_color }};
+	}
+
+	@media (min-width: 768px) {
+		.cta-banner__heading {
+			font-size: 36px;
+		}
+	}
+
+	.cta-banner__description {
+		font-size: 16px;
+		line-height: 1.5;
+		margin: 0;
+		opacity: 0.9;
+		color: {{ text_color }};
+	}
+
+	.cta-banner__buttons {
+		position: relative;
+		z-index: 2;
+		display: flex;
+		gap: 15px;
+		flex-wrap: wrap;
+		flex-shrink: 0;
+	}
+
+	@media (max-width: 767px) {
+		.cta-banner__buttons {
+			width: 100%;
+		}
+	}
+
+	/* Override primary button background to transparent */
+	#call-back-cta-{{ section.id }} .button--primary {
+		background-color: transparent;
+	}
+
+	/* Callback Popup Modal Styles */
+	.callback-popup-overlay {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, 0.6);
+		z-index: 9999;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		opacity: 0;
+		visibility: hidden;
+		transition: opacity 0.3s ease, visibility 0.3s ease;
+		padding: 20px;
+	}
+
+	.callback-popup-overlay.is-open {
+		opacity: 1;
+		visibility: visible;
+	}
+
+	.callback-popup {
+		background: #ffffff;
+		border-radius: 16px;
+		max-width: 480px;
+		width: 100%;
+		padding: 40px 30px;
+		position: relative;
+		transform: translateY(20px);
+		transition: transform 0.3s ease;
+		box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+	}
+
+	.callback-popup-overlay.is-open .callback-popup {
+		transform: translateY(0);
+	}
+
+	.callback-popup__close {
+		position: absolute;
+		top: 16px;
+		right: 16px;
+		width: 40px;
+		height: 40px;
+		border: none;
+		background: #f5f5f5;
+		border-radius: 50%;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		transition: background 0.2s ease;
+	}
+
+	.callback-popup__close:hover {
+		background: #eaeaea;
+	}
+
+	.callback-popup__close svg {
+		width: 18px;
+		height: 18px;
+		stroke: #333;
+	}
+
+	.callback-popup__heading {
+		font-family: var(--heading-font-family);
+		font-size: 24px;
+		font-weight: 600;
+		margin: 0 0 8px 0;
+		color: #2C2A28;
+	}
+
+	.callback-popup__description {
+		font-size: 15px;
+		color: #666;
+		margin: 0 0 24px 0;
+		line-height: 1.5;
+	}
+
+	.callback-form__group {
+		margin-bottom: 16px;
+	}
+
+	.callback-form__label {
+		display: block;
+		font-size: 14px;
+		font-weight: 500;
+		color: #333;
+		margin-bottom: 6px;
+	}
+
+	.callback-form__input {
+		width: 100%;
+		padding: 14px 16px;
+		border: 1px solid #ddd;
+		border-radius: 8px;
+		font-size: 15px;
+		transition: border-color 0.2s ease, box-shadow 0.2s ease;
+		background: #fafafa;
+	}
+
+	.callback-form__input:focus {
+		outline: none;
+		border-color: var(--color-primary, #8B7355);
+		box-shadow: 0 0 0 3px rgba(139, 115, 85, 0.1);
+		background: #fff;
+	}
+
+	.callback-form__input::placeholder {
+		color: #999;
+	}
+
+	.callback-form__row {
+		display: flex;
+		gap: 12px;
+	}
+
+	.callback-form__row .callback-form__group {
+		flex: 1;
+	}
+
+	.callback-form__submit {
+		width: 100%;
+		padding: 16px 24px;
+		background: var(--color-primary, #8B7355);
+		color: #fff;
+		border: none;
+		border-radius: 8px;
+		font-size: 16px;
+		font-weight: 600;
+		cursor: pointer;
+		transition: background 0.2s ease, transform 0.2s ease;
+		margin-top: 8px;
+	}
+
+	.callback-form__submit:hover {
+		background: var(--color-primary-hover, #7a6349);
+		transform: translateY(-1px);
+	}
+
+	.callback-form__submit:active {
+		transform: translateY(0);
+	}
+
+	/* Success message */
+	.callback-form__success {
+		text-align: center;
+		padding: 20px 0;
+	}
+
+	.callback-form__success-icon {
+		width: 60px;
+		height: 60px;
+		background: #e8f5e9;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0 auto 16px;
+	}
+
+	.callback-form__success-icon svg {
+		width: 30px;
+		height: 30px;
+		stroke: #4caf50;
+	}
+
+	.callback-form__success-heading {
+		font-size: 20px;
+		font-weight: 600;
+		color: #2C2A28;
+		margin: 0 0 8px 0;
+	}
+
+	.callback-form__success-text {
+		font-size: 15px;
+		color: #666;
+		margin: 0;
+	}
+
+	@media (max-width: 480px) {
+		.callback-form__row {
+			flex-direction: column;
+			gap: 0;
+		}
+
+		.callback-popup {
+			padding: 30px 20px;
+		}
+	}
+</style>
+
+<section id="call-back-cta-{{ section.id }}">
+	<div class="cta-banner">
+		<div class="cta-banner__content">
+			{%- if heading != blank -%}
+				<h2 class="cta-banner__heading">{{ heading }}</h2>
+			{%- endif -%}
+			
+			{%- if description != blank -%}
+				<p class="cta-banner__description">{{ description }}</p>
+			{%- endif -%}
+		</div>
+
+		<div class="cta-banner__buttons">
+			{%- if button_1_label != blank -%}
+				{%- if enable_popup -%}
+					{%- if button_1_style == 'circle' -%}
+						<button type="button" class="button-circle js-callback-popup-trigger" aria-label="{{ button_1_label }}">
+							<span class="button__text">{{ button_1_label }}</span>
+							<span class="button-new__icon-container">
+								<span class="button-new__icon-wrapper">
+									{% render 'icons-new', icon: 'arrow-right' %}
+								</span>
+							</span>
+						</button>
+					{%- else -%}
+						<button type="button" class="button-new button--{{ button_1_style }} js-callback-popup-trigger">
+							{{ button_1_label }}
+						</button>
+					{%- endif -%}
+				{%- elsif button_1_link != blank -%}
+					{%- if button_1_style == 'circle' -%}
+						<a href="{{ button_1_link }}" class="button-circle" aria-label="{{ button_1_label }}">
+							<span class="button__text">{{ button_1_label }}</span>
+							<span class="button-new__icon-container">
+								<span class="button-new__icon-wrapper">
+									{% render 'icons-new', icon: 'arrow-right' %}
+								</span>
+							</span>
+						</a>
+					{%- else -%}
+						<a href="{{ button_1_link }}" class="button-new button--{{ button_1_style }}">
+							{{ button_1_label }}
+						</a>
+					{%- endif -%}
+				{%- endif -%}
+			{%- endif -%}
+
+			{%- if button_2_label != blank and button_2_link != blank -%}
+				{%- if button_2_style == 'circle' -%}
+					<a href="{{ button_2_link }}" class="button-circle" aria-label="{{ button_2_label }}">
+						<span class="button__text">{{ button_2_label }}</span>
+						<span class="button-new__icon-container">
+							<span class="button-new__icon-wrapper">
+								{% render 'icons-new', icon: 'arrow-right' %}
+							</span>
+						</span>
+					</a>
+				{%- else -%}
+					<a href="{{ button_2_link }}" class="button-new button--{{ button_2_style }}">
+						{{ button_2_label }}
+					</a>
+				{%- endif -%}
+			{%- endif -%}
+		</div>
+	</div>
+
+	{%- if enable_popup -%}
+		<!-- Callback Request Popup Modal -->
+		<div class="callback-popup-overlay js-callback-popup-overlay" id="callback-popup-{{ section.id }}">
+			<div class="callback-popup">
+				<button type="button" class="callback-popup__close js-callback-popup-close" aria-label="Close popup">
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+					</svg>
+				</button>
+
+				<div class="callback-popup__content js-callback-form-content">
+					{%- if popup_heading != blank -%}
+						<h3 class="callback-popup__heading">{{ popup_heading }}</h3>
+					{%- endif -%}
+					
+					{%- if popup_description != blank -%}
+						<p class="callback-popup__description">{{ popup_description }}</p>
+					{%- endif -%}
+
+					{%- form 'contact', class: 'callback-form' -%}
+						<input type="hidden" name="contact[tags]" value="callback-request">
+						
+						<div class="callback-form__row">
+							<div class="callback-form__group">
+								<label class="callback-form__label" for="callback-first-name-{{ section.id }}">First Name *</label>
+								<input 
+									type="text" 
+									id="callback-first-name-{{ section.id }}"
+									name="contact[first_name]" 
+									class="callback-form__input" 
+									placeholder="Enter your first name"
+									required
+								>
+							</div>
+							<div class="callback-form__group">
+								<label class="callback-form__label" for="callback-last-name-{{ section.id }}">Last Name *</label>
+								<input 
+									type="text" 
+									id="callback-last-name-{{ section.id }}"
+									name="contact[last_name]" 
+									class="callback-form__input" 
+									placeholder="Enter your last name"
+									required
+								>
+							</div>
+						</div>
+
+						<div class="callback-form__row">
+							<div class="callback-form__group">
+								<label class="callback-form__label" for="callback-email-{{ section.id }}">Email *</label>
+								<input 
+									type="email" 
+									id="callback-email-{{ section.id }}"
+									name="contact[email]" 
+									class="callback-form__input" 
+									placeholder="Enter your email"
+									required
+								>
+							</div>
+
+							<div class="callback-form__group">
+								<label class="callback-form__label" for="callback-phone-{{ section.id }}">Phone Number *</label>
+								<input 
+									type="tel" 
+									id="callback-phone-{{ section.id }}"
+									name="contact[phone]" 
+									class="callback-form__input" 
+									placeholder="Enter your phone"
+									required
+								>
+							</div>
+						</div>
+
+						<button type="submit" class="callback-form__submit">
+							{{ popup_submit_label | default: 'Submit Request' }}
+						</button>
+					{%- endform -%}
+				</div>
+
+				<!-- Success Message (hidden by default, shown after form submission) -->
+				<div class="callback-form__success js-callback-success" style="display: none;">
+					<div class="callback-form__success-icon">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+						</svg>
+					</div>
+					<h4 class="callback-form__success-heading">Thank You!</h4>
+					<p class="callback-form__success-text">We've received your request and will call you back soon.</p>
+				</div>
+			</div>
+		</div>
+
+		<script>
+			(function() {
+				const section = document.getElementById('call-back-cta-{{ section.id }}');
+				const trigger = section.querySelector('.js-callback-popup-trigger');
+				const overlay = document.getElementById('callback-popup-{{ section.id }}');
+				const closeBtn = overlay.querySelector('.js-callback-popup-close');
+				const formContent = overlay.querySelector('.js-callback-form-content');
+				const successMessage = overlay.querySelector('.js-callback-success');
+
+				function openPopup() {
+					overlay.classList.add('is-open');
+					document.body.style.overflow = 'hidden';
+				}
+
+				function closePopup() {
+					overlay.classList.remove('is-open');
+					document.body.style.overflow = '';
+				}
+
+				if (trigger) {
+					trigger.addEventListener('click', openPopup);
+				}
+
+				if (closeBtn) {
+					closeBtn.addEventListener('click', closePopup);
+				}
+
+				overlay.addEventListener('click', function(e) {
+					if (e.target === overlay) {
+						closePopup();
+					}
+				});
+
+				document.addEventListener('keydown', function(e) {
+					if (e.key === 'Escape' && overlay.classList.contains('is-open')) {
+						closePopup();
+					}
+				});
+
+				// Check if form was submitted successfully (Shopify redirects with #contact_form)
+				if (window.location.hash === '#contact_form' || window.location.search.includes('form_type=contact')) {
+					// Show success state
+					openPopup();
+					if (formContent) formContent.style.display = 'none';
+					if (successMessage) successMessage.style.display = 'block';
+					
+					// Auto-close after 4 seconds
+					setTimeout(function() {
+						closePopup();
+						if (formContent) formContent.style.display = 'block';
+						if (successMessage) successMessage.style.display = 'none';
+						// Clean up URL
+						history.replaceState(null, '', window.location.pathname);
+					}, 4000);
+				}
+			})();
+		</script>
+	{%- endif -%}
+</section>
+
+{% schema %}
+{
+	"name": "Call-Back CTA Banner",
+	"settings": [
+		{
+			"type": "header",
+			"content": "Content"
+		},
+		{
+			"type": "text",
+			"id": "heading",
+			"label": "Heading",
+			"default": "Connect with us"
+		},
+		{
+			"type": "textarea",
+			"id": "description",
+			"label": "Description",
+			"default": "Contact us with any query or any idea."
+		},
+		{
+			"type": "header",
+			"content": "Primary Button"
+		},
+		{
+			"type": "text",
+			"id": "button_1_label",
+			"label": "Button label",
+			"default": "Request a Call Back"
+		},
+		{
+			"type": "checkbox",
+			"id": "enable_popup",
+			"label": "Open callback popup on click",
+			"default": true,
+			"info": "When enabled, clicking the primary button opens a callback form popup instead of navigating to a link"
+		},
+		{
+			"type": "url",
+			"id": "button_1_link",
+			"label": "Button link",
+			"info": "Only used if popup is disabled"
+		},
+		{
+			"type": "select",
+			"id": "button_1_style",
+			"label": "Button style",
+			"options": [
+				{ "value": "primary", "label": "Primary" },
+				{ "value": "secondary", "label": "Secondary" },
+				{ "value": "circle", "label": "Circle" }
+			],
+			"default": "primary"
+		},
+		{
+			"type": "header",
+			"content": "Callback Popup"
+		},
+		{
+			"type": "text",
+			"id": "popup_heading",
+			"label": "Popup heading",
+			"default": "Request a Call Back"
+		},
+		{
+			"type": "textarea",
+			"id": "popup_description",
+			"label": "Popup description",
+			"default": "Fill in your details and we'll get in touch with you shortly."
+		},
+		{
+			"type": "text",
+			"id": "popup_submit_label",
+			"label": "Submit button label",
+			"default": "Submit Request"
+		},
+		{
+			"type": "header",
+			"content": "Secondary Button"
+		},
+		{
+			"type": "text",
+			"id": "button_2_label",
+			"label": "Button label"
+		},
+		{
+			"type": "url",
+			"id": "button_2_link",
+			"label": "Button link"
+		},
+		{
+			"type": "select",
+			"id": "button_2_style",
+			"label": "Button style",
+			"options": [
+				{ "value": "primary", "label": "Primary" },
+				{ "value": "secondary", "label": "Secondary" },
+				{ "value": "circle", "label": "Circle" }
+			],
+			"default": "secondary"
+		},
+		{
+			"type": "header",
+			"content": "Design"
+		},
+		{
+			"type": "color_background",
+			"id": "background",
+			"label": "Background",
+			"default": "linear-gradient(135deg, #8B5CF6, #6D28D9)",
+			"info": "Choose a solid color or custom gradient"
+		},
+		{
+			"type": "image_picker",
+			"id": "background_image",
+			"label": "Background image",
+			"info": "Overrides background color if set"
+		},
+		{
+			"type": "color",
+			"id": "overlay_color",
+			"label": "Image overlay color",
+			"default": "#000000"
+		},
+		{
+			"type": "range",
+			"id": "overlay_opacity",
+			"min": 0,
+			"max": 100,
+			"step": 1,
+			"unit": "%",
+			"label": "Image overlay opacity",
+			"default": 30
+		},
+		{
+			"type": "color",
+			"id": "text_color",
+			"label": "Text color",
+			"default": "#FFFFFF"
+		},
+		{
+			"type": "range",
+			"id": "border_radius",
+			"min": 0,
+			"max": 50,
+			"step": 2,
+			"unit": "px",
+			"label": "Border radius",
+			"default": 20
+		},
+		{
+			"type": "checkbox",
+			"id": "full_width",
+			"label": "Make full width",
+			"default": false,
+			"info": "If unchecked, uses container max-width"
+		},
+		{
+			"type": "header",
+			"content": "Spacing"
+		},
+		{
+			"type": "range",
+			"id": "offset_top_desktop",
+			"min": 0,
+			"max": 100,
+			"step": 5,
+			"unit": "px",
+			"label": "Desktop padding top",
+			"default": 50
+		},
+		{
+			"type": "range",
+			"id": "offset_bottom_desktop",
+			"min": 0,
+			"max": 100,
+			"step": 5,
+			"unit": "px",
+			"label": "Desktop padding bottom",
+			"default": 50
+		},
+		{
+			"type": "range",
+			"id": "offset_top_mobile",
+			"min": 0,
+			"max": 100,
+			"step": 5,
+			"unit": "px",
+			"label": "Mobile padding top",
+			"default": 30
+		},
+		{
+			"type": "range",
+			"id": "offset_bottom_mobile",
+			"min": 0,
+			"max": 100,
+			"step": 5,
+			"unit": "px",
+			"label": "Mobile padding bottom",
+			"default": 30
+		}
+	],
+	"presets": [
+		{
+			"name": "Call-Back CTA Banner"
+		}
+	]
+}
+{% endschema %}

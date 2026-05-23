@@ -1,0 +1,269 @@
+/* ==========================================================================
+   Custom Footer Section - CSS
+   ========================================================================== */
+
+.custom-footer {
+    background-color: var(--footer-bg-color, #F4F4F0);
+    color: var(--footer-text-color, #1A1A1A);
+    padding-top: var(--footer-padding-top, 80px);
+    padding-bottom: var(--footer-padding-bottom, 40px);
+    width: 100%;
+    font-family: var(--font-body-family);
+    overflow: hidden;
+}
+
+.custom-footer__container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    /* Using flex column for the main stack */
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+}
+
+/* --- Top Row: Contact & Links --- */
+.custom-footer__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 60px;
+    gap: 40px;
+}
+
+/* Contact Column (Left) */
+.custom-footer__contact {
+    flex: 1;
+    max-width: 700px;
+}
+
+.custom-footer__heading {
+    font-size: var(--contact-heading-size, 14px);
+    font-weight: 500;
+    margin-bottom: 24px;
+    display: block;
+    color: inherit;
+    opacity: 0.8;
+}
+
+.custom-footer__email,
+.custom-footer__phone {
+    display: block;
+    font-weight: 400;
+    margin-bottom: 12px;
+    line-height: 1.2;
+    color: inherit;
+    text-decoration: none;
+}
+
+.custom-footer__email {
+    font-size: var(--contact-email-size, 24px);
+}
+
+.custom-footer__phone {
+    font-size: var(--contact-phone-size, 24px);
+}
+
+.custom-footer__address {
+    margin-top: 24px;
+    font-size: var(--contact-address-size, 16px);
+    opacity: 0.8;
+    line-height: 1.5;
+}
+
+.custom-footer__address p {
+    margin: 0;
+}
+
+/* Links Columns (Right) */
+.custom-footer__links-wrapper {
+    display: flex;
+    gap: 80px;
+}
+
+.custom-footer__menu-column {
+    min-width: 160px;
+}
+
+.custom-footer__menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.custom-footer__menu-item {
+    margin-bottom: 12px;
+}
+
+.custom-footer__menu-link {
+    text-decoration: none;
+    color: inherit;
+    font-size: 16px;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.custom-footer__menu-link:hover {
+    opacity: 1;
+}
+
+/* --- Middle Row: Big Logo --- */
+.custom-footer__middle {
+    width: 100%;
+    margin-bottom: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Massive Text Logo */
+.custom-footer__big-logo {
+    display: block;
+    width: 100%;
+    /* Uses conditional variable from Liquid - either vw or px */
+    font-size: var(--logo-font-size-desktop, 11.4vw) !important;
+    line-height: 0.85;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    text-align: left;
+    margin: 0;
+    color: var(--logo-text-color, #1A1A1A);
+    white-space: nowrap;
+    /* Prevent text from wrapping to next line */
+    overflow: visible;
+    /* Allow text to be visible */
+}
+
+.custom-footer__logo-image {
+    width: var(--logo-image-width, 300px);
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+
+/* --- Bottom Row: Utility & Copyright --- */
+.custom-footer__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 30px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.custom-footer__copyright {
+    font-size: 14px;
+    opacity: 0.6;
+}
+
+.custom-footer__socials {
+    display: flex;
+    gap: 15px;
+}
+
+.social-icon-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-icon-circle:hover {
+    background-color: currentColor;
+    color: var(--footer-bg-color, #F4F4F0);
+}
+
+.social-icon-circle svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+}
+
+/* Mobile Responsiveness */
+@media screen and (max-width: 900px) {
+    .custom-footer__container {
+        padding: 0 20px;
+    }
+
+    .custom-footer__top {
+        flex-direction: column;
+        gap: 50px;
+    }
+
+    .custom-footer__links-wrapper {
+        width: 100%;
+        justify-content: space-between;
+        gap: 30px;
+        flex-wrap: wrap;
+        /* Allow wrapping on very small screens */
+    }
+
+    .custom-footer__bottom {
+        flex-direction: column-reverse;
+        /* Copyright on bottom */
+        gap: 20px;
+        align-items: flex-start;
+    }
+
+    .custom-footer__socials {
+        width: 100%;
+        justify-content: flex-start;
+        /* Align left on mobile */
+    }
+}
+
+/* Extra small screens */
+@media screen and (max-width: 450px) {
+    .custom-footer__container {
+        padding: 0 10px;
+    }
+}
+
+/* --- Intro Section --- */
+.custom-footer__intro {
+    width: 100%;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.custom-footer__intro-subheading {
+    font-size: 14px;
+    opacity: 0.6;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.custom-footer__intro-heading {
+    font-size: var(--intro-heading-size, 36px);
+    font-weight: 500;
+    margin: 0;
+    line-height: 1.2;
+    max-width: 600px;
+}
+
+.custom-footer__intro-description {
+    font-size: var(--intro-description-size, 16px);
+    opacity: 0.8;
+    max-width: 700px;
+    line-height: 1.5;
+}
+
+.custom-footer__intro-description p {
+    margin: 0;
+}
+
+@media screen and (max-width: 900px) {
+    .custom-footer__intro-heading {
+        font-size: 28px;
+    }
+}

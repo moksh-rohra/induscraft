@@ -1,0 +1,276 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "default-page": {
+      "type": "default-page-template",
+      "disabled": true,
+      "settings": {
+        "offset_top_desktop": 60,
+        "offset_bottom_desktop": 60,
+        "offset_top_mobile": 30,
+        "offset_bottom_mobile": 30
+      }
+    },
+    "spaces_hero_qjmHnf": {
+      "type": "spaces-hero",
+      "blocks": {
+        "hotspot_HPLcj3": {
+          "type": "hotspot",
+          "settings": {
+            "product": "antilia-sheesham-6-seater-dining-set",
+            "horizontal_position": 28,
+            "vertical_position": 65,
+            "horizontal_position_mobile": 28,
+            "vertical_position_mobile": 65,
+            "card_position": "auto"
+          }
+        },
+        "hotspot_BTRt6t": {
+          "type": "hotspot",
+          "settings": {
+            "product": "antilia-sheesham-coffee-table-with-2-stools",
+            "horizontal_position": 39,
+            "vertical_position": 75,
+            "horizontal_position_mobile": 39,
+            "vertical_position_mobile": 75,
+            "card_position": "bottom"
+          }
+        },
+        "hotspot_kkFaV8": {
+          "type": "hotspot",
+          "settings": {
+            "product": "aeron-sheesham-coffee-table-with-glass-top",
+            "horizontal_position": 90,
+            "vertical_position": 70,
+            "horizontal_position_mobile": 90,
+            "vertical_position_mobile": 70,
+            "card_position": "bottom"
+          }
+        }
+      },
+      "block_order": [
+        "hotspot_HPLcj3",
+        "hotspot_BTRt6t",
+        "hotspot_kkFaV8"
+      ],
+      "name": "Spaces Hero",
+      "settings": {
+        "background_image": "shopify://shop_images/bedroom-sketch.png",
+        "full_height": true,
+        "desktop_height": 80,
+        "mobile_height": 250,
+        "hotspot_background": "#808080b3",
+        "hotspot_dot_color": "#ffffff",
+        "hotspot_size_desktop": 32,
+        "hotspot_size_mobile": 28,
+        "always_show_cards": true,
+        "always_show_cards_mobile": false,
+        "offset_top_desktop": 0,
+        "offset_bottom_desktop": 60,
+        "offset_top_mobile": 0,
+        "offset_bottom_mobile": 40
+      }
+    },
+    "product_list_GABwrg": {
+      "type": "product-list",
+      "name": "Product List",
+      "settings": {
+        "heading": "Used Products",
+        "heading_font_size_desktop": 32,
+        "heading_font_size_mobile": 24,
+        "heading_color": "#000000",
+        "button_text": "View All",
+        "button_link": "shopify://collections",
+        "button_aria_label": "",
+        "button_style": "primary",
+        "product_list": [
+          "aeron-sheesham-coffee-table-with-glass-top",
+          "aeron-small-square-sheesham-coffee-table",
+          "amethyst-solid-wood-classic-bench",
+          "amora-chair-by-induscraft-in-solid-sheesham-wood",
+          "antilia-sheesham-6-seater-dining-set",
+          "antilia-sheesham-coffee-table-with-2-stools",
+          "antilia-sheesham-coffee-table-with-4-stools",
+          "antilia-sheesham-rectangular-dining-table"
+        ],
+        "card_design": "alternate",
+        "arrow_bg_color": "#ffffff",
+        "arrow_hover_bg_color": "#f0f0f0",
+        "arrow_color": "#000000",
+        "max_width": 1400,
+        "padding_top_desktop": 40,
+        "padding_bottom_desktop": 40,
+        "padding_top_mobile": 24,
+        "padding_bottom_mobile": 24
+      }
+    },
+    "big_stagger_text_Qgby3C": {
+      "type": "big-stagger-text",
+      "blocks": {
+        "text_block_jgq6Ne": {
+          "type": "text_block",
+          "settings": {
+            "text": "Built for Real-World Living",
+            "text_color": "#333333",
+            "font_size_d": 35,
+            "font_size_m": 20,
+            "use_theme_font": false,
+            "text_align": "center",
+            "is_bold": false
+          }
+        }
+      },
+      "block_order": [
+        "text_block_jgq6Ne"
+      ],
+      "name": "Big Stagger Text",
+      "settings": {
+        "bg_color": "rgba(0,0,0,0)",
+        "padding_top_d": 30,
+        "padding_bottom_d": 0,
+        "padding_top_m": 0,
+        "padding_bottom_m": 0
+      }
+    },
+    "text_section_nQTC6G": {
+      "type": "text-section",
+      "custom_css": [
+        "{background-color: #00ff0000;}"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "heading": "",
+        "subheading": "",
+        "text_content": "<p>See how Induscraft transforms large spaces into thoughtful environments through end-to-end furnishing, material precision, and execution excellence.</p>",
+        "text_alignment": "center",
+        "section_alignment": "center",
+        "enable_read_more": false,
+        "read_more_text": "Read more",
+        "show_less_text": "Show less",
+        "full_width": false,
+        "offset_top_desktop": 0,
+        "offset_bottom_desktop": 20,
+        "offset_top_mobile": 0,
+        "offset_bottom_mobile": 20
+      }
+    },
+    "spaces_gallery_VaUgpH": {
+      "type": "spaces-gallery",
+      "blocks": {
+        "gallery_slide_e6ThWY": {
+          "type": "gallery_slide",
+          "settings": {
+            "image": "shopify://shop_images/zangerolame.jpg",
+            "title": "",
+            "link": ""
+          }
+        },
+        "gallery_slide_FfAiWC": {
+          "type": "gallery_slide",
+          "settings": {
+            "image": "shopify://shop_images/storiesofdesign.jpg",
+            "title": "",
+            "link": ""
+          }
+        },
+        "gallery_slide_4yTx3V": {
+          "type": "gallery_slide",
+          "settings": {
+            "image": "shopify://shop_images/mike-van.jpg",
+            "title": "",
+            "link": ""
+          }
+        },
+        "gallery_slide_4KqPXT": {
+          "type": "gallery_slide",
+          "settings": {
+            "image": "shopify://shop_images/bedroom.jpg",
+            "title": "",
+            "link": ""
+          }
+        },
+        "gallery_slide_EHnpUX": {
+          "type": "gallery_slide",
+          "settings": {
+            "image": "shopify://shop_images/1_8e5bec79-7f0b-4e6f-9727-40f7e92bd905.png",
+            "title": "",
+            "link": ""
+          }
+        },
+        "gallery_slide_FyjFBV": {
+          "type": "gallery_slide",
+          "settings": {
+            "image": "shopify://shop_images/tima.jpg",
+            "title": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "gallery_slide_e6ThWY",
+        "gallery_slide_FfAiWC",
+        "gallery_slide_4yTx3V",
+        "gallery_slide_4KqPXT",
+        "gallery_slide_EHnpUX",
+        "gallery_slide_FyjFBV"
+      ],
+      "name": "Spaces Gallery",
+      "settings": {
+        "bg_color": "rgba(0,0,0,0)",
+        "desktop_height": 700,
+        "mobile_height": 400,
+        "image_border_radius": 20,
+        "animation_duration": 600,
+        "padding_top_desktop": 50,
+        "padding_bottom_desktop": 100,
+        "padding_top_mobile": 30,
+        "padding_bottom_mobile": 50
+      }
+    },
+    "spaces_cta_bVQNqq": {
+      "type": "spaces-cta",
+      "custom_css": [
+        "{margin-bottom: 100px;}"
+      ],
+      "name": "Spaces CTA",
+      "settings": {
+        "image": "shopify://shop_images/Shelby_Sofa.png",
+        "overlay_opacity": 40,
+        "content_max_width": 800,
+        "heading": "Want to get your Own Space Designed?",
+        "heading_size_desktop": 48,
+        "heading_size_mobile": 20,
+        "use_bristone_font": true,
+        "btn_label": "Book a Consultation",
+        "btn_link": "",
+        "button_type": "secondary",
+        "desktop_height": 700,
+        "section_max_width": 90,
+        "border_radius": 20,
+        "mobile_height": 400,
+        "padding_top_desktop": 0,
+        "padding_bottom_desktop": 0,
+        "padding_top_mobile": 0,
+        "padding_bottom_mobile": 0,
+        "text_color": "#ffffff"
+      }
+    }
+  },
+  "order": [
+    "default-page",
+    "spaces_hero_qjmHnf",
+    "product_list_GABwrg",
+    "big_stagger_text_Qgby3C",
+    "text_section_nQTC6G",
+    "spaces_gallery_VaUgpH",
+    "spaces_cta_bVQNqq"
+  ]
+}

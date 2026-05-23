@@ -1,0 +1,353 @@
+{{ 'b2b-about.css' | asset_url | stylesheet_tag }}
+
+<section 
+  id="b2b-about-{{ section.id }}" 
+  class="b2b-about" 
+  data-section-id="{{ section.id }}"
+  style="
+    --bg-color: {{ section.settings.bg_color }};
+    --subheading-size: {{ section.settings.subheading_size }}px;
+    --subheading-size-m: {{ section.settings.subheading_size_mobile }}px;
+    --heading-size: {{ section.settings.heading_size }}px;
+    --heading-size-m: {{ section.settings.heading_size_mobile }}px;
+    --subheading-color-reveal: {{ section.settings.subheading_color_reveal }};
+    --subheading-color-washed: {{ section.settings.subheading_color_washed }};
+    --heading-color-reveal: {{ section.settings.heading_color_reveal }};
+    --heading-color-washed: {{ section.settings.heading_color_washed }};
+    
+    --pt-d: {{ section.settings.padding_top_d }}px;
+    --pb-d: {{ section.settings.padding_bottom_d }}px;
+    --pl-d: {{ section.settings.padding_left_d }}px;
+    --pr-d: {{ section.settings.padding_right_d }}px;
+    --mt-d: {{ section.settings.margin_top_d }}px;
+    --mb-d: {{ section.settings.margin_bottom_d }}px;
+    --ml-d: {{ section.settings.margin_left_d }}px;
+    --mr-d: {{ section.settings.margin_right_d }}px;
+
+    --pt-m: {{ section.settings.padding_top_m }}px;
+    --pb-m: {{ section.settings.padding_bottom_m }}px;
+    --pl-m: {{ section.settings.padding_left_m }}px;
+    --pr-m: {{ section.settings.padding_right_m }}px;
+    --mt-m: {{ section.settings.margin_top_m }}px;
+    --mb-m: {{ section.settings.margin_bottom_m }}px;
+    --ml-m: {{ section.settings.margin_left_m }}px;
+    --mr-m: {{ section.settings.margin_right_m }}px;
+  "
+>
+  <div class="b2b-about__container">
+    <div class="b2b-about__left">
+      <div class="b2b-about__subheading-wrapper">
+        <div class="b2b-about__icon-box">
+           <div class="b2b-about__icon b2b-about__icon--base"></div>
+           <div class="b2b-about__icon b2b-about__icon--reveal js-b2b-icon-reveal"></div>
+        </div>
+        <div class="b2b-about__subheading js-b2b-subheading">
+          {{ section.settings.subheading }}
+        </div>
+      </div>
+    </div>
+    
+    <div class="b2b-about__right">
+      <div class="b2b-about__heading js-b2b-heading">
+        {{ section.settings.heading }}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Load GSAP and ScrollTrigger -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+<script>
+  (function() {
+    const sectionId = '{{ section.id }}';
+    const sectionSelector = `#b2b-about-${sectionId}`;
+
+    function initB2BAboutAnimation() {
+      // Ensure GSAP is loaded
+      if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+        // Poll for it slightly effectively than just giving up? 
+        // Or wait for window load if deferred.
+        // Let's just create a simple retry mechanism
+        setTimeout(initB2BAboutAnimation, 50);
+        return;
+      }
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      const section = document.querySelector(sectionSelector);
+      if (!section) return;
+
+      const subheading = section.querySelector('.js-b2b-subheading');
+      const iconReveal = section.querySelector('.js-b2b-icon-reveal');
+      const headingContainer = section.querySelector('.js-b2b-heading');
+
+      // Helper: Split text into lines with a "reveal layer"
+      function prepareTextForReveal(element, revealColorVar, baseColorVar) {
+        if (!element) return [];
+        
+        // 1. Wrap words to calculate lines
+        const words = element.innerText.split(' ').map(word => `<span style="display:inline-block;">${word}</span>`);
+        element.innerHTML = words.join(' ');
+        
+        const children = Array.from(element.children);
+        const lines = {};
+        
+        // Group by Offset Top
+        children.forEach(span => {
+          const top = span.offsetTop;
+          if (!lines[top]) lines[top] = [];
+          lines[top].push(span.innerText);
+        });
+
+        // 2. Rebuild HTML with line wrappers and reveal layers
+        let newHTML = '';
+        Object.keys(lines).sort((a,b) => a - b).forEach(top => {
+          const lineText = lines[top].join(' '); // Add space back
+          // Use inline style for specific colors on the reveal layer and base layer
+          newHTML += `
+            <div class="b2b-line-wrapper">
+              <span class="b2b-line-inner" style="color: var(${baseColorVar})">
+                ${lineText}
+                <span class="b2b-reveal-layer" style="color: var(${revealColorVar})">${lineText}</span>
+              </span>
+            </div>`;
+        });
+        
+        element.innerHTML = newHTML;
+        return element.querySelectorAll('.b2b-reveal-layer');
+      }
+
+      // Prepare Subheading
+      // For subheading, user said "reveal from left to right on subheading". 
+      // It might be single line or multi line. Treating it as standard text.
+      // But let's wrap it in a line wrapper too for consistency if it's multiline.
+      const subheadingReveals = prepareTextForReveal(subheading, '--subheading-color-reveal', '--subheading-color-washed');
+
+      // Prepare Heading
+      // Note: Heading might be inside a <p> tag from RTE.
+      let headingTextEl = headingContainer.querySelector('p') || headingContainer;
+      const headingReveals = prepareTextForReveal(headingTextEl, '--heading-color-reveal', '--heading-color-washed');
+
+      // Animation Timeline
+      const pinDuration = {{ section.settings.pin_duration | default: 100 }};
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: "top top", 
+          end: `+=${pinDuration}%`, // Use dynamic duration
+          scrub: 1,
+          pin: true, // Enable pinning
+          refreshPriority: 1, // Higher priority - calculate this first before dependent sections
+          invalidateOnRefresh: true,
+          // markers: true, // debug
+        }
+      });
+
+      // 0. Icon Reveal
+      if (iconReveal) {
+         tl.to(iconReveal, {
+           clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+           duration: 0.5,
+           ease: "none"
+         });
+      }
+
+      // 1. Subheading Reveal (Left to Right)
+      if (subheadingReveals.length > 0) {
+        tl.to(subheadingReveals, {
+          clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+          duration: 1,
+          stagger: 0.1,
+          ease: "none"
+        }, "<"); // Insert at start (roughly same time as icon or slightly after? "<" means start of previous animate, which is icon. Let's run them together or slight stagger)
+        // Actually, user said "reveal... subheading". Icon is part of subheading.
+        // Let's chain them tightly.
+      }
+
+      // 2. Heading Reveal (Line by Line, Left to Right)
+      if (headingReveals.length > 0) {
+        tl.to(headingReveals, {
+          clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+          duration: 1, // Per line duration in the scrub timeline
+          stagger: 1, // Sequential: Line N finishes (duration 1) before Line N+1 starts
+          ease: "none"
+        }, "+=0.2"); // Slight delay after subheading
+      }
+    }
+
+    // Initialize on load and theme editor changes
+    // We do NOT add a global shopify:section:load listener here because this script is 
+    // re-executed every time the section re-renders in the editor. Adding a listener would accumulate duplicates.
+    // Instead, we just run the init function immediately.
+    
+    // Check if already initialized on this specific element instance
+    const sectionEl = document.querySelector(sectionSelector);
+    if (sectionEl && !sectionEl.hasAttribute('data-anim-initialized')) {
+      sectionEl.setAttribute('data-anim-initialized', 'true');
+      
+      initB2BAboutAnimation();
+    } else if (sectionEl) {
+       // Already initialized
+    } else {
+        // Wait for DOM
+        if (document.readyState === 'loading') {
+             document.addEventListener('DOMContentLoaded', initB2BAboutAnimation);
+        } else {
+             initB2BAboutAnimation();
+        }
+    }
+
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "B2B About",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "ABOUT INDUSCRAFT"
+    },
+    {
+      "type": "range",
+      "id": "subheading_size",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Subheading Size (Desktop)",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "subheading_size_mobile",
+      "min": 8,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Subheading Size (Mobile)",
+      "default": 12
+    },
+    {
+      "type": "richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "<p>At Induscraft, we craft timeless furniture rooted in tradition and designed for modern living. Every piece reflects thoughtful design, skilled craftsmanship, and a deep respect for natural materials.</p>"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 20,
+      "max": 100,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size (Desktop)",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "min": 16,
+      "max": 60,
+      "step": 1,
+      "unit": "px",
+      "label": "Heading Size (Mobile)",
+      "default": 32
+    },
+    {
+      "type": "header",
+      "content": "Animtion Settings"
+    },
+    {
+      "type": "range",
+      "id": "pin_duration",
+      "min": 50,
+      "max": 300,
+      "step": 10,
+      "unit": "%",
+      "label": "Pin Duration",
+      "default": 100,
+      "info": "How long the section stays pinned while scrolling (percentage of viewport height)"
+    },
+    {
+      "type": "header",
+      "content": "Colors: Background"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#F5F5F0"
+    },
+    {
+      "type": "header",
+      "content": "Colors: Subheading"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color_reveal",
+      "label": "Subheading: Revealed Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color_washed",
+      "label": "Subheading: Washed Out Color",
+      "default": "rgba(0,0,0, 0.1)"
+    },
+    {
+      "type": "header",
+      "content": "Colors: Heading"
+    },
+    {
+      "type": "color",
+      "id": "heading_color_reveal",
+      "label": "Heading: Revealed Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "heading_color_washed",
+      "label": "Heading: Washed Out Color",
+      "default": "rgba(0,0,0, 0.1)"
+    },
+    {
+      "type": "header",
+      "content": "Spacing (Desktop)"
+    },
+    { "type": "range", "id": "margin_top_d", "min": 0, "max": 200, "step": 5, "unit": "px", "label": "Margin Top", "default": 0 },
+    { "type": "range", "id": "margin_bottom_d", "min": 0, "max": 200, "step": 5, "unit": "px", "label": "Margin Bottom", "default": 0 },
+    { "type": "range", "id": "margin_left_d", "min": 0, "max": 200, "step": 5, "unit": "px", "label": "Margin Left", "default": 0 },
+    { "type": "range", "id": "margin_right_d", "min": 0, "max": 200, "step": 5, "unit": "px", "label": "Margin Right", "default": 0 },
+    { "type": "range", "id": "padding_top_d", "min": 0, "max": 200, "step": 5, "unit": "px", "label": "Padding Top", "default": 80 },
+    { "type": "range", "id": "padding_bottom_d", "min": 0, "max": 200, "step": 5, "unit": "px", "label": "Padding Bottom", "default": 80 },
+    { "type": "range", "id": "padding_left_d", "min": 0, "max": 200, "step": 5, "unit": "px", "label": "Padding Left", "default": 20 },
+    { "type": "range", "id": "padding_right_d", "min": 0, "max": 200, "step": 5, "unit": "px", "label": "Padding Right", "default": 20 },
+    {
+      "type": "header",
+      "content": "Spacing (Mobile)"
+    },
+    { "type": "range", "id": "margin_top_m", "min": 0, "max": 200, "step": 5, "unit": "px", "label": "Margin Top", "default": 0 },
+    { "type": "range", "id": "margin_bottom_m", "min": 0, "max": 200, "step": 5, "unit": "px", "label": "Margin Bottom", "default": 0 },
+    { "type": "range", "id": "margin_left_m", "min": 0, "max": 200, "step": 5, "unit": "px", "label": "Margin Left", "default": 0 },
+    { "type": "range", "id": "margin_right_m", "min": 0, "max": 200, "step": 5, "unit": "px", "label": "Margin Right", "default": 0 },
+    { "type": "range", "id": "padding_top_m", "min": 0, "max": 200, "step": 5, "unit": "px", "label": "Padding Top", "default": 40 },
+    { "type": "range", "id": "padding_bottom_m", "min": 0, "max": 200, "step": 5, "unit": "px", "label": "Padding Bottom", "default": 40 },
+    { "type": "range", "id": "padding_left_m", "min": 0, "max": 200, "step": 5, "unit": "px", "label": "Padding Left", "default": 10 },
+    { "type": "range", "id": "padding_right_m", "min": 0, "max": 200, "step": 5, "unit": "px", "label": "Padding Right", "default": 10 }
+  ],
+  "presets": [
+    {
+      "name": "B2B About"
+    }
+  ]
+}
+{% endschema %}

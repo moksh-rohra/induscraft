@@ -1,0 +1,108 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+    "sections": {
+        "17656089669af44794": {
+            "type": "_blocks",
+            "blocks": {
+                "ai_gen_block_be7bb42_4JaMTP": {
+                    "type": "ai_gen_block_be7bb42",
+                    "settings": {
+                        "main_title": "Discover Luxury",
+                        "main_subtitle": "A curated collection of exclusive oak products",
+                        "header_alignment": "center",
+                        "title_size": 48,
+                        "subtitle_size": 18,
+                        "show_brand_intro": true,
+                        "brand_logo": "shopify://shop_images/Logo.png",
+                        "brand_name": "",
+                        "brand_tagline": "Exclusive Oak Collection",
+                        "brand_description": "<p>Where opulence intertwines with the revered traditions of Japanese craftsmanship. Named after the Japanese word for wood, Moakuzai epitomizes the grandeur and precision of timeless woodwork. Our furniture is meticulously crafted from the finest oakwood, presenting designs that are both understated and spectacular, destined to transform any interior into a sanctuary of elegance.</p>",
+                        "brand_image": "shopify://shop_images/Brand_Discovery_a3356a64-b86d-4352-a2e0-b3d89898c9e6.jpg",
+                        "brand_button_link": "",
+                        "brand_button_text": "Explore Collection",
+                        "brand_bg_color": "#fffcf5",
+                        "brand_text_color": "#2c2c2c",
+                        "show_collection_section": true,
+                        "collection_title": "Yuki Collection",
+                        "collection_subtitle": "The first line of Moakuzai products",
+                        "collection_feature_1_enabled": true,
+                        "collection_feature_1_image": "shopify://shop_images/thestupidkid69_Sleek_solid_wood_bed_with_cream_fabric_and_curve_c1aee5bb-6176-4059-8f4e-c52761bdc8f2.png",
+                        "collection_feature_1_category": "Yuki",
+                        "collection_feature_1_title": "Signature Oak Furniture",
+                        "collection_feature_1_description": "<p>Introducing the Yuki Collection by Moakuzai, inspired by the delicate beauty of snow. Each piece features soft, snow-like edges that curve gracefully, avoiding rigid lines and adding a serene touch. Upholstered in luxurious cream-colored fabric, Yuki offers a perfect blend of simplicity and elegance, transforming any space into a refined sanctuary. Experience the understated beauty of snow with the Yuki Collection.</p>",
+                        "collection_feature_1_link": "shopify://collections/yuki-range",
+                        "collection_feature_1_link_text": "View collection",
+                        "collection_feature_2_enabled": true,
+                        "collection_feature_2_image": "shopify://shop_images/Brand_Discovery_4.jpg",
+                        "collection_feature_2_category": "",
+                        "collection_feature_2_title": "Inspiration",
+                        "collection_feature_2_description": "<p>Furniture pieces are kept to a minimum and usually have simple, clean lines. The colour palette is cream, neutral and focused on natural textures.</p>",
+                        "collection_feature_2_link": "",
+                        "collection_feature_2_link_text": "Explore",
+                        "collection_feature_3_enabled": true,
+                        "collection_feature_3_image": "shopify://shop_images/thestupidkid69_Sleek_and_wooden_TV_Cabinet_with_cream_fabric_at_f1387132-a6ed-406b-ae8a-d770538bc566.png",
+                        "collection_feature_3_category": "Yuki",
+                        "collection_feature_3_title": "TV Cabinet",
+                        "collection_feature_3_description": "<p>The products are exceptional, combining aesthetics with reliability, creating a soothing visual appeal.<br/></p>",
+                        "collection_feature_3_link": "shopify://products/yuki-contemporary-tv-cabinet-with-curved-edges",
+                        "collection_feature_3_link_text": "Buy now",
+                        "collection_feature_4_enabled": true,
+                        "collection_feature_4_image": "shopify://shop_images/thestupidkid69_Sleek_and_wooden_study_table_and_chair_with_crea_7a33be2e-c7e0-452c-af2e-5c6df301db98.png",
+                        "collection_feature_4_category": "Yuki",
+                        "collection_feature_4_title": "Office Desk with Chair",
+                        "collection_feature_4_description": "<p>An office desk with a glamorous and luxurious style, paired with a modern chair that complements the sophisticated ambience set by Yuki furniture.</p>",
+                        "collection_feature_4_link": "shopify://products/yuki-modern-solid-wood-office-desk-and-upholstered-chair",
+                        "collection_feature_4_link_text": "Buy now",
+                        "collection_feature_5_enabled": true,
+                        "collection_feature_5_image": "shopify://shop_images/thestupidkid69_Sleek_and_wooden_full_body_mirror._Round_mirror__e81890e1-a11a-4ba0-8718-e902194dbb90.png",
+                        "collection_feature_5_category": "Yuki",
+                        "collection_feature_5_title": "Mirror",
+                        "collection_feature_5_description": "<p>A stunning mirror with a minimal bezel, providing a distraction-free reflection for<br/>you.<br/></p>",
+                        "collection_feature_5_link": "shopify://products/yuki-modern-full-length-wall-mirror-with-curved-frame",
+                        "collection_feature_5_link_text": "Buy now",
+                        "show_additional_features": false,
+                        "feature_1_enabled": true,
+                        "feature_1_category": "Craftsmanship",
+                        "feature_1_title": "Artisan Quality",
+                        "feature_1_description": "<p>Every piece is crafted with meticulous attention to detail.</p>",
+                        "feature_1_link": "",
+                        "feature_1_link_text": "Learn more",
+                        "feature_2_enabled": true,
+                        "feature_2_category": "Sustainability",
+                        "feature_2_title": "Eco-Friendly Materials",
+                        "feature_2_description": "<p>Sustainably sourced oak for a better tomorrow.</p>",
+                        "feature_2_link": "",
+                        "feature_2_link_text": "Read more",
+                        "max_width": 1400,
+                        "grid_gap": 24,
+                        "border_radius": 8,
+                        "title_color": "#000000",
+                        "subtitle_color": "#666666",
+                        "card_bg_color": "#ffffff",
+                        "text_color": "#000000",
+                        "accent_color": "#8b6f47",
+                        "button_bg_color": "#2c2c2c",
+                        "button_text_color": "#ffffff",
+                        "button_hover_bg_color": "#8b6f47"
+                    },
+                    "blocks": {}
+                }
+            },
+            "block_order": [
+                "ai_gen_block_be7bb42_4JaMTP"
+            ],
+            "settings": {}
+        }
+    },
+    "order": [
+        "17656089669af44794"
+    ]
+}

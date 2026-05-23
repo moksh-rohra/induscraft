@@ -1,0 +1,327 @@
+{%- comment -%}
+  B2B Hero Section
+  ================
+  Features:
+  - Massive Typography (Bristone Reg)
+  - Mixed media grid (Text + Images) 
+  - GSAP Staggered entry animation
+{%- endcomment -%}
+
+{{ 'b2b-hero.css' | asset_url | stylesheet_tag }}
+
+<section 
+  id="b2b-hero-{{ section.id }}" 
+  class="b2b-hero" 
+  data-section-id="{{ section.id }}"
+  style="
+    --bg-color: {{ section.settings.bg_color }};
+    --text-color: {{ section.settings.text_color }};
+    --height-mobile: {{ section.settings.height_mobile }}px;
+  "
+>
+  {%- comment -%} Background Media Layer {%- endcomment -%}
+  <div class="b2b-hero__bg-media">
+    {%- if section.settings.bg_video != blank -%}
+      {{ section.settings.bg_video | video_tag: 
+        autoplay: true, 
+        loop: true, 
+        muted: true, 
+        playsinline: true,
+        class: 'b2b-hero__bg-video'
+      }}
+    {%- elsif section.settings.bg_image != blank -%}
+      {{ section.settings.bg_image | image_url: width: 2000 | image_tag: 
+        loading: 'eager',
+        class: 'b2b-hero__bg-image',
+        sizes: '100vw'
+      }}
+    {%- endif -%}
+    {%- if section.settings.bg_overlay_opacity > 0 -%}
+      <div class="b2b-hero__bg-overlay" style="opacity: {{ section.settings.bg_overlay_opacity | divided_by: 100.0 }};"></div>
+    {%- endif -%}
+  </div>
+  
+  <div class="b2b-hero__container">
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when 'hero_text' -%}
+          {%- assign font_max = block.settings.font_size -%}
+          {%- assign font_mobile = block.settings.font_size_mobile -%}
+          <div class="b2b-hero__item b2b-hero__item--text b2b-animate-text" {{ block.shopify_attributes }} style="--font-size-d: {{ font_max }}px; --font-size-m: {{ font_mobile }}px; --letter-spacing-d: {{ block.settings.letter_spacing }}px; --letter-spacing-m: {{ block.settings.letter_spacing_mobile }}px;">
+            <span class="b2b-hero__word" style="font-weight: {{ block.settings.font_weight }};">{{ block.settings.text }}</span>
+          </div>
+        
+        {%- when 'image' -%}
+          <div class="b2b-hero__item b2b-hero__item--image b2b-animate-image{% if block.settings.hover_reveal %} b2b-hero__item--hover-reveal{% endif %}" style="--image-width: {{ block.settings.image_width }}px; --image-height: {{ block.settings.image_height }}px;" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 1000 | image_tag: 
+                loading: 'eager',
+                class: 'b2b-hero__img',
+                widths: '300, 600, 1000',
+                sizes: '(min-width: 768px) 33vw, 100vw'
+              }}
+              {%- if block.settings.caption_text != blank -%}
+                <div class="b2b-hero__caption">{{ block.settings.caption_text }}</div>
+              {%- endif -%}
+            {%- else -%}
+              {{ 'image' | placeholder_svg_tag: 'b2b-hero__img b2b-hero__img--placeholder' }}
+            {%- endif -%}
+          </div>
+          
+        {%- when 'description' -%}
+          <div class="b2b-hero__item b2b-hero__item--desc b2b-animate-text" {{ block.shopify_attributes }}>
+            <div class="b2b-hero__desc-content">
+              {{ block.settings.description }}
+            </div>
+          </div>
+      {%- endcase -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{%- comment -%} GSAP Integration {%- endcomment -%}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script>
+  (function() {
+    const sectionId = '{{ section.id }}';
+    
+    function initB2BHeroAnimation() {
+      if (typeof gsap === 'undefined') {
+        setTimeout(initB2BHeroAnimation, 100);
+        return;
+      }
+      
+      const section = document.querySelector(`#b2b-hero-${sectionId}`);
+      if (!section) return;
+      
+      // Clear only GSAP animation properties, preserve custom CSS variables
+      const textElements = section.querySelectorAll('.b2b-animate-text');
+      const imageElements = section.querySelectorAll('.b2b-animate-image');
+      gsap.set(textElements, { clearProps: "transform,opacity" });
+      gsap.set(imageElements, { clearProps: "transform,opacity,scale" });
+      
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+      
+      tl.from(textElements, {
+        y: 100,
+        opacity: 0,
+        duration: 1.2,
+        stagger: 0.1
+      })
+      .from(imageElements, {
+        scale: 0.8,
+        opacity: 0,
+        duration: 1.0,
+        stagger: 0.1
+      }, "-=0.8");
+    }
+    
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initB2BHeroAnimation);
+    } else {
+      initB2BHeroAnimation();
+    }
+    
+    document.addEventListener('shopify:section:load', function(e) {
+      if (e.detail.sectionId === sectionId) initB2BHeroAnimation();
+    });
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "B2B Hero",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Background"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color (Fallback)",
+      "default": "#2A2420",
+      "info": "Shows when no image/video is set or while loading"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "video",
+      "id": "bg_video",
+      "label": "Background Video",
+      "info": "Video takes priority over image if both are set"
+    },
+    {
+      "type": "range",
+      "id": "bg_overlay_opacity",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "unit": "%",
+      "label": "Background Overlay Opacity",
+      "default": 40,
+      "info": "Darkens background for better text readability"
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#EFEFEF"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Settings"
+    },
+    {
+      "type": "range",
+      "id": "height_mobile",
+      "min": 300,
+      "max": 800,
+      "step": 20,
+      "unit": "px",
+      "label": "Section Height (Mobile)",
+      "default": 500
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hero_text",
+      "name": "Big Text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Word",
+          "default": "BUILT"
+        },
+        {
+          "type": "range",
+          "id": "letter_spacing",
+          "min": -50,
+          "max": 50,
+          "step": 1,
+          "unit": "px",
+          "label": "Letter Spacing (Desktop)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "letter_spacing_mobile",
+          "min": -30,
+          "max": 30,
+          "step": 1,
+          "unit": "px",
+          "label": "Letter Spacing (Mobile)",
+          "default": 0
+        },
+        {
+          "type": "range",
+          "id": "font_size",
+          "min": 50,
+          "max": 300,
+          "step": 5,
+          "unit": "px",
+          "label": "Font Size (Desktop)",
+          "default": 120
+        },
+        {
+          "type": "range",
+          "id": "font_size_mobile",
+          "min": 30,
+          "max": 150,
+          "step": 5,
+          "unit": "px",
+          "label": "Font Size (Mobile)",
+          "default": 60
+        },
+        {
+          "type": "select",
+          "id": "font_weight",
+          "label": "Font Weight",
+          "options": [
+            { "value": "normal", "label": "Normal" },
+            { "value": "bold", "label": "Bold" }
+          ],
+          "default": "bold"
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "Image Block",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "caption_text",
+          "label": "Overlay / Caption",
+          "default": "INTERIOR"
+        },
+        {
+          "type": "range",
+          "id": "image_width",
+          "min": 100,
+          "max": 600,
+          "step": 10,
+          "unit": "px",
+          "label": "Image Width",
+          "default": 220
+        },
+        {
+          "type": "range",
+          "id": "image_height",
+          "min": 80,
+          "max": 500,
+          "step": 10,
+          "unit": "px",
+          "label": "Image Height",
+          "default": 170
+        },
+        {
+          "type": "checkbox",
+          "id": "hover_reveal",
+          "label": "Reveal Image on Hover",
+          "default": false,
+          "info": "When enabled, only caption shows by default and image reveals on hover"
+        }
+      ]
+    },
+    {
+      "type": "description",
+      "name": "Description Block",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Text",
+          "default": "<p>At INDUSCRAFT we craft architectural experiences...</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "B2B Hero",
+      "blocks": [
+        { "type": "hero_text", "settings": { "text": "BUILT" } },
+        { "type": "hero_text", "settings": { "text": "TO" } },
+        { "type": "image" },
+        { "type": "hero_text", "settings": { "text": "LAST" } },
+        { "type": "hero_text", "settings": { "text": "SINCE" } },
+        { "type": "hero_text", "settings": { "text": "1999" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

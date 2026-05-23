@@ -1,0 +1,275 @@
+{{ 'section-google-map.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    background-color: {{ section.settings.bg_color }};
+  }
+
+  @media screen and (min-width: 768px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .section-{{ section.id }}-padding .gm-container {
+    max-width: {{ section.settings.max_width }}px;
+  }
+
+  .section-{{ section.id }}-padding .gm-map-wrapper {
+    height: {{ section.settings.map_height_mobile }}px;
+    border-radius: {{ section.settings.border_radius }}px;
+  }
+
+  @media screen and (min-width: 768px) {
+    .section-{{ section.id }}-padding .gm-map-wrapper {
+      height: {{ section.settings.map_height }}px;
+    }
+  }
+
+  {%- if section.settings.show_heading -%}
+    .section-{{ section.id }}-padding .gm-heading {
+      font-size: {{ section.settings.heading_size_mobile }}px;
+      color: {{ section.settings.heading_color }};
+    }
+
+    @media screen and (min-width: 768px) {
+      .section-{{ section.id }}-padding .gm-heading {
+        font-size: {{ section.settings.heading_size }}px;
+      }
+    }
+
+    .section-{{ section.id }}-padding .gm-subheading {
+      color: {{ section.settings.subheading_color }};
+    }
+  {%- endif -%}
+{%- endstyle -%}
+
+<div class="google-map-section section-{{ section.id }}-padding">
+  <div class="gm-container">
+    {%- if section.settings.show_heading and section.settings.heading != blank -%}
+      <div class="gm-header">
+        <h2 class="gm-heading">{{ section.settings.heading | escape }}</h2>
+        {%- if section.settings.subheading != blank -%}
+          <p class="gm-subheading">{{ section.settings.subheading | escape }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="gm-map-wrapper">
+      {%- if section.settings.map_embed_url != blank -%}
+        {%- assign map_input = section.settings.map_embed_url -%}
+        
+        {%- comment -%} Extract src URL if user pasted full iframe HTML {%- endcomment -%}
+        {%- if map_input contains 'src="' -%}
+          {%- assign after_src = map_input | split: 'src="' | last -%}
+          {%- assign final_url = after_src | split: '"' | first -%}
+        {%- elsif map_input contains "src='" -%}
+          {%- assign after_src = map_input | split: "src='" | last -%}
+          {%- assign final_url = after_src | split: "'" | first -%}
+        {%- else -%}
+          {%- comment -%} User pasted just the URL directly {%- endcomment -%}
+          {%- assign final_url = map_input -%}
+        {%- endif -%}
+
+        <iframe 
+          class="gm-iframe"
+          src="{{ final_url }}"
+          width="100%"
+          height="100%"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      {%- else -%}
+        <div class="gm-placeholder">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </svg>
+          <p>Add a Google Maps embed URL in the section settings</p>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Google Map",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Map Settings"
+    },
+    {
+      "type": "textarea",
+      "id": "map_embed_url",
+      "label": "Google Maps Embed Code or URL",
+      "info": "Paste the full iframe embed code from Google Maps (Share → Embed a map) OR just the src URL"
+    },
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_heading",
+      "label": "Show Heading",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Visit Our Store"
+    },
+    {
+      "type": "range",
+      "id": "heading_size",
+      "min": 20,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size (Desktop)",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "heading_size_mobile",
+      "min": 18,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Heading Size (Mobile)",
+      "default": 28
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Find us at our showroom location"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "min": 600,
+      "max": 1600,
+      "step": 20,
+      "unit": "px",
+      "label": "Maximum Width",
+      "default": 1200
+    },
+    {
+      "type": "range",
+      "id": "map_height",
+      "min": 200,
+      "max": 800,
+      "step": 20,
+      "unit": "px",
+      "label": "Map Height (Desktop)",
+      "default": 460
+    },
+    {
+      "type": "range",
+      "id": "map_height_mobile",
+      "min": 200,
+      "max": 500,
+      "step": 20,
+      "unit": "px",
+      "label": "Map Height (Mobile)",
+      "default": 300
+    },
+    {
+      "type": "range",
+      "id": "border_radius",
+      "min": 0,
+      "max": 32,
+      "step": 2,
+      "unit": "px",
+      "label": "Border Radius",
+      "default": 12
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading Color",
+      "default": "#1a1a1a"
+    },
+    {
+      "type": "color",
+      "id": "subheading_color",
+      "label": "Subheading Color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding (Desktop)",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding (Desktop)",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding (Mobile)",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 80,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding (Mobile)",
+      "default": 40
+    }
+  ],
+  "presets": [
+    {
+      "name": "Google Map"
+    }
+  ]
+}
+{% endschema %}

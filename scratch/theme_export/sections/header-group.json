@@ -1,0 +1,417 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "header",
+  "name": "Header group",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "text_slide_gfWeLy": {
+          "type": "text_slide",
+          "settings": {
+            "slider_layout": "simple_text",
+            "text_slider_desktop": "<p>25% Off Site Wide</p>",
+            "text_slider_mobile": "",
+            "text_slider_timer_desktop": "Set the date for the timer",
+            "text_slider_timer_mobile": "",
+            "slider_timer_month": "0",
+            "slider_timer_day": "1",
+            "slider_timer_hour": "0",
+            "slider_timer_timezone": "+0",
+            "slider_button_text": "Shop now",
+            "slider_button_link": ""
+          }
+        },
+        "text_slide_tpXp9q": {
+          "type": "text_slide",
+          "settings": {
+            "slider_layout": "simple_text",
+            "text_slider_desktop": "<p>FREE SHIPPING ON ORDER OVER 5000RS</p>",
+            "text_slider_mobile": "",
+            "text_slider_timer_desktop": "Set the date for the timer",
+            "text_slider_timer_mobile": "",
+            "slider_timer_month": "0",
+            "slider_timer_day": "1",
+            "slider_timer_hour": "0",
+            "slider_timer_timezone": "+0",
+            "slider_button_text": "Shop now",
+            "slider_button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "text_slide_gfWeLy",
+        "text_slide_tpXp9q"
+      ],
+      "disabled": true,
+      "settings": {
+        "enable_autoplay": true,
+        "autoplay_speed": 5,
+        "show_announcement_bar": true,
+        "layout": "simple_text",
+        "background_image_type": "cover",
+        "show_bottom_border": true,
+        "show_socials": false,
+        "additional_menu": "",
+        "text_content_desktop": "<p>Announcement bar text</p>",
+        "text_content_mobile": "",
+        "text_desktop": "Set the date for the timer",
+        "text_mobile": "",
+        "timer_month": "0",
+        "timer_day": "1",
+        "timer_hour": "0",
+        "timer_timezone": "+0",
+        "button_text": "Shop now",
+        "button_link": "",
+        "background_color": "#24412b",
+        "background_overlay": "",
+        "border_bottom_color": "#e6e6e6",
+        "text_color": "#ffffff",
+        "link_color": "#000000",
+        "button_color": "#ffffff",
+        "button_background": "#000000",
+        "button_border": "#000000",
+        "button_cross_color": "#ffffff",
+        "button_color_hover": "#000000",
+        "button_background_hover": "#757575",
+        "button_border_hover": "#757575",
+        "button_cross_hover": "#757575",
+        "social_icon_color": "#000000",
+        "social_icon_color_hover": "#727272"
+      }
+    },
+    "ticker_bar_LUxRpx": {
+      "type": "ticker-bar",
+      "blocks": {
+        "announcement_Y6qijz": {
+          "type": "announcement",
+          "settings": {
+            "text": "Sign-up to newsletter to get 10%",
+            "link": "",
+            "icon": "dot"
+          }
+        },
+        "announcement_EDDjja": {
+          "type": "announcement",
+          "settings": {
+            "text": "New Arrivals Just Dropped!",
+            "link": "shopify://collections/new-arrivals",
+            "icon": "dot"
+          }
+        },
+        "announcement_KEyBPC": {
+          "type": "announcement",
+          "settings": {
+            "text": "Use code WELCOME10 for 10% off",
+            "link": "",
+            "icon": "dot"
+          }
+        }
+      },
+      "block_order": [
+        "announcement_Y6qijz",
+        "announcement_EDDjja",
+        "announcement_KEyBPC"
+      ],
+      "name": "Ticker Bar",
+      "settings": {
+        "speed": 140,
+        "direction": "left",
+        "pause_on_hover": true,
+        "background_color": "#d33636",
+        "text_color": "#ffffff",
+        "gap": 40,
+        "padding_vertical": 12,
+        "font_size": 14,
+        "font_weight": 500
+      }
+    },
+    "header": {
+      "type": "header",
+      "blocks": {
+        "megamenu_V3jCHh": {
+          "type": "megamenu",
+          "settings": {
+            "menu_handle": "shop",
+            "menu_type": "list",
+            "badge_text": "",
+            "badge_text_color": "#ffffff",
+            "badge_background_color": "#cc0000",
+            "image": "shopify://shop_images/aira.jpg",
+            "label": "",
+            "heading": "",
+            "link": "",
+            "link_label": "",
+            "media_rounded_corners": true,
+            "product1": "",
+            "label2": "",
+            "heading2": "",
+            "link2": "",
+            "link_label2": "",
+            "media_rounded_corners2": false,
+            "product2": ""
+          }
+        },
+        "icon_menu_YTQYWt": {
+          "type": "icon_menu",
+          "settings": {
+            "menu_handle": "rooms",
+            "image_1": "shopify://shop_images/living-room_7500c1db-fa09-4fd6-adcf-f690d8bba434.png",
+            "heading_1": "Living Room Furniture",
+            "label_1": "Shop Now",
+            "link_1": "shopify://collections/living-room-furniture",
+            "icon_size_1": 120,
+            "icon_padding_1": 0,
+            "icon_bg_1": "rgba(0,0,0,0)",
+            "image_2": "shopify://shop_images/bedroom_97735dfe-8243-4a3c-b575-a92ac23c4d5a.png",
+            "heading_2": "Bedroom Furniture",
+            "label_2": "Shop Now",
+            "link_2": "shopify://collections/bedroom-furniture",
+            "icon_size_2": 120,
+            "icon_padding_2": 0,
+            "icon_bg_2": "rgba(0,0,0,0)",
+            "image_3": "shopify://shop_images/dininig-room.png",
+            "heading_3": "Dining Room Furniture",
+            "label_3": "Shop Now",
+            "link_3": "shopify://collections/dining-room-furniture",
+            "icon_size_3": 120,
+            "icon_padding_3": 0,
+            "icon_bg_3": "rgba(0,0,0,0)",
+            "image_4": "shopify://shop_images/office.png",
+            "heading_4": "Office / Study Furniture",
+            "label_4": "Shop Now",
+            "link_4": "shopify://collections/office-and-study-room-furniture",
+            "icon_size_4": 120,
+            "icon_padding_4": 0,
+            "icon_bg_4": "rgba(0,0,0,0)",
+            "image_5": "shopify://shop_images/storage-wardrobe.png",
+            "heading_5": "Storage",
+            "label_5": "Shop Now",
+            "link_5": "shopify://collections/storage-and-cabinets",
+            "icon_size_5": 120,
+            "icon_padding_5": 0,
+            "icon_bg_5": "rgba(0,0,0,0)",
+            "image_6": "shopify://shop_images/accessories.png",
+            "heading_6": "Accessories",
+            "label_6": "Shop Now",
+            "link_6": "shopify://collections/all",
+            "icon_size_6": 120,
+            "icon_padding_6": 0,
+            "icon_bg_6": "rgba(0,0,0,0)",
+            "heading_7": "",
+            "label_7": "",
+            "link_7": "",
+            "icon_size_7": 80,
+            "icon_padding_7": 20,
+            "icon_bg_7": "#f0f0f0"
+          }
+        },
+        "megamenu_qwaLBN": {
+          "type": "megamenu",
+          "settings": {
+            "menu_handle": "collections",
+            "menu_type": "list",
+            "badge_text": "",
+            "badge_text_color": "#ffffff",
+            "badge_background_color": "#cc0000",
+            "image": "shopify://shop_images/emrecan.jpg",
+            "label": "Shop Now",
+            "heading": "Chairs",
+            "link": "",
+            "link_label": "",
+            "media_rounded_corners": true,
+            "product1": "",
+            "image2": "shopify://shop_images/living-room.jpg",
+            "label2": "Shop Now",
+            "heading2": "Sofas",
+            "link2": "",
+            "link_label2": "",
+            "media_rounded_corners2": true,
+            "product2": ""
+          }
+        },
+        "megamenu_half_to_half_XrLyCz": {
+          "type": "megamenu-half-to-half",
+          "settings": {
+            "menu_handle": "custom-furniture",
+            "badge_text": "",
+            "badge_text_color": "#ffffff",
+            "badge_background_color": "#cc0000",
+            "heading": "Custom Furniture for Homes, Retail & Hospitality Spaces",
+            "subheading": "",
+            "heading_size_desktop": 44,
+            "heading_size_mobile": 24,
+            "subheading_size_desktop": 38,
+            "subheading_size_mobile": 24,
+            "short_text": "Whether you're furnishing your home, sourcing for retail, or planning large-scale projects, our team collaborates with you to design and craft furniture tailored to your exact needs.",
+            "button_label1": "Experience Our B2B",
+            "button_link1": "shopify://pages/b2b-experience",
+            "button1_style": "secondary",
+            "button_label2": "Custom Furniture",
+            "button_link2": "shopify://pages/custom-furniture",
+            "button2_style": "primary",
+            "image": "shopify://shop_images/living-room.jpg",
+            "show_shadow": false,
+            "shadow_color": "",
+            "shadow_color_mobile": "",
+            "image_link": ""
+          }
+        },
+        "megamenu_images_U34e8g": {
+          "type": "megamenu-images",
+          "settings": {
+            "menu_handle": "about",
+            "badge_text": "",
+            "badge_text_color": "#ffffff",
+            "badge_background_color": "#cc0000",
+            "image": "shopify://shop_images/shkrabaanthony.jpg",
+            "label": "Visit",
+            "heading": "Our Story",
+            "heading_size": 20,
+            "link": "shopify://pages/about-us",
+            "link_label": "",
+            "media_rounded_corners": true,
+            "product1": "",
+            "image2": "shopify://shop_images/caelideco.jpg",
+            "label2": "Show",
+            "heading2": "Behind The Design",
+            "heading_size2": 20,
+            "link2": "shopify://pages/about-us",
+            "link_label2": "",
+            "media_rounded_corners2": false,
+            "product2": "",
+            "image3": "shopify://shop_images/zimmerman.jpg",
+            "label3": "Connect",
+            "heading3": "Customer Stories",
+            "heading_size3": 20,
+            "link3": "shopify://pages/customer-stories",
+            "link_label3": "",
+            "media_rounded_corners3": true,
+            "product3": "",
+            "image4": "shopify://shop_images/spacee.jpg",
+            "label4": "Connect",
+            "heading4": "Our People",
+            "heading_size4": 20,
+            "link4": "shopify://pages/about-us",
+            "link_label4": "",
+            "media_rounded_corners4": false,
+            "product4": ""
+          }
+        },
+        "icon_menu_aVdejV": {
+          "type": "icon_menu",
+          "settings": {
+            "menu_handle": "stores",
+            "image_1": "shopify://shop_images/monument_14150888.png",
+            "heading_1": "Jodhpur",
+            "label_1": "Visit",
+            "link_1": "shopify://pages/jodhpur",
+            "icon_size_1": 80,
+            "icon_padding_1": 20,
+            "icon_bg_1": "#f0f0f0",
+            "image_2": "shopify://shop_images/angkor-wat_2647109.png",
+            "heading_2": "Bengaluru",
+            "label_2": "Visit",
+            "link_2": "shopify://pages/bangalore",
+            "icon_size_2": 80,
+            "icon_padding_2": 20,
+            "icon_bg_2": "#f0f0f0",
+            "image_3": "shopify://shop_images/food_13608665.png",
+            "heading_3": "Pune",
+            "label_3": "Visit",
+            "link_3": "shopify://pages/pune",
+            "icon_size_3": 80,
+            "icon_padding_3": 20,
+            "icon_bg_3": "#f0f0f0",
+            "heading_4": "",
+            "label_4": "",
+            "link_4": "shopify://pages/vadodara",
+            "icon_size_4": 80,
+            "icon_padding_4": 20,
+            "icon_bg_4": "#f0f0f0",
+            "heading_5": "",
+            "label_5": "",
+            "link_5": "",
+            "icon_size_5": 80,
+            "icon_padding_5": 20,
+            "icon_bg_5": "#f0f0f0",
+            "heading_6": "",
+            "label_6": "",
+            "link_6": "",
+            "icon_size_6": 80,
+            "icon_padding_6": 20,
+            "icon_bg_6": "#f0f0f0",
+            "heading_7": "",
+            "label_7": "",
+            "link_7": "",
+            "icon_size_7": 80,
+            "icon_padding_7": 20,
+            "icon_bg_7": "#f0f0f0"
+          }
+        }
+      },
+      "block_order": [
+        "megamenu_V3jCHh",
+        "icon_menu_YTQYWt",
+        "megamenu_qwaLBN",
+        "megamenu_half_to_half_XrLyCz",
+        "megamenu_images_U34e8g",
+        "icon_menu_aVdejV"
+      ],
+      "custom_css": [
+        ".header-mega-menu__menu-item-text {font-size: 0.8rem;}",
+        ".header-mega-menu__image-wrapper {border-radius: 20px !important;}"
+      ],
+      "settings": {
+        "header_type": "sticky_hide",
+        "enable_transparent_header_homepage": false,
+        "enable_transparent_header_collection": false,
+        "enable_transparent_header_mobile": false,
+        "keep_transparent_header_on_hover": false,
+        "enable_bottom_border": true,
+        "enable_mega_menu_borders": true,
+        "is_show_box_shadow": true,
+        "is_show_language_selector": true,
+        "is_show_country_selector": true,
+        "logo": "shopify://shop_images/induscraft-logo.avif",
+        "logo_width": 170,
+        "logo_position": "left",
+        "menu": "header-menu",
+        "menu_type_desktop": "both",
+        "open_menu_type": "hover",
+        "make_first_lvl_clickable": false,
+        "header_bg": "#ffffff",
+        "mobile_menu_bg": "#ffffff",
+        "text_color": "#000000",
+        "text_color_secondary": "#000000",
+        "text_color_transparent": "#ffffff",
+        "icon_color": "#000000",
+        "icon_color_hover": "#000000",
+        "icon_color_transparent": "#ffffff",
+        "count_text_color": "#ffffff",
+        "count_text_color_transparent": "#000000",
+        "count_text_bg": "#000000",
+        "count_text_bg_transparent": "#ffffff",
+        "border_color": "#e6e6e6",
+        "megamenu_image_text": "#ffffff",
+        "megamenu_image_link_label": "#2c2a28",
+        "megamenu_image_link_label_background": "#eab88c",
+        "megamenu_overlay_color": "",
+        "megamenu_gradient_color": "#2c2a28"
+      }
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "ticker_bar_LUxRpx",
+    "header"
+  ]
+}

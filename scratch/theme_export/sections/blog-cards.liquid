@@ -1,0 +1,316 @@
+<section id="CustomBlogCards-{{ section.id }}" class="custom-blog-cards {% if section.settings.hover_animation %}is-hover{% endif %}" style="background: {{ section.settings.background_color }}; padding: {{ section.settings.section_padding_top }}px 0 {{ section.settings.section_padding_bottom }}px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Inter', sans-serif;">
+  <div class="custom-blog-cards__inner page-width" style="max-width: 1400px; margin: 0 auto; padding: 0 16px;">
+    <div class="custom-blog-cards__header" style="display:flex; justify-content: {% if section.settings.heading_alignment == 'left' %}flex-start{% else %}center{% endif %};">
+      <h2 class="custom-blog-cards__title" style="color: {{ section.settings.heading_color }}; font-size: {{ section.settings.heading_size }}px !important; margin: 0; text-align: {{ section.settings.heading_alignment }};">{{ section.settings.heading_text }}</h2>
+    </div>
+
+    {% assign blog_obj = section.settings.blog | default: blog %}
+    {% if blog_obj and blog_obj.handle %}
+      {% assign blog_obj = blogs[blog_obj.handle] %}
+    {% elsif blog_obj and blogs[blog_obj] %}
+      {% assign blog_obj = blogs[blog_obj] %}
+    {% endif %}
+    {% if blog_obj %}
+      {% assign articles = blog_obj.articles %}
+      {% assign cards_per_page = section.settings.cards_per_page | default: 8 %}
+      <div class="cbc-grid" data-cards-per-page="{{ cards_per_page }}" style="display:grid; gap: {{ section.settings.grid_gap }}px; margin-top: {{ section.settings.heading_gap | default: 24 }}px;">
+        {% if articles.size > 0 %}
+        {% for article in articles %}
+          <article class="cpl-card" role="article" data-card-index="{{ forloop.index0 }}" style="background: {{ section.settings.card_background }}; border-radius: {{ section.settings.card_border_radius }}px; box-shadow: 0 4px {{ section.settings.card_shadow_intensity | times: 4 }}px rgba(0,0,0,0.04); padding: 0; display:flex; flex-direction:column; height:100%; transition: transform 300ms ease, box-shadow 300ms ease;">
+            <div class="cpl-card__body" style="flex:1 1 auto; text-align: {{ section.settings.text_alignment }}; padding: 20px;">
+              <h3 class="cpl-card__title" style="margin:0 0 8px 0; font-size: {{ section.settings.card_title_size | default: 18 }}px; color: {{ section.settings.title_color }}; font-weight:700;">
+                <a href="{{ article.url }}" style="color: inherit; text-decoration:none;">{{ article.title }}</a>
+              </h3>
+              <p class="cpl-card__excerpt" style="margin:0 0 12px 0; color: {{ section.settings.excerpt_color }}; font-size: {{ section.settings.excerpt_size }}px; line-height:1.4;">
+                {{ article.excerpt | strip_html | truncatewords: 30 }}
+              </p>
+              {% if section.settings.show_price and article.metafields.custom.price != blank %}
+                <div class="cpl-card__price" style="font-weight:700; color: {{ section.settings.price_color }}; margin-bottom:12px;">{{ article.metafields.custom.price }}</div>
+              {% endif %}
+              <a class="cpl-card__btn" href="{{ article.url }}" style="display:inline-block; padding:10px 14px; background: {{ section.settings.button_color }}; color: {{ section.settings.button_text_color }}; text-decoration:none; border-radius:20px; font-weight:600;">{{ section.settings.button_text }}</a>
+            </div>
+
+            {% if article.image %}
+              <div class="cpl-card__image" style="margin-top:16px; flex-shrink:0;">
+                <img src="{{ article.image | image_url: width: 800 }}" alt="{{ article.title }}" width="800" height="200" loading="lazy" style="width:100%; height:200px; display:block; border-radius: 0 0 {{ section.settings.card_border_radius }}px {{ section.settings.card_border_radius }}px; object-fit:cover;">
+              </div>
+            {% endif %}
+          </article>
+        {% endfor %}
+        {% else %}
+          <div style="padding:24px; background:#fff; border-radius:12px;">No articles found.</div>
+        {% endif %}
+      </div>
+      
+      <!-- Pagination -->
+      {% if articles.size > cards_per_page %}
+      <div class="cbc-pagination" data-total-cards="{{ articles.size }}">
+        <button class="cbc-pagination__btn cbc-pagination__prev" disabled aria-label="Previous page">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <div class="cbc-pagination__numbers"></div>
+        <button class="cbc-pagination__btn cbc-pagination__next" aria-label="Next page">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+      {% endif %}
+    {% else %}
+      <div style="padding:24px; background:#fff; border-radius:12px; margin-top: 16px;">No blog selected or blog has no articles.</div>
+    {% endif %}
+  </div>
+</section>
+
+<style>
+.custom-blog-cards { background: {{ section.settings.background_color }}; }
+
+/* Base mobile-first: 1 column */
+#CustomBlogCards-{{ section.id }} .cbc-grid {
+  grid-template-columns: 1fr;
+}
+
+/* Small tablets: 2 columns */
+@media screen and (min-width: 576px) {
+  #CustomBlogCards-{{ section.id }} .cbc-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Tablets: 3 columns */
+@media screen and (min-width: 768px) {
+  #CustomBlogCards-{{ section.id }} .cbc-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Desktop: 4 columns */
+@media screen and (min-width: 1024px) {
+  #CustomBlogCards-{{ section.id }} .cbc-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+#CustomBlogCards-{{ section.id }} .cpl-card { margin: 0; }
+#CustomBlogCards-{{ section.id }} .cpl-card img { border-radius:8px; }
+
+#CustomBlogCards-{{ section.id }} .cpl-card__excerpt {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+#CustomBlogCards-{{ section.id }}.is-hover .cpl-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+/* Responsive heading */
+#CustomBlogCards-{{ section.id }} .custom-blog-cards__title { 
+  font-size: {{ section.settings.heading_size | times: 0.7 | round }}px !important; 
+}
+
+@media screen and (min-width: 768px) {
+  #CustomBlogCards-{{ section.id }} .custom-blog-cards__title { 
+    font-size: {{ section.settings.heading_size }}px !important; 
+  }
+}
+
+/* Mobile card body padding */
+@media screen and (max-width: 575px) {
+  #CustomBlogCards-{{ section.id }} .cpl-card__body {
+    padding: 16px;
+  }
+  
+  #CustomBlogCards-{{ section.id }} .cpl-card__title {
+    font-size: {{ section.settings.card_title_size | minus: 2 }}px !important;
+  }
+}
+
+/* Pagination Styles */
+#CustomBlogCards-{{ section.id }} .cbc-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+
+#CustomBlogCards-{{ section.id }} .cbc-pagination__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #374151;
+}
+
+#CustomBlogCards-{{ section.id }} .cbc-pagination__btn:hover:not(:disabled) {
+  background: #f3f4f6;
+  border-color: #d1d5db;
+}
+
+#CustomBlogCards-{{ section.id }} .cbc-pagination__btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+#CustomBlogCards-{{ section.id }} .cbc-pagination__numbers {
+  display: flex;
+  gap: 4px;
+}
+
+#CustomBlogCards-{{ section.id }} .cbc-pagination__num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  transition: all 0.2s ease;
+}
+
+#CustomBlogCards-{{ section.id }} .cbc-pagination__num:hover {
+  background: #f3f4f6;
+}
+
+#CustomBlogCards-{{ section.id }} .cbc-pagination__num.is-active {
+  background: {{ section.settings.button_color }};
+  color: {{ section.settings.button_text_color }};
+  border-color: {{ section.settings.button_color }};
+}
+
+/* Hide cards for pagination */
+#CustomBlogCards-{{ section.id }} .cpl-card[data-hidden="true"] {
+  display: none !important;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const sectionId = '{{ section.id }}';
+  const container = document.getElementById('CustomBlogCards-' + sectionId);
+  if (!container) return;
+  
+  const grid = container.querySelector('.cbc-grid');
+  const pagination = container.querySelector('.cbc-pagination');
+  if (!grid || !pagination) return;
+  
+  const cards = Array.from(grid.querySelectorAll('.cpl-card'));
+  const cardsPerPage = parseInt(grid.dataset.cardsPerPage) || 8;
+  const totalCards = cards.length;
+  const totalPages = Math.ceil(totalCards / cardsPerPage);
+  
+  if (totalPages <= 1) {
+    pagination.style.display = 'none';
+    return;
+  }
+  
+  let currentPage = 1;
+  
+  const prevBtn = pagination.querySelector('.cbc-pagination__prev');
+  const nextBtn = pagination.querySelector('.cbc-pagination__next');
+  const numbersContainer = pagination.querySelector('.cbc-pagination__numbers');
+  
+  // Generate page numbers
+  function renderPageNumbers() {
+    numbersContainer.innerHTML = '';
+    for (let i = 1; i <= totalPages; i++) {
+      const btn = document.createElement('button');
+      btn.className = 'cbc-pagination__num' + (i === currentPage ? ' is-active' : '');
+      btn.textContent = i;
+      btn.addEventListener('click', () => goToPage(i));
+      numbersContainer.appendChild(btn);
+    }
+  }
+  
+  // Show/hide cards based on current page
+  function updateCards() {
+    const start = (currentPage - 1) * cardsPerPage;
+    const end = start + cardsPerPage;
+    
+    cards.forEach((card, index) => {
+      card.setAttribute('data-hidden', index < start || index >= end);
+    });
+    
+    prevBtn.disabled = currentPage === 1;
+    nextBtn.disabled = currentPage === totalPages;
+    
+    renderPageNumbers();
+  }
+  
+  function goToPage(page) {
+    currentPage = page;
+    updateCards();
+    // Scroll to section top
+    container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  
+  prevBtn.addEventListener('click', () => {
+    if (currentPage > 1) goToPage(currentPage - 1);
+  });
+  
+  nextBtn.addEventListener('click', () => {
+    if (currentPage < totalPages) goToPage(currentPage + 1);
+  });
+  
+  // Initial render
+  updateCards();
+});
+</script>
+
+{% schema %}
+{
+  "name": "Custom Blog Cards",
+  "settings": [
+    { "type":"text","id":"heading_text","label":"Heading text","default":"Latest Posts" },
+    { "type":"blog","id":"blog","label":"Blog Source" },
+    { "type":"range","id":"cards_per_page","label":"Cards per page","min":4,"max":16,"step":1,"default":8 },
+    { "type":"range","id":"grid_gap","label":"Grid gap (px)","min":0,"max":48,"step":2,"default":20 },
+
+    { "type":"select","id":"heading_alignment","label":"Heading alignment","options":[{"value":"center","label":"Center"},{"value":"left","label":"Left"}],"default":"center" },
+    { "type":"select","id":"text_alignment","label":"Text alignment inside cards","options":[{"value":"left","label":"Left"},{"value":"center","label":"Center"}],"default":"left" },
+
+    { "type":"color","id":"background_color","label":"Section background color","default":"#F9F9F9" },
+    { "type":"color","id":"card_background","label":"Card background color","default":"#FFFFFF" },
+    { "type":"range","id":"card_border_radius","label":"Card border radius (px)","min":0,"max":40,"step":1,"default":16 },
+    { "type":"range","id":"card_shadow_intensity","label":"Card shadow intensity (0-3)","min":0,"max":3,"step":0.1,"default":1 },
+    { "type":"checkbox","id":"hover_animation","label":"Enable hover animation (scale)","default":true },
+
+    { "type":"color","id":"heading_color","label":"Heading color","default":"#111827" },
+    { "type":"range","id":"heading_size","label":"Heading size (px)","min":20,"max":48,"step":1,"default":28 },
+    { "type":"range","id":"heading_gap","label":"Gap between heading and cards (px)","min":0,"max":160,"step":2,"default":24 },
+
+    { "type":"color","id":"title_color","label":"Card title color","default":"#111827" },
+    { "type":"range","id":"card_title_size","label":"Card title size (px)","min":12,"max":36,"step":1,"default":18 },
+    { "type":"color","id":"excerpt_color","label":"Card excerpt color","default":"#6B7280" },
+    { "type":"range","id":"excerpt_size","label":"Excerpt font size (px)","min":12,"max":18,"step":1,"default":14 },
+
+    { "type":"color","id":"button_color","label":"Button color","default":"#111827" },
+    { "type":"color","id":"button_text_color","label":"Button text color","default":"#FFFFFF" },
+    { "type":"text","id":"button_text","label":"Button text","default":"Read More" },
+
+    { "type":"checkbox","id":"show_price","label":"Show price metafield (if available)","default":false },
+    { "type":"color","id":"price_color","label":"Price text color","default":"#111827" },
+
+    { "type":"color","id":"background","label":"Deprecated (do not use)","default":"#FFFFFF","info":"No effect; for backward compatibility" },
+
+    { "type":"range","id":"section_padding_top","label":"Section padding top (px)","min":0,"max":200,"step":4,"default":40 },
+    { "type":"range","id":"section_padding_bottom","label":"Section padding bottom (px)","min":0,"max":200,"step":4,"default":40 }
+  ],
+  "presets": [{ "name":"Blog Cards" }]
+}
+{% endschema %}
+

@@ -1,0 +1,405 @@
+{% style %}
+    #shopify-section-{{ section.id }} {
+        padding-top: {{ section.settings.padding_top_mobile }}px;
+        padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+        overflow: hidden;
+    }
+
+    @media screen and (min-width: 768px) {
+        #shopify-section-{{ section.id }} {
+            padding-top: {{ section.settings.padding_top_desktop }}px;
+            padding-bottom: {{ section.settings.padding_bottom_desktop }}px;
+        }
+    }
+
+    .shop-by-room {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 20px;
+        position: relative;
+    }
+
+    .shop-by-room__heading {
+        text-align: center;
+        margin-bottom: 30px;
+        font-size: {{ section.settings.heading_size_mobile }}px !important;
+        font-weight: 400;
+        color: #181210;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    @media (min-width: 768px) {
+        .shop-by-room__heading {
+            font-size: {{ section.settings.heading_size_desktop }}px !important;
+            margin-bottom: 50px;
+        }
+    }
+
+    .shop-by-room .swiper {
+        overflow: visible;
+    }
+    
+    .shop-by-room .swiper-slide {
+        height: auto;
+    }
+
+    .shop-by-room__card {
+        display: block;
+        position: relative;
+        width: 100%;
+        height: 100%; 
+        border-radius: 20px;
+        aspect-ratio: 1 / 1.25;
+        overflow: hidden;
+        text-decoration: none;
+        color: #fff;
+    }
+
+    .shop-by-room__image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+    }
+
+    .shop-by-room__card:hover .shop-by-room__image {
+        transform: scale(1.05);
+    }
+
+    .shop-by-room__overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, transparent 60%, rgba(0,0,0,0.5));
+        pointer-events: none;
+    }
+
+    .shop-by-room__title {
+        position: absolute;
+        bottom: 30px;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        font-size: {{ section.settings.card_title_size_mobile }}px;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        z-index: 2;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    }
+    
+    @media (min-width: 768px) {
+         .shop-by-room__title {
+            top: 50%;
+            bottom: auto;
+            transform: translateY(-50%);
+            font-size: {{ section.settings.card_title_size_desktop }}px;
+            background: transparent;
+         }
+         
+         /* Stronger dark overlay on desktop to ensure text legibility if centered */
+         .shop-by-room__overlay {
+            background: rgba(0,0,0,0.15); 
+            transition: background 0.3s;
+         }
+         
+         .shop-by-room__card:hover .shop-by-room__overlay {
+            background: rgba(0,0,0,0.05);
+         }
+    }
+
+    /* Navigation Buttons */
+    .shop-by-room__nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .shop-by-room__nav:hover {
+        background: #fff;
+        transform: translateY(-50%) scale(1.1);
+        box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    }
+
+    .shop-by-room__nav--prev {
+        left: 30px;
+    }
+
+    .shop-by-room__nav--next {
+        right: 30px;
+    }
+    
+    .shop-by-room__nav.swiper-button-disabled {
+        opacity: 0;
+        pointer-events: none;
+    }
+    
+    .shop-by-room__nav svg {
+        width: 24px;
+        height: 24px;
+        stroke: #333;
+        stroke-width: 1.5px;
+        fill: none;
+    }
+
+    @media (max-width: 767px) {
+        .shop-by-room__nav {
+            display: none; /* Hide arrows on mobile, swipe only is generally better */
+        }
+        
+        .shop-by-room {
+            padding: 0; /* Full bleed on mobile if desired, or small padding */
+        }
+        
+        /* Add some padding to container for the slides if not full bleed */
+        .shop-by-room__container { /* wrapping div if added */ }
+    }
+
+{% endstyle %}
+
+<div class="shop-by-room" id="shop-by-room-{{ section.id }}">
+    {% if section.settings.heading != blank %}
+        <h2 class="shop-by-room__heading">{{ section.settings.heading }}</h2>
+    {% endif %}
+
+    <div class="swiper js-shop-by-room-slider">
+        <div class="swiper-wrapper">
+            {% for block in section.blocks %}
+                <div class="swiper-slide" {{ block.shopify_attributes }}>
+                    <a href="{{ block.settings.link }}" class="shop-by-room__card">
+                        {% if block.settings.image != blank %}
+                            {{ block.settings.image | image_url: width: 800 | image_tag: class: 'shop-by-room__image', loading: 'lazy' }}
+                        {% else %}
+                            {{ 'lifestyle-1' | placeholder_svg_tag: 'shop-by-room__image' }}
+                        {% endif %}
+                        <div class="shop-by-room__overlay"></div>
+                        <span class="shop-by-room__title">{{ block.settings.title }}</span>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+        
+        <div class="shop-by-room__nav shop-by-room__nav--prev">
+            <svg viewBox="0 0 24 24"><path d="M19 12H5M5 12L12 19M5 12L12 5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="shop-by-room__nav shop-by-room__nav--next">
+             <svg viewBox="0 0 24 24"><path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+    </div>
+</div>
+
+<script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+    (function() {
+        const initSlider = (sectionId) => {
+            const container = document.getElementById(`shop-by-room-${sectionId}`);
+            if (!container) return;
+            
+            const sliderElement = container.querySelector('.js-shop-by-room-slider');
+            if(sliderElement && typeof Swiper !== 'undefined') {
+                const slideCount = sliderElement.querySelectorAll('.swiper-slide').length;
+                
+                new Swiper(sliderElement, {
+                    slidesPerView: 1.2,
+                    spaceBetween: 10,
+                    loop: true,
+                    loopedSlides: slideCount,
+                    centeredSlides: true,
+                    navigation: {
+                        nextEl: container.querySelector('.shop-by-room__nav--next'),
+                        prevEl: container.querySelector('.shop-by-room__nav--prev'),
+                    },
+                    breakpoints: {
+                        480: {
+                            slidesPerView: 2.2,
+                            spaceBetween: 16,
+                            centeredSlides: true
+                        },
+                        768: {
+                            slidesPerView: 3,
+                            spaceBetween: 20,
+                            centeredSlides: true
+                        },
+                        1024: {
+                            slidesPerView: 4,
+                            spaceBetween: 24,
+                            centeredSlides: false
+                        }
+                    }
+                });
+            }
+        };
+
+        const checkSwiper = () => {
+            if (typeof Swiper !== 'undefined') {
+                initSlider('{{ section.id }}');
+            } else {
+                setTimeout(checkSwiper, 100);
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', checkSwiper);
+        if (typeof Swiper !== 'undefined') initSlider('{{ section.id }}'); // Try immediate if ready
+        
+        // Re-init for theme editor
+        if (Shopify && Shopify.designMode) {
+            document.addEventListener('shopify:section:load', (event) => {
+                if (event.detail.sectionId === '{{ section.id }}') {
+                     checkSwiper();
+                }
+            });
+        }
+    })();
+</script>
+
+{% schema %}
+{
+    "name": "Shop By Room",
+    "settings": [
+        {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading",
+            "default": "SHOP BY ROOM"
+        },
+        {
+            "type": "header",
+            "content": "Typography"
+        },
+        {
+            "type": "range",
+            "id": "heading_size_desktop",
+            "min": 24,
+            "max": 100,
+            "step": 2,
+            "unit": "px",
+            "label": "Heading Font Size (Desktop)",
+            "default": 42
+        },
+        {
+            "type": "range",
+            "id": "heading_size_mobile",
+            "min": 16,
+            "max": 60,
+            "step": 2,
+            "unit": "px",
+            "label": "Heading Font Size (Mobile)",
+            "default": 32
+        },
+        {
+            "type": "range",
+            "id": "card_title_size_desktop",
+            "min": 16,
+            "max": 60,
+            "step": 1,
+            "unit": "px",
+            "label": "Card Title Size (Desktop)",
+            "default": 28
+        },
+        {
+            "type": "range",
+            "id": "card_title_size_mobile",
+            "min": 14,
+            "max": 40,
+            "step": 1,
+            "unit": "px",
+            "label": "Card Title Size (Mobile)",
+            "default": 24
+        },
+        {
+            "type": "header",
+            "content": "Spacing"
+        },
+        {
+            "type": "range",
+            "id": "padding_top_desktop",
+            "min": 0,
+            "max": 100,
+            "step": 4,
+            "unit": "px",
+            "label": "Padding Top (Desktop)",
+            "default": 60
+        },
+        {
+            "type": "range",
+            "id": "padding_bottom_desktop",
+            "min": 0,
+            "max": 100,
+            "step": 4,
+            "unit": "px",
+            "label": "Padding Bottom (Desktop)",
+            "default": 60
+        },
+        {
+            "type": "range",
+            "id": "padding_top_mobile",
+            "min": 0,
+            "max": 80,
+            "step": 4,
+            "unit": "px",
+            "label": "Padding Top (Mobile)",
+            "default": 40
+        },
+        {
+            "type": "range",
+            "id": "padding_bottom_mobile",
+            "min": 0,
+            "max": 80,
+            "step": 4,
+            "unit": "px",
+            "label": "Padding Bottom (Mobile)",
+            "default": 40
+        }
+    ],
+    "blocks": [
+        {
+            "type": "room",
+            "name": "Room",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "image",
+                    "label": "Image"
+                },
+                {
+                    "type": "text",
+                    "id": "title",
+                    "label": "Title",
+                    "default": "LIVING"
+                },
+                {
+                    "type": "url",
+                    "id": "link",
+                    "label": "Link"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Shop By Room",
+            "blocks": [
+                { "type": "room", "settings": { "title": "DINING" } },
+                { "type": "room", "settings": { "title": "LIVING" } },
+                { "type": "room", "settings": { "title": "OFFICE" } },
+                { "type": "room", "settings": { "title": "LIGHTING" } }
+            ]
+        }
+    ]
+}
+{% endschema %}
