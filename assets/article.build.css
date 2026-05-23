@@ -245,7 +245,7 @@ html.no-active .article-banner .article-banner__image {
 	justify-content: center;
 }
 .article-comments .article-comments__form .input {
-	backgroundbackground-color: var(--color-background, #fff);
+	background-color: var(--color-background, #fff);
 }
 .article-comments .article-comments__form svg {
 	flex-shrink: 0;

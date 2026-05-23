@@ -1,0 +1,339 @@
+/* ============================================
+   Trade Gallery Section
+   ============================================
+   Editorial header + full-width image slider
+   with overlay info cards.
+   ============================================ */
+
+/* --- Section Container --- */
+.trade-gallery {
+    position: relative;
+    z-index: 1;
+    background-color: var(--tg-bg, #F8F6F2);
+    overflow: hidden;
+}
+
+/* ============================================
+   Header Area
+   ============================================ */
+.trade-gallery__header {
+    padding: var(--tg-pad-top, 80px) var(--tg-pad-x, 60px) 48px;
+    max-width: var(--global-container-width, 1440px);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 40px;
+    align-items: end;
+}
+
+.trade-gallery__header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.trade-gallery__heading {
+    font-family: 'Bristone', var(--heading-font-family) !important;
+    font-size: var(--tg-heading-size, 72px) !important;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    color: var(--tg-heading-color, #1a1a1a);
+    margin: 0;
+}
+
+.trade-gallery__heading-row {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.trade-gallery__label-icon {
+    width: calc(var(--tg-heading-size, 72px) * 0.75);
+    height: calc(var(--tg-heading-size, 72px) * 0.75);
+    border-radius: 3px;
+    flex-shrink: 0;
+    background-color: #EC4855;
+}
+
+/* Right side: thumbnail + description */
+.trade-gallery__header-right {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 280px;
+    padding-bottom: 8px;
+}
+
+.trade-gallery__header-thumb {
+    width: 100px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.trade-gallery__header-desc {
+    font-family: var(--base-font-family);
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--tg-desc-color, #555555);
+    margin: 0;
+}
+
+.trade-gallery__header-desc p {
+    margin: 0;
+}
+
+/* ============================================
+   Slider
+   ============================================ */
+.trade-gallery__slider-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.trade-gallery__slider {
+    display: flex;
+    transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+    will-change: transform;
+}
+
+.trade-gallery__slide {
+    position: relative;
+    flex: 0 0 100%;
+    width: 100%;
+    height: var(--tg-slide-height, 70vh);
+    overflow: hidden;
+}
+
+.trade-gallery__slide-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* --- Overlay Info Card --- */
+.trade-gallery__slide-info {
+    position: absolute;
+    bottom: 10%;
+    left: 20%;
+    background: var(--tg-card-bg, rgba(248, 246, 242, 0.95));
+    padding: 28px 32px;
+    height: 300px;
+    min-width: 240px;
+    max-width: 250px;
+    display: flex;
+    flex-direction: column;
+}
+
+.trade-gallery__slide-title {
+    font-family: var(--base-font-family);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--tg-heading-color, #1a1a1a);
+    margin: 0;
+    line-height: 1.3;
+}
+
+.trade-gallery__slide-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: auto 0;
+}
+
+.trade-gallery__slide-year {
+    font-family: var(--base-font-family);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--tg-heading-color, #1a1a1a);
+    line-height: 1.4;
+    margin: 0;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.trade-gallery__slide-category {
+    font-family: var(--base-font-family);
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--tg-heading-color, #1a1a1a);
+    line-height: 1.4;
+    margin: 0;
+    padding-top: 14px;
+}
+
+.trade-gallery__slide-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: auto;
+    font-family: var(--base-font-family);
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--tg-heading-color, #1a1a1a);
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.trade-gallery__slide-link:hover {
+    opacity: 0.6;
+}
+
+.trade-gallery__slide-link svg {
+    width: 12px;
+    height: 12px;
+}
+
+/* --- Card Navigation Arrows --- */
+.trade-gallery__card-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 0 -10px;
+}
+
+.trade-gallery__card-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--tg-heading-color, #1a1a1a);
+    padding: 0;
+    transition: opacity 0.2s;
+}
+
+.trade-gallery__card-arrow:hover {
+    opacity: 0.5;
+}
+
+.trade-gallery__card-arrow svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* --- Gallery Overlay Arrows (on the image) --- */
+.trade-gallery__gallery-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    width: 52px;
+    height: 52px;
+    backdrop-filter: blur(4px);
+    border-radius: 99px;
+    border: none;
+    color: #1a1a1a;
+    cursor: pointer;
+}
+
+.trade-gallery__gallery-arrow:hover {
+    transform: translateY(-50%) scale(1.08);
+}
+
+.trade-gallery__gallery-arrow svg {
+    width: 44px;
+    height: 44px;
+}
+
+.trade-gallery__gallery-arrow--prev {
+    left: 24px;
+}
+
+.trade-gallery__gallery-arrow--next {
+    right: 24px;
+}
+
+/* ============================================
+   GSAP Animation States
+   ============================================ */
+.trade-gallery__animate {
+    opacity: 0;
+    transform: translateY(25px);
+}
+
+/* ============================================
+   Responsive: Tablet
+   ============================================ */
+@media (max-width: 991px) {
+    .trade-gallery__header {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 48px 32px 32px;
+    }
+
+    .trade-gallery__heading {
+        font-size: var(--tg-heading-size-t, 48px) !important;
+    }
+
+    .trade-gallery__header-right {
+        max-width: 100%;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .trade-gallery__slide {
+        height: var(--tg-slide-height-t, 55vh);
+    }
+
+    .trade-gallery__slide-info {
+        bottom: 24px;
+        left: 24px;
+        padding: 20px 24px;
+    }
+}
+
+/* ============================================
+   Responsive: Mobile
+   ============================================ */
+@media (max-width: 749px) {
+    .trade-gallery__header {
+        padding: 32px 16px 24px;
+    }
+
+    .trade-gallery__heading {
+        font-size: var(--tg-heading-size-m, 32px) !important;
+    }
+
+    .trade-gallery__heading-row {
+        gap: 12px;
+    }
+
+    .trade-gallery__header-right {
+        flex-direction: column;
+    }
+
+    .trade-gallery__slide {
+        height: var(--tg-slide-height-m, 60vh);
+    }
+
+    .trade-gallery__slide-info {
+        bottom: 16px;
+        left: 16px;
+        right: 16px;
+        max-width: none;
+        padding: 20px;
+    }
+
+    .trade-gallery__slide-year,
+    .trade-gallery__slide-category {
+        font-size: 18px;
+    }
+
+    .trade-gallery__nav {
+        padding: 20px 16px 32px;
+    }
+}

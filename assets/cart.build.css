@@ -202,7 +202,7 @@
 	position: relative;
 	padding-left: 10px;
 	padding-right: 10px;
-	backgroundbackground-color: var(--color-background, #ffffff);
+	background-color: var(--color-background, #ffffff);
 }
 .cart-template .cart-template__discounts {
 	margin: 10px 20px 20px;
@@ -304,7 +304,7 @@
 .cart-template .cart-template__subtotal-value {
 	z-index: var(--layer-flat, 1);
 	padding: 0 5px;
-	backgroundbackground-color: var(--color-background, #ffffff);
+	background-color: var(--color-background, #ffffff);
 }
 .cart-template .cart-template__subtotal-value {
 	font-size: calc(var(--body-font-size) * 1.375);

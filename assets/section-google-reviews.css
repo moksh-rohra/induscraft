@@ -3,7 +3,7 @@
     padding: 40px 0;
     overflow: hidden;
     position: relative;
-    background-color: var(--color-background, #ffffff);
+    background-color: #ffffff;
 }
 
 .google-reviews-header {

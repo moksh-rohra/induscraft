@@ -3,7 +3,7 @@
   padding: 40px 0;
   overflow: hidden;
   position: relative;
-  background-color: var(--color-background, #ffffff);
+  background-color: #ffffff;
 }
 
 .video-reviews-header {
@@ -132,7 +132,7 @@
 }
 
 .vr-play-pause-btn:hover {
-  background: var(--color-background, #ffffff);
+  background: #ffffff;
   transform: translate(-50%, -50%) scale(1.1);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }

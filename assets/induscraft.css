@@ -4,7 +4,7 @@
 .header-mega-menu--icon-menu,
 .header-mega-menu-new--icon-menu {
     width: 100%;
-    background: var(--color-background, #fff);
+    background: #fff;
     padding: 30px 0;
 }
 
@@ -117,7 +117,7 @@
     margin: 0;
     padding: 15px 40px;
     list-style: none;
-    background-color: var(--color-background, #fff);
+    background-color: #fff;
     /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); */
     display: none;
     flex-direction: column;
@@ -591,7 +591,7 @@ h3 {
     border: 1.5px solid #ddd;
     border-radius: 8px;
     outline: none;
-    background: var(--color-background, #fff);
+    background: #fff;
     color: #333;
     transition: border-color 0.2s ease;
     font-family: inherit;
@@ -723,51 +723,24 @@ h3 {
     display: none !important;
 }
 
+/* Hide breadcrumb and sticky button on trade pages */
+.template-page-trade .breadcrumb-new,
+.template-page-trade .sticky-button {
+    display: none !important;
+}
+
+/* Ensure footer & main content scroll above the fixed trade-hero */
+.template-page-trade .footer-group,
+.template-page-trade .footer-section,
+.template-page-trade footer,
+.template-page-trade .shopify-section-group-footer-group {
+    position: relative;
+    z-index: 1;
+}
+
 /* Shift WhatsApp button up on all pages */
 body .df-btn-cont,
 body #df-btn-cont,
 body [class*="df-btn"] {
     bottom: 80px !important;
-}
-/* Force Mobile Filter Button Style on Desktop */
-.product-filters-new .product-filters__open-menu-button {
-    position: fixed !important;
-    top: 85px !important;
-    bottom: auto !important;
-    left: 12px !important;
-    right: auto !important;
-    transform: none !important;
-    width: 48px !important;
-    height: 48px !important;
-    padding: 0 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    border-radius: 50% !important;
-    z-index: 95 !important;
-    background-color: #ffffff !important;
-    color: #000000 !important;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15) !important;
-    border: none !important;
-    cursor: pointer !important;
-}
-
-@supports (padding-top: max(12px)) {
-    .product-filters-new .product-filters__open-menu-button {
-        top: max(85px, calc(85px + env(safe-area-inset-top))) !important;
-        left: max(12px, env(safe-area-inset-left)) !important;
-    }
-}
-
-.product-filters-new .product-filters__open-menu-button-text,
-.product-filters-new .product-filters__title {
-    display: none !important;
-}
-
-.product-filters-new .product-filters__open-menu-button-counter {
-    display: none !important;
-}
-
-.product-filters-new .product-filters__open-menu-button svg {
-    margin: 0 !important;
 }

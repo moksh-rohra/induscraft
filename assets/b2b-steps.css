@@ -94,7 +94,7 @@
 .b2b-steps__card {
     flex: 0 0 100%;
     min-width: 280px;
-    background-color: var(--color-background, #fff);
+    background-color: #fff;
     border: 1px solid #e0e0e0;
     border-radius: 20px;
     padding: 30px;

@@ -1,0 +1,268 @@
+/* ============================================
+   Trade Work — "How We Work Together"
+   ============================================
+   Scroll-driven pinned process section.
+   Left column (heading + image) stays pinned,
+   right column steps scroll. Image cross-fades
+   per active step.
+   ============================================ */
+
+/* --- Section Container --- */
+.trade-work {
+    position: relative;
+    z-index: 1;
+    background-color: var(--tw-bg, #ffffff);
+    overflow: hidden;
+}
+
+.trade-work__container {
+    max-width: var(--global-container-width, 1440px);
+    margin: 0 auto;
+    padding: var(--tw-pad-top, 80px) var(--tw-pad-x, 60px) var(--tw-pad-bottom, 80px);
+}
+
+/* ============================================
+   Two-Column Grid
+   ============================================ */
+.trade-work__grid {
+    display: grid;
+    grid-template-columns: var(--tw-left-width, 40%) 1fr;
+    gap: var(--tw-gap, 80px);
+    align-items: start;
+}
+
+/* ============================================
+   Left Column (Pinned)
+   ============================================ */
+.trade-work__left {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    /* GSAP handles pinning on desktop */
+}
+
+.trade-work__subheading {
+    font-family: var(--base-font-family);
+    font-size: var(--tw-subheading-size, 13px);
+    font-weight: 400;
+    color: var(--tw-subheading-color, #888888);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin: 0 0 8px 0;
+}
+
+.trade-work__section-label {
+    font-family: var(--base-font-family);
+    font-size: var(--tw-label-size, 18px);
+    font-weight: 500;
+    color: var(--tw-heading-color, #1a1a1a);
+    margin: 0 0 32px 0;
+    line-height: 1.3;
+}
+
+.trade-work__left-desc {
+    font-family: var(--base-font-family);
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--tw-desc-color, #666666);
+    margin: 0 0 32px 0;
+    max-width: 360px;
+}
+
+.trade-work__left-desc p {
+    margin: 0;
+}
+
+/* --- Image Stack (cross-fade container) --- */
+.trade-work__image-stack {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: 0;
+}
+
+.trade-work__image-item {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: opacity;
+}
+
+.trade-work__image-item.is-active {
+    opacity: 1;
+}
+
+.trade-work__image-item img,
+.trade-work__image-item .trade-work__placeholder {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.trade-work__placeholder {
+    background: linear-gradient(135deg, #e8e4df 0%, #d4cfc8 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 14px;
+}
+
+/* ============================================
+   Right Column — Steps
+   ============================================ */
+.trade-work__steps {
+    display: flex;
+    flex-direction: column;
+    /* JS sets --tw-steps-offset to align first step with image */
+    padding-top: var(--tw-steps-offset, 0px);
+}
+
+.trade-work__step {
+    padding: 48px 0;
+    border-top: 1px solid var(--tw-border-color, rgba(0, 0, 0, 0.1));
+    opacity: 0.35;
+    transition: opacity 0.5s ease;
+    /* Enough height so only one step is visible next to the image */
+    min-height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.trade-work__step:last-child {
+    border-bottom: 1px solid var(--tw-border-color, rgba(0, 0, 0, 0.1));
+}
+
+.trade-work__step.is-active {
+    opacity: 1;
+}
+
+/* Step Header: Title left, Number right */
+.trade-work__step-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 20px;
+}
+
+.trade-work__step-title {
+    font-family: 'Bristone', var(--heading-font-family);
+    font-size: var(--tw-step-title-size, 32px);
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--tw-heading-color, #1a1a1a);
+    margin: 0;
+}
+
+.trade-work__step-number {
+    font-family: var(--base-font-family);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--tw-subheading-color, #888888);
+    flex-shrink: 0;
+    padding-top: 6px;
+}
+
+/* Step Body */
+.trade-work__step-body {
+    font-family: var(--base-font-family);
+    font-size: var(--tw-body-size, 15px);
+    line-height: 1.7;
+    color: var(--tw-desc-color, #666666);
+    margin: 0;
+    max-width: 600px;
+}
+
+.trade-work__step-body p {
+    margin: 0;
+}
+
+/* ============================================
+   GSAP Animation States
+   ============================================ */
+.trade-work__animate {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+/* Pin spacer fix — prevent layout shift */
+.trade-work .pin-spacer {
+    /* GSAP injects this wrapper */
+}
+
+/* ============================================
+   Responsive: Tablet (≤991px)
+   ============================================ */
+@media (max-width: 991px) {
+    .trade-work__container {
+        padding: var(--tw-pad-top-m, 48px) 32px var(--tw-pad-bottom-m, 48px);
+    }
+
+    .trade-work__grid {
+        grid-template-columns: 38% 1fr;
+        gap: 48px;
+    }
+
+    .trade-work__step {
+        padding: 36px 0;
+        min-height: 280px;
+    }
+
+    .trade-work__step-title {
+        font-size: calc(var(--tw-step-title-size, 32px) * 0.8);
+    }
+
+    .trade-work__section-label {
+        font-size: calc(var(--tw-label-size, 18px) * 0.9);
+    }
+}
+
+/* ============================================
+   Responsive: Mobile (≤749px)
+   ============================================ */
+@media (max-width: 749px) {
+    .trade-work__container {
+        padding: var(--tw-pad-top-m, 48px) var(--tw-pad-x-m, 20px) var(--tw-pad-bottom-m, 48px);
+    }
+
+    .trade-work__grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    /* On mobile, left column is not pinned — show once at top */
+    .trade-work__left {
+        position: relative !important;
+    }
+
+    .trade-work__image-stack {
+        aspect-ratio: 16 / 10;
+    }
+
+    .trade-work__step {
+        padding: 28px 0;
+        opacity: 1; /* No muting on mobile */
+        min-height: 0; /* Reset min-height on mobile */
+    }
+
+    .trade-work__steps {
+        padding-top: 0 !important; /* No offset on mobile */
+    }
+
+    .trade-work__step-title {
+        font-size: var(--tw-step-title-size-m, 24px);
+    }
+
+    .trade-work__step-header {
+        margin-bottom: 14px;
+    }
+
+    .trade-work__section-label {
+        margin-bottom: 20px;
+    }
+}

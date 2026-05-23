@@ -24,7 +24,7 @@
 }
 
 .category-card {
-    background-color: var(--color-background, #fff);
+    background-color: #fff;
     border-radius: 10px;
     overflow: hidden;
     text-decoration: none;

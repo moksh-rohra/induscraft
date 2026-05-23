@@ -174,11 +174,6 @@
 			initDrawers();
 			setEventListeners();
 			setEventBusListeners();
-			
-			// Ensure scroll is properly restored on page load
-			// This fixes issues where overflow: hidden may have persisted from navigation
-			document.body.style.overflow = '';
-			headerInner.style.paddingRight = "0px";
 		}
 
 		/**
@@ -833,14 +828,8 @@
 			setTimeout(() => addHiddenClass(target), timeout);
 
 			if (bodyScroll) {
-				// Properly restore scroll by removing the overflow property
-				document.body.style.overflow = '';
+				document.body.style.overflow = null;
 				headerInner.style.paddingRight = "0px";
-				
-				// Force reflow to ensure scroll is restored
-				setTimeout(() => {
-					window.scrollTo(window.scrollX, window.scrollY);
-				}, 100);
 			}
 
 			if (isRemoveTrapFocus) {

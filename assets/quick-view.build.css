@@ -189,7 +189,7 @@
 	height: 60px;
 	padding: 0;
 	border: none;
-	background-color: var(--color-background, #fff);
+	background-color: #fff;
 	border-radius: 100%;
 	box-shadow: 0 0 3px -1px #000;
 	color: #000;
@@ -242,7 +242,7 @@
 	height: 44px;
 	margin-top: -22px;
 	border-radius: 50%;
-	background-color: var(--color-background, #fff);
+	background-color: #fff;
 	box-shadow: 0 0 3px -1px #000;
 	color: #000;
 	transform: translate3d(0, 0, 0);
@@ -268,7 +268,7 @@
 .quick-view .shopify-model-viewer-ui .shopify-model-viewer-ui__controls-area {
 	flex-direction: row;
 	border: 1px solid var(--color-slider-arrow-border);
-	background-color: var(--color-background, #fff);
+	background-color: #fff;
 }
 
 .quick-view .shopify-model-viewer-ui .shopify-model-viewer-ui__button {
@@ -537,7 +537,7 @@
 	height: 60px;
 	padding: 0;
 	border: none;
-	background-color: var(--color-background, #fff);
+	background-color: #fff;
 	border-radius: 100%;
 	box-shadow: 0 0 3px -1px #000;
 	color: #000;
@@ -633,7 +633,7 @@
 .quick-view-new .shopify-model-viewer-ui .shopify-model-viewer-ui__controls-area {
 	flex-direction: row;
 	border: 1px solid var(--color-slider-arrow-border);
-	background-color: var(--color-background, #fff);
+	background-color: #fff;
 }
 
 .quick-view-new .shopify-model-viewer-ui .shopify-model-viewer-ui__button {

@@ -1,0 +1,349 @@
+/* ============================================
+   Trade Hero Section
+   ============================================
+   Full-screen background image/video with
+   split two-column layout:
+   LEFT:  subheading + heading
+   RIGHT: description + buttons
+   
+   Scroll-over parallax: hero is fixed behind the
+   page. A spacer maintains flow. The next section
+   scrolls over the hero as it blurs/scales/fades.
+   ============================================ */
+
+/* --- Spacer: occupies hero height in document flow --- */
+.trade-hero__spacer {
+    width: 100%;
+    height: 100vh;
+}
+
+/* --- Main Container (fixed behind page) --- */
+.trade-hero {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    overflow: hidden;
+    background-color: var(--trade-hero-bg-color, #1a1a1a);
+    z-index: 0;
+    will-change: transform, filter, opacity;
+    transform-origin: center center;
+}
+
+/* --- Inner container: animated via GSAP on scroll --- */
+.trade-hero__inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: inherit;
+    will-change: transform, filter, opacity;
+    transform-origin: center center;
+}
+
+/* --- Background Media Layer --- */
+.trade-hero__media {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    transform: scale(1.15);
+    transform-origin: center center;
+}
+
+.trade-hero__bg-image,
+.trade-hero__bg-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Mobile background image swap */
+.trade-hero__bg-image--mobile {
+    display: none;
+}
+
+@media (max-width: 749px) {
+    .trade-hero__bg-image--desktop {
+        display: none;
+    }
+    .trade-hero__bg-image--mobile {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+/* --- Overlay --- */
+.trade-hero__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* ============================================
+   Content Grid – Two Column Layout
+   ============================================ */
+.trade-hero__grid {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: var(--trade-hero-left-width, 50%) 1fr;
+    gap: var(--trade-hero-columns-gap, 40px);
+    padding: var(--trade-hero-pad-top, 120px) var(--trade-hero-pad-right, 60px) var(--trade-hero-pad-bottom, 60px) var(--trade-hero-pad-left, 60px);
+    min-height: inherit;
+}
+
+/* --- Grid Vertical Position --- */
+.trade-hero__grid--v-top {
+    align-content: start;
+    align-items: stretch;
+}
+
+.trade-hero__grid--v-center {
+    align-content: center;
+    align-items: stretch;
+}
+
+.trade-hero__grid--v-bottom {
+    align-content: end;
+    align-items: stretch;
+}
+
+.trade-hero__grid--v-stretch {
+    align-items: stretch;
+}
+
+/* --- Grid Horizontal Position --- */
+.trade-hero__grid--h-left {
+    justify-content: start;
+}
+
+.trade-hero__grid--h-center {
+    justify-content: center;
+}
+
+.trade-hero__grid--h-right {
+    justify-content: end;
+}
+
+.trade-hero__grid--h-stretch {
+    justify-content: stretch;
+}
+
+/* ============================================
+   Columns
+   ============================================ */
+.trade-hero__col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 0;
+    overflow: hidden;
+}
+
+.trade-hero__col--left {
+    /* Width controlled by grid-template-columns */
+}
+
+.trade-hero__col--right {
+    /* Takes remaining space via 1fr */
+}
+
+/* --- Per-Column Text Alignment --- */
+.trade-hero__col--align-left {
+    text-align: left;
+    align-items: flex-start;
+}
+
+.trade-hero__col--align-center {
+    text-align: center;
+    align-items: center;
+}
+
+.trade-hero__col--align-right {
+    text-align: right;
+    align-items: flex-end;
+}
+
+/* --- Per-Column Vertical Alignment --- */
+.trade-hero__col--v-top {
+    justify-content: flex-start;
+}
+
+.trade-hero__col--v-center {
+    justify-content: center;
+}
+
+.trade-hero__col--v-bottom {
+    justify-content: flex-end;
+}
+
+/* ============================================
+   Typography
+   ============================================ */
+
+/* --- Subheading --- */
+.trade-hero__subheading {
+    font-family: var(--base-font-family);
+    font-size: var(--trade-hero-subheading-size-d, 14px);
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--trade-hero-subheading-color, rgba(255, 255, 255, 0.8));
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* --- Heading --- */
+.trade-hero__heading {
+    font-family: 'Bristone', var(--heading-font-family);
+    font-size: var(--trade-hero-heading-size-d, 56px);
+    font-weight: var(--heading-font-weight, 400);
+    line-height: 1.1;
+    color: var(--trade-hero-heading-color, #ffffff);
+    margin: 0;
+    word-break: break-word;
+}
+
+/* --- Description --- */
+.trade-hero__description {
+    font-family: var(--base-font-family);
+    font-size: var(--trade-hero-desc-size-d, 16px);
+    line-height: 1.65;
+    color: var(--trade-hero-desc-color, rgba(255, 255, 255, 0.75));
+    margin-top: 10px;
+    margin-bottom: 32px;
+}
+
+.trade-hero__description p {
+    margin: 0;
+}
+
+/* ============================================
+   Buttons
+   ============================================ */
+.trade-hero__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+/* Button alignment variants */
+.trade-hero__buttons--left {
+    justify-content: flex-start;
+}
+
+.trade-hero__buttons--center {
+    justify-content: center;
+}
+
+.trade-hero__buttons--right {
+    justify-content: flex-end;
+}
+
+/* Ensure theme buttons have transparent background in hero context */
+.trade-hero__buttons .button-new {
+    background-color: transparent;
+}
+
+.trade-hero__buttons .button-new:hover {
+    background-color: transparent;
+}
+
+/* Use theme's hover color for the ::before fill animation */
+.trade-hero__buttons .button-new.button--primary::before {
+    background-color: var(--button-background-color-primary-hover);
+}
+
+.trade-hero__buttons .button-new.button--secondary::before {
+    background-color: var(--button-background-color-secondary-hover);
+}
+
+/* ============================================
+   GSAP Animation States
+   ============================================ */
+.trade-hero__animate {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+/* ============================================
+   Height Variants
+   ============================================ */
+.trade-hero--full {
+    min-height: 100vh;
+}
+
+.trade-hero--large {
+    min-height: 85vh;
+}
+
+.trade-hero--medium {
+    min-height: 70vh;
+}
+
+/* ============================================
+   Responsive: Tablet
+   ============================================ */
+@media (max-width: 991px) {
+    .trade-hero__heading {
+        font-size: var(--trade-hero-heading-size-t, 44px);
+    }
+}
+
+/* ============================================
+   Responsive: Mobile
+   ============================================ */
+@media (max-width: 749px) {
+    .trade-hero {
+        min-height: var(--trade-hero-height-mobile, 100vh);
+    }
+
+    /* Stack columns vertically */
+    .trade-hero__grid {
+        grid-template-columns: 1fr;
+        gap: var(--trade-hero-columns-gap-mobile, 24px);
+        padding: var(--trade-hero-pad-top-m, 80px) var(--trade-hero-pad-right-m, 24px) var(--trade-hero-pad-bottom-m, 40px) var(--trade-hero-pad-left-m, 24px);
+        align-content: end;
+    }
+
+    .trade-hero__subheading {
+        font-size: var(--trade-hero-subheading-size-m, 12px);
+        letter-spacing: 2px;
+        margin-bottom: 12px;
+    }
+
+    .trade-hero__heading {
+        font-size: var(--trade-hero-heading-size-m, 34px);
+    }
+
+    .trade-hero__description {
+        font-size: var(--trade-hero-desc-size-m, 14px);
+        margin-bottom: 24px;
+    }
+
+    .trade-hero__buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .trade-hero__buttons .button-new {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+    }
+}
