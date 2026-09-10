@@ -1,0 +1,568 @@
+<!doctype html>
+<html class="no-js" lang="{{- request.locale.iso_code -}}">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<meta name="theme-color" content="{{- settings.color_button -}}">
+		<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WDXDCQRH');</script>
+<!-- End Google Tag Manager -->
+
+		{%- if settings.hide_search_engine -%}
+			<meta name="robots" content="noindex">
+		{%- endif -%}
+
+		<link rel="canonical" href="{{- canonical_url -}}">
+		<link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+
+		{%- if settings.favicon != blank -%}
+			<link rel="icon" href="{{ settings.favicon | image_url: width: 32, height: 32 }}" type="image/png">
+		{%- endif -%}
+
+		{%- capture seo_title -%}
+			{%- if template == 'search' and search.performed == true -%}
+				{{ 'general.search.heading' | t: count: search.results_count }}: {{ 'general.search.results_with_count' | t: terms: search.terms, count: search.results_count }}
+			{%- else -%}
+				{{ page_title }}
+			{%- endif -%}
+
+			{%- if current_tags -%}
+				{%- assign meta_tags = current_tags | join: ', ' -%} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags -}}
+			{%- endif -%}
+
+			{%- if current_page != 1 -%}
+				&ndash; {{ 'general.meta.page' | t: page: current_page }}
+			{%- endif -%}
+
+			{%- assign escaped_page_title = page_title | escape -%}
+			{%- unless escaped_page_title contains shop.name -%}
+				&ndash; {{ shop.name }}
+			{%- endunless -%}
+		{%- endcapture -%}
+
+		<title>
+			{{- seo_title | strip -}}
+		</title>
+
+		{%- if page_description -%}
+			<meta name="description" content="{{- page_description | escape -}}">
+		{%- endif -%}
+
+		{%- render 'social-meta-tags' -%}
+		{%- render 'head-theme-meta', layout: 'theme' -%}
+
+		{% unless settings.base_font.system? %}
+			{{ settings.base_font | font_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+			{{ settings.base_font | font_modify: 'weight', '600' | font_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+		{% endunless %}
+
+		{% if settings.design == 'alternate' %}
+			{% unless settings.subheading_font.system? %}
+				{{ settings.subheading_font | font_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+			{% endunless %}
+		{% endif %}
+
+		{% unless settings.heading_font.system? %}
+			{{ settings.heading_font | font_url | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+		{% endunless %}
+
+		{%- render 'custom-variables.css' -%}
+
+		{{ 'main.build.css' | asset_url | stylesheet_tag: preload: true }}
+
+		{%- if settings.design == 'alternate' -%}
+			{{ 'header-new.build.css' | asset_url | stylesheet_tag: preload: true }}
+		{%- else -%}
+			{{ 'header.build.css' | asset_url | stylesheet_tag: preload: true }}
+		{%- endif -%}
+
+		{%- if template.name == "product" -%}
+			<link rel="stylesheet" href="{{ 'carousel.build.css' | asset_url }}">
+		{%- endif -%}
+
+		{%- if template.directory == 'customers' or settings.show_shipping_rates_calculator -%}
+			<script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>
+		{%- endif -%}
+
+			<script>
+			window.themeCore = window.themeCore || {};
+			window.themeCore.productPlaceholderImage = {{- settings.product_default_image | image_url | replace: "//", "https://" | json -}};
+			window.themeCore.articlePlaceholderImage = {{- settings.article_default_image | image_url | replace: "//", "https://" | json -}};
+			window.themeCore.articlePlaceholderImageFocal = {{ settings.article_default_image.presentation.focal_point | json }};
+			window.themeCore.productPlaceholderImageFocal = {{ settings.product_default_image.presentation.focal_point | json }};
+			{%- if settings.enable_compare_products -%}
+				window.themeCore.compareProductsTitle = {{ settings.compare_products_heading |  json }};
+			{%- endif -%}
+			{% if settings.cart_reminder_enable %}
+				window.themeCore.CartReminder = {
+					config: {
+						cookieTime: {{- settings.cart_reminder_cookie_time | json -}},
+						displayFrequency: {{- settings.cart_reminder_display_frequency | json -}},
+						text: {{- settings.cart_reminder_text | json -}},
+						colorText: {{- settings.cart_reminder_color_text | json -}},
+						colorBg: {{- settings.cart_reminder_color_bg | json -}},
+						cartType: {{- settings.cart_type | json -}},
+						cartRoute: {{- routes.cart_url | json -}},
+						cartLinkA11y: {{- "cart.reminder.accessibility.cart" | t | escape | json -}},
+						cartButtonA11y: {{- "cart.reminder.accessibility.cart_drawer" | t | escape | json -}},
+						closeButtonA11y: {{- "cart.reminder.accessibility.close_button" | t | escape | json -}}
+					}
+				}
+			{% endif %}
+		</script>
+
+		{{ content_for_header }}
+
+		<script>
+			document.querySelector("html").classList.remove("no-js");
+			if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+				document.documentElement.classList.add('dark-mode');
+			}
+		</script>
+	</head>
+
+	{%- assign rtl_langs = 'ar,arc,dv,fa,ha,he,khw,ks,ku,ps,ur,yi' | split: ',' -%}
+	{%- assign current_langs = localization.language.iso_code | split: '-' | first -%}
+
+	{%- capture classes -%}
+		design-{{- settings.design }} template-{{ template | split: '.' | first }}{% if settings.enable_sepia %} sepia-background{% endif %}{% if rtl_langs contains current_langs %} rtl{% endif %}
+	{%-endcapture-%}
+
+	<body class="{{- classes -}}">
+		<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WDXDCQRH"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+		<a
+			href="#MainContent"
+			class="skip-content-link visually-hidden"
+		>
+			{{- "general.accessibility.skip_to_content" | t -}}
+		</a>
+
+		{%- if template.name != 'cart' and settings.cart_type == 'drawer' -%}
+			{%- sections 'header-group-with-cart-drawer' -%}
+		{%- else -%}
+			{%- sections 'header-group' -%}
+		{%- endif -%}
+
+		{%- render 'predictive-search' -%}
+
+		{%- if settings.is_product_promo_enabled and settings.product_promo_product != blank -%}
+			{% if settings.design == 'alternate' %}
+				{%- render 'product-promo-new' -%}
+			{% else %}
+				{%- render 'product-promo' -%}
+			{% endif %}
+		{%- endif -%}
+
+		{% if settings.is_promo_banner_enabled %}
+			{% if settings.design == 'alternate' %}
+				{%- render 'promotion-banner-new' -%}
+			{% else %}
+				{%- render 'promotion-banner' -%}
+			{% endif %}
+		{% endif %}
+
+		{%- if settings.is_cookie_bar_enabled -%}
+			{% case settings.design %}
+				{% when 'alternate' %}
+					{%- render 'cookie-bar-new' -%}
+				{% when 'standard' %}
+					{%- render 'cookie-bar' -%}
+			{% endcase %}
+		{%- endif -%}
+
+		{%- if settings.enable_compare_products -%}
+			{%- render 'compare-products-popup-button' -%}
+		{%- endif -%}
+
+		<main id="MainContent" class="content" role="main" tabindex="-1">
+			{%- if settings.show_breadcrumbs and template.name != 'product' -%}
+				{%- render "breadcrumbs" -%}
+			{%- endif -%}
+
+			{{ content_for_layout }}
+		</main>
+
+		{%- sections 'footer-group' -%}
+		{%- render 'page-preloader' -%}
+
+		{%- if settings.is_age_check_enable -%}
+			{% case settings.design %}
+				{% when 'alternate' %}
+					{%- render 'age-check-popup-new' -%}
+				{% when 'standard' %}
+					{%- render 'age-check-popup' -%}
+			{% endcase %}
+		{%- endif -%}
+
+		{%- if settings.is_newsletter_popup_enabled -%}
+			{% case settings.design %}
+				{% when 'alternate' %}
+					{%- render 'newsletter-popup-new' -%}
+				{% when 'standard' %}
+					{%- render 'newsletter-popup' -%}
+			{% endcase %}
+		{%- endif -%}
+
+		{%- render 'custom-furniture-popup' -%}
+
+		{%- render 'js-objects' -%}
+
+		{%- unless template.name == "product" -%}
+			<link rel="stylesheet" href="{{ 'carousel.build.css' | asset_url }}">
+		{%- endunless -%}
+
+		<link rel="stylesheet" href="{{ 'deferred-main.build.css' | asset_url }}">
+		<link rel="stylesheet" href="{{ 'induscraft.css' | asset_url }}">
+
+		{% render 'js-animate-observer' %}
+
+		<script src="{{- 'main.build.min.js' | asset_url -}}" defer></script>
+
+		{% if settings.enable_compare_products %}
+			{% case settings.design %}
+				{% when 'alternate' %}
+					<link rel="stylesheet" href="{{ 'compare-products-new.build.css' | asset_url }}">
+				{% when 'standard' %}
+					<link rel="stylesheet" href="{{ 'compare-products.build.css' | asset_url }}">
+			{% endcase %}
+			<script src="{{- 'component-compare-products.build.min.js' | asset_url -}}" defer></script>
+		{% endif %}
+
+		{% if settings.cart_reminder_enable %}
+			{% case settings.design %}
+				{% when 'alternate' %}
+					<link rel="stylesheet" href="{{ 'cart-reminder-new.build.css' | asset_url }}">
+				{% when 'standard' %}
+					<link rel="stylesheet" href="{{ 'cart-reminder.build.css' | asset_url }}">
+			{% endcase %}
+			<script src="{{- 'component-cart-reminder.build.min.js' | asset_url -}}" defer></script>
+		{% endif %}
+
+		{% if settings.is_quick_view_enabled %}
+			<script src="{{- 'component-video.build.min.js' | asset_url -}}" defer></script>
+			<script src="{{- 'component-ar-model.build.min.js' | asset_url -}}" defer></script>
+		{% endif %}
+
+
+
+		<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			const mainMenuDrawer = document.getElementById('headerDrawerMenu');
+			if (mainMenuDrawer) {
+				function updateMenuBodyClass() {
+					const ariaHidden = mainMenuDrawer.getAttribute('aria-hidden');
+					if (ariaHidden === 'false' || mainMenuDrawer.classList.contains('is-active')) {
+						document.body.classList.add('main-menu-open-active');
+					} else {
+						document.body.classList.remove('main-menu-open-active');
+					}
+				}
+
+				setTimeout(updateMenuBodyClass, 100);
+
+				const observer = new MutationObserver(function(mutations) {
+					mutations.forEach(function(mutation) {
+						if (mutation.type === 'attributes' && (mutation.attributeName === 'aria-hidden' || mutation.attributeName === 'class')) {
+							updateMenuBodyClass();
+						}
+					});
+				});
+
+				observer.observe(mainMenuDrawer, {
+					attributes: true,
+					attributeFilter: ['aria-hidden', 'class']
+				});
+			}
+
+			const cartDrawer = document.getElementById('CartDrawer');
+			if (cartDrawer) {
+				function updateCartBodyClass() {
+					const ariaHidden = cartDrawer.getAttribute('aria-hidden');
+					if (ariaHidden === 'false' || cartDrawer.classList.contains('is-active')) {
+						document.body.classList.add('cart-drawer-open-active');
+					} else {
+						document.body.classList.remove('cart-drawer-open-active');
+					}
+				}
+
+				setTimeout(updateCartBodyClass, 100);
+
+				const cartObserver = new MutationObserver(function(mutations) {
+					mutations.forEach(function(mutation) {
+						if (mutation.type === 'attributes' && (mutation.attributeName === 'aria-hidden' || mutation.attributeName === 'class')) {
+							updateCartBodyClass();
+						}
+					});
+				});
+
+				cartObserver.observe(cartDrawer, {
+					attributes: true,
+					attributeFilter: ['aria-hidden', 'class']
+				});
+			}
+
+			if (window.themeCore && window.themeCore.EventBus) {
+				window.themeCore.EventBus.listen("cart:drawer:open", function() {
+					document.body.classList.add('cart-drawer-open-active');
+				});
+				window.themeCore.EventBus.listen("cart:drawer:refresh-and-open", function() {
+					document.body.classList.add('cart-drawer-open-active');
+				});
+				window.themeCore.EventBus.listen("cart:drawer:close", function() {
+					document.body.classList.remove('cart-drawer-open-active');
+				});
+			}
+		});
+		</script>
+		<style>
+			body.main-menu-open-active .product-filters__open-menu-button-wrapper,
+			body.main-menu-open-active .mobile-floating-buttons {
+				display: none !important;
+			}
+			
+			/* Fallback for browsers that don't support :has() using EventBus class */
+			body.cart-drawer-open-active .mobile-floating-buttons,
+			body.cart-drawer-open-active [class*="sticky-whatsapp-btn-section-"],
+			body.cart-drawer-open-active .whatsapp-circular-btn,
+			body.cart-drawer-open-active .custom-furniture-toast,
+			body.cart-drawer-open-active .product-filters__open-menu-button-wrapper,
+			body.cart-drawer-open-active .product-sticky-add-to-cart,
+			body.cart-drawer-open-active .product-sticky-add-to-cart-new,
+			body.cart-drawer-open-active .js-sticky-add-to-cart,
+			body.cart-drawer-open-active .sticky-atc-bar {
+				display: none !important;
+			}
+
+			/* Modern foolproof CSS using :has() */
+			body:has(#CartDrawer.is-active) .mobile-floating-buttons,
+			body:has(#CartDrawer.is-active) [class*="sticky-whatsapp-btn-section-"],
+			body:has(#CartDrawer.is-active) .whatsapp-circular-btn,
+			body:has(#CartDrawer.is-active) .custom-furniture-toast,
+			body:has(#CartDrawer.is-active) .product-filters__open-menu-button-wrapper,
+			body:has(#CartDrawer.is-active) .product-sticky-add-to-cart,
+			body:has(#CartDrawer.is-active) .product-sticky-add-to-cart-new,
+			body:has(#CartDrawer.is-active) .js-sticky-add-to-cart,
+			body:has(#CartDrawer.is-active) .sticky-atc-bar,
+			body:has(#CartDrawer[aria-hidden="false"]) .mobile-floating-buttons,
+			body:has(#CartDrawer[aria-hidden="false"]) [class*="sticky-whatsapp-btn-section-"],
+			body:has(#CartDrawer[aria-hidden="false"]) .whatsapp-circular-btn,
+			body:has(#CartDrawer[aria-hidden="false"]) .custom-furniture-toast,
+			body:has(#CartDrawer[aria-hidden="false"]) .product-filters__open-menu-button-wrapper,
+			body:has(#CartDrawer[aria-hidden="false"]) .product-sticky-add-to-cart,
+			body:has(#CartDrawer[aria-hidden="false"]) .product-sticky-add-to-cart-new,
+			body:has(#CartDrawer[aria-hidden="false"]) .js-sticky-add-to-cart,
+			body:has(#CartDrawer[aria-hidden="false"]) .sticky-atc-bar {
+				display: none !important;
+			}
+		</style>
+		
+		<style>
+		.theme-toggle {
+			background: transparent;
+			color: inherit;
+			border: none;
+			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		@media (min-width: 1200px) {
+			.mobile-theme-toggle { display: none !important; }
+		}
+		@media (max-width: 1199.98px) {
+			.desktop-theme-toggle { display: none !important; }
+		}
+		html.dark-mode .sun-icon { display: none !important; }
+		html.dark-mode .moon-icon { display: block !important; }
+
+		/* Global Dark Mode Variables & Styles */
+		html.dark-mode, html.dark-mode * {
+			--header-background: #1a1a1a !important;
+			--header-mobile-menu-bg: #1a1a1a !important;
+			--header-text-color: #ffffff !important;
+			--header-icon-color: #ffffff !important;
+			--background-color: #121212 !important;
+			--color-background: #121212 !important;
+			--color-base-background-1: #121212 !important;
+			--color-base-background-2: #121212 !important;
+			--about-hero-bg: #121212 !important;
+			--scrolled-bg-color: #121212 !important;
+			--bg-color: #121212 !important;
+			--color-white: #121212 !important;
+			--color-black: #ffffff !important;
+			--color-foreground: #ffffff !important;
+			--color-text-primary: #ffffff !important;
+			--color-text-secondary: #aaaaaa !important;
+		}
+		
+		html.dark-mode body,
+		html.dark-mode .main-content {
+			background-color: #121212 !important;
+			color: #ffffff !important;
+		}
+		html.dark-mode .header, html.dark-mode .header-new, html.dark-mode .footer, html.dark-mode .custom-footer,
+		html.dark-mode .section-header, 
+		html.dark-mode .header__container, 
+		html.dark-mode .drawer__body,
+		html.dark-mode .drawer__header,
+		html.dark-mode .cart-notification__container,
+		html.dark-mode .cart-notification-new__container,
+		html.dark-mode .header-mobile__menu {
+			background-color: #1a1a1a !important;
+			color: #ffffff !important;
+		}
+		html.dark-mode .header__icon svg, 
+		html.dark-mode .header-mobile__menu-item-toggle-icon svg,
+		html.dark-mode .header-mobile__menu-item-icon-back svg,
+		html.dark-mode .drawer__close svg,
+		html.dark-mode .cart-notification__close svg,
+		html.dark-mode .cart-notification-new__close svg {
+			fill: #ffffff !important;
+			color: #ffffff !important;
+		}
+		html.dark-mode h1, html.dark-mode h2, html.dark-mode h3, 
+		html.dark-mode h4, html.dark-mode h5, html.dark-mode h6, 
+		html.dark-mode p, html.dark-mode span, html.dark-mode a,
+		html.dark-mode label, html.dark-mode legend {
+			color: #ffffff !important;
+		}
+		html.dark-mode .card, html.dark-mode .product-card, html.dark-mode .product-card-new,
+		html.dark-mode .collection-card, html.dark-mode .card-wrapper,
+		html.dark-mode .product-card-new .product-card__footer,
+		html.dark-mode .product-card .product-card__footer {
+			background-color: #1e1e1e !important;
+			color: #ffffff !important;
+			border-color: #333 !important;
+		}
+		html.dark-mode .price, html.dark-mode .price-item {
+			color: #ffffff !important;
+		}
+		
+		html.dark-mode .product-card-new .product-card__quick-view-text-button.product-card__quick-view-text-button--mobile {
+			background-color: #333 !important;
+			color: #ffffff !important;
+			border-color: #555 !important;
+		}
+		
+		html.dark-mode .cart-notification-new__cta.button--primary,
+		html.dark-mode .cart-notification__cta[name="checkout"] {
+			background-color: #ffffff !important;
+			color: #000000 !important;
+			border-color: #ffffff !important;
+		}
+		
+		html.dark-mode .cart-notification-new__cta.button--primary:hover,
+		html.dark-mode .cart-notification__cta[name="checkout"]:hover {
+			background-color: #e0e0e0 !important;
+			border-color: #e0e0e0 !important;
+		}
+		
+		/* Delivery Checker Dark Mode */
+		html.dark-mode .delivery-checker {
+			background: #1e1e1e !important;
+			border-color: #333 !important;
+		}
+		html.dark-mode .delivery-checker__heading,
+		html.dark-mode .delivery-checker__result-text,
+		html.dark-mode .delivery-checker__result-pincode {
+			color: #ffffff !important;
+		}
+		html.dark-mode .delivery-checker__input {
+			background: #121212 !important;
+			color: #ffffff !important;
+			border-color: #333 !important;
+		}
+		html.dark-mode .delivery-checker__result {
+			background: rgba(22, 163, 74, 0.1) !important;
+			border-color: rgba(22, 163, 74, 0.3) !important;
+		}
+		html.dark-mode .delivery-checker__result-unavailable {
+			background: rgba(217, 119, 6, 0.1) !important;
+			border-color: rgba(217, 119, 6, 0.3) !important;
+		}
+		html.dark-mode .delivery-checker__result-unavailable span {
+			color: #fcd34d !important;
+		}
+		
+		/* --- New Dark Mode Overrides --- */
+		/* Form Inputs & Labels */
+		html.dark-mode input,
+		html.dark-mode textarea,
+		html.dark-mode select {
+			background-color: #1e1e1e !important;
+			color: #ffffff !important;
+			border-color: #333 !important;
+		}
+		
+		html.dark-mode input::placeholder,
+		html.dark-mode textarea::placeholder {
+			color: #aaaaaa !important;
+		}
+		
+		html.dark-mode .required {
+			color: #ff5252 !important;
+		}
+		
+		/* Override hardcoded section backgrounds */
+		html.dark-mode [id^="shopify-section-"] > section,
+		html.dark-mode [id^="shopify-section-"] > div {
+			background-color: transparent !important;
+		}
+		
+		/* B2B / Bulk Order Specifics */
+		html.dark-mode .b2b-steps__card--cta {
+			background-color: #1e1e1e !important;
+		}
+		
+		/* Custom Furniture Specific */
+		html.dark-mode .custom-furniture-form__file-label {
+			background-color: #1e1e1e !important;
+			border-color: #333 !important;
+		}
+		html.dark-mode .custom-furniture-form__file-name,
+		html.dark-mode .custom-furniture-form__success,
+		html.dark-mode .b2b-contact-form__success {
+			background-color: rgba(46, 125, 50, 0.2) !important;
+			color: #81c784 !important;
+		}
+		html.dark-mode .custom-furniture-form__error {
+			background-color: rgba(198, 40, 40, 0.2) !important;
+			color: #e57373 !important;
+		}
+		
+		/* Slider Navigation Buttons */
+		html.dark-mode .shop-by-room__nav,
+		html.dark-mode .room-layout-prev,
+		html.dark-mode .room-layout-next {
+			background: rgba(30, 30, 30, 0.9) !important;
+			color: #ffffff !important;
+		}
+		html.dark-mode .shop-by-room__nav svg {
+			stroke: #ffffff !important;
+		}
+		</style>
+		<script>
+		document.addEventListener('DOMContentLoaded', () => {
+			const themeToggles = document.querySelectorAll('.theme-toggle');
+			themeToggles.forEach(toggle => {
+				toggle.addEventListener('click', () => {
+					document.documentElement.classList.toggle('dark-mode');
+					if (document.documentElement.classList.contains('dark-mode')) {
+						localStorage.setItem('theme', 'dark');
+					} else {
+						localStorage.setItem('theme', 'light');
+					}
+				});
+			});
+		});
+		</script>
+	</body>
+</html>
