@@ -234,13 +234,13 @@
 					name="commit"
 					aria-label="{{- button_aria_label | default: default_btn_text | escape -}}"
 				>
-					{% render 'icons-medium' with icon: 'arrow' %}
+					{% render 'icons-medium' with icon, icon: 'arrow' %}
 				</button>
 			</div>
 
 			{%- if form.errors -%}
 				<small class="newsletter-form__message newsletter-form__message--error" id="Newsletter-error--{{- section.id -}}">
-					{% render 'icons-small' with icon: 'close' %}
+					{% render 'icons-small' with icon, icon: 'close' %}
 
 					{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}
 				</small>
@@ -252,7 +252,7 @@
 				  id="Newsletter-success--{{- section.id -}}"
 				  tabindex="-1"
 				>
-					{% render 'icons-small' with icon: 'check' %}
+					{% render 'icons-small' with icon, icon: 'check' %}
 
 					{{- success_message | default: default_success_text -}}
 				</h3>
@@ -581,3 +581,19 @@
 		]
 	}
 {%- endschema -%}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'icons-medium' with icon: 'arrow' %}"
+  to: "{% render 'icons-medium' with icon, icon: 'arrow' %}"
+  position: 8545..8597
+- from: "{% render 'icons-small' with icon: 'close' %}"
+  to: "{% render 'icons-small' with icon, icon: 'close' %}"
+  position: 8773..8824
+- from: "{% render 'icons-small' with icon: 'check' %}"
+  to: "{% render 'icons-small' with icon, icon: 'check' %}"
+  position: 9158..9209
+{% endcomment %}

@@ -211,7 +211,7 @@
 							{% if form.errors %}
 								<small class="newsletter-popup-form__message newsletter-popup-form__message--error"
 									   id="newsletter-popup-contact-form-error">
-									{% render 'icons-small' with icon: 'close' %}
+									{% render 'icons-small' with icon, icon: 'close' %}
 
 									{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}
 								</small>
@@ -223,7 +223,7 @@
 									id="newsletter-popup-contact-form-success"
 									tabindex="-1"
 								>
-									{% render 'icons-small' with icon: 'check' %}
+									{% render 'icons-small' with icon, icon: 'check' %}
 
 									{{- success_message | default: default_success_text -}}
 								</h3>
@@ -268,3 +268,16 @@
 		</div>
 	</div>
 {% endif %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'icons-small' with icon: 'close' %}"
+  to: "{% render 'icons-small' with icon, icon: 'close' %}"
+  position: 12249..12300
+- from: "{% render 'icons-small' with icon: 'check' %}"
+  to: "{% render 'icons-small' with icon, icon: 'check' %}"
+  position: 12683..12734
+{% endcomment %}

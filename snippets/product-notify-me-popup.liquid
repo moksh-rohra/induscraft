@@ -55,7 +55,7 @@
 								class="product-notify-me-contact-form__message product-notify-me-contact-form__message--error"
 								tabindex="-1"
 							>
-								{% render 'icons-small' with icon: 'close' %}
+								{% render 'icons-small' with icon, icon: 'close' %}
 
 								{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}
 							</small>
@@ -66,7 +66,7 @@
 								class="product-notify-me-contact-form__message product-notify-me-contact-form__message--success text"
 								tabindex="-1"
 							>
-								{% render 'icons-small' with icon: 'check' %}
+								{% render 'icons-small' with icon, icon: 'check' %}
 
 								{{- notify_me_form_success_message -}}
 							</h3>
@@ -153,3 +153,16 @@
 		</div>
 	</div>
 {%- endif -%}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'icons-small' with icon: 'close' %}"
+  to: "{% render 'icons-small' with icon, icon: 'close' %}"
+  position: 2663..2714
+- from: "{% render 'icons-small' with icon: 'check' %}"
+  to: "{% render 'icons-small' with icon, icon: 'check' %}"
+  position: 3054..3105
+{% endcomment %}

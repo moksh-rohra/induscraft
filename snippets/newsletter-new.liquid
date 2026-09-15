@@ -246,7 +246,7 @@
 
 			{%- if form.errors -%}
 				<div class="newsletter-form__message newsletter-form__message--error" id="Newsletter-error--{{- section.id -}}">
-					{% render 'icons-small' with icon: 'close' %}
+					{% render 'icons-small' with icon, icon: 'close' %}
 
 					<span>
 						{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}
@@ -260,7 +260,7 @@
 					id="Newsletter-success--{{- section.id -}}"
 					tabindex="-1"
 				>
-					{% render 'icons-small' with icon: 'check' %}
+					{% render 'icons-small' with icon, icon: 'check' %}
 
 					<span>
 						{{- success_message | default: default_success_text -}}
@@ -331,3 +331,16 @@
 
 	<script src="{{- 'section-newsletter.build.min.js' | asset_url -}}" defer></script>
 </section>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% render 'icons-small' with icon: 'close' %}"
+  to: "{% render 'icons-small' with icon, icon: 'close' %}"
+  position: 10694..10745
+- from: "{% render 'icons-small' with icon: 'check' %}"
+  to: "{% render 'icons-small' with icon, icon: 'check' %}"
+  position: 11101..11152
+{% endcomment %}
